@@ -810,25 +810,25 @@ function App() {
         )}
       </main>
 
-      <nav>
-        <button
-          className={screen === "dashboard" ? "active" : ""}
-          onClick={() => setScreen("dashboard")}
-        >
-          Tableau de bord
-        </button>
+      <nav className="bottomNav">
+  <button
+    className={screen === "dashboard" ? "active" : ""}
+    onClick={() => setScreen("dashboard")}
+  >
+    <span>Accueil</span>
+  </button>
 
-        <button
-          className={screen === "history" ? "active" : ""}
-          onClick={() => setScreen("history")}
-        >
-          Dépenses
-        </button>
+  <button className="add" onClick={newExpense} aria-label="Ajouter une dépense">
+    <Plus size={24} />
+  </button>
 
-        <button className="add" onClick={newExpense}>
-          <Plus />
-        </button>
-      </nav>
+  <button
+    className={screen === "history" ? "active" : ""}
+    onClick={() => setScreen("history")}
+  >
+    <span>Dépenses</span>
+  </button>
+</nav>
 
       {showTrip && (
         <Modal title="Mon voyage" close={() => setShowTrip(false)}>

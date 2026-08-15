@@ -67,6 +67,54 @@ function App() {
     loadFromSupabase();
   }, []);
 
+  useEffect(() => {
+    if (!tripId) return;
+  
+    const channel = supabase
+      .channel(`voyage-${tripId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "expenses",
+          filter: `trip_id=eq.${tripId}`,
+        },
+        () => {
+          loadFromSupabase();
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "participants",
+          filter: `trip_id=eq.${tripId}`,
+        },
+        () => {
+          loadFromSupabase();
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "trips",
+          filter: `id=eq.${tripId}`,
+        },
+        () => {
+          loadFromSupabase();
+        },
+      )
+      .subscribe();
+  
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [tripId]);
+
   async function joinTripByCode(e) {
     e.preventDefault();
 
@@ -109,72 +157,117 @@ function App() {
     try {
       setLoading(true);
       setError("");
-
-      const savedTripId = localStorage.getItem("voyage-depenses-trip-id");
-
+  
+      const params = new URLSearchParams(window.location.search);
+      const shareCodeFromUrl = params.get("trip")?.trim().toUpperCase();
+  
       let trip = null;
-
-      // Si ce téléphone connaît déjà un voyage,
-      // on charge directement celui-ci.
-      if (savedTripId) {
-        const { data: existingTrip, error: tripError } = await supabase
+  
+      // 1. Si un code de partage est présent dans l'URL,
+      // on charge précisément ce voyage.
+      if (shareCodeFromUrl) {
+        const { data: sharedTrip, error: sharedTripError } = await supabase
           .from("trips")
           .select("*")
-          .eq("id", savedTripId)
-          .single();
-
-        if (tripError) throw tripError;
-
-        trip = existingTrip;
+          .eq("share_code", shareCodeFromUrl)
+          .maybeSingle();
+  
+        if (sharedTripError) throw sharedTripError;
+  
+        if (!sharedTrip) {
+          throw new Error(
+            "Ce lien de voyage est invalide ou le voyage n'existe plus.",
+          );
+        }
+  
+        trip = sharedTrip;
+  
+        // On mémorise le voyage pour les prochaines ouvertures.
+        localStorage.setItem("voyage-depenses-trip-id", trip.id);
+        localStorage.setItem(
+          "voyage-depenses-share-code",
+          trip.share_code,
+        );
+  
+        // Nettoie l'URL après chargement.
+        window.history.replaceState({}, "", "/");
       }
-
-      // Pour compatibilité avec ton installation actuelle :
-      // si aucun voyage n'est encore mémorisé, on prend
-      // le premier voyage existant.
+  
+      // 2. Sinon, on reprend le dernier voyage utilisé.
+      if (!trip) {
+        const savedTripId = localStorage.getItem(
+          "voyage-depenses-trip-id",
+        );
+  
+        if (savedTripId) {
+          const { data: savedTrip, error: savedTripError } = await supabase
+            .from("trips")
+            .select("*")
+            .eq("id", savedTripId)
+            .maybeSingle();
+  
+          if (savedTripError) throw savedTripError;
+  
+          trip = savedTrip;
+        }
+      }
+  
+      // 3. Dernier fallback : premier voyage existant.
       if (!trip) {
         const { data: trips, error: tripError } = await supabase
           .from("trips")
           .select("*")
           .order("created_at", { ascending: true })
           .limit(1);
-
+  
         if (tripError) throw tripError;
-
+  
         trip = trips?.[0];
-
-        if (!trip) {
-          const { data: createdTrip, error: createError } = await supabase
-            .from("trips")
-            .insert({
-              name: "Mon voyage",
-              share_code: generateShareCode(),
-            })
-            .select()
-            .single();
-
-          if (createError) throw createError;
-
-          trip = createdTrip;
-
-          const { error: participantError } = await supabase
-            .from("participants")
-            .insert([
-              {
-                trip_id: trip.id,
-                name: "Moi",
-              },
-              {
-                trip_id: trip.id,
-                name: "Mon conjoint",
-              },
-            ]);
-
-          if (participantError) throw participantError;
-        }
       }
-
-      // On mémorise le voyage sur cet appareil.
-      localStorage.setItem("voyage-depenses-trip-id", trip.id);
+  
+      // 4. Si aucun voyage n'existe, on en crée un.
+      if (!trip) {
+        const { data: createdTrip, error: createError } = await supabase
+          .from("trips")
+          .insert({
+            name: "Mon voyage",
+          })
+          .select()
+          .single();
+  
+        if (createError) throw createError;
+  
+        trip = createdTrip;
+  
+        const { error: participantError } = await supabase
+          .from("participants")
+          .insert([
+            {
+              trip_id: trip.id,
+              name: "Moi",
+            },
+            {
+              trip_id: trip.id,
+              name: "Mon conjoint",
+            },
+          ]);
+  
+        if (participantError) throw participantError;
+      }
+  
+      setTripId(trip.id);
+  
+      localStorage.setItem(
+        "voyage-depenses-trip-id",
+        trip.id,
+      );
+  
+      if (trip.share_code) {
+        localStorage.setItem(
+          "voyage-depenses-share-code",
+          trip.share_code,
+        );
+      }
 
       setTripId(trip.id);
 
@@ -208,11 +301,11 @@ function App() {
       setData({
         trip: {
           name: trip.name || "Mon voyage",
+          shareCode: trip.share_code || "",
           start: trip.start_date || "",
           end: trip.end_date || "",
           countries: trip.countries || "",
           budget: trip.budget ?? "",
-          shareCode: trip.share_code || "",
         },
         people,
         categories: DEFAULT_CATS,

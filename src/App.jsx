@@ -69,44 +69,71 @@ function App() {
       setLoading(true);
       setError("");
 
-      let { data: trips, error: tripError } = await supabase
-        .from("trips")
-        .select("*")
-        .order("created_at", { ascending: true })
-        .limit(1);
+      const savedTripId = localStorage.getItem("voyage-depenses-trip-id");
 
-      if (tripError) throw tripError;
+      let trip = null;
 
-      let trip = trips?.[0];
-
-      if (!trip) {
-        const { data: createdTrip, error: createError } = await supabase
+      // Si ce téléphone connaît déjà un voyage,
+      // on charge directement celui-ci.
+      if (savedTripId) {
+        const { data: existingTrip, error: tripError } = await supabase
           .from("trips")
-          .insert({
-            name: "Mon voyage",
-          })
-          .select()
+          .select("*")
+          .eq("id", savedTripId)
           .single();
 
-        if (createError) throw createError;
+        if (tripError) throw tripError;
 
-        trip = createdTrip;
-
-        const { error: participantError } = await supabase
-          .from("participants")
-          .insert([
-            {
-              trip_id: trip.id,
-              name: "Moi",
-            },
-            {
-              trip_id: trip.id,
-              name: "Mon conjoint",
-            },
-          ]);
-
-        if (participantError) throw participantError;
+        trip = existingTrip;
       }
+
+      // Pour compatibilité avec ton installation actuelle :
+      // si aucun voyage n'est encore mémorisé, on prend
+      // le premier voyage existant.
+      if (!trip) {
+        const { data: trips, error: tripError } = await supabase
+          .from("trips")
+          .select("*")
+          .order("created_at", { ascending: true })
+          .limit(1);
+
+        if (tripError) throw tripError;
+
+        trip = trips?.[0];
+
+        if (!trip) {
+          const { data: createdTrip, error: createError } = await supabase
+            .from("trips")
+            .insert({
+              name: "Mon voyage",
+              share_code: generateShareCode(),
+            })
+            .select()
+            .single();
+
+          if (createError) throw createError;
+
+          trip = createdTrip;
+
+          const { error: participantError } = await supabase
+            .from("participants")
+            .insert([
+              {
+                trip_id: trip.id,
+                name: "Moi",
+              },
+              {
+                trip_id: trip.id,
+                name: "Mon conjoint",
+              },
+            ]);
+
+          if (participantError) throw participantError;
+        }
+      }
+
+      // On mémorise le voyage sur cet appareil.
+      localStorage.setItem("voyage-depenses-trip-id", trip.id);
 
       setTripId(trip.id);
 
@@ -133,7 +160,7 @@ function App() {
       const people =
         participants?.length > 0
           ? participants.map((p) => p.name)
-          : ["Bonhomme", "Petit ours"];
+          : ["Moi", "Mon conjoint"];
 
       setParticipantIds((participants || []).map((p) => p.id));
 
@@ -144,6 +171,7 @@ function App() {
           end: trip.end_date || "",
           countries: trip.countries || "",
           budget: trip.budget ?? "",
+          shareCode: trip.share_code || "",
         },
         people,
         categories: DEFAULT_CATS,
@@ -155,6 +183,10 @@ function App() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function generateShareCode() {
+    return Math.random().toString(36).substring(2, 10).toUpperCase();
   }
 
   function dbExpenseToApp(e) {

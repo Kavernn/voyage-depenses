@@ -62,14 +62,16 @@ function App() {
   const [joinCode, setJoinCode] = useState("");
   const [showJoin, setShowJoin] = useState(false);
   const [joining, setJoining] = useState(false);
+  const [syncStatus, setSyncStatus] = useState("connecting");
 
   useEffect(() => {
     loadFromSupabase();
   }, []);
 
+
   useEffect(() => {
     if (!tripId) return;
-  
+
     const channel = supabase
       .channel(`voyage-${tripId}`)
       .on(
@@ -109,7 +111,7 @@ function App() {
         },
       )
       .subscribe();
-  
+
     return () => {
       supabase.removeChannel(channel);
     };
@@ -157,12 +159,12 @@ function App() {
     try {
       setLoading(true);
       setError("");
-  
+
       const params = new URLSearchParams(window.location.search);
       const shareCodeFromUrl = params.get("trip")?.trim().toUpperCase();
-  
+
       let trip = null;
-  
+
       // 1. Si un code de partage est présent dans l'URL,
       // on charge précisément ce voyage.
       if (shareCodeFromUrl) {
@@ -171,47 +173,47 @@ function App() {
           .select("*")
           .eq("share_code", shareCodeFromUrl)
           .maybeSingle();
-  
+
         if (sharedTripError) throw sharedTripError;
-  
+
         if (!sharedTrip) {
           throw new Error(
             "Ce lien de voyage est invalide ou le voyage n'existe plus.",
           );
         }
-  
+
         trip = sharedTrip;
-  
+
         // On mémorise le voyage pour les prochaines ouvertures.
         localStorage.setItem("voyage-depenses-trip-id", trip.id);
         localStorage.setItem(
           "voyage-depenses-share-code",
           trip.share_code,
         );
-  
+
         // Nettoie l'URL après chargement.
         window.history.replaceState({}, "", "/");
       }
-  
+
       // 2. Sinon, on reprend le dernier voyage utilisé.
       if (!trip) {
         const savedTripId = localStorage.getItem(
           "voyage-depenses-trip-id",
         );
-  
+
         if (savedTripId) {
           const { data: savedTrip, error: savedTripError } = await supabase
             .from("trips")
             .select("*")
             .eq("id", savedTripId)
             .maybeSingle();
-  
+
           if (savedTripError) throw savedTripError;
-  
+
           trip = savedTrip;
         }
       }
-  
+
       // 3. Dernier fallback : premier voyage existant.
       if (!trip) {
         const { data: trips, error: tripError } = await supabase
@@ -219,12 +221,12 @@ function App() {
           .select("*")
           .order("created_at", { ascending: true })
           .limit(1);
-  
+
         if (tripError) throw tripError;
-  
+
         trip = trips?.[0];
       }
-  
+
       // 4. Si aucun voyage n'existe, on en crée un.
       if (!trip) {
         const { data: createdTrip, error: createError } = await supabase
@@ -234,11 +236,11 @@ function App() {
           })
           .select()
           .single();
-  
+
         if (createError) throw createError;
-  
+
         trip = createdTrip;
-  
+
         const { error: participantError } = await supabase
           .from("participants")
           .insert([
@@ -251,17 +253,17 @@ function App() {
               name: "Mon conjoint",
             },
           ]);
-  
+
         if (participantError) throw participantError;
       }
-  
+
       setTripId(trip.id);
-  
+
       localStorage.setItem(
         "voyage-depenses-trip-id",
         trip.id,
       );
-  
+
       if (trip.share_code) {
         localStorage.setItem(
           "voyage-depenses-share-code",
@@ -760,15 +762,22 @@ function App() {
             <label>
               Code du voyage
               <input
-                autoFocus
-                required
-                autoCapitalize="characters"
-                autoCorrect="off"
-                spellCheck="false"
-                value={joinCode}
-                onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
-                placeholder="Ex. 4251CBDD"
-              />
+  autoFocus
+  required
+  type="number"
+  inputMode="decimal"
+  enterKeyHint="next"
+  step="0.01"
+  min="0"
+  value={form.amount}
+  placeholder="0,00"
+  onChange={(e) =>
+    setForm({
+      ...form,
+      amount: e.target.value,
+    })
+  }
+/>
             </label>
 
             <button className="primary" disabled={joining}>

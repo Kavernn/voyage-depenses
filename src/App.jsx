@@ -1687,44 +1687,107 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
 function History({ data, onBack, onEdit, onDelete }) {
   return (
-    <section>
-      <div className="topline">
-        <button onClick={onBack}>← Retour</button>
+    <section className="historyScreen">
+      <div className="historyHeader">
+        <button className="historyBack" onClick={onBack}>
+          ←
+        </button>
 
-        <h2>Dépenses</h2>
+        <div>
+          <span>DÉPENSES</span>
+          <h2>Historique</h2>
+        </div>
+
+        <div className="historyTotal">
+          <strong>{data.expenses.length}</strong>
+          <small>dépenses</small>
+        </div>
       </div>
 
       {data.expenses.length === 0 ? (
-        <div className="empty">Aucune dépense pour le moment.</div>
+        <div className="historyEmpty">
+          <div className="historyEmptyIcon">
+            <Wallet size={24} />
+          </div>
+
+          <strong>Aucune dépense</strong>
+
+          <p>
+            Tes dépenses apparaîtront ici dès que tu en ajouteras une.
+          </p>
+        </div>
       ) : (
-        <div className="list">
-          {data.expenses.map((expense) => (
-            <div className="expense" key={expense.id}>
-              <div>
-                <b>{expense.description || expense.category}</b>
+        <div className="historyList">
+          {data.expenses.map((expense) => {
+            const category = expense.category || "Autre";
+            const initial = category.charAt(0).toUpperCase();
 
-                <small>
-                  {expense.date} · {expense.payer} ·{" "}
-                  {expense.personal ? "Personnel" : "Partagé"}
-                </small>
+            return (
+              <article className="expenseCard" key={expense.id}>
+                <div className="expenseCardMain">
+                  <div className="expenseCategoryIcon">
+                    {initial}
+                  </div>
 
-                <small>
-                  {expense.amount.toFixed(2)} {expense.currency} →{" "}
-                  {money(expense.cad)}
-                </small>
-              </div>
+                  <div className="expenseCardInfo">
+                    <div className="expenseCardTitle">
+                      <strong>
+                        {expense.description || category}
+                      </strong>
 
-              <div className="actions">
-                <button onClick={() => onEdit(expense)}>
-                  <Pencil size={17} />
-                </button>
+                      <span
+                        className={
+                          expense.personal
+                            ? "expenseBadge personal"
+                            : "expenseBadge shared"
+                        }
+                      >
+                        {expense.personal ? "Personnel" : "Partagé"}
+                      </span>
+                    </div>
 
-                <button onClick={() => onDelete(expense.id)}>
-                  <Trash2 size={17} />
-                </button>
-              </div>
-            </div>
-          ))}
+                    <div className="expenseMeta">
+                      <span>{category}</span>
+                      <span>•</span>
+                      <span>{expense.payer}</span>
+                      <span>•</span>
+                      <span>{expense.date}</span>
+                    </div>
+
+                    <small className="expenseOriginal">
+                      {Number(expense.amount).toFixed(2)}{" "}
+                      {expense.currency}
+                    </small>
+                  </div>
+
+                  <div className="expenseCardAmount">
+                    <strong>{money(expense.cad)}</strong>
+                  </div>
+                </div>
+
+                <div className="expenseCardActions">
+                  <button
+                    type="button"
+                    onClick={() => onEdit(expense)}
+                    aria-label={`Modifier ${expense.description || category}`}
+                  >
+                    <Pencil size={16} />
+                    <span>Modifier</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className="deleteAction"
+                    onClick={() => onDelete(expense.id)}
+                    aria-label={`Supprimer ${expense.description || category}`}
+                  >
+                    <Trash2 size={16} />
+                    <span>Supprimer</span>
+                  </button>
+                </div>
+              </article>
+            );
+          })}
         </div>
       )}
     </section>

@@ -1,19 +1,25 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import React, { useEffect } from "react";
+import { X } from "lucide-react";
 
-export default function Modal({
-  title,
-  close,
-  children
-}) {
+export default function Modal({ title, close, children }) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   return (
-    <div className="overlay">
+    <div className="overlay" role="dialog" aria-modal="true" aria-label={title}>
       <div className="modal">
         <div className="modalHead">
           <h2>{title}</h2>
 
-          <button onClick={close}>
-            <X />
+          <button type="button" onClick={close} aria-label="Fermer">
+            <X size={22} />
           </button>
         </div>
 

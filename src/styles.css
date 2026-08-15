@@ -1,354 +1,1064 @@
-*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f8fafc;color:#111827}button,input,select{font:inherit}button{border:0;background:none;cursor:pointer}.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:90px}header{height:64px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;background:#111827;color:white;position:sticky;top:0;z-index:5}.brand{font-weight:800;display:flex;gap:9px;align-items:center}.iconBtn{color:white}main{padding:18px}.hero{background:white;border-radius:22px;padding:22px;display:flex;justify-content:space-between;gap:12px;box-shadow:0 2px 12px #0000000b}.hero h1{margin:3px 0 5px;font-size:26px}.hero p{margin:0;color:#64748b}.eyebrow{font-size:12px!important;font-weight:700;text-transform:uppercase;letter-spacing:.06em}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.cards>div,.people,.balance,.budget{background:white;border-radius:18px;padding:17px;box-shadow:0 2px 12px #00000008}.cards span,.people span,.balance span,.budget span{display:block;color:#64748b;font-size:13px}.cards strong{display:block;font-size:23px;margin-top:4px}.budget{margin-bottom:14px}.budget>div:first-child{display:flex;justify-content:space-between}.bar{height:9px;background:#e5e7eb;border-radius:99px;margin-top:10px;overflow:hidden}.bar i{display:block;height:100%;background:#111827;border-radius:99px}.balance{margin-bottom:12px}.balance strong{display:block;margin-top:6px;font-size:17px}.people{display:grid;gap:12px;margin-bottom:14px}.people div{display:flex;justify-content:space-between}.primary,.secondary{width:100%;border-radius:15px;padding:14px 16px;font-weight:800;display:flex;justify-content:center;align-items:center;gap:8px}.primary{background:#111827;color:white}.secondary{background:white;color:#111827;border:1px solid #e2e8f0}.big{margin-top:10px}.topline{display:flex;align-items:center;gap:18px;margin-bottom:14px}.topline h2{margin:0}.empty{background:white;border-radius:18px;padding:30px;text-align:center;color:#64748b}.list{display:grid;gap:10px}.expense{background:white;border-radius:17px;padding:15px;display:flex;justify-content:space-between;gap:12px}.expense b,.expense small{display:block}.expense small{color:#64748b;margin-top:3px}.actions{display:flex;gap:4px}.actions button{padding:8px}.form{display:grid;gap:13px}.form label{display:grid;gap:6px;font-size:13px;font-weight:700}.form input,.form select{width:100%;border:1px solid #dbe2ea;border-radius:11px;padding:12px;background:white}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check{display:flex!important;grid-template-columns:auto 1fr!important;align-items:center}.check input{width:auto}.rate{font-size:12px;color:#64748b}.overlay{position:fixed;inset:0;background:#0008;z-index:20;display:flex;align-items:flex-end;justify-content:center}.modal{background:#f8fafc;width:min(720px,100%);max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.modalHead h2{margin:0}.modalHead button{padding:6px}nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(720px,100%);height:70px;background:white;border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;z-index:10}nav button{font-size:12px;color:#64748b}nav button.active{color:#111827;font-weight:800}nav .add{width:52px;height:52px;background:#111827;color:white;border-radius:50%;display:grid;place-items:center}small{font-weight:500}@media(min-width:700px){.overlay{align-items:center}.modal{border-radius:24px;max-height:85vh}.app{padding-bottom:20px}nav{position:static;transform:none;width:auto;margin-top:20px;border:0;border-radius:16px}.hero h1{font-size:30px}}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: #f8fafc;
+  color: #111827;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.app {
+  max-width: 720px;
+  margin: auto;
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+header {
+  height: 64px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #111827;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.brand {
+  font-weight: 800;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.iconBtn {
+  color: white;
+}
+main {
+  padding: 18px;
+}
+.hero {
+  background: white;
+  border-radius: 22px;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 2px 12px #0000000b;
+}
+.hero h1 {
+  margin: 3px 0 5px;
+  font-size: 26px;
+}
+.hero p {
+  margin: 0;
+  color: #64748b;
+}
+.eyebrow {
+  font-size: 12px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0;
+}
+.cards > div,
+.people,
+.balance,
+.budget {
+  background: white;
+  border-radius: 18px;
+  padding: 17px;
+  box-shadow: 0 2px 12px #00000008;
+}
+.cards span,
+.people span,
+.balance span,
+.budget span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+}
+.cards strong {
+  display: block;
+  font-size: 23px;
+  margin-top: 4px;
+}
+.budget {
+  margin-bottom: 14px;
+}
+.budget > div:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+.bar {
+  height: 9px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  background: #111827;
+  border-radius: 99px;
+}
+.balance {
+  margin-bottom: 12px;
+}
+.balance strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 17px;
+}
+.people {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.people div {
+  display: flex;
+  justify-content: space-between;
+}
+.primary,
+.secondary {
+  width: 100%;
+  border-radius: 15px;
+  padding: 14px 16px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.primary {
+  background: #111827;
+  color: white;
+}
+.secondary {
+  background: white;
+  color: #111827;
+  border: 1px solid #e2e8f0;
+}
+.big {
+  margin-top: 10px;
+}
+.topline {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+.topline h2 {
+  margin: 0;
+}
+.empty {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  color: #64748b;
+}
+.list {
+  display: grid;
+  gap: 10px;
+}
+.expense {
+  background: white;
+  border-radius: 17px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.expense b,
+.expense small {
+  display: block;
+}
+.expense small {
+  color: #64748b;
+  margin-top: 3px;
+}
+.actions {
+  display: flex;
+  gap: 4px;
+}
+.actions button {
+  padding: 8px;
+}
+.form {
+  display: grid;
+  gap: 13px;
+}
+.form label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.form input,
+.form select {
+  width: 100%;
+  border: 1px solid #dbe2ea;
+  border-radius: 11px;
+  padding: 12px;
+  background: white;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.check {
+  display: flex !important;
+  grid-template-columns: auto 1fr !important;
+  align-items: center;
+}
+.check input {
+  width: auto;
+}
+.rate {
+  font-size: 12px;
+  color: #64748b;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #0008;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal {
+  background: #f8fafc;
+  width: min(720px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  border-radius: 24px 24px 0 0;
+  padding: 18px;
+}
+.modalHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.modalHead h2 {
+  margin: 0;
+}
+.modalHead button {
+  padding: 6px;
+}
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 100%);
+  height: 70px;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+}
+nav button {
+  font-size: 12px;
+  color: #64748b;
+}
+nav button.active {
+  color: #111827;
+  font-weight: 800;
+}
+nav .add {
+  width: 52px;
+  height: 52px;
+  background: #111827;
+  color: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+small {
+  font-weight: 500;
+}
+@media (min-width: 700px) {
+  .overlay {
+    align-items: center;
+  }
+  .modal {
+    border-radius: 24px;
+    max-height: 85vh;
+  }
+  .app {
+    padding-bottom: 20px;
+  }
+  nav {
+    position: static;
+    transform: none;
+    width: auto;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 16px;
+  }
+  .hero h1 {
+    font-size: 30px;
+  }
+}
 .travellers {
-    margin-top: 8px;
-    padding-top: 16px;
-    border-top: 1px solid #e5e7eb;
-  }
-  
-  .travellers h3 {
-    margin: 0 0 14px;
-    font-size: 16px;
-  }
-  
-  .travellers label + label {
-    margin-top: 12px;
-  }
-  /* =========================
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.travellers h3 {
+  margin: 0 0 14px;
+  font-size: 16px;
+}
+
+.travellers label + label {
+  margin-top: 12px;
+}
+/* =========================
    DASHBOARD V2
    ========================= */
 
 .dashboardSummary {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 12px;
-    margin: 14px 0;
-  }
-  
-  .summaryCard {
-    background: white;
-    border-radius: 18px;
-    padding: 17px;
-    box-shadow: 0 2px 12px #00000008;
-  }
-  
-  .summaryCard span {
-    display: block;
-    color: #64748b;
-    font-size: 13px;
-  }
-  
-  .summaryCard strong {
-    display: block;
-    font-size: 23px;
-    margin-top: 5px;
-  }
-  
-  .summaryCard small {
-    display: block;
-    color: #64748b;
-    margin-top: 5px;
-  }
-  
-  .primarySummary {
-    background: #111827;
-    color: white;
-  }
-  
-  .primarySummary span,
-  .primarySummary small {
-    color: #cbd5e1;
-  }
-  
-  .budgetEnhanced {
-    margin-bottom: 14px;
-  }
-  
-  .budgetHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 12px;
-  }
-  
-  .budgetHeader > div {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-  
-  .budgetHeader strong {
-    font-size: 18px;
-  }
-  
-  .budgetHeader > span {
-    text-align: right;
-  }
-  
-  .balanceEnhanced {
-    padding: 18px;
-  }
-  
-  .balanceTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .balanceIcon {
-    font-size: 20px !important;
-    color: #111827 !important;
-  }
-  
-  .categoryCard {
-    background: white;
-    border-radius: 18px;
-    padding: 17px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 12px #00000008;
-  }
-  
-  .sectionTitle {
-    margin-bottom: 15px;
-  }
-  
-  .sectionTitle > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .sectionTitle span {
-    font-size: 14px;
-    font-weight: 800;
-  }
-  
-  .sectionTitle small {
-    color: #64748b;
-    font-size: 12px;
-  }
-  
-  .categoryList {
-    display: grid;
-    gap: 14px;
-  }
-  
-  .categoryRow {
-    display: grid;
-    gap: 7px;
-  }
-  
-  .categoryTop {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 13px;
-  }
-  
-  .categoryTop > span {
-    color: #334155;
-  }
-  
-  .categoryTop > div {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  
-  .categoryTop b {
-    font-size: 13px;
-  }
-  
-  .categoryTop small {
-    color: #64748b;
-    min-width: 30px;
-    text-align: right;
-  }
-  
-  .categoryBar {
-    height: 7px;
-    background: #e5e7eb;
-    border-radius: 99px;
-    overflow: hidden;
-  }
-  
-  .categoryBar i {
-    display: block;
-    height: 100%;
-    background: #111827;
-    border-radius: 99px;
-  }
-  
-  .peopleEnhanced {
-    padding: 17px;
-    margin-bottom: 14px;
-  }
-  
-  .peopleEnhanced .sectionTitle {
-    margin-bottom: 8px;
-  }
-  
-  .personRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 9px 0;
-  }
-  
-  .personInfo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #e2e8f0;
-    display: grid;
-    place-items: center;
-    font-size: 13px;
-    font-weight: 800;
-  }
-  
-  .personRow > b {
-    font-size: 15px;
-  }
-  
-  @media(max-width:480px) {
-    .dashboardSummary {
-      grid-template-columns: 1fr 1fr;
-    }
-  
-    .summaryCard strong {
-      font-size: 20px;
-    }
-  
-    .budgetHeader {
-      align-items: start;
-      flex-direction: column;
-    }
-  
-    .budgetHeader > span {
-      text-align: left;
-    }
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.summaryCard {
+  background: white;
+  border-radius: 18px;
+  padding: 17px;
+  box-shadow: 0 2px 12px #00000008;
+}
+
+.summaryCard span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.summaryCard strong {
+  display: block;
+  font-size: 23px;
+  margin-top: 5px;
+}
+
+.summaryCard small {
+  display: block;
+  color: #64748b;
+  margin-top: 5px;
+}
+
+.primarySummary {
+  background: #111827;
+  color: white;
+}
+
+.primarySummary span,
+.primarySummary small {
+  color: #cbd5e1;
+}
+
+.budgetEnhanced {
+  margin-bottom: 14px;
+}
+
+.budgetHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+}
+
+.budgetHeader > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.budgetHeader strong {
+  font-size: 18px;
+}
+
+.budgetHeader > span {
+  text-align: right;
+}
+
+.balanceEnhanced {
+  padding: 18px;
+}
+
+.balanceTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balanceIcon {
+  font-size: 20px !important;
+  color: #111827 !important;
+}
+
+.categoryCard {
+  background: white;
+  border-radius: 18px;
+  padding: 17px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 12px #00000008;
+}
+
+.sectionTitle {
+  margin-bottom: 15px;
+}
+
+.sectionTitle > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionTitle span {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sectionTitle small {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.categoryList {
+  display: grid;
+  gap: 14px;
+}
+
+.categoryRow {
+  display: grid;
+  gap: 7px;
+}
+
+.categoryTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.categoryTop > span {
+  color: #334155;
+}
+
+.categoryTop > div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.categoryTop b {
+  font-size: 13px;
+}
+
+.categoryTop small {
+  color: #64748b;
+  min-width: 30px;
+  text-align: right;
+}
+
+.categoryBar {
+  height: 7px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.categoryBar i {
+  display: block;
+  height: 100%;
+  background: #111827;
+  border-radius: 99px;
+}
+
+.peopleEnhanced {
+  padding: 17px;
+  margin-bottom: 14px;
+}
+
+.peopleEnhanced .sectionTitle {
+  margin-bottom: 8px;
+}
+
+.personRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+}
+
+.personInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.personRow > b {
+  font-size: 15px;
+}
+
+@media (max-width: 480px) {
+  .dashboardSummary {
+    grid-template-columns: 1fr 1fr;
   }
 
-  /* =========================
+  .summaryCard strong {
+    font-size: 20px;
+  }
+
+  .budgetHeader {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .budgetHeader > span {
+    text-align: left;
+  }
+}
+
+/* =========================
    RÉPARTITION DES DÉPENSES
    ========================= */
 
 .splitSection {
-    display: grid;
-    gap: 10px;
-    margin-top: 4px;
-  }
-  
-  .splitTitle {
-    font-size: 13px;
-    font-weight: 800;
-  }
-  
-  .splitOptions {
-    display: grid;
-    gap: 7px;
-  }
-  
-  .splitOption {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.splitTitle {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.splitOptions {
+  display: grid;
+  gap: 7px;
+}
+
+.splitOption {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dbe2ea;
+  border-radius: 13px;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-align: left;
+  color: #111827;
+}
+
+.splitOption.active {
+  border-color: #111827;
+  background: #f1f5f9;
+}
+
+.splitOption .radio {
+  font-size: 17px;
+  width: 20px;
+}
+
+.splitOption span:last-child {
+  display: grid;
+  gap: 2px;
+}
+
+.splitOption b {
+  font-size: 13px;
+}
+
+.splitOption small {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.customSplit {
+  background: #f1f5f9;
+  border-radius: 13px;
+  padding: 13px;
+}
+
+.customSplit input[type="range"] {
+  padding: 0;
+  border: 0;
+}
+
+.splitPercent {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.splitAmounts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.splitAmounts > div {
+  background: #f8fafc;
+  border-radius: 11px;
+  padding: 10px;
+}
+
+.splitAmounts span,
+.splitAmounts b {
+  display: block;
+}
+
+.splitAmounts span {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.splitAmounts b {
+  margin-top: 3px;
+  font-size: 13px;
+}
+
+.personalDivider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #94a3b8;
+  font-size: 11px;
+  margin: 2px 0;
+}
+
+.personalDivider::before,
+.personalDivider::after {
+  content: "";
+  height: 1px;
+  background: #e2e8f0;
+  flex: 1;
+}
+/* =========================================================
+   IPHONE / MOBILE UX
+   ========================================================= */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  overscroll-behavior-x: none;
+}
+
+button,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+/* Safe area iPhone */
+.app {
+  padding-bottom: calc(90px + env(safe-area-inset-bottom));
+}
+
+header {
+  padding-top: env(safe-area-inset-top);
+  height: calc(64px + env(safe-area-inset-top));
+}
+
+nav {
+  padding-bottom: env(safe-area-inset-bottom);
+  height: calc(70px + env(safe-area-inset-bottom));
+}
+
+/* Champs suffisamment grands pour le doigt + évite le zoom iOS */
+.form input,
+.form select {
+  min-height: 48px;
+  font-size: 16px;
+}
+
+.form button {
+  min-height: 48px;
+}
+
+/* Boutons d'action plus faciles à toucher */
+.actions button {
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+}
+
+/* Bouton principal */
+.primary,
+.secondary {
+  min-height: 50px;
+  font-size: 16px;
+}
+
+/* Modal optimisée pour iPhone */
+.overlay {
+  padding: 0;
+}
+
+.modal {
+  width: 100%;
+  max-width: 720px;
+  max-height: calc(100vh - env(safe-area-inset-top));
+  max-height: calc(100dvh - env(safe-area-inset-top));
+  padding-top: max(18px, env(safe-area-inset-top));
+  padding-bottom: calc(18px + env(safe-area-inset-bottom));
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Dashboard compact sur petits écrans */
+@media (max-width: 480px) {
+  .app {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #dbe2ea;
-    border-radius: 13px;
-    background: white;
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    text-align: left;
-    color: #111827;
   }
-  
-  .splitOption.active {
-    border-color: #111827;
-    background: #f1f5f9;
+
+  header {
+    padding-left: 16px;
+    padding-right: 16px;
   }
-  
-  .splitOption .radio {
-    font-size: 17px;
-    width: 20px;
+
+  main {
+    padding: 14px;
   }
-  
-  .splitOption span:last-child {
-    display: grid;
-    gap: 2px;
+
+  .hero {
+    padding: 18px;
+    border-radius: 20px;
   }
-  
-  .splitOption b {
-    font-size: 13px;
+
+  .hero h1 {
+    font-size: 23px;
   }
-  
-  .splitOption small {
-    color: #64748b;
-    font-size: 11px;
+
+  .dashboardSummary {
+    gap: 9px;
   }
-  
-  .customSplit {
-    background: #f1f5f9;
-    border-radius: 13px;
-    padding: 13px;
+
+  .summaryCard {
+    padding: 14px;
+    border-radius: 16px;
   }
-  
-  .customSplit input[type="range"] {
-    padding: 0;
-    border: 0;
+
+  .summaryCard strong {
+    font-size: 19px;
   }
-  
-  .splitPercent {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
+
+  .cards {
+    gap: 9px;
   }
-  
-  .splitAmounts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+
+  .cards > div {
+    padding: 14px;
   }
-  
-  .splitAmounts > div {
-    background: #f8fafc;
-    border-radius: 11px;
+
+  .cards strong {
+    font-size: 20px;
+  }
+
+  .expense {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .topline {
+    gap: 10px;
+  }
+
+  .topline h2 {
+    font-size: 21px;
+  }
+
+  nav {
+    height: calc(72px + env(safe-area-inset-bottom));
+  }
+
+  nav button {
+    min-width: 58px;
+    min-height: 48px;
+    padding: 6px 8px;
+  }
+
+  nav .add {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Très petits iPhone */
+@media (max-width: 360px) {
+  main {
     padding: 10px;
   }
-  
-  .splitAmounts span,
-  .splitAmounts b {
-    display: block;
+
+  .hero {
+    padding: 16px;
   }
-  
-  .splitAmounts span {
-    color: #64748b;
-    font-size: 11px;
+
+  .dashboardSummary {
+    grid-template-columns: 1fr;
   }
-  
-  .splitAmounts b {
-    margin-top: 3px;
-    font-size: 13px;
+
+  .summaryCard strong {
+    font-size: 21px;
   }
-  
-  .personalDivider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #94a3b8;
-    font-size: 11px;
-    margin: 2px 0;
+}
+
+/* Réduit les animations si l'utilisateur les désactive */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
-  
-  .personalDivider::before,
-  .personalDivider::after {
-    content: "";
-    height: 1px;
-    background: #e2e8f0;
-    flex: 1;
+}
+
+/* =========================================================
+   IPHONE / MOBILE UX
+   ========================================================= */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overscroll-behavior-y: none;
+}
+
+body {
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+button,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+/* App respecte l'encoche / Dynamic Island */
+.app {
+  min-height: 100dvh;
+  padding-bottom: calc(90px + env(safe-area-inset-bottom));
+}
+
+/* Header */
+header {
+  padding-top: env(safe-area-inset-top);
+  height: calc(64px + env(safe-area-inset-top));
+}
+
+/* Navigation iPhone */
+nav {
+  height: calc(70px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Boutons suffisamment grands pour le tactile */
+.iconBtn,
+.actions button,
+.modalHead button {
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+}
+
+/* Empêche iOS de zoomer lorsqu'on touche un champ */
+.form input,
+.form select,
+.form textarea {
+  font-size: 16px;
+}
+
+/* Inputs plus faciles à utiliser */
+.form input,
+.form select {
+  min-height: 48px;
+}
+
+/* Boutons principaux */
+.primary,
+.secondary {
+  min-height: 50px;
+}
+
+/* Modale mobile */
+.overlay {
+  align-items: flex-end;
+  padding: 0;
+}
+
+.modal {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90dvh;
+  padding: 16px 18px calc(24px + env(safe-area-inset-bottom));
+  border-radius: 24px 24px 0 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Quand le clavier apparaît */
+.form {
+  padding-bottom: 8px;
+}
+
+/* Zones tactiles des options */
+.splitOption {
+  min-height: 58px;
+}
+
+/* Slider plus facile à manipuler */
+input[type="range"] {
+  min-height: 44px;
+}
+
+/* Désactive le comportement de sélection accidentelle */
+nav,
+button,
+.splitOption {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Feedback tactile léger */
+button:active {
+  transform: scale(0.98);
+}
+
+.primary:active,
+nav .add:active {
+  transform: scale(0.96);
+}
+
+/* Très petits écrans */
+@media (max-width: 390px) {
+  main {
+    padding: 14px;
   }
+
+  .hero {
+    padding: 18px;
+    border-radius: 19px;
+  }
+
+  .hero h1 {
+    font-size: 23px;
+  }
+
+  .summaryCard {
+    padding: 14px;
+  }
+
+  .summaryCard strong {
+    font-size: 19px;
+  }
+
+  .cards {
+    gap: 8px;
+  }
+
+  .dashboardSummary {
+    gap: 8px;
+  }
+
+  .expense {
+    padding: 13px;
+  }
+}
+
+/* iPhone en mode paysage */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal {
+    max-height: 96dvh;
+  }
+
+  nav {
+    height: calc(58px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Desktop : on conserve le comportement actuel */
+@media (min-width: 700px) {
+  .app {
+    padding-bottom: 20px;
+  }
+
+  header {
+    padding-top: 0;
+    height: 64px;
+  }
+
+  nav {
+    padding-bottom: 0;
+    height: 70px;
+  }
+
+  .modal {
+    max-height: 85dvh;
+    padding: 18px;
+    border-radius: 24px;
+  }
+}

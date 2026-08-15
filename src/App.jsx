@@ -59,10 +59,51 @@ function App() {
   const [rates, setRates] = useState({ CAD: 1 });
   const [rateStatus, setRateStatus] = useState("Prêt");
   const [form, setForm] = useState(null);
+  const [joinCode, setJoinCode] = useState("");
+  const [showJoin, setShowJoin] = useState(false);
+  const [joining, setJoining] = useState(false);
 
   useEffect(() => {
     loadFromSupabase();
   }, []);
+
+  async function joinTripByCode(e) {
+    e.preventDefault();
+
+    const code = joinCode.trim().toUpperCase();
+
+    if (!code) {
+      setError("Entre le code du voyage.");
+      return;
+    }
+
+    try {
+      setJoining(true);
+      setError("");
+
+      const { data: trip, error: tripError } = await supabase
+        .from("trips")
+        .select("*")
+        .eq("share_code", code)
+        .single();
+
+      if (tripError || !trip) {
+        throw new Error("Code de voyage invalide.");
+      }
+
+      localStorage.setItem("voyage-depenses-trip-id", trip.id);
+
+      setShowJoin(false);
+      setJoinCode("");
+
+      await loadFromSupabase();
+    } catch (err) {
+      console.error(err);
+      setError(err?.message || "Impossible de rejoindre ce voyage.");
+    } finally {
+      setJoining(false);
+    }
+  }
 
   async function loadFromSupabase() {
     try {
@@ -593,14 +634,56 @@ function App() {
           Voyage Dépenses
         </div>
 
-        <button
-          className="iconBtn"
-          onClick={() => setShowTrip(true)}
-          title="Voyage"
-        >
-          <Wallet size={20} />
-        </button>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <button
+            className="iconBtn"
+            onClick={() => setShowTrip(true)}
+            title="Voyage"
+          >
+            <Wallet size={20} />
+          </button>
+
+          <button
+            className="iconBtn"
+            onClick={() => setShowJoin(true)}
+            title="Rejoindre un voyage"
+          >
+            <Plus size={20} />
+          </button>
+        </div>
       </header>
+
+      {showJoin && (
+        <Modal
+          title="Rejoindre un voyage"
+          close={() => {
+            setShowJoin(false);
+            setJoinCode("");
+          }}
+        >
+          <form className="form" onSubmit={joinTripByCode}>
+            <p>Entre le code de partage que ton compagnon t'a donné.</p>
+
+            <label>
+              Code du voyage
+              <input
+                autoFocus
+                required
+                autoCapitalize="characters"
+                autoCorrect="off"
+                spellCheck="false"
+                value={joinCode}
+                onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
+                placeholder="Ex. 4251CBDD"
+              />
+            </label>
+
+            <button className="primary" disabled={joining}>
+              {joining ? "Connexion…" : "Rejoindre le voyage"}
+            </button>
+          </form>
+        </Modal>
+      )}
 
       {error && <div className="error">{error}</div>}
 

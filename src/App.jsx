@@ -812,20 +812,22 @@ function App() {
 
       <nav className="bottomNav">
   <button
-    className={screen === "dashboard" ? "active" : ""}
+    className={screen === "dashboard" ? "navItem active" : "navItem"}
     onClick={() => setScreen("dashboard")}
   >
+    <span className="navIcon">⌂</span>
     <span>Accueil</span>
   </button>
 
-  <button className="add" onClick={newExpense} aria-label="Ajouter une dépense">
-    <Plus size={24} />
+  <button className="navAdd" onClick={newExpense} aria-label="Ajouter une dépense">
+    <Plus size={24} strokeWidth={2.5} />
   </button>
 
   <button
-    className={screen === "history" ? "active" : ""}
+    className={screen === "history" ? "navItem active" : "navItem"}
     onClick={() => setScreen("history")}
   >
+    <span className="navIcon">≡</span>
     <span>Dépenses</span>
   </button>
 </nav>

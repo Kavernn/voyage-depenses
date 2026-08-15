@@ -13,3 +13,342 @@
   .travellers label + label {
     margin-top: 12px;
   }
+  /* =========================
+   DASHBOARD V2
+   ========================= */
+
+.dashboardSummary {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  
+  .summaryCard {
+    background: white;
+    border-radius: 18px;
+    padding: 17px;
+    box-shadow: 0 2px 12px #00000008;
+  }
+  
+  .summaryCard span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+  }
+  
+  .summaryCard strong {
+    display: block;
+    font-size: 23px;
+    margin-top: 5px;
+  }
+  
+  .summaryCard small {
+    display: block;
+    color: #64748b;
+    margin-top: 5px;
+  }
+  
+  .primarySummary {
+    background: #111827;
+    color: white;
+  }
+  
+  .primarySummary span,
+  .primarySummary small {
+    color: #cbd5e1;
+  }
+  
+  .budgetEnhanced {
+    margin-bottom: 14px;
+  }
+  
+  .budgetHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 12px;
+  }
+  
+  .budgetHeader > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .budgetHeader strong {
+    font-size: 18px;
+  }
+  
+  .budgetHeader > span {
+    text-align: right;
+  }
+  
+  .balanceEnhanced {
+    padding: 18px;
+  }
+  
+  .balanceTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .balanceIcon {
+    font-size: 20px !important;
+    color: #111827 !important;
+  }
+  
+  .categoryCard {
+    background: white;
+    border-radius: 18px;
+    padding: 17px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px #00000008;
+  }
+  
+  .sectionTitle {
+    margin-bottom: 15px;
+  }
+  
+  .sectionTitle > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .sectionTitle span {
+    font-size: 14px;
+    font-weight: 800;
+  }
+  
+  .sectionTitle small {
+    color: #64748b;
+    font-size: 12px;
+  }
+  
+  .categoryList {
+    display: grid;
+    gap: 14px;
+  }
+  
+  .categoryRow {
+    display: grid;
+    gap: 7px;
+  }
+  
+  .categoryTop {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+  }
+  
+  .categoryTop > span {
+    color: #334155;
+  }
+  
+  .categoryTop > div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .categoryTop b {
+    font-size: 13px;
+  }
+  
+  .categoryTop small {
+    color: #64748b;
+    min-width: 30px;
+    text-align: right;
+  }
+  
+  .categoryBar {
+    height: 7px;
+    background: #e5e7eb;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  
+  .categoryBar i {
+    display: block;
+    height: 100%;
+    background: #111827;
+    border-radius: 99px;
+  }
+  
+  .peopleEnhanced {
+    padding: 17px;
+    margin-bottom: 14px;
+  }
+  
+  .peopleEnhanced .sectionTitle {
+    margin-bottom: 8px;
+  }
+  
+  .personRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+  }
+  
+  .personInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  
+  .personRow > b {
+    font-size: 15px;
+  }
+  
+  @media(max-width:480px) {
+    .dashboardSummary {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .summaryCard strong {
+      font-size: 20px;
+    }
+  
+    .budgetHeader {
+      align-items: start;
+      flex-direction: column;
+    }
+  
+    .budgetHeader > span {
+      text-align: left;
+    }
+  }
+
+  /* =========================
+   RÉPARTITION DES DÉPENSES
+   ========================= */
+
+.splitSection {
+    display: grid;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  
+  .splitTitle {
+    font-size: 13px;
+    font-weight: 800;
+  }
+  
+  .splitOptions {
+    display: grid;
+    gap: 7px;
+  }
+  
+  .splitOption {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dbe2ea;
+    border-radius: 13px;
+    background: white;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-align: left;
+    color: #111827;
+  }
+  
+  .splitOption.active {
+    border-color: #111827;
+    background: #f1f5f9;
+  }
+  
+  .splitOption .radio {
+    font-size: 17px;
+    width: 20px;
+  }
+  
+  .splitOption span:last-child {
+    display: grid;
+    gap: 2px;
+  }
+  
+  .splitOption b {
+    font-size: 13px;
+  }
+  
+  .splitOption small {
+    color: #64748b;
+    font-size: 11px;
+  }
+  
+  .customSplit {
+    background: #f1f5f9;
+    border-radius: 13px;
+    padding: 13px;
+  }
+  
+  .customSplit input[type="range"] {
+    padding: 0;
+    border: 0;
+  }
+  
+  .splitPercent {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+  
+  .splitAmounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .splitAmounts > div {
+    background: #f8fafc;
+    border-radius: 11px;
+    padding: 10px;
+  }
+  
+  .splitAmounts span,
+  .splitAmounts b {
+    display: block;
+  }
+  
+  .splitAmounts span {
+    color: #64748b;
+    font-size: 11px;
+  }
+  
+  .splitAmounts b {
+    margin-top: 3px;
+    font-size: 13px;
+  }
+  
+  .personalDivider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #94a3b8;
+    font-size: 11px;
+    margin: 2px 0;
+  }
+  
+  .personalDivider::before,
+  .personalDivider::after {
+    content: "";
+    height: 1px;
+    background: #e2e8f0;
+    flex: 1;
+  }

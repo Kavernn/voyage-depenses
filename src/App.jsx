@@ -1066,32 +1066,83 @@ function App() {
   </div>
 </div>
 
-            {/* CATÉGORIE */}
-<div className="expenseChoiceSection">
-  <label>Catégorie</label>
+  {/* CATÉGORIES */}
+{categories.length > 0 && (
+  <div className="categoryCard mobileCategoryCard">
+    <div className="categoryHeader">
+      <div>
+        <span className="sectionEyebrow">ANALYSE</span>
+        <h3>Dépenses par catégorie</h3>
+      </div>
 
-  <div className="categoryChoiceGrid">
-    {data.categories.map((category) => (
-      <button
-        key={category}
-        type="button"
-        className={
-          form.category === category
-            ? "categoryChoice active"
-            : "categoryChoice"
-        }
-        onClick={() =>
-          setForm({
-            ...form,
-            category,
-          })
-        }
-      >
-        {category}
-      </button>
-    ))}
+      <div className="categoryTotal">
+        <strong>{money(categoryTotal)}</strong>
+        <span>au total</span>
+      </div>
+    </div>
+
+    <div className="categoryList">
+      {categories.map(([category, amount]) => {
+        const percentage =
+          categoryTotal > 0
+            ? (amount / categoryTotal) * 100
+            : 0;
+
+        const relativeWidth =
+          maxCategory > 0
+            ? (amount / maxCategory) * 100
+            : 0;
+
+        const icons = {
+          Hébergement: "🏨",
+          Restaurants: "🍽️",
+          Épicerie: "🛒",
+          Transport: "🚗",
+          Activités: "🎟️",
+          Magasinage: "🛍️",
+          Alcool: "🍷",
+          Essence: "⛽",
+          "Frais bancaires": "💳",
+          Autre: "📦",
+        };
+
+        return (
+          <div
+            className="categoryRow mobileCategoryRow"
+            key={category}
+          >
+            <div className="categoryRowTop">
+              <div className="categoryName">
+                <span className="categoryIcon">
+                  {icons[category] || "📦"}
+                </span>
+
+                <div>
+                  <strong>{category}</strong>
+                  <small>
+                    {percentage.toFixed(0)}% du total
+                  </small>
+                </div>
+              </div>
+
+              <strong className="categoryAmount">
+                {money(amount)}
+              </strong>
+            </div>
+
+            <div className="categoryBar">
+              <span
+                style={{
+                  width: `${Math.max(relativeWidth, 2)}%`,
+                }}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
   </div>
-</div>
+)}
 
 {/* DATE */}
 <div className="expenseDateSection">
@@ -1338,37 +1389,93 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
   const maxCategory = categories.length > 0 ? categories[0][1] : 0;
 
+  const tripDays = (() => {
+    if (!data.trip.start || !data.trip.end) return null;
+  
+    const start = new Date(data.trip.start);
+    const end = new Date(data.trip.end);
+  
+    const diff = Math.ceil(
+      (end - start) / (1000 * 60 * 60 * 24),
+    );
+  
+    return Math.max(1, diff + 1);
+  })();
+  
+  const dailyAverage =
+    tripDays && stats.total > 0
+      ? stats.total / tripDays
+      : 0;
+  
+  const budgetRemaining =
+    stats.budget > 0
+      ? stats.remaining
+      : null;
+
   return (
     <section className="dashboard">
-      {/* HEADER VOYAGE */}
-      <div className="hero mobileHero">
-        <div className="heroContent">
-          <p className="eyebrow">
-            {data.trip.start && data.trip.end
-              ? `${data.trip.start} → ${data.trip.end}`
-              : "Nouveau voyage"}
-          </p>
+     {/* HEADER VOYAGE */}
+<div className="travelHero">
+  <div className="travelHeroTop">
+    <div className="travelHeroIcon">
+      <Plane size={22} />
+    </div>
 
-          <h1>{data.trip.name}</h1>
+    <button
+      className="travelHeroEdit"
+      onClick={onTrip}
+      aria-label="Modifier le voyage"
+    >
+      <Pencil size={17} />
+    </button>
+  </div>
 
-          <p className="heroCountries">
-            {data.trip.countries || "Configure ton voyage pour commencer."}
-          </p>
-        </div>
+  <div className="travelHeroContent">
+    <span className="travelHeroLabel">
+      {data.trip.start && data.trip.end
+        ? `${data.trip.start} → ${data.trip.end}`
+        : "NOUVEAU VOYAGE"}
+    </span>
 
-        <button
-          className="heroEdit"
-          onClick={onTrip}
-          aria-label="Modifier le voyage"
-        >
-          ✎
-        </button>
+    <h1>{data.trip.name}</h1>
+
+    <p>
+      {data.trip.countries ||
+        "Ajoute les destinations de ton voyage"}
+    </p>
+  </div>
+
+  <div className="travelHeroStats">
+    {tripDays && (
+      <div>
+        <strong>{tripDays}</strong>
+        <span>jours</span>
       </div>
+    )}
 
-      {/* TOTAL + BUDGET */}
-      <div className="dashboardSummary mobileSummary">
-        <div className="summaryCard primarySummary">
-          <span>Total dépensé</span>
+    {stats.total > 0 && (
+      <div>
+        <strong>{money(dailyAverage)}</strong>
+        <span>/ jour</span>
+      </div>
+    )}
+
+    {data.people.length > 0 && (
+      <div>
+        <strong>{data.people.length}</strong>
+        <span>voyageurs</span>
+      </div>
+    )}
+  </div>
+</div>
+
+      {/* RÉSUMÉ FINANCIER */}
+      <div className="financialGrid">
+        <div className="financialCard financialCardMain">
+          <div className="financialCardLabel">
+            <span>Total dépensé</span>
+            <Wallet size={17} />
+          </div>
 
           <strong>{money(stats.total)}</strong>
 
@@ -1379,20 +1486,22 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           </small>
         </div>
 
-        <div className="summaryCard budgetSummary">
-          <span>Budget</span>
+        <div className="financialCard">
+          <div className="financialCardLabel">
+            <span>Budget</span>
+          </div>
 
           <strong>
             {stats.budget ? money(stats.budget) : "—"}
           </strong>
 
-          {stats.budget > 0 ? (
-            <small>
-              {money(Math.max(0, stats.remaining))} restant
-            </small>
-          ) : (
-            <small>Aucun budget défini</small>
-          )}
+          <small>
+            {stats.budget > 0
+              ? stats.remaining >= 0
+                ? `${money(stats.remaining)} restant`
+                : `${money(Math.abs(stats.remaining))} dépassé`
+              : "Aucun budget défini"}
+          </small>
         </div>
       </div>
 
@@ -1451,31 +1560,45 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
         )}
       </div>
 
-            {/* CATÉGORIES */}
-            {categories.length > 0 && (
+      {/* DÉPENSES PAR CATÉGORIE */}
+      {categories.length > 0 && (
         <div className="categoryCard mobileCategoryCard">
-          <div className="sectionTitle">
+          <div className="categoryHeader">
             <div>
               <span>Dépenses par catégorie</span>
               <small>{money(categoryTotal)} au total</small>
             </div>
+
+            <div className="categoryCount">
+              {categories.length}
+            </div>
           </div>
 
           <div className="categoryList">
-            {categories.map(([category, amount]) => {
+            {categories.map(([category, amount], index) => {
               const percentage =
-                stats.total > 0 ? (amount / stats.total) * 100 : 0;
+                stats.total > 0
+                  ? (amount / stats.total) * 100
+                  : 0;
 
               const relativeWidth =
-                maxCategory > 0 ? (amount / maxCategory) * 100 : 0;
+                maxCategory > 0
+                  ? (amount / maxCategory) * 100
+                  : 0;
 
               return (
-                <div className="categoryRow mobileCategoryRow" key={category}>
+                <div
+                  className="categoryRow mobileCategoryRow"
+                  key={category}
+                >
                   <div className="categoryTop">
-                    <span>{category}</span>
+                    <div className="categoryName">
+                      <span className={`categoryDot categoryDot${index}`} />
+                      <span>{category}</span>
+                    </div>
 
-                    <div>
-                      <b>{money(amount)}</b>
+                    <div className="categoryAmount">
+                      <strong>{money(amount)}</strong>
                       <small>{percentage.toFixed(0)}%</small>
                     </div>
                   </div>
@@ -1496,30 +1619,53 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
       {/* RÉPARTITION PAR VOYAGEUR */}
       <div className="people peopleEnhanced mobilePeople">
-        <div className="sectionTitle">
+        <div className="peopleHeader">
           <div>
             <span>Dépenses par voyageur</span>
-            <small>Montant payé</small>
+            <small>Montant payé par chacun</small>
+          </div>
+
+          <div className="peopleCount">
+            {data.people.length}
           </div>
         </div>
 
         <div className="peopleList">
-          {data.people.map((person) => (
-            <div key={person} className="personRow mobilePersonRow">
-              <div className="personInfo">
-                <div className="avatar">
-                  {person.charAt(0).toUpperCase()}
+          {data.people.map((person) => {
+            const paid = stats.paid[person] || 0;
+            const percentage =
+              stats.total > 0
+                ? (paid / stats.total) * 100
+                : 0;
+
+            return (
+              <div key={person} className="personRow mobilePersonRow">
+                <div className="personInfo">
+                  <div className="avatar">
+                    {person.charAt(0).toUpperCase()}
+                  </div>
+
+                  <div className="personName">
+                    <span>{person}</span>
+                    <small>
+                      {percentage.toFixed(0)} % du total
+                    </small>
+                  </div>
                 </div>
 
-                <div className="personName">
-                  <span>{person}</span>
-                  <small>Payé</small>
+                <div className="personAmount">
+                  <strong>{money(paid)}</strong>
+                  <div className="personBar">
+                    <i
+                      style={{
+                        width: `${Math.min(100, percentage)}%`,
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-
-              <b>{money(stats.paid[person])}</b>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

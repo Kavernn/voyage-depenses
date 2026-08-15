@@ -3355,3 +3355,591 @@ nav button {
 .splitOption.active .splitCheck {
   border: 1px solid currentColor;
 }
+
+/* =========================================================
+   DASHBOARD V2 — RÉSUMÉ FINANCIER
+   ========================================================= */
+
+   .financialGrid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  
+  .financialCard {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #e8edf3;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow:
+      0 2px 4px rgba(15, 23, 42, 0.03),
+      0 10px 30px rgba(15, 23, 42, 0.06);
+  }
+  
+  .financialCardMain {
+    background:
+      linear-gradient(145deg, #111827 0%, #1f2937 100%);
+    border-color: #111827;
+    color: #ffffff;
+  }
+  
+  .financialCardLabel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .financialCardLabel span {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  
+  .financialCardMain .financialCardLabel span {
+    color: #cbd5e1;
+  }
+  
+  .financialCardLabel svg {
+    flex: 0 0 auto;
+    color: #94a3b8;
+  }
+  
+  .financialCardMain .financialCardLabel svg {
+    color: #ffffff;
+  }
+  
+  .financialCard strong {
+    display: block;
+    margin: 0;
+    font-size: clamp(25px, 7vw, 34px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  
+  .financialCard small {
+    display: block;
+    margin-top: 10px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .financialCardMain small {
+    color: #cbd5e1;
+  }
+  
+  /* Petite touche visuelle sur la carte principale */
+  .financialCardMain::after {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    right: -55px;
+    bottom: -65px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  
+  @media (max-width: 480px) {
+    .financialGrid {
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin: 12px 0;
+    }
+  
+    .financialCard {
+      padding: 15px;
+      border-radius: 18px;
+    }
+  
+    .financialCard strong {
+      font-size: 22px;
+    }
+  
+    .financialCardLabel {
+      margin-bottom: 10px;
+    }
+  
+    .financialCardLabel span {
+      font-size: 10px;
+    }
+  
+    .financialCard small {
+      font-size: 10px;
+      line-height: 1.3;
+    }
+  }
+  /* =========================================================
+   DASHBOARD V2 — SOLDE ENTRE VOUS
+   ========================================================= */
+
+.balanceEnhanced {
+  position: relative;
+  overflow: hidden;
+  margin: 14px 0;
+  padding: 18px;
+  border: 1px solid #e8edf3;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.03),
+    0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.balanceTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.balanceTitle > span:first-child {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.balanceIcon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 11px;
+  background: #f1f5f9;
+  font-size: 16px;
+}
+
+.balanceEnhanced strong {
+  display: block;
+  margin-top: 14px;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.balanceEnhanced small {
+  display: block;
+  margin-top: 5px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.balanceEnhanced.balanced {
+  background: linear-gradient(145deg, #f0fdf4, #ffffff);
+  border-color: #bbf7d0;
+}
+
+.balanceEnhanced.balanced .balanceIcon {
+  background: #dcfce7;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .balanceEnhanced {
+    margin: 12px 0;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .balanceEnhanced strong {
+    font-size: 19px;
+  }
+
+  .balanceEnhanced small {
+    font-size: 12px;
+  }
+
+  .balanceIcon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* =========================================================
+   DASHBOARD V2 — DÉPENSES PAR CATÉGORIE
+   ========================================================= */
+
+   .categoryCard {
+    margin: 14px 0;
+    padding: 18px;
+    border: 1px solid #e8edf3;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow:
+      0 2px 4px rgba(15, 23, 42, 0.03),
+      0 10px 30px rgba(15, 23, 42, 0.05);
+  }
+  
+  .categoryHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  
+  .categoryHeader > div:first-child span {
+    display: block;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  
+  .categoryHeader > div:first-child small {
+    display: block;
+    margin-top: 3px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .categoryCount {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 11px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  
+  .categoryList {
+    display: grid;
+    gap: 16px;
+  }
+  
+  .categoryRow {
+    min-width: 0;
+  }
+  
+  .categoryTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .categoryName {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 9px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  
+  .categoryName > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .categoryDot {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #111827;
+  }
+  
+  .categoryDot1 {
+    background: #475569;
+  }
+  
+  .categoryDot2 {
+    background: #64748b;
+  }
+  
+  .categoryDot3 {
+    background: #94a3b8;
+  }
+  
+  .categoryDot4 {
+    background: #cbd5e1;
+  }
+  
+  .categoryDot5 {
+    background: #e2e8f0;
+  }
+  
+  .categoryAmount {
+    display: flex;
+    align-items: baseline;
+    flex: 0 0 auto;
+    gap: 7px;
+  }
+  
+  .categoryAmount strong {
+    color: #111827;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  
+  .categoryAmount small {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  
+  .categoryBar {
+    width: 100%;
+    height: 7px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #f1f5f9;
+  }
+  
+  .categoryBar i {
+    display: block;
+    height: 100%;
+    min-width: 4px;
+    border-radius: inherit;
+    background: #111827;
+    transition: width 0.35s ease;
+  }
+  
+  .categoryRow:nth-child(2) .categoryBar i {
+    background: #475569;
+  }
+  
+  .categoryRow:nth-child(3) .categoryBar i {
+    background: #64748b;
+  }
+  
+  .categoryRow:nth-child(4) .categoryBar i {
+    background: #94a3b8;
+  }
+  
+  .categoryRow:nth-child(5) .categoryBar i {
+    background: #a8b3c2;
+  }
+  
+  .categoryRow:nth-child(6) .categoryBar i {
+    background: #cbd5e1;
+  }
+  
+  @media (max-width: 480px) {
+    .categoryCard {
+      margin: 12px 0;
+      padding: 16px;
+      border-radius: 18px;
+    }
+  
+    .categoryList {
+      gap: 15px;
+    }
+  
+    .categoryHeader {
+      margin-bottom: 16px;
+    }
+  
+    .categoryHeader > div:first-child span {
+      font-size: 14px;
+    }
+  
+    .categoryAmount {
+      gap: 5px;
+    }
+  
+    .categoryAmount strong {
+      font-size: 13px;
+    }
+  
+    .categoryName {
+      font-size: 12px;
+    }
+  }
+
+  /* =========================================================
+   DASHBOARD V2 — RÉPARTITION PAR VOYAGEUR
+   ========================================================= */
+
+.peopleEnhanced {
+  margin: 14px 0;
+  padding: 18px;
+  border: 1px solid #e8edf3;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.03),
+    0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.peopleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.peopleHeader > div:first-child span {
+  display: block;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.peopleHeader > div:first-child small {
+  display: block;
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.peopleCount {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 11px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.peopleList {
+  display: grid;
+  gap: 16px;
+}
+
+.personRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.personInfo {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 11px;
+}
+
+.avatar {
+  display: grid;
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 14px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.personName {
+  min-width: 0;
+}
+
+.personName > span {
+  display: block;
+  overflow: hidden;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.personName small {
+  display: block;
+  margin-top: 3px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.personAmount {
+  flex: 0 0 auto;
+  min-width: 105px;
+  text-align: right;
+}
+
+.personAmount strong {
+  display: block;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.personBar {
+  width: 105px;
+  height: 5px;
+  margin-top: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #f1f5f9;
+}
+
+.personBar i {
+  display: block;
+  height: 100%;
+  min-width: 3px;
+  border-radius: inherit;
+  background: #111827;
+  transition: width 0.35s ease;
+}
+
+@media (max-width: 480px) {
+  .peopleEnhanced {
+    margin: 12px 0;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .peopleHeader {
+    margin-bottom: 16px;
+  }
+
+  .peopleHeader > div:first-child span {
+    font-size: 14px;
+  }
+
+  .peopleList {
+    gap: 15px;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .personName > span {
+    font-size: 13px;
+  }
+
+  .personAmount {
+    min-width: 90px;
+  }
+
+  .personAmount strong {
+    font-size: 13px;
+  }
+
+  .personBar {
+    width: 90px;
+  }
+}

@@ -13,17 +13,31 @@ export default function Modal({ title, close, children }) {
   }, []);
 
   return (
-    <div className="overlay" role="dialog" aria-modal="true" aria-label={title}>
+    <div
+      className="overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+    >
       <div className="modal">
+        <div className="sheetHandle" aria-hidden="true" />
+
         <div className="modalHead">
           <h2>{title}</h2>
 
-          <button type="button" onClick={close} aria-label="Fermer">
-            <X size={22} />
+          <button
+            type="button"
+            onClick={close}
+            aria-label="Fermer"
+            className="modalClose"
+          >
+            <X size={21} strokeWidth={2.2} />
           </button>
         </div>
 
-        {children}
+        <div className="modalContent">
+          {children}
+        </div>
       </div>
     </div>
   );

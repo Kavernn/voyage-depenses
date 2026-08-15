@@ -762,22 +762,20 @@ function App() {
             <label>
               Code du voyage
               <input
-  autoFocus
-  required
-  type="number"
-  inputMode="decimal"
-  enterKeyHint="next"
-  step="0.01"
-  min="0"
-  value={form.amount}
-  placeholder="0,00"
-  onChange={(e) =>
-    setForm({
-      ...form,
-      amount: e.target.value,
-    })
-  }
-/>
+                autoFocus
+                required
+                type="text"
+                inputMode="text"
+                autoCapitalize="characters"
+                autoCorrect="off"
+                spellCheck="false"
+                maxLength={8}
+                value={joinCode}
+                placeholder="Ex. 4251CBDD"
+                onChange={(e) =>
+                  setJoinCode(e.target.value.toUpperCase())
+                }
+              />
             </label>
 
             <button className="primary" disabled={joining}>
@@ -954,118 +952,164 @@ function App() {
           close={() => setShowExpense(false)}
         >
           <form onSubmit={saveExpense} className="form">
-            {/* MONTANT */}
-            <label>
-              Montant
-              <input
-                autoFocus
-                required
-                type="number"
-                step="0.01"
-                min="0"
-                value={form.amount}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    amount: e.target.value,
-                  })
-                }
-              />
-            </label>
+                {/* MONTANT */}
+                <div className="expenseAmountSection">
+              <label className="amountLabel">
+                Montant
+              </label>
+
+              <div className="amountInputWrap">
+                <input
+                  className="amountInput"
+                  autoFocus
+                  required
+                  type="number"
+                  inputMode="decimal"
+                  enterKeyHint="next"
+                  step="0.01"
+                  min="0"
+                  value={form.amount}
+                  placeholder="0,00"
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      amount: e.target.value,
+                    })
+                  }
+                />
+
+                <span className="amountCurrency">
+                  {form.currency}
+                </span>
+              </div>
+            </div>
 
             {/* CONVERSION CAD EN TEMPS RÉEL */}
             {form.amount && Number(form.amount) > 0 && (
-              <div className="liveConversion">
-                <div className="liveConversionLabel">Équivalent en CAD</div>
+              <div className="liveConversion mobileLiveConversion">
+                <div className="liveConversionMain">
+                  <span>≈</span>
 
-                <div className="liveConversionAmount">
-                  {form.currency === "CAD"
-                    ? money(Number(form.amount))
-                    : form.rate
-                      ? money(Number(form.amount) * Number(form.rate))
-                      : "Mise à jour du taux…"}
+                  <strong>
+                    {form.currency === "CAD"
+                      ? money(Number(form.amount))
+                      : form.rate
+                        ? money(
+                            Number(form.amount) * Number(form.rate),
+                          )
+                        : "…"}
+                  </strong>
+
+                  <span>CAD</span>
                 </div>
 
                 {form.currency !== "CAD" && form.rate && (
                   <div className="liveConversionRate">
-                    Taux actuel : 1 {form.currency} ={" "}
+                    1 {form.currency} ={" "}
                     {Number(form.rate).toFixed(6)} CAD
                   </div>
                 )}
               </div>
             )}
 
-            {/* DEVISE + PAYEUR */}
-            <div className="grid2">
-              <label>
-                Devise
-                <select
-                  value={form.currency}
-                  onChange={(e) => handleCurrencyChange(e.target.value)}
-                >
-                  {CURRENCIES.map((currency) => (
-                    <option key={currency.code} value={currency.code}>
-                      {currency.code} — {currency.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
+         {/* DEVISE */}
+<div className="expenseChoiceSection">
+  <label>Devise</label>
 
-              <label>
-                Payé par
-                <select
-                  value={form.payer}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      payer: e.target.value,
-                    })
-                  }
-                >
-                  {data.people.map((person) => (
-                    <option key={person} value={person}>
-                      {person}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
+  <div className="currencyGrid">
+    {CURRENCIES.map((currency) => (
+      <button
+        key={currency.code}
+        type="button"
+        className={
+          form.currency === currency.code
+            ? "currencyChoice active"
+            : "currencyChoice"
+        }
+        onClick={() => handleCurrencyChange(currency.code)}
+      >
+        <strong>{currency.code}</strong>
+        <span>{currency.name}</span>
+      </button>
+    ))}
+  </div>
+</div>
 
-            {/* CATÉGORIE + DATE */}
-            <div className="grid2">
-              <label>
-                Catégorie
-                <select
-                  value={form.category}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      category: e.target.value,
-                    })
-                  }
-                >
-                  {data.categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </label>
+{/* PAYEUR */}
+<div className="expenseChoiceSection">
+  <label>Payé par</label>
 
-              <label>
-                Date
-                <input
-                  type="date"
-                  value={form.date}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      date: e.target.value,
-                    })
-                  }
-                />
-              </label>
-            </div>
+  <div className="payerGrid">
+    {data.people.map((person) => (
+      <button
+        key={person}
+        type="button"
+        className={
+          form.payer === person
+            ? "payerChoice active"
+            : "payerChoice"
+        }
+        onClick={() =>
+          setForm({
+            ...form,
+            payer: person,
+          })
+        }
+      >
+        <span className="payerAvatar">
+          {person.charAt(0).toUpperCase()}
+        </span>
+
+        <span>{person}</span>
+      </button>
+    ))}
+  </div>
+</div>
+
+            {/* CATÉGORIE */}
+<div className="expenseChoiceSection">
+  <label>Catégorie</label>
+
+  <div className="categoryChoiceGrid">
+    {data.categories.map((category) => (
+      <button
+        key={category}
+        type="button"
+        className={
+          form.category === category
+            ? "categoryChoice active"
+            : "categoryChoice"
+        }
+        onClick={() =>
+          setForm({
+            ...form,
+            category,
+          })
+        }
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+</div>
+
+{/* DATE */}
+<div className="expenseDateSection">
+  <label htmlFor="expense-date">Date</label>
+
+  <input
+    id="expense-date"
+    className="expenseDateInput"
+    type="date"
+    value={form.date}
+    onChange={(e) =>
+      setForm({
+        ...form,
+        date: e.target.value,
+      })
+    }
+  />
+</div>
 
             {/* DESCRIPTION */}
             <label>
@@ -1094,151 +1138,153 @@ function App() {
                 }
               />
             </label>
+            ### Section Répartition corrigée
 
-            {/* RÉPARTITION */}
-            {data.people.length >= 2 && (
-              <div className="splitSection">
-                <div className="splitTitle">Répartition</div>
+```jsx
+{/* RÉPARTITION */}
+{data.people.length >= 2 && (
+  <div className="splitSection">
+    <div className="splitTitle">Répartition</div>
 
-                <div className="splitOptions">
-                  <button
-                    type="button"
-                    className={
-                      form.splitMode === "equal"
-                        ? "splitOption active"
-                        : "splitOption"
-                    }
-                    onClick={() => changeSplitMode("equal")}
-                  >
-                    <span className="radio">
-                      {form.splitMode === "equal" ? "●" : "○"}
-                    </span>
+    <div className="splitOptions">
+      <button
+        type="button"
+        className={
+          form.splitMode === "equal"
+            ? "splitOption active"
+            : "splitOption"
+        }
+        onClick={() => changeSplitMode("equal")}
+      >
+        <span className="radio">
+          {form.splitMode === "equal" ? "●" : "○"}
+        </span>
 
-                    <span>
-                      <b>50 / 50</b>
-                      <small>
-                        {data.people[0]} et {data.people[1]}
-                      </small>
-                    </span>
-                  </button>
+        <span>
+          <b>50 / 50</b>
+          <small>
+            {data.people[0]} et {data.people[1]}
+          </small>
+        </span>
+      </button>
 
-                  <button
-                    type="button"
-                    className={
-                      form.splitMode === "personal1"
-                        ? "splitOption active"
-                        : "splitOption"
-                    }
-                    onClick={() => changeSplitMode("personal1")}
-                  >
-                    <span className="radio">
-                      {form.splitMode === "personal1" ? "●" : "○"}
-                    </span>
+      <button
+        type="button"
+        className={
+          form.splitMode === "personal1"
+            ? "splitOption active"
+            : "splitOption"
+        }
+        onClick={() => changeSplitMode("personal1")}
+      >
+        <span className="radio">
+          {form.splitMode === "personal1" ? "●" : "○"}
+        </span>
 
-                    <span>
-                      <b>{data.people[0]} seulement</b>
-                      <small>100 % {data.people[0]}</small>
-                    </span>
-                  </button>
+        <span>
+          <b>{data.people[0]} seulement</b>
+          <small>100 % {data.people[0]}</small>
+        </span>
+      </button>
 
-                  <button
-                    type="button"
-                    className={
-                      form.splitMode === "personal2"
-                        ? "splitOption active"
-                        : "splitOption"
-                    }
-                    onClick={() => changeSplitMode("personal2")}
-                  >
-                    <span className="radio">
-                      {form.splitMode === "personal2" ? "●" : "○"}
-                    </span>
+      <button
+        type="button"
+        className={
+          form.splitMode === "personal2"
+            ? "splitOption active"
+            : "splitOption"
+        }
+        onClick={() => changeSplitMode("personal2")}
+      >
+        <span className="radio">
+          {form.splitMode === "personal2" ? "●" : "○"}
+        </span>
 
-                    <span>
-                      <b>{data.people[1]} seulement</b>
-                      <small>100 % {data.people[1]}</small>
-                    </span>
-                  </button>
+        <span>
+          <b>{data.people[1]} seulement</b>
+          <small>100 % {data.people[1]}</small>
+        </span>
+      </button>
 
-                  <button
-                    type="button"
-                    className={
-                      form.splitMode === "custom"
-                        ? "splitOption active"
-                        : "splitOption"
-                    }
-                    onClick={() => changeSplitMode("custom")}
-                  >
-                    <span className="radio">
-                      {form.splitMode === "custom" ? "●" : "○"}
-                    </span>
+      <button
+        type="button"
+        className={
+          form.splitMode === "custom"
+            ? "splitOption active"
+            : "splitOption"
+        }
+        onClick={() => changeSplitMode("custom")}
+      >
+        <span className="radio">
+          {form.splitMode === "custom" ? "●" : "○"}
+        </span>
 
-                    <span>
-                      <b>Personnalisé</b>
-                      <small>Choisir les proportions</small>
-                    </span>
-                  </button>
-                </div>
+        <span>
+          <b>Personnalisé</b>
+          <small>Choisir les proportions</small>
+        </span>
+      </button>
+    </div>
 
-                {form.splitMode === "custom" && (
-                  <div className="customSplit">
-                    <div className="splitPercent">
-                      <span>{data.people[0]}</span>
-                      <b>{form.split}%</b>
-                    </div>
+    {form.splitMode === "custom" && (
+      <div className="customSplit">
+        <div className="splitPercent">
+          <span>{data.people[0]}</span>
+          <b>{form.split}%</b>
+        </div>
 
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      step="5"
-                      value={form.split}
-                      onChange={(e) =>
-                        setForm({
-                          ...form,
-                          split: Number(e.target.value),
-                        })
-                      }
-                    />
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="5"
+          value={form.split}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              split: Number(e.target.value),
+            })
+          }
+        />
 
-                    <div className="splitPercent">
-                      <span>{data.people[1]}</span>
-                      <b>{100 - form.split}%</b>
-                    </div>
-                  </div>
-                )}
+        <div className="splitPercent">
+          <span>{data.people[1]}</span>
+          <b>{100 - form.split}%</b>
+        </div>
+      </div>
+    )}
 
-                <div className="splitAmounts">
-                  <div>
-                    <span>{data.people[0]}</span>
+    <div className="splitAmounts">
+      <div>
+        <span>{data.people[0]}</span>
 
-                    <b>
-                      {money(
-                        (Number(form.amount) || 0) *
-                          (form.split / 100) *
-                          (form.currency === "CAD"
-                            ? 1
-                            : Number(form.rate) || 0),
-                      )}
-                    </b>
-                  </div>
+        <b>
+          {money(
+            (Number(form.amount) || 0) *
+              (form.split / 100) *
+              (form.currency === "CAD"
+                ? 1
+                : Number(form.rate) || 0),
+          )}
+        </b>
+      </div>
 
-                  <div>
-                    <span>{data.people[1]}</span>
+      <div>
+        <span>{data.people[1]}</span>
 
-                    <b>
-                      {money(
-                        (Number(form.amount) || 0) *
-                          ((100 - form.split) / 100) *
-                          (form.currency === "CAD"
-                            ? 1
-                            : Number(form.rate) || 0),
-                      )}
-                    </b>
-                  </div>
-                </div>
-              </div>
-            )}
+        <b>
+          {money(
+            (Number(form.amount) || 0) *
+              ((100 - form.split) / 100) *
+              (form.currency === "CAD"
+                ? 1
+                : Number(form.rate) || 0),
+          )}
+        </b>
+      </div>
+    </div>
+  </div>
+)}
 
             {/* TAUX */}
             {form.currency !== "CAD" && form.rate && (
@@ -1268,8 +1314,10 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
     : 0;
 
   const debtor = stats.net > 0 ? data.people[1] : data.people[0];
-
   const creditor = stats.net > 0 ? data.people[0] : data.people[1];
+
+  const isBalanced =
+    data.people.length < 2 || Math.abs(stats.net) < 0.005;
 
   const categories = Object.entries(
     data.expenses.reduce((result, expense) => {
@@ -1283,15 +1331,18 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 6);
 
-  const categoryTotal = categories.reduce((sum, [, amount]) => sum + amount, 0);
+  const categoryTotal = categories.reduce(
+    (sum, [, amount]) => sum + amount,
+    0,
+  );
 
   const maxCategory = categories.length > 0 ? categories[0][1] : 0;
 
   return (
-    <section>
-      {/* VOYAGE */}
-      <div className="hero">
-        <div>
+    <section className="dashboard">
+      {/* HEADER VOYAGE */}
+      <div className="hero mobileHero">
+        <div className="heroContent">
           <p className="eyebrow">
             {data.trip.start && data.trip.end
               ? `${data.trip.start} → ${data.trip.end}`
@@ -1300,16 +1351,25 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
           <h1>{data.trip.name}</h1>
 
-          <p>{data.trip.countries || "Configure ton voyage pour commencer."}</p>
+          <p className="heroCountries">
+            {data.trip.countries || "Configure ton voyage pour commencer."}
+          </p>
         </div>
 
-        <button onClick={onTrip}>Modifier</button>
+        <button
+          className="heroEdit"
+          onClick={onTrip}
+          aria-label="Modifier le voyage"
+        >
+          ✎
+        </button>
       </div>
 
-      {/* RÉSUMÉ */}
-      <div className="dashboardSummary">
+      {/* TOTAL + BUDGET */}
+      <div className="dashboardSummary mobileSummary">
         <div className="summaryCard primarySummary">
           <span>Total dépensé</span>
+
           <strong>{money(stats.total)}</strong>
 
           <small>
@@ -1319,27 +1379,37 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           </small>
         </div>
 
-        <div className="summaryCard">
+        <div className="summaryCard budgetSummary">
           <span>Budget</span>
 
-          <strong>{stats.budget ? money(stats.budget) : "—"}</strong>
+          <strong>
+            {stats.budget ? money(stats.budget) : "—"}
+          </strong>
 
-          {stats.budget > 0 && (
-            <small>{money(Math.max(0, stats.remaining))} restant</small>
+          {stats.budget > 0 ? (
+            <small>
+              {money(Math.max(0, stats.remaining))} restant
+            </small>
+          ) : (
+            <small>Aucun budget défini</small>
           )}
         </div>
       </div>
 
       {/* PROGRESSION BUDGET */}
       {stats.budget > 0 && (
-        <div className="budget budgetEnhanced">
+        <div className="budget budgetEnhanced mobileBudget">
           <div className="budgetHeader">
             <div>
               <span>Budget utilisé</span>
-              <strong>{pct.toFixed(1)} %</strong>
+              <strong>{pct.toFixed(0)} %</strong>
             </div>
 
-            <span>{money(stats.remaining)} restant</span>
+            <span>
+              {stats.remaining >= 0
+                ? `${money(stats.remaining)} restant`
+                : `${money(Math.abs(stats.remaining))} dépassé`}
+            </span>
           </div>
 
           <div className="bar">
@@ -1353,24 +1423,37 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
       )}
 
       {/* SOLDE */}
-      <div className="balance balanceEnhanced">
+      <div
+        className={`balance balanceEnhanced mobileBalance ${
+          isBalanced ? "balanced" : ""
+        }`}
+      >
         <div className="balanceTitle">
           <span>Solde entre vous</span>
           <span className="balanceIcon">⚖️</span>
         </div>
 
-        <strong>
-          {data.people.length < 2
-            ? "Ajoute un deuxième voyageur"
-            : Math.abs(stats.net) < 0.005
-              ? "Vous êtes à égalité"
-              : `${debtor} doit ${money(Math.abs(stats.net))} à ${creditor}`}
-        </strong>
+        {data.people.length < 2 ? (
+          <strong>Ajoute un deuxième voyageur</strong>
+        ) : isBalanced ? (
+          <>
+            <strong>Vous êtes à égalité</strong>
+            <small>Tout est équilibré pour le moment</small>
+          </>
+        ) : (
+          <>
+            <strong>
+              {debtor} doit {money(Math.abs(stats.net))}
+            </strong>
+
+            <small>à {creditor}</small>
+          </>
+        )}
       </div>
 
-      {/* CATÉGORIES */}
-      {categories.length > 0 && (
-        <div className="categoryCard">
+            {/* CATÉGORIES */}
+            {categories.length > 0 && (
+        <div className="categoryCard mobileCategoryCard">
           <div className="sectionTitle">
             <div>
               <span>Dépenses par catégorie</span>
@@ -1387,13 +1470,12 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
                 maxCategory > 0 ? (amount / maxCategory) * 100 : 0;
 
               return (
-                <div className="categoryRow" key={category}>
+                <div className="categoryRow mobileCategoryRow" key={category}>
                   <div className="categoryTop">
                     <span>{category}</span>
 
                     <div>
                       <b>{money(amount)}</b>
-
                       <small>{percentage.toFixed(0)}%</small>
                     </div>
                   </div>
@@ -1413,7 +1495,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
       )}
 
       {/* RÉPARTITION PAR VOYAGEUR */}
-      <div className="people peopleEnhanced">
+      <div className="people peopleEnhanced mobilePeople">
         <div className="sectionTitle">
           <div>
             <span>Dépenses par voyageur</span>
@@ -1421,28 +1503,38 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           </div>
         </div>
 
-        {data.people.map((person) => (
-          <div key={person} className="personRow">
-            <div className="personInfo">
-              <div className="avatar">{person.charAt(0).toUpperCase()}</div>
+        <div className="peopleList">
+          {data.people.map((person) => (
+            <div key={person} className="personRow mobilePersonRow">
+              <div className="personInfo">
+                <div className="avatar">
+                  {person.charAt(0).toUpperCase()}
+                </div>
 
-              <span>{person}</span>
+                <div className="personName">
+                  <span>{person}</span>
+                  <small>Payé</small>
+                </div>
+              </div>
+
+              <b>{money(stats.paid[person])}</b>
             </div>
-
-            <b>{money(stats.paid[person])}</b>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* ACTIONS */}
-      <button className="primary big" onClick={onAdd}>
-        <Plus />
-        Ajouter une dépense
-      </button>
+           {/* ACTIONS */}
+           <div className="dashboardActions">
+        <button className="primary big mobileAddButton" onClick={onAdd}>
+          <Plus size={21} />
+          <span>Ajouter une dépense</span>
+        </button>
 
-      <button className="secondary big" onClick={onHistory}>
-        Voir l'historique ({data.expenses.length})
-      </button>
+        <button className="secondary big mobileHistoryButton" onClick={onHistory}>
+          <span>Voir l'historique</span>
+          <span className="historyCount">{data.expenses.length}</span>
+        </button>
+      </div>
     </section>
   );
 }

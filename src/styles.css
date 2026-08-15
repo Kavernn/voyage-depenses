@@ -1368,3 +1368,1990 @@ nav button {
   color: #64748b;
   margin-top: 4px;
 }
+
+/* =========================================================
+   IOS BOTTOM SHEET
+   ========================================================= */
+
+   .sheetHandle {
+    display: none;
+  }
+
+  .modalClose {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #475569;
+    display: grid;
+    place-items: center;
+  }
+
+  .modalContent {
+    min-height: 0;
+  }
+
+  @media (max-width: 699px) {
+    .overlay {
+      align-items: flex-end;
+      padding: 0;
+      background: #00000066;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 720px;
+      max-height: calc(94dvh - env(safe-area-inset-top));
+      border-radius: 26px 26px 0 0;
+      padding: 10px 16px calc(18px + env(safe-area-inset-bottom));
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      box-shadow: 0 -8px 30px #00000018;
+    }
+
+    .sheetHandle {
+      display: block;
+      width: 38px;
+      height: 4px;
+      margin: 2px auto 12px;
+      border-radius: 99px;
+      background: #cbd5e1;
+    }
+
+    .modalHead {
+      min-height: 44px;
+      margin-bottom: 14px;
+    }
+
+    .modalHead h2 {
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .modalClose {
+      background: #f1f5f9;
+    }
+  }
+
+  /* ================================
+   EXPENSE MODAL — iPHONE
+   ================================ */
+
+.expenseAmountField {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.expenseAmountField > span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.expenseAmountInput {
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+  padding: 0 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 18px;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.expenseAmountInput:focus-within {
+  border-color: #111827;
+  box-shadow: 0 0 0 4px rgba(17, 24, 39, 0.08);
+}
+
+.expenseAmountInput input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 700;
+  color: #111827;
+}
+
+.expenseAmountInput input::placeholder {
+  color: #cbd5e1;
+}
+
+.expenseAmountInput > span {
+  flex: 0 0 auto;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* ================================
+   EXPENSE QUICK FIELDS
+   ================================ */
+
+   .expenseQuickFields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .expenseQuickField {
+    display: block;
+  }
+
+  .expenseQuickField > span {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .expenseQuickField select {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+    outline: none;
+  }
+
+  .expenseQuickField select:focus {
+    border-color: #111827;
+    box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.07);
+  }
+
+  @media (max-width: 380px) {
+    .expenseQuickFields {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* ================================
+   EXPENSE SPLIT — iPHONE
+   ================================ */
+
+.splitSection {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.splitTitle {
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.splitOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.splitOption {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 15px;
+  background: #fff;
+  color: #111827;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.splitOption:active {
+  transform: scale(0.98);
+}
+
+.splitOption.active {
+  border-color: #111827;
+  background: #f1f5f9;
+}
+
+.splitOption .radio {
+  flex: 0 0 auto;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.splitOption > span:last-child {
+  min-width: 0;
+}
+
+.splitOption b {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.splitOption small {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.customSplit {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 15px;
+  background: #f8fafc;
+}
+
+.customSplit .splitPercent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.customSplit .splitPercent span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.customSplit .splitPercent b {
+  font-size: 18px;
+}
+
+.customSplit input[type="range"] {
+  width: 100%;
+  height: 6px;
+  accent-color: #111827;
+  cursor: pointer;
+}
+
+/* =========================================
+   iPHONE — MODAL FULL SCREEN
+   ========================================= */
+
+   @media (max-width: 600px) {
+    .overlay {
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 0;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: none;
+      height: 100dvh;
+      max-height: none;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .modalHead {
+      flex: 0 0 auto;
+      min-height: 64px;
+      padding:
+        max(10px, env(safe-area-inset-top))
+        16px
+        10px
+        16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      background: #fff;
+    }
+
+    .modalHead h2 {
+      flex: 1;
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .modalHead button {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #111827;
+    }
+
+    .modal > .form {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+
+      padding:
+        18px
+        16px
+        calc(28px + env(safe-area-inset-bottom));
+    }
+
+    .form {
+      gap: 16px;
+    }
+
+    .form label {
+      font-size: 13px;
+    }
+
+    .form input,
+    .form select {
+      min-height: 52px;
+      font-size: 16px;
+      border-radius: 14px;
+    }
+
+    .form textarea {
+      font-size: 16px;
+      border-radius: 14px;
+    }
+
+    .primary {
+      min-height: 54px;
+      border-radius: 15px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+
+  @media (max-width: 600px) {
+    nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+
+      height: calc(64px + env(safe-area-inset-bottom));
+      padding:
+        8px
+        12px
+        calc(8px + env(safe-area-inset-bottom));
+
+      display: grid;
+      grid-template-columns: 1fr 72px 1fr;
+      align-items: center;
+
+      background: rgba(255, 255, 255, 0.94);
+      border-top: 1px solid #e2e8f0;
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    nav > button {
+      height: 48px;
+      border: 0;
+      background: transparent;
+      border-radius: 14px;
+
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 600;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+    }
+
+    nav > button.active {
+      color: #111827;
+      background: #f1f5f9;
+    }
+
+    nav .add {
+      width: 58px;
+      height: 58px;
+
+      justify-self: center;
+
+      border-radius: 50%;
+      background: #111827;
+      color: white;
+
+      box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.25),
+        0 0 0 5px #fff;
+
+      transform: translateY(-12px);
+    }
+
+    nav .add:active {
+      transform: translateY(-12px) scale(0.94);
+    }
+
+    main {
+      padding-bottom: calc(82px + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (max-width: 600px) {
+    main {
+      width: 100%;
+    }
+
+    .app > main {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    /* Cartes principales */
+    .card,
+    .dashboardCard,
+    .summaryCard {
+      border-radius: 18px;
+    }
+
+    /* Grilles desktop → une colonne */
+    .grid2 {
+      grid-template-columns: 1fr;
+    }
+
+    /* Statistiques */
+    .stats,
+    .statsGrid,
+    .summaryGrid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat,
+    .statCard {
+      min-width: 0;
+      padding: 15px;
+      border-radius: 16px;
+    }
+
+    .statValue,
+    .statCard strong {
+      font-size: 20px;
+    }
+
+    /* Gros total */
+    .total,
+    .totalCard {
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .totalAmount {
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    /* Boutons */
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button,
+    input,
+    select {
+      touch-action: manipulation;
+    }
+
+    /* Historique */
+    .expense,
+    .expenseRow,
+    .expenseItem {
+      min-height: 72px;
+    }
+
+    /* Texte */
+    h1 {
+      font-size: 26px;
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-size: 21px;
+    }
+
+    h3 {
+      font-size: 17px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .balanceEnhanced {
+      margin-top: 14px;
+      padding: 20px 18px;
+      border-radius: 20px;
+      background: #111827;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    .balanceEnhanced .balanceTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .balanceEnhanced .balanceTitle span:first-child {
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .balanceEnhanced .balanceIcon {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 16px;
+    }
+
+    .balanceEnhanced > strong {
+      display: block;
+      font-size: 21px;
+      line-height: 1.3;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+  }
+
+  /* =========================================
+   DASHBOARD — IPHONE UX
+   ========================================= */
+
+@media (max-width: 600px) {
+  .hero {
+    margin: 4px 0 14px;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+
+  .hero h1 {
+    margin: 0;
+    font-size: 25px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero p:not(.eyebrow) {
+    margin: 7px 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .hero button {
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* -------------------------
+     TOTAL + BUDGET
+     ------------------------- */
+
+  .dashboardSummary {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .summaryCard {
+    min-width: 0;
+    padding: 17px 15px;
+    border-radius: 18px;
+  }
+
+  .summaryCard span {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .summaryCard strong {
+    display: block;
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+  }
+
+  .summaryCard small {
+    display: block;
+    margin-top: 7px;
+    font-size: 11px;
+    line-height: 1.3;
+    color: #64748b;
+  }
+
+  .primarySummary {
+    background: #111827;
+    color: #fff;
+  }
+
+  .primarySummary span,
+  .primarySummary small {
+    color: #cbd5e1;
+  }
+
+  /* -------------------------
+     BUDGET
+     ------------------------- */
+
+  .budgetEnhanced {
+    margin: 10px 0 14px;
+    padding: 15px;
+    border-radius: 18px;
+  }
+
+  .budgetHeader {
+    margin-bottom: 10px;
+  }
+
+  .budgetHeader strong {
+    font-size: 15px;
+  }
+
+  .budgetHeader > span {
+    font-size: 11px;
+  }
+
+  .bar {
+    height: 7px;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  /* -------------------------
+     SOLDE
+     ------------------------- */
+
+  .balanceEnhanced {
+    margin: 0 0 14px;
+  }
+
+  /* -------------------------
+     CATÉGORIES
+     ------------------------- */
+
+  .categoryCard {
+    margin-bottom: 14px;
+    padding: 17px;
+    border-radius: 18px;
+  }
+
+  .sectionTitle {
+    margin-bottom: 14px;
+  }
+
+  .sectionTitle span {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .sectionTitle small {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .categoryRow {
+    margin-bottom: 13px;
+  }
+
+  .categoryRow:last-child {
+    margin-bottom: 0;
+  }
+
+  .categoryTop {
+    margin-bottom: 6px;
+  }
+
+  .categoryTop > span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  .categoryTop b {
+    font-size: 12px;
+  }
+
+  .categoryTop small {
+    min-width: 34px;
+    font-size: 10px;
+  }
+
+  .categoryBar {
+    height: 5px;
+    border-radius: 99px;
+  }
+
+  /* -------------------------
+     VOYAGEURS
+     ------------------------- */
+
+  .peopleEnhanced {
+    margin-bottom: 14px;
+    padding: 17px;
+    border-radius: 18px;
+  }
+
+  .personRow {
+    min-height: 54px;
+    padding: 7px 0;
+  }
+
+  .personInfo {
+    gap: 10px;
+  }
+
+  .personInfo .avatar {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+
+  .personInfo span {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .personRow > b {
+    font-size: 14px;
+  }
+
+  /* -------------------------
+     ACTIONS
+     ------------------------- */
+
+  .primary.big,
+  .secondary.big {
+    min-height: 50px;
+    margin-bottom: 9px;
+    border-radius: 15px;
+    font-size: 14px;
+  }
+
+  /*
+   * Le bouton + de la tab bar est déjà
+   * l'action principale sur mobile.
+   * On garde "Ajouter" mais plus compact.
+   */
+
+  .primary.big {
+    margin-top: 4px;
+  }
+}
+
+/* =========================================================
+   IPHONE DASHBOARD — MOBILE UX/UI
+   ========================================================= */
+
+   @media (max-width: 600px) {
+
+    body {
+      background: #f5f7fa;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #root {
+      min-height: 100dvh;
+    }
+
+    main {
+      padding: 0 16px calc(100px + env(safe-area-inset-bottom));
+    }
+
+    /* ---------- HEADER ---------- */
+
+    header {
+      min-height: 58px;
+      padding: 10px 16px;
+    }
+
+    header h1 {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    header p {
+      font-size: 12px;
+    }
+
+    .iconBtn {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+    }
+
+    /* ---------- DASHBOARD ---------- */
+
+    .hero {
+      margin: 8px 0 14px;
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .hero h1 {
+      font-size: 25px;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      margin: 4px 0 6px;
+    }
+
+    .hero .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 13px;
+    }
+
+    .hero button {
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+    }
+
+    /* ---------- SUMMARY ---------- */
+
+    .dashboardSummary {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .summaryCard {
+      min-height: 108px;
+      padding: 16px;
+      border-radius: 20px;
+    }
+
+    .summaryCard span {
+      font-size: 12px;
+    }
+
+    .summaryCard strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 22px;
+      letter-spacing: -0.6px;
+    }
+
+    .summaryCard small {
+      display: block;
+      margin-top: 5px;
+      font-size: 11px;
+    }
+
+    .primarySummary {
+      grid-column: 1 / -1;
+      min-height: 130px;
+    }
+
+    .primarySummary strong {
+      font-size: 34px;
+      letter-spacing: -1.2px;
+    }
+
+    /* ---------- BUDGET ---------- */
+
+    .budgetEnhanced {
+      padding: 16px;
+      margin: 10px 0;
+      border-radius: 20px;
+    }
+
+    .budgetHeader {
+      gap: 8px;
+    }
+
+    .budgetHeader strong {
+      font-size: 20px;
+    }
+
+    .bar {
+      height: 9px;
+      margin-top: 12px;
+      border-radius: 99px;
+    }
+
+    /* ---------- BALANCE ---------- */
+
+    .balanceEnhanced {
+      margin: 10px 0;
+      padding: 18px;
+      border-radius: 20px;
+    }
+
+    .balanceTitle {
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    .balanceEnhanced strong {
+      display: block;
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .balanceIcon {
+      font-size: 18px;
+    }
+
+    /* ---------- SECTIONS ---------- */
+
+    .categoryCard,
+    .peopleEnhanced {
+      margin-top: 10px;
+      padding: 17px;
+      border-radius: 20px;
+    }
+
+    .sectionTitle span {
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    .sectionTitle small {
+      font-size: 11px;
+    }
+
+    .categoryRow {
+      padding: 10px 0;
+    }
+
+    .categoryTop {
+      font-size: 13px;
+    }
+
+    .categoryTop b {
+      font-size: 13px;
+    }
+
+    .categoryTop small {
+      font-size: 11px;
+    }
+
+    .categoryBar {
+      height: 6px;
+      margin-top: 7px;
+    }
+
+    /* ---------- PEOPLE ---------- */
+
+    .personRow {
+      min-height: 52px;
+      padding: 7px 0;
+    }
+
+    .personInfo {
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+    }
+
+    .personRow > b {
+      font-size: 14px;
+    }
+
+    /* ---------- MAIN ACTION ---------- */
+
+    button.primary.big,
+    button.secondary.big {
+      width: 100%;
+      min-height: 54px;
+      margin-top: 10px;
+      border-radius: 17px;
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    /* ---------- BOTTOM NAV ---------- */
+
+    nav {
+      position: fixed;
+      z-index: 50;
+      left: 10px;
+      right: 10px;
+      bottom: calc(8px + env(safe-area-inset-bottom));
+
+      height: 66px;
+      padding: 7px;
+
+      border-radius: 22px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.14),
+        0 1px 3px rgba(15, 23, 42, 0.08);
+    }
+
+    nav button {
+      min-height: 50px;
+      border: 0;
+      background: transparent;
+      border-radius: 16px;
+
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    nav button.active {
+      background: #f1f5f9;
+    }
+
+    nav .add {
+      width: 50px;
+      height: 50px;
+      min-height: 50px;
+
+      justify-self: center;
+
+      border-radius: 17px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 0;
+    }
+
+    nav .add svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ---------- MODALS ---------- */
+
+    .overlay {
+      align-items: flex-end;
+      padding: 0;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: none;
+
+      max-height: 92dvh;
+      overflow-y: auto;
+
+      border-radius: 26px 26px 0 0;
+      padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+    }
+
+    .modalHead {
+      position: sticky;
+      top: -20px;
+      z-index: 2;
+
+      margin: -20px -16px 18px;
+      padding: 16px;
+
+      background: inherit;
+    }
+
+    .modalHead h2 {
+      font-size: 20px;
+    }
+
+    /* ---------- FORMS ---------- */
+
+    .form {
+      gap: 15px;
+    }
+
+    .form input,
+    .form select,
+    .form textarea {
+      min-height: 48px;
+      font-size: 16px;
+      border-radius: 14px;
+    }
+
+    .form button.primary {
+      min-height: 52px;
+      border-radius: 16px;
+    }
+
+    .grid2 {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+  }
+
+  /* =========================================================
+   DASHBOARD MOBILE
+   ========================================================= */
+
+.mobileHero {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+  border-radius: 24px;
+}
+
+.mobileHero .heroContent {
+  min-width: 0;
+}
+
+.mobileHero h1 {
+  margin: 4px 0 6px;
+  font-size: clamp(26px, 7vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.7px;
+}
+
+.heroCountries {
+  margin: 0;
+  opacity: 0.72;
+  font-size: 14px;
+}
+
+.heroEdit {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.mobileSummary {
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mobileSummary .summaryCard {
+  min-height: 128px;
+  border-radius: 20px;
+  padding: 18px;
+}
+
+.mobileSummary .primarySummary strong {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(30px, 8vw, 42px);
+  line-height: 1;
+  letter-spacing: -1.5px;
+}
+
+.mobileSummary .budgetSummary strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 23px;
+  line-height: 1.05;
+}
+
+.mobileSummary small {
+  display: block;
+  margin-top: 10px;
+  line-height: 1.3;
+}
+
+.mobileBudget {
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-radius: 18px;
+}
+
+.mobileBalance {
+  margin-top: 10px;
+  margin-bottom: 18px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.mobileBalance strong {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(21px, 5.5vw, 28px);
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+}
+
+.mobileBalance small {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.mobileBalance.balanced strong {
+  font-size: 22px;
+}
+
+@media (max-width: 430px) {
+  .mobileHero {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .mobileHero h1 {
+    font-size: 28px;
+  }
+
+  .mobileSummary .summaryCard {
+    min-height: 118px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .mobileSummary .primarySummary strong {
+    font-size: 31px;
+  }
+
+  .mobileSummary .budgetSummary strong {
+    font-size: 20px;
+  }
+
+  .mobileBalance {
+    padding: 18px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobileSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .mobileSummary .summaryCard {
+    min-height: auto;
+  }
+}
+
+/* =========================================================
+   DASHBOARD MOBILE — CATÉGORIES + VOYAGEURS
+   ========================================================= */
+
+   .mobileCategoryCard,
+   .mobilePeople {
+     border-radius: 20px;
+     margin-bottom: 12px;
+   }
+
+   .mobileCategoryCard .sectionTitle,
+   .mobilePeople .sectionTitle {
+     margin-bottom: 14px;
+   }
+
+   .mobileCategoryRow {
+     padding: 12px 0;
+   }
+
+   .mobileCategoryRow:first-child {
+     padding-top: 4px;
+   }
+
+   .mobileCategoryRow:last-child {
+     padding-bottom: 2px;
+   }
+
+   .mobileCategoryRow .categoryTop {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     gap: 12px;
+   }
+
+   .mobileCategoryRow .categoryTop > span {
+     min-width: 0;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     font-weight: 600;
+   }
+
+   .mobileCategoryRow .categoryTop > div {
+     flex: 0 0 auto;
+     display: flex;
+     align-items: center;
+     gap: 8px;
+   }
+
+   .mobileCategoryRow .categoryTop b {
+     font-size: 14px;
+   }
+
+   .mobileCategoryRow .categoryTop small {
+     min-width: 38px;
+     text-align: right;
+     opacity: 0.55;
+     font-size: 12px;
+   }
+
+   .mobileCategoryRow .categoryBar {
+     height: 5px;
+     margin-top: 8px;
+     border-radius: 999px;
+     overflow: hidden;
+   }
+
+   .mobileCategoryRow .categoryBar i {
+     display: block;
+     height: 100%;
+     border-radius: inherit;
+     transition: width 300ms ease;
+   }
+
+   .mobilePeople {
+     padding-bottom: 4px;
+   }
+
+   .mobilePeople .peopleList {
+     display: flex;
+     flex-direction: column;
+   }
+
+   .mobilePersonRow {
+     min-height: 58px;
+     padding: 10px 0;
+   }
+
+   .mobilePersonRow + .mobilePersonRow {
+     border-top: 1px solid rgba(127, 127, 127, 0.12);
+   }
+
+   .mobilePersonRow .personInfo {
+     display: flex;
+     align-items: center;
+     gap: 11px;
+     min-width: 0;
+   }
+
+   .mobilePersonRow .avatar {
+     flex: 0 0 auto;
+     width: 38px;
+     height: 38px;
+     display: grid;
+     place-items: center;
+     border-radius: 50%;
+     font-weight: 700;
+   }
+
+   .mobilePersonRow .personName {
+     min-width: 0;
+     display: flex;
+     flex-direction: column;
+     gap: 2px;
+   }
+
+   .mobilePersonRow .personName span {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     font-weight: 600;
+   }
+
+   .mobilePersonRow .personName small {
+     font-size: 12px;
+     opacity: 0.5;
+   }
+
+   .mobilePersonRow > b {
+     flex: 0 0 auto;
+     font-size: 16px;
+     letter-spacing: -0.2px;
+   }
+
+   @media (max-width: 430px) {
+     .mobileCategoryCard,
+     .mobilePeople {
+       border-radius: 18px;
+     }
+
+     .mobileCategoryRow {
+       padding: 11px 0;
+     }
+
+     .mobilePersonRow {
+       min-height: 56px;
+     }
+   }
+
+   /* =========================================================
+   DASHBOARD MOBILE — ACTIONS
+   ========================================================= */
+
+.dashboardActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  padding-bottom: 12px;
+}
+
+.mobileAddButton,
+.mobileHistoryButton {
+  width: 100%;
+  min-height: 54px;
+  border-radius: 17px;
+}
+
+.mobileAddButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mobileHistoryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.historyCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   BOTTOM NAV — IPHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+
+    height: calc(66px + env(safe-area-inset-bottom));
+    padding:
+      7px 18px
+      calc(7px + env(safe-area-inset-bottom));
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 8px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-top: 1px solid rgba(127, 127, 127, 0.15);
+  }
+
+  nav > button {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  nav > button.active {
+    font-weight: 700;
+  }
+
+  nav > button.add {
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+
+    border-radius: 17px;
+
+    display: grid;
+    place-items: center;
+  }
+
+  nav > button.add svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  main {
+    padding-bottom: 92px;
+  }
+}
+
+/* Très petits iPhone */
+@media (max-width: 360px) {
+  nav {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  nav > button {
+    font-size: 10px;
+  }
+
+  nav > button.add {
+    flex-basis: 48px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* =========================================================
+   AJOUTER UNE DÉPENSE — MONTANT MOBILE
+   ========================================================= */
+
+   .expenseAmountSection {
+    margin-bottom: 4px;
+  }
+
+  .amountLabel {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .amountInputWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .amountInput {
+    width: 100%;
+    min-height: 68px;
+    padding: 8px 72px 8px 18px;
+
+    border-radius: 18px;
+
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 750;
+    letter-spacing: -1px;
+
+    text-align: left;
+
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .amountInput::placeholder {
+    opacity: 0.28;
+  }
+
+  .amountInput::-webkit-inner-spin-button,
+  .amountInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .amountCurrency {
+    position: absolute;
+    right: 17px;
+
+    font-size: 15px;
+    font-weight: 700;
+    opacity: 0.55;
+
+    pointer-events: none;
+  }
+
+  .mobileLiveConversion {
+    margin-top: 8px;
+    padding: 11px 14px;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .liveConversionMain {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+
+  .liveConversionMain > span:first-child {
+    font-size: 14px;
+    opacity: 0.55;
+  }
+
+  .liveConversionMain strong {
+    font-size: 17px;
+    font-weight: 750;
+  }
+
+  .liveConversionMain > span:last-child {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.55;
+  }
+
+  .mobileLiveConversion .liveConversionRate {
+    margin: 0;
+    text-align: right;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 430px) {
+    .amountInput {
+      min-height: 64px;
+      font-size: 30px;
+      border-radius: 17px;
+    }
+
+    .mobileLiveConversion {
+      padding: 10px 13px;
+    }
+  }
+
+  /* =========================================================
+   AJOUTER UNE DÉPENSE — DEVISE + PAYEUR
+   ========================================================= */
+
+.expenseChoiceSection {
+  margin-top: 5px;
+}
+
+.expenseChoiceSection > label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.currencyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.currencyChoice,
+.payerChoice {
+  border: 1px solid transparent;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.currencyChoice {
+  min-height: 58px;
+  padding: 8px 6px;
+
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.currencyChoice strong {
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.currencyChoice span {
+  font-size: 10px;
+  opacity: 0.55;
+}
+
+.currencyChoice.active {
+  border-color: currentColor;
+}
+
+.payerGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.payerChoice {
+  min-height: 56px;
+  padding: 8px 12px;
+
+  border-radius: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.payerChoice.active {
+  border-color: currentColor;
+}
+
+.payerAvatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@media (max-width: 430px) {
+  .currencyGrid {
+    gap: 7px;
+  }
+
+  .currencyChoice {
+    min-height: 54px;
+  }
+
+  .payerChoice {
+    min-height: 54px;
+  }
+}
+
+/* =========================================================
+   AJOUTER UNE DÉPENSE — CATÉGORIE + DATE
+   ========================================================= */
+
+   .categoryChoiceGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .categoryChoice {
+    min-height: 42px;
+    padding: 8px 13px;
+
+    border: 1px solid transparent;
+    border-radius: 13px;
+
+    background: transparent;
+
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .categoryChoice.active {
+    border-color: currentColor;
+  }
+
+  .expenseDateSection {
+    margin-top: 16px;
+  }
+
+  .expenseDateSection label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .expenseDateInput {
+    width: 100%;
+    min-height: 50px;
+    padding: 0 13px;
+
+    border-radius: 14px;
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  @media (max-width: 430px) {
+    .categoryChoice {
+      min-height: 40px;
+      padding: 7px 12px;
+    }
+
+    .expenseDateInput {
+      min-height: 48px;
+
+
+    }
+  }
+
+  /* =========================================================
+   RÉPARTITION — MOBILE
+   ========================================================= */
+
+.splitSection {
+  margin-top: 18px;
+}
+
+.splitTitle {
+  margin-bottom: 9px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.splitOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.splitOption {
+  width: 100%;
+  min-height: 64px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 16px;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  text-align: left;
+  font: inherit;
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.splitOption.active {
+  border-color: currentColor;
+}
+
+.splitIcon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+
+  border-radius: 12px;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.splitContent {
+  min-width: 0;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.splitContent b {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.splitContent small {
+  font-size: 11px;
+  opacity: 0.55;
+  line-height: 1.2;
+}
+
+.splitCheck {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.splitOption.active .splitCheck {
+  border: 1px solid currentColor;
+}

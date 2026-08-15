@@ -40,6 +40,7 @@ function App() {
   const [error, setError] = useState('');
 
   const [tripId, setTripId] = useState(null);
+  const [participantIds, setParticipantIds] = useState([]);
 
   const [data, setData] = useState({
     trip: {
@@ -133,9 +134,13 @@ function App() {
       if (expensesError) throw expensesError;
 
       const people =
-        participants?.length > 0
-          ? participants.map((p) => p.name)
-          : ['Moi', 'Mon conjoint'];
+      participants?.length > 0
+        ? participants.map((p) => p.name)
+        : ['Bonhomme', 'Petit ours'];
+    
+    setParticipantIds(
+      (participants || []).map((p) => p.id)
+    );
 
       setData({
         trip: {
@@ -179,13 +184,27 @@ function App() {
 
   async function saveTrip(e) {
     e.preventDefault();
-
+  
     if (!tripId) return;
-
+  
+    const person1 = data.people[0]?.trim();
+    const person2 = data.people[1]?.trim();
+  
+    if (!person1 || !person2) {
+      setError('Les deux voyageurs doivent avoir un nom.');
+      return;
+    }
+  
+    if (person1 === person2) {
+      setError('Les deux voyageurs doivent avoir des noms différents.');
+      return;
+    }
+  
     try {
       setSaving(true);
       setError('');
-
+  
+      // Sauvegarde du voyage
       const { error: updateError } = await supabase
         .from('trips')
         .update({
@@ -199,13 +218,32 @@ function App() {
               : Number(data.trip.budget)
         })
         .eq('id', tripId);
-
+  
       if (updateError) throw updateError;
-
+  
+      // Sauvegarde des noms des voyageurs
+      for (let i = 0; i < participantIds.length; i++) {
+        const participantId = participantIds[i];
+        const newName = data.people[i];
+  
+        const { error: participantError } = await supabase
+          .from('participants')
+          .update({
+            name: newName
+          })
+          .eq('id', participantId);
+  
+        if (participantError) throw participantError;
+      }
+  
       setShowTrip(false);
     } catch (err) {
       console.error(err);
-      setError(err?.message || 'Erreur lors de la sauvegarde.');
+  
+      setError(
+        err?.message ||
+          'Erreur lors de la sauvegarde du voyage.'
+      );
     } finally {
       setSaving(false);
     }
@@ -637,7 +675,29 @@ function App() {
                 }
               />
             </label>
+            <div className="travellers">
+  <h3>Voyageurs</h3>
 
+  {data.people.map((person, index) => (
+    <label key={participantIds[index] || index}>
+      Voyageur {index + 1}
+
+      <input
+        type="text"
+        value={person}
+        maxLength={40}
+        onChange={(e) =>
+          setData((current) => ({
+            ...current,
+            people: current.people.map((p, i) =>
+              i === index ? e.target.value : p
+            )
+          }))
+        }
+      />
+    </label>
+  ))}
+</div>
             <button
               className="primary"
               disabled={saving}

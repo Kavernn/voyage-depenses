@@ -1594,9 +1594,9 @@ const budgetPercentage =
 
       {/* SOLDE */}
       <div
-        className={`balance balanceEnhanced mobileBalance ${
-          isBalanced ? "balanced" : ""
-        }`}
+      className={`balanceCardFinal ${
+        isBalanced ? "balanced" : ""
+      }`}
       >
         <div className="balanceTitle">
           <span>Solde entre vous</span>

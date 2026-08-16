@@ -4946,3 +4946,45 @@ nav button {
       margin-bottom: 8px;
     }
   }
+
+  /* =========================================================
+   FIX FINAL — MODAL AU-DESSUS DE LA BOTTOM NAV
+   ========================================================= */
+
+.overlay {
+  z-index: 20000 !important;
+}
+
+.modal {
+  z-index: 20001 !important;
+}
+
+.bottomNav {
+  z-index: 9999 !important;
+}
+
+/* La modal doit pouvoir utiliser toute la hauteur */
+@media (max-width: 600px) {
+  .overlay {
+    position: fixed !important;
+    inset: 0 !important;
+  }
+
+  .modal {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  .modalContent {
+    flex: 1 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modalContent > .form,
+  .modal > .form {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom)) !important;
+  }
+}

@@ -344,26 +344,45 @@ function App() {
 
   async function saveTrip(e) {
     e.preventDefault();
-
+  
     if (!tripId) return;
-
+  
     const person1 = data.people[0]?.trim();
     const person2 = data.people[1]?.trim();
-
+  
     if (!person1 || !person2) {
       setError("Les deux voyageurs doivent avoir un nom.");
       return;
     }
-
+  
     if (person1 === person2) {
       setError("Les deux voyageurs doivent avoir des noms différents.");
       return;
     }
-
+  
     try {
       setSaving(true);
       setError("");
-
+  
+      // On récupère les noms actuellement enregistrés
+      // avant de les remplacer.
+      const { data: currentParticipants, error: currentParticipantsError } =
+        await supabase
+          .from("participants")
+          .select("id, name")
+          .eq("trip_id", tripId);
+  
+      if (currentParticipantsError) {
+        throw currentParticipantsError;
+      }
+  
+      const oldNamesById = Object.fromEntries(
+        (currentParticipants || []).map((participant) => [
+          participant.id,
+          participant.name,
+        ]),
+      );
+  
       // Sauvegarde du voyage
       const { error: updateError } = await supabase
         .from("trips")
@@ -375,28 +394,47 @@ function App() {
           budget: data.trip.budget === "" ? null : Number(data.trip.budget),
         })
         .eq("id", tripId);
-
+  
       if (updateError) throw updateError;
-
-      // Sauvegarde des noms des voyageurs
+  
+      // Sauvegarde des noms + migration des anciens payer
       for (let i = 0; i < participantIds.length; i++) {
         const participantId = participantIds[i];
-        const newName = data.people[i];
-
+        const newName = data.people[i]?.trim();
+        const oldName = oldNamesById[participantId];
+  
         const { error: participantError } = await supabase
           .from("participants")
           .update({
             name: newName,
           })
           .eq("id", participantId);
-
+  
         if (participantError) throw participantError;
+  
+        // Si le voyageur a été renommé,
+        // on met à jour les anciennes dépenses.
+        if (oldName && oldName !== newName) {
+          const { error: expenseRenameError } = await supabase
+            .from("expenses")
+            .update({
+              payer: newName,
+            })
+            .eq("trip_id", tripId)
+            .eq("payer", oldName);
+  
+          if (expenseRenameError) {
+            throw expenseRenameError;
+          }
+        }
       }
-
+  
+      await loadFromSupabase();
+  
       setShowTrip(false);
     } catch (err) {
       console.error(err);
-
+  
       setError(err?.message || "Erreur lors de la sauvegarde du voyage.");
     } finally {
       setSaving(false);
@@ -675,6 +713,16 @@ function App() {
           .filter((expense) => expense.payer === person)
           .reduce((sum, expense) => sum + expense.cad, 0),
       ]),
+    );
+
+    console.log(
+      "PAYERS DEBUG",
+      data.expenses.map((expense) => ({
+        amount: expense.cad,
+        payer: expense.payer,
+        description: expense.description,
+        category: expense.category,
+      })),
     );
 
     const owedBy = Object.fromEntries(data.people.map((person) => [person, 0]));

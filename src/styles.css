@@ -4929,3 +4929,20 @@ nav button {
     font-size: 12px;
   }
 }
+
+/* =========================================================
+   FIX — BOUTON ENREGISTRER AU-DESSUS DE LA NAVBAR
+   ========================================================= */
+
+   @media (max-width: 600px) {
+    .modalContent > .form,
+    .modal > .form {
+      padding-bottom: calc(
+        110px + env(safe-area-inset-bottom)
+      ) !important;
+    }
+  
+    .form .primary:last-child {
+      margin-bottom: 8px;
+    }
+  }

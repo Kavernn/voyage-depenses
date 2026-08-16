@@ -6672,3 +6672,71 @@ nav button {
       min-height: 40px;
     }
   }
+  /* =========================================================
+   ADD EXPENSE — CATEGORY PICKER
+   ========================================================= */
+
+.expenseCategoryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.expenseCategoryChoice {
+  min-height: 58px;
+  padding: 10px 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 15px;
+
+  background: #ffffff;
+  color: #334155;
+
+  text-align: left;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.12s ease;
+}
+
+.expenseCategoryChoice:active {
+  transform: scale(0.98);
+}
+
+.expenseCategoryChoice.active {
+  border-color: rgba(37, 99, 235, 0.35);
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.expenseCategoryEmoji {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: #f8fafc;
+
+  font-size: 17px;
+}
+
+.expenseCategoryChoice.active .expenseCategoryEmoji {
+  background: #dbeafe;
+}
+
+@media (max-width: 380px) {
+  .expenseCategoryGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1135,6 +1135,52 @@ function App() {
   />
 </div>
 
+{/* CATÉGORIE */}
+<div className="expenseChoiceSection">
+  <label>Catégorie</label>
+
+  <div className="expenseCategoryGrid">
+    {data.categories.map((category) => {
+      const icons = {
+        Hébergement: "🏨",
+        Restaurants: "🍽️",
+        Épicerie: "🛒",
+        Transport: "🚗",
+        Activités: "🎟️",
+        Magasinage: "🛍️",
+        Alcool: "🍷",
+        Essence: "⛽",
+        "Frais bancaires": "💳",
+        Autre: "📦",
+      };
+
+      return (
+        <button
+          key={category}
+          type="button"
+          className={
+            form.category === category
+              ? "expenseCategoryChoice active"
+              : "expenseCategoryChoice"
+          }
+          onClick={() =>
+            setForm({
+              ...form,
+              category,
+            })
+          }
+        >
+          <span className="expenseCategoryEmoji">
+            {icons[category] || "📦"}
+          </span>
+
+          <span>{category}</span>
+        </button>
+      );
+    })}
+  </div>
+</div>
+
             {/* DESCRIPTION */}
             <label>
               Description (facultatif)

@@ -4755,3 +4755,78 @@ nav button {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================================
+   FIX — SOLDE ENTRE VOUS
+   ========================================================= */
+
+   .balanceEnhanced {
+    color: #111827;
+  }
+  
+  .balanceEnhanced .balanceTitle > span:first-child {
+    color: #64748b !important;
+  }
+  
+  .balanceEnhanced .balanceIcon {
+    color: #111827 !important;
+    background: #f1f5f9 !important;
+  }
+  
+  .balanceEnhanced > strong {
+    color: #111827 !important;
+  }
+  
+  .balanceEnhanced > small {
+    color: #64748b !important;
+  }
+  
+  .balanceEnhanced.balanced {
+    color: #111827;
+    background: linear-gradient(145deg, #f0fdf4, #ffffff);
+  }
+  
+  .balanceEnhanced.balanced .balanceTitle > span:first-child {
+    color: #64748b !important;
+  }
+  
+  .balanceEnhanced.balanced .balanceIcon {
+    color: #166534 !important;
+    background: #dcfce7 !important;
+  }
+  
+  .balanceEnhanced.balanced > strong {
+    color: #166534 !important;
+  }
+  
+  .balanceEnhanced.balanced > small {
+    color: #64748b !important;
+  }
+  
+  /* Mobile */
+  @media (max-width: 600px) {
+    .balanceEnhanced {
+      color: #111827 !important;
+      background: #ffffff !important;
+    }
+  
+    .balanceEnhanced .balanceTitle > span:first-child {
+      color: #64748b !important;
+    }
+  
+    .balanceEnhanced > strong {
+      color: #111827 !important;
+    }
+  
+    .balanceEnhanced > small {
+      color: #64748b !important;
+    }
+  
+    .balanceEnhanced.balanced {
+      background: linear-gradient(145deg, #f0fdf4, #ffffff) !important;
+    }
+  
+    .balanceEnhanced.balanced > strong {
+      color: #166534 !important;
+    }
+  }

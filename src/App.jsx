@@ -1337,6 +1337,26 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
       ? stats.remaining
       : null;
 
+      const averagePerPerson =
+  data.people.length > 0
+    ? stats.total / data.people.length
+    : 0;
+
+const biggestCategory =
+  categories.length > 0
+    ? categories[0]
+    : null;
+
+const biggestExpense =
+  data.expenses.length > 0
+    ? [...data.expenses].sort((a, b) => b.cad - a.cad)[0]
+    : null;
+
+const budgetPercentage =
+  stats.budget > 0
+    ? (stats.total / stats.budget) * 100
+    : 0;
+
   return (
     <section className="dashboard">
      {/* HEADER VOYAGE */}
@@ -1395,40 +1415,156 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 </div>
 
       {/* RÉSUMÉ FINANCIER */}
-      <div className="financialGrid">
-        <div className="financialCard financialCardMain">
-          <div className="financialCardLabel">
-            <span>Total dépensé</span>
-            <Wallet size={17} />
-          </div>
+<div className="financialSummary">
+  <div className="financialSummaryHeader">
+    <div>
+      <span className="sectionEyebrow">FINANCES</span>
+      <h3>Résumé financier</h3>
+    </div>
 
-          <strong>{money(stats.total)}</strong>
+    {stats.total > 0 && (
+      <strong className="financialSummaryTotal">
+        {money(stats.total)}
+      </strong>
+    )}
+  </div>
 
-          <small>
-            {stats.sharedTotal > 0
-              ? `${money(stats.sharedTotal)} partagé`
-              : "Aucune dépense partagée"}
-          </small>
-        </div>
+  <div className="financialMainGrid">
+    {/* TOTAL */}
+    <div className="financialMainCard">
+      <span>Total dépensé</span>
+      <strong>{money(stats.total)}</strong>
 
-        <div className="financialCard">
-          <div className="financialCardLabel">
-            <span>Budget</span>
-          </div>
+      {tripDays && stats.total > 0 ? (
+        <small>{money(dailyAverage)} / jour</small>
+      ) : (
+        <small>{data.expenses.length} dépense(s)</small>
+      )}
+    </div>
+
+    {/* BUDGET */}
+    <div className="financialMainCard">
+      <span>Budget</span>
+
+      <strong>
+        {stats.budget > 0
+          ? money(stats.budget)
+          : "—"}
+      </strong>
+
+      {stats.budget > 0 ? (
+        <small>
+          {stats.remaining >= 0
+            ? `${money(stats.remaining)} restant`
+            : `${money(Math.abs(stats.remaining))} dépassé`}
+        </small>
+      ) : (
+        <small>Aucun budget défini</small>
+      )}
+    </div>
+  </div>
+
+  {/* INDICATEURS */}
+  <div className="financialMetrics">
+
+    <div className="financialMetric">
+      <span>Par jour</span>
+      <strong>
+        {dailyAverage > 0
+          ? money(dailyAverage)
+          : "—"}
+      </strong>
+    </div>
+
+    <div className="financialMetric">
+      <span>Par voyageur</span>
+      <strong>
+        {averagePerPerson > 0
+          ? money(averagePerPerson)
+          : "—"}
+      </strong>
+    </div>
+
+    <div className="financialMetric">
+      <span>Partagé</span>
+      <strong>
+        {stats.sharedTotal > 0
+          ? money(stats.sharedTotal)
+          : "—"}
+      </strong>
+    </div>
+
+    <div className="financialMetric">
+      <span>Personnel</span>
+      <strong>
+        {stats.personalTotal > 0
+          ? money(stats.personalTotal)
+          : "—"}
+      </strong>
+    </div>
+
+  </div>
+
+  {/* BUDGET */}
+  {stats.budget > 0 && (
+    <div className="financialBudget">
+
+      <div className="financialBudgetHeader">
+        <span>Utilisation du budget</span>
+
+        <strong>
+          {budgetPercentage.toFixed(0)} %
+        </strong>
+      </div>
+
+      <div className="financialBudgetBar">
+        <span
+          style={{
+            width: `${Math.min(100, Math.max(0, budgetPercentage))}%`,
+          }}
+        />
+      </div>
+
+    </div>
+  )}
+
+  {/* INSIGHTS */}
+  {(biggestCategory || biggestExpense) && (
+    <div className="financialInsights">
+
+      {biggestCategory && (
+        <div className="financialInsight">
+          <span>Plus grosse catégorie</span>
 
           <strong>
-            {stats.budget ? money(stats.budget) : "—"}
+            {biggestCategory[0]}
           </strong>
 
           <small>
-            {stats.budget > 0
-              ? stats.remaining >= 0
-                ? `${money(stats.remaining)} restant`
-                : `${money(Math.abs(stats.remaining))} dépassé`
-              : "Aucun budget défini"}
+            {money(biggestCategory[1])}
           </small>
         </div>
-      </div>
+      )}
+
+      {biggestExpense && (
+        <div className="financialInsight">
+          <span>Plus grosse dépense</span>
+
+          <strong>
+            {biggestExpense.description ||
+              biggestExpense.category ||
+              "Dépense"}
+          </strong>
+
+          <small>
+            {money(biggestExpense.cad)}
+          </small>
+        </div>
+      )}
+
+    </div>
+  )}
+</div>
 
       {/* PROGRESSION BUDGET */}
       {stats.budget > 0 && (

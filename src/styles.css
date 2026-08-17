@@ -12180,3 +12180,130 @@ textarea:focus {
       0 0 0 6px rgba(248, 250, 252, 0.96) !important;
   }
 }
+
+
+/* =========================================================
+   EXPENSE EDITOR — FIXED SAVE FOOTER V2
+   ========================================================= */
+
+/*
+ * Réserve de l'espace à la fin du formulaire.
+ * Le contenu peut donc être scrollé complètement au-dessus
+ * du bouton fixe.
+ */
+.expenseEditorForm {
+  padding-bottom:
+    calc(
+      105px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/*
+ * CTA toujours ancré au bas de l'écran.
+ */
+.expenseEditorForm .expenseSaveButton {
+  position: fixed !important;
+
+  left: 50% !important;
+  right: auto !important;
+
+  bottom:
+    calc(
+      12px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  transform: translateX(-50%) !important;
+
+  z-index: 1000 !important;
+
+  width: calc(100% - 72px) !important;
+  max-width: 688px !important;
+
+  min-height: 58px !important;
+
+  margin: 0 !important;
+  padding: 0 18px !important;
+
+  border: 0 !important;
+  border-radius: 18px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0868ee 0%,
+      #0964e8 100%
+    ) !important;
+
+  color: #ffffff !important;
+
+  font-size: 16px !important;
+  font-weight: 850 !important;
+
+  box-shadow:
+    0 12px 30px rgba(15, 23, 42, 0.18),
+    0 0 0 10px rgba(248, 250, 252, 0.96) !important;
+
+  opacity: 1 !important;
+}
+
+
+/*
+ * Aucun montant :
+ * le CTA reste visible mais clairement désactivé.
+ */
+.expenseEditorForm .expenseSaveButton:disabled {
+  background: #c4d5ec !important;
+
+  color: rgba(255, 255, 255, 0.90) !important;
+
+  box-shadow:
+    0 0 0 10px rgba(248, 250, 252, 0.96) !important;
+
+  opacity: 1 !important;
+
+  cursor: default !important;
+}
+
+
+/*
+ * Petit écran iPhone.
+ */
+@media (max-width: 480px) {
+  .expenseEditorForm .expenseSaveButton {
+    width: calc(100% - 48px) !important;
+
+    bottom:
+      calc(
+        10px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+
+  .expenseEditorForm {
+    padding-bottom:
+      calc(
+        100px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+}
+
+
+/*
+ * Quand le clavier iOS est ouvert, on garde un CTA
+ * compact pour maximiser la zone de formulaire.
+ */
+@media (max-height: 700px) {
+  .expenseEditorForm .expenseSaveButton {
+    min-height: 54px !important;
+
+    bottom:
+      calc(
+        6px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+}

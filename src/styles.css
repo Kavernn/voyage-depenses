@@ -3120,6 +3120,425 @@ button:active {
     margin-top: 16px;
   }
 }
+
+/* =========================================================
+   TRAVEL INTELLIGENCE
+   ========================================================= */
+
+.travelIntel {
+  position: relative;
+  overflow: hidden;
+
+  margin: 22px 0 26px;
+  padding: 20px;
+
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(37, 99, 235, 0.11),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8fafc
+    );
+
+  box-shadow:
+    0 14px 38px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.travelIntel::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -75px;
+  bottom: -85px;
+
+  border: 1px solid rgba(37, 99, 235, 0.08);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.travelIntelTop {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 16px;
+}
+
+.travelIntelTop > div:first-child > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 850;
+
+  letter-spacing: 0.13em;
+}
+
+.travelIntelTop h2 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: clamp(22px, 5vw, 30px);
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+}
+
+.travelIntelMessage {
+  position: relative;
+  z-index: 1;
+
+  max-width: 520px;
+
+  margin: 9px 0 18px;
+
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.travelIntelPulse {
+  display: flex;
+  align-items: flex-end;
+
+  gap: 3px;
+
+  height: 28px;
+  padding-top: 4px;
+}
+
+.travelIntelPulse i {
+  display: block;
+
+  width: 4px;
+
+  border-radius: 99px;
+
+  background: #2563eb;
+
+  animation:
+    travelIntelPulse
+    1.5s
+    ease-in-out
+    infinite;
+}
+
+.travelIntelPulse i:nth-child(1) {
+  height: 9px;
+}
+
+.travelIntelPulse i:nth-child(2) {
+  height: 18px;
+
+  animation-delay: 0.15s;
+}
+
+.travelIntelPulse i:nth-child(3) {
+  height: 13px;
+
+  animation-delay: 0.3s;
+}
+
+.travelIntel.watch .travelIntelPulse i {
+  background: #f59e0b;
+}
+
+.travelIntel.hot .travelIntelPulse i {
+  background: #ef4444;
+}
+
+.travelIntel.on-track .travelIntelPulse i {
+  background: #10b981;
+}
+
+@keyframes travelIntelPulse {
+  0%,
+  100% {
+    transform: scaleY(0.72);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.travelIntelGrid {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 8px;
+}
+
+.travelIntelMetric {
+  min-width: 0;
+
+  padding: 13px 12px;
+
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.78);
+}
+
+.travelIntelMetric.primary {
+  border-color:
+    rgba(37, 99, 235, 0.14);
+
+  background:
+    rgba(239, 246, 255, 0.82);
+}
+
+.travelIntelMetric small {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+  font-weight: 850;
+
+  letter-spacing: 0.08em;
+}
+
+.travelIntelMetric strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #0f172a;
+
+  font-size: clamp(17px, 4vw, 23px);
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.travelIntelMetric span {
+  display: block;
+
+  margin-top: 5px;
+
+  overflow: hidden;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.travelIntelBudget {
+  position: relative;
+  z-index: 1;
+
+  margin-top: 10px;
+  padding: 14px;
+
+  border-radius: 17px;
+
+  background:
+    rgba(15, 23, 42, 0.035);
+}
+
+.travelIntelBudgetHead {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.travelIntelBudgetHead strong {
+  color: #0f172a;
+
+  font-size: 12px;
+}
+
+.travelIntelBar {
+  height: 7px;
+
+  margin-top: 9px;
+
+  overflow: hidden;
+
+  border-radius: 99px;
+
+  background: #e2e8f0;
+}
+
+.travelIntelBar i {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #2563eb;
+
+  transition:
+    width 0.35s ease;
+}
+
+.travelIntel.hot .travelIntelBar i {
+  background: #ef4444;
+}
+
+.travelIntel.watch .travelIntelBar i {
+  background: #f59e0b;
+}
+
+.travelIntel.on-track .travelIntelBar i {
+  background: #10b981;
+}
+
+.travelIntelCompare {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 10px;
+
+  color: #64748b;
+
+  font-size: 11px;
+}
+
+.travelIntelCompare strong {
+  color: #0f172a;
+
+  font-size: 12px;
+}
+
+.travelIntelSignal {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 9px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.travelIntelSignalDot {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  border-radius: 50%;
+
+  background: #10b981;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(16, 185, 129, 0.1);
+}
+
+.travelIntel.hot .travelIntelSignalDot {
+  background: #ef4444;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(239, 68, 68, 0.1);
+}
+
+.travelIntel.watch .travelIntelSignalDot {
+  background: #f59e0b;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(245, 158, 11, 0.1);
+}
+
+@media (max-width: 600px) {
+  .travelIntel {
+    margin-top: 18px;
+
+    padding: 17px;
+
+    border-radius: 21px;
+  }
+
+  .travelIntelGrid {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .travelIntelMetric {
+    padding: 12px 11px;
+  }
+
+  .travelIntelMetric strong {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .travelIntelGrid {
+    gap: 6px;
+  }
+
+  .travelIntelMetric {
+    padding: 11px 9px;
+  }
+
+  .travelIntelMetric strong {
+    font-size: 16px;
+  }
+
+  .travelIntelTop h2 {
+    font-size: 21px;
+  }
+}
+
 /* =========================================================
    TRAVEL FINANCE PREMIUM — HISTORY V3
    ========================================================= */

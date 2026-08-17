@@ -1605,441 +1605,420 @@ function App() {
   );
 }
 
-function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
-  const pct = stats.budget
-    ? Math.min(100, Math.max(0, (stats.total / stats.budget) * 100))
-    : 0;
 
-  const debtor = stats.net > 0 ? data.people[1] : data.people[0];
-  const creditor = stats.net > 0 ? data.people[0] : data.people[1];
+function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
+  const tripDays = (() => {
+    if (!data.trip.start || !data.trip.end) return null;
+
+    const start = new Date(data.trip.start);
+    const end = new Date(data.trip.end);
+
+    const diff = Math.ceil(
+      (end - start) / (1000 * 60 * 60 * 24),
+    );
+
+    return Math.max(1, diff + 1);
+  })();
+
+  const dailyAverage =
+    tripDays && stats.total > 0
+      ? stats.total / tripDays
+      : 0;
+
+  const averagePerPerson =
+    data.people.length > 0
+      ? stats.total / data.people.length
+      : 0;
 
   const isBalanced =
-    data.people.length < 2 || Math.abs(stats.net) < 0.005;
+    data.people.length < 2 ||
+    Math.abs(stats.net) < 0.005;
+
+  const debtor =
+    stats.net > 0
+      ? data.people[1]
+      : data.people[0];
+
+  const creditor =
+    stats.net > 0
+      ? data.people[0]
+      : data.people[1];
+
+  const budgetPercentage =
+    stats.budget > 0
+      ? Math.min(100, Math.max(0, (stats.total / stats.budget) * 100))
+      : 0;
 
   const categories = Object.entries(
     data.expenses.reduce((result, expense) => {
       const category = expense.category || "Autre";
-
       result[category] = (result[category] || 0) + expense.cad;
-
       return result;
     }, {}),
   )
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 6);
+    .slice(0, 5);
 
   const categoryTotal = categories.reduce(
     (sum, [, amount]) => sum + amount,
     0,
   );
 
-  const maxCategory = categories.length > 0 ? categories[0][1] : 0;
+  const countryText =
+    data.trip.countries ||
+    "Albanie · Kosovo · Macédoine du Nord";
 
-  const tripDays = (() => {
-    if (!data.trip.start || !data.trip.end) return null;
-  
-    const start = new Date(data.trip.start);
-    const end = new Date(data.trip.end);
-  
-    const diff = Math.ceil(
-      (end - start) / (1000 * 60 * 60 * 24),
-    );
-  
-    return Math.max(1, diff + 1);
-  })();
-  
-  const dailyAverage =
-    tripDays && stats.total > 0
-      ? stats.total / tripDays
-      : 0;
-  
-  const budgetRemaining =
-    stats.budget > 0
-      ? stats.remaining
-      : null;
-
-      const averagePerPerson =
-  data.people.length > 0
-    ? stats.total / data.people.length
-    : 0;
-
-const biggestCategory =
-  categories.length > 0
-    ? categories[0]
-    : null;
-
-const biggestExpense =
-  data.expenses.length > 0
-    ? [...data.expenses].sort((a, b) => b.cad - a.cad)[0]
-    : null;
-
-const budgetPercentage =
-  stats.budget > 0
-    ? (stats.total / stats.budget) * 100
-    : 0;
+  const recentExpenses = [...data.expenses]
+    .sort((a, b) => {
+      const dateA = new Date(a.date || 0).getTime();
+      const dateB = new Date(b.date || 0).getTime();
+      return dateB - dateA;
+    })
+    .slice(0, 4);
 
   return (
-    <section className="dashboard">
-     {/* HEADER VOYAGE */}
-<div className="travelHero">
-  <div className="travelHeroTop">
-    <div className="travelHeroIcon">
-      <Plane size={22} />
-    </div>
+    <section className="balkanDashboard">
 
-    <button
-      className="travelHeroEdit"
-      onClick={onTrip}
-      aria-label="Modifier le voyage"
-    >
-      <Pencil size={17} />
-    </button>
-  </div>
+      {/* =================================================
+          TRIP HERO
+         ================================================= */}
 
-  <div className="travelHeroContent">
-    <span className="travelHeroLabel">
-      {data.trip.start && data.trip.end
-        ? `${data.trip.start} → ${data.trip.end}`
-        : "NOUVEAU VOYAGE"}
-    </span>
+      <div className="balkanHero">
 
-    <h1>{data.trip.name}</h1>
+        <div className="balkanHeroNoise" />
 
-    <p>
-      {data.trip.countries ||
-        "Ajoute les destinations de ton voyage"}
-    </p>
-  </div>
+        <div className="balkanHeroTop">
+          <div className="balkanPassport">
+            <span>TRIP</span>
+            <strong>01</strong>
+          </div>
 
-  <div className="travelHeroStats">
-    {tripDays && (
-      <div>
-        <strong>{tripDays}</strong>
-        <span>jours</span>
-      </div>
-    )}
-
-    {stats.total > 0 && (
-      <div>
-        <strong>{money(dailyAverage)}</strong>
-        <span>/ jour</span>
-      </div>
-    )}
-
-    {data.people.length > 0 && (
-      <div>
-        <strong>{data.people.length}</strong>
-        <span>voyageurs</span>
-      </div>
-    )}
-  </div>
-</div>
-
-      {/* RÉSUMÉ FINANCIER */}
-<div className="financialSummary">
-  <div className="financialSummaryHeader">
-    <div>
-      <span className="sectionEyebrow">FINANCES</span>
-      <h3>Résumé financier</h3>
-    </div>
-
-    {stats.total > 0 && (
-      <strong className="financialSummaryTotal">
-        {money(stats.total)}
-      </strong>
-    )}
-  </div>
-
-  <div className="financialMainGrid">
-    {/* TOTAL */}
-    <div className="financialMainCard">
-      <span>Total dépensé</span>
-      <strong>{money(stats.total)}</strong>
-
-      {tripDays && stats.total > 0 ? (
-        <small>{money(dailyAverage)} / jour</small>
-      ) : (
-        <small>{data.expenses.length} dépense(s)</small>
-      )}
-    </div>
-
-    {/* BUDGET */}
-    <div className="financialMainCard">
-      <span>Budget</span>
-
-      <strong>
-        {stats.budget > 0
-          ? money(stats.budget)
-          : "—"}
-      </strong>
-
-      {stats.budget > 0 ? (
-        <small>
-          {stats.remaining >= 0
-            ? `${money(stats.remaining)} restant`
-            : `${money(Math.abs(stats.remaining))} dépassé`}
-        </small>
-      ) : (
-        <small>Aucun budget défini</small>
-      )}
-    </div>
-  </div>
-
-  {/* INDICATEURS */}
-  <div className="financialMetrics">
-
-    <div className="financialMetric">
-      <span>Par jour</span>
-      <strong>
-        {dailyAverage > 0
-          ? money(dailyAverage)
-          : "—"}
-      </strong>
-    </div>
-
-    <div className="financialMetric">
-      <span>Par voyageur</span>
-      <strong>
-        {averagePerPerson > 0
-          ? money(averagePerPerson)
-          : "—"}
-      </strong>
-    </div>
-
-    <div className="financialMetric">
-      <span>Partagé</span>
-      <strong>
-        {stats.sharedTotal > 0
-          ? money(stats.sharedTotal)
-          : "—"}
-      </strong>
-    </div>
-
-    <div className="financialMetric">
-      <span>Personnel</span>
-      <strong>
-        {stats.personalTotal > 0
-          ? money(stats.personalTotal)
-          : "—"}
-      </strong>
-    </div>
-
-  </div>
-
-  {/* BUDGET */}
-  {stats.budget > 0 && (
-    <div className="financialBudget">
-
-      <div className="financialBudgetHeader">
-        <span>Utilisation du budget</span>
-
-        <strong>
-          {budgetPercentage.toFixed(0)} %
-        </strong>
-      </div>
-
-      <div className="financialBudgetBar">
-        <span
-          style={{
-            width: `${Math.min(100, Math.max(0, budgetPercentage))}%`,
-          }}
-        />
-      </div>
-
-    </div>
-  )}
-
-  {/* INSIGHTS */}
-  {(biggestCategory || biggestExpense) && (
-    <div className="financialInsights">
-
-      {biggestCategory && (
-        <div className="financialInsight">
-          <span>Plus grosse catégorie</span>
-
-          <strong>
-            {biggestCategory[0]}
-          </strong>
-
-          <small>
-            {money(biggestCategory[1])}
-          </small>
+          <button
+            type="button"
+            className="balkanEdit"
+            onClick={onTrip}
+            aria-label="Modifier le voyage"
+          >
+            <Pencil size={16} />
+          </button>
         </div>
-      )}
 
-      {biggestExpense && (
-        <div className="financialInsight">
-          <span>Plus grosse dépense</span>
-
-          <strong>
-            {biggestExpense.description ||
-              biggestExpense.category ||
-              "Dépense"}
-          </strong>
-
-          <small>
-            {money(biggestExpense.cad)}
-          </small>
+        <div className="balkanRouteLabel">
+          <span className="routePulse" />
+          BALKAN ROAD TRIP
         </div>
-      )}
 
-    </div>
-  )}
-</div>
+        <h1>{data.trip.name || "Balkan Escape"}</h1>
 
-      {/* SOLDE */}
-      <div
-      className={`balanceCardFinal ${
-        isBalanced ? "balanced" : ""
-      }`}
+        <div className="balkanRoute">
+          <span>🇦🇱</span>
+          <i />
+          <span>🇽🇰</span>
+          <i />
+          <span>🇲🇰</span>
+        </div>
+
+        <p className="balkanCountries">
+          {countryText}
+        </p>
+
+        <div className="balkanHeroStats">
+          <div>
+            <strong>{tripDays || "—"}</strong>
+            <span>jours</span>
+          </div>
+
+          <div>
+            <strong>{data.people.length}</strong>
+            <span>voyageurs</span>
+          </div>
+
+          <div>
+            <strong>
+              {dailyAverage > 0 ? money(dailyAverage) : "—"}
+            </strong>
+            <span>/ jour</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* =================================================
+          QUICK ACTION
+         ================================================= */}
+
+      <button
+        type="button"
+        className="balkanAddExpense"
+        onClick={onAdd}
       >
-        <div className="balanceTitle">
-          <span>Solde entre vous</span>
-          <span className="balanceIcon">⚖️</span>
+        <span className="balkanAddIcon">+</span>
+
+        <span className="balkanAddText">
+          <strong>Ajouter une dépense</strong>
+          <small>Note ton prochain arrêt</small>
+        </span>
+
+        <span className="balkanAddArrow">↗</span>
+      </button>
+
+      {/* =================================================
+          MONEY SNAPSHOT
+         ================================================= */}
+
+      <div className="balkanSectionHead">
+        <div>
+          <span>TRAVEL MONEY</span>
+          <h2>État du voyage</h2>
+        </div>
+
+        <span className="balkanLive">
+          ● LIVE
+        </span>
+      </div>
+
+      <div className="balkanMoneyGrid">
+
+        <div className="balkanTotalCard">
+          <div className="balkanCardLabel">
+            <span>Total dépensé</span>
+            <span className="balkanTinyFlag">€ / $</span>
+          </div>
+
+          <strong>{money(stats.total)}</strong>
+
+          <small>
+            {data.expenses.length} dépense
+            {data.expenses.length > 1 ? "s" : ""}
+            {averagePerPerson > 0
+              ? ` · ${money(averagePerPerson)} / personne`
+              : ""}
+          </small>
+        </div>
+
+        <div className="balkanBudgetCard">
+
+          <div className="balkanCardLabel">
+            <span>Budget</span>
+            <span>{stats.budget > 0 ? `${budgetPercentage.toFixed(0)}%` : "—"}</span>
+          </div>
+
+          <strong>
+            {stats.budget > 0
+              ? money(stats.remaining)
+              : "—"}
+          </strong>
+
+          <small>
+            {stats.budget > 0
+              ? stats.remaining >= 0
+                ? "encore disponible"
+                : "budget dépassé"
+              : "aucun budget défini"}
+          </small>
+
+          {stats.budget > 0 && (
+            <div className="balkanBudgetTrack">
+              <span
+                style={{
+                  width: `${budgetPercentage}%`,
+                }}
+              />
+            </div>
+          )}
+
+        </div>
+
+      </div>
+
+      {/* =================================================
+          BALANCE
+         ================================================= */}
+
+      <div className="balkanBalance">
+
+        <div className="balkanBalanceTop">
+          <span>SETTLE UP</span>
+          <span className="balkanBalanceIcon">⇄</span>
         </div>
 
         {data.people.length < 2 ? (
-          <strong>Ajoute un deuxième voyageur</strong>
+          <>
+            <strong>Ajoute un deuxième voyageur</strong>
+            <small>La balance apparaîtra ici.</small>
+          </>
         ) : isBalanced ? (
           <>
-            <strong>Vous êtes à égalité</strong>
-            <small>Tout est équilibré pour le moment</small>
+            <strong>Tout est équilibré</strong>
+            <small>Personne ne doit rien à personne.</small>
           </>
         ) : (
           <>
-            <strong>
-              {debtor} doit {money(Math.abs(stats.net))}
-            </strong>
+            <div className="balkanTransfer">
+              <div className="balkanPerson">
+                <span>
+                  {debtor?.charAt(0).toUpperCase()}
+                </span>
+                <small>{debtor}</small>
+              </div>
 
-            <small>à {creditor}</small>
+              <div className="balkanTransferLine">
+                <strong>{money(Math.abs(stats.net))}</strong>
+                <i>→</i>
+              </div>
+
+              <div className="balkanPerson">
+                <span>
+                  {creditor?.charAt(0).toUpperCase()}
+                </span>
+                <small>{creditor}</small>
+              </div>
+            </div>
           </>
         )}
+
       </div>
 
-      {/* DÉPENSES PAR CATÉGORIE */}
+      {/* =================================================
+          RECENT EXPENSES
+         ================================================= */}
+
+      <div className="balkanSectionHead balkanRecentHead">
+        <div>
+          <span>TRIP LOG</span>
+          <h2>Dépenses récentes</h2>
+        </div>
+
+        <button
+          type="button"
+          onClick={onHistory}
+          className="balkanSeeAll"
+        >
+          Tout voir →
+        </button>
+      </div>
+
+      {recentExpenses.length === 0 ? (
+
+        <div className="balkanEmpty">
+          <span>✦</span>
+          <strong>Aucune dépense</strong>
+          <small>Le voyage commence ici.</small>
+        </div>
+
+      ) : (
+
+        <div className="balkanTimeline">
+
+          {recentExpenses.map((expense, index) => {
+            const category =
+              expense.category || "Autre";
+
+            return (
+              <button
+                type="button"
+                className="balkanExpenseRow"
+                key={expense.id}
+                onClick={() => onHistory()}
+              >
+
+                <div className="balkanTimelineMarker">
+                  <span />
+                  {index < recentExpenses.length - 1 && <i />}
+                </div>
+
+                <div className="balkanExpenseIcon">
+                  {category.charAt(0).toUpperCase()}
+                </div>
+
+                <div className="balkanExpenseInfo">
+                  <strong>
+                    {expense.description || category}
+                  </strong>
+
+                  <span>
+                    {category}
+                    {expense.place ? ` · ${expense.place}` : ""}
+                  </span>
+                </div>
+
+                <div className="balkanExpenseAmount">
+                  <strong>{money(expense.cad)}</strong>
+                  <small>{expense.date}</small>
+                </div>
+
+              </button>
+            );
+          })}
+
+        </div>
+      )}
+
+      {/* =================================================
+          CATEGORIES
+         ================================================= */}
+
       {categories.length > 0 && (
-        <div className="categoryCard mobileCategoryCard">
-          <div className="categoryHeader">
+
+        <div className="balkanCategories">
+
+          <div className="balkanSectionHead">
             <div>
-              <span>Dépenses par catégorie</span>
-              <small>{money(categoryTotal)} au total</small>
+              <span>BREAKDOWN</span>
+              <h2>Où part l'argent</h2>
             </div>
 
-            <div className="categoryCount">
-              {categories.length}
-            </div>
+            <strong>
+              {money(categoryTotal)}
+            </strong>
           </div>
 
-          <div className="categoryList">
+          <div className="balkanCategoryList">
+
             {categories.map(([category, amount], index) => {
               const percentage =
                 stats.total > 0
                   ? (amount / stats.total) * 100
                   : 0;
 
-              const relativeWidth =
-                maxCategory > 0
-                  ? (amount / maxCategory) * 100
-                  : 0;
-
               return (
                 <div
-                  className="categoryRow mobileCategoryRow"
+                  className="balkanCategory"
                   key={category}
                 >
-                  <div className="categoryTop">
-                    <div className="categoryName">
-                      <span className={`categoryDot categoryDot${index}`} />
-                      <span>{category}</span>
+
+                  <div className="balkanCategoryTop">
+                    <div>
+                      <span className={`balkanCategoryDot balkanCategoryDot${index}`} />
+                      <strong>{category}</strong>
                     </div>
 
-                    <div className="categoryAmount">
-                      <strong>{money(amount)}</strong>
-                      <small>{percentage.toFixed(0)}%</small>
-                    </div>
+                    <span>
+                      {money(amount)}
+                    </span>
                   </div>
 
-                  <div className="categoryBar">
+                  <div className="balkanCategoryTrack">
                     <i
                       style={{
-                        width: `${relativeWidth}%`,
+                        width: `${percentage}%`,
                       }}
                     />
                   </div>
+
                 </div>
               );
             })}
+
           </div>
+
         </div>
       )}
 
-      {/* RÉPARTITION PAR VOYAGEUR */}
-      <div className="people peopleEnhanced mobilePeople">
-        <div className="peopleHeader">
-          <div>
-            <span>Dépenses par voyageur</span>
-            <small>Montant payé par chacun</small>
-          </div>
-
-          <div className="peopleCount">
-            {data.people.length}
-          </div>
-        </div>
-
-        <div className="peopleList">
-          {data.people.map((person) => {
-            const paid = stats.paid[person] || 0;
-            const percentage =
-              stats.total > 0
-                ? (paid / stats.total) * 100
-                : 0;
-
-            return (
-              <div key={person} className="personRow mobilePersonRow">
-                <div className="personInfo">
-                  <div className="avatar">
-                    {person.charAt(0).toUpperCase()}
-                  </div>
-
-                  <div className="personName">
-                    <span>{person}</span>
-                    <small>
-                      {percentage.toFixed(0)} % du total
-                    </small>
-                  </div>
-                </div>
-
-                <div className="personAmount">
-                  <strong>{money(paid)}</strong>
-                  <div className="personBar">
-                    <i
-                      style={{
-                        width: `${Math.min(100, percentage)}%`,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-           {/* ACTIONS */}
-           <div className="dashboardActions">
-        <button className="primary big mobileAddButton" onClick={onAdd}>
-          <Plus size={21} />
-          <span>Ajouter une dépense</span>
-        </button>
-
-        <button className="secondary big mobileHistoryButton" onClick={onHistory}>
-          <span>Voir l'historique</span>
-          <span className="historyCount">{data.expenses.length}</span>
-        </button>
-      </div>
     </section>
   );
 }
+
 
 function History({ data, onBack, onEdit, onDelete }) {
   return (

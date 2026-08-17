@@ -5610,3 +5610,1361 @@ button:active {
   }
 }
 
+
+
+/* =========================================================
+   BALKAN TRAVEL OS — DASHBOARD
+   Albania · Kosovo · North Macedonia
+   ========================================================= */
+
+.balkanDashboard {
+  --balkan-ink: #101828;
+  --balkan-muted: #667085;
+  --balkan-line: #e7e9ee;
+  --balkan-paper: #f6f5f1;
+  --balkan-red: #a9142b;
+  --balkan-blue: #155eef;
+  --balkan-gold: #f5b700;
+
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+/* ---------- HERO ---------- */
+
+.balkanHero {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 330px;
+  padding: 22px;
+
+  border-radius: 30px;
+
+  color: #fff;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(245, 183, 0, .32),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(21, 94, 239, .34),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #5e0718 0%,
+      #8f1128 42%,
+      #b51e35 72%,
+      #15171c 100%
+    );
+
+  box-shadow:
+    0 22px 50px rgba(78, 11, 27, .20);
+}
+
+.balkanHero::after {
+  content: "";
+
+  position: absolute;
+  right: -80px;
+  bottom: -100px;
+
+  width: 270px;
+  height: 270px;
+
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 38px rgba(255,255,255,.035),
+    0 0 0 76px rgba(255,255,255,.025);
+}
+
+.balkanHeroNoise {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: .08;
+
+  background-image:
+    linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(255,255,255,.4) 25%,
+      transparent 26%
+    );
+
+  background-size: 9px 9px;
+}
+
+.balkanHeroTop {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.balkanPassport {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  padding: 8px 10px;
+
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 11px;
+
+  background: rgba(255,255,255,.09);
+
+  backdrop-filter: blur(10px);
+}
+
+.balkanPassport span {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  opacity: .68;
+}
+
+.balkanPassport strong {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.balkanEdit {
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 13px;
+
+  background: rgba(255,255,255,.1);
+  color: #fff;
+
+  backdrop-filter: blur(10px);
+}
+
+.balkanRouteLabel {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 38px;
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .18em;
+}
+
+.routePulse {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #ffd43b;
+
+  box-shadow: 0 0 0 5px rgba(255,212,59,.12);
+}
+
+.balkanHero h1 {
+  position: relative;
+  z-index: 2;
+
+  margin: 7px 0 4px;
+
+  font-size: clamp(32px, 7vw, 52px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  font-weight: 850;
+}
+
+.balkanCountries {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: rgba(255,255,255,.72);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.balkanRoute {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 20px;
+}
+
+.balkanRoute span {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.12);
+
+  font-size: 18px;
+
+  backdrop-filter: blur(8px);
+}
+
+.balkanRoute i {
+  display: block;
+
+  width: 34px;
+  height: 1px;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.7) 0 5px,
+      transparent 5px 9px
+    );
+}
+
+.balkanHeroStats {
+  position: absolute;
+  z-index: 3;
+
+  right: 22px;
+  bottom: 22px;
+
+  display: flex;
+  gap: 20px;
+}
+
+.balkanHeroStats div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.balkanHeroStats strong {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.balkanHeroStats span {
+  margin-top: 4px;
+
+  color: rgba(255,255,255,.58);
+
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* ---------- ADD ---------- */
+
+.balkanAddExpense {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  width: 100%;
+  min-height: 72px;
+
+  margin: 13px 0 25px;
+  padding: 10px 13px;
+
+  border: 1px solid #111827;
+  border-radius: 20px;
+
+  background: #111827;
+  color: #fff;
+
+  text-align: left;
+
+  box-shadow: 0 12px 25px rgba(15,23,42,.13);
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
+}
+
+.balkanAddExpense:active {
+  transform: scale(.985);
+}
+
+.balkanAddIcon {
+  display: grid;
+  place-items: center;
+
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+
+  border-radius: 15px;
+
+  background: #f8c62d;
+  color: #111827;
+
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.balkanAddText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  flex: 1;
+}
+
+.balkanAddText strong {
+  font-size: 14px;
+}
+
+.balkanAddText small {
+  color: #98a2b3;
+  font-size: 11px;
+}
+
+.balkanAddArrow {
+  font-size: 21px;
+  color: #f8c62d;
+}
+
+/* ---------- SECTION HEAD ---------- */
+
+.balkanSectionHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin: 0 2px 11px;
+}
+
+.balkanSectionHead > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.balkanSectionHead > div > span {
+  color: #98a2b3;
+
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+
+.balkanSectionHead h2 {
+  margin: 3px 0 0;
+
+  color: var(--balkan-ink);
+
+  font-size: 21px;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.balkanLive {
+  color: #12b76a;
+
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+/* ---------- MONEY ---------- */
+
+.balkanMoneyGrid {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+.balkanTotalCard,
+.balkanBudgetCard {
+  min-height: 145px;
+
+  padding: 18px;
+
+  border: 1px solid var(--balkan-line);
+  border-radius: 21px;
+
+  background: #fff;
+
+  box-shadow: 0 7px 20px rgba(15,23,42,.035);
+}
+
+.balkanTotalCard {
+  color: #fff;
+
+  border: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      #15171c,
+      #272b34
+    );
+}
+
+.balkanCardLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #98a2b3;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.balkanTotalCard .balkanCardLabel {
+  color: #aeb5c0;
+}
+
+.balkanTinyFlag {
+  opacity: .55;
+}
+
+.balkanTotalCard > strong,
+.balkanBudgetCard > strong {
+  display: block;
+
+  margin-top: 17px;
+
+  font-size: clamp(25px, 6vw, 38px);
+  line-height: .95;
+  letter-spacing: -.045em;
+}
+
+.balkanBudgetCard > strong {
+  color: var(--balkan-ink);
+}
+
+.balkanTotalCard small,
+.balkanBudgetCard small {
+  display: block;
+
+  margin-top: 9px;
+
+  color: #98a2b3;
+
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.balkanBudgetCard small {
+  color: #667085;
+}
+
+.balkanBudgetTrack {
+  overflow: hidden;
+
+  height: 6px;
+
+  margin-top: 17px;
+
+  border-radius: 99px;
+
+  background: #eef0f3;
+}
+
+.balkanBudgetTrack span {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #155eef,
+      #f5b700
+    );
+}
+
+/* ---------- BALANCE ---------- */
+
+.balkanBalance {
+  margin-bottom: 28px;
+  padding: 18px 19px;
+
+  border: 1px solid #ebeef2;
+  border-radius: 21px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff 0%,
+      #f8fafc 100%
+    );
+}
+
+.balkanBalanceTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+
+  color: #98a2b3;
+
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.balkanBalanceIcon {
+  display: grid;
+  place-items: center;
+
+  width: 27px;
+  height: 27px;
+
+  border-radius: 9px;
+
+  background: #f2f4f7;
+
+  color: #475467;
+
+  font-size: 15px;
+}
+
+.balkanBalance > strong {
+  display: block;
+
+  color: var(--balkan-ink);
+
+  font-size: 17px;
+}
+
+.balkanBalance > small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #98a2b3;
+
+  font-size: 11px;
+}
+
+.balkanTransfer {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 13px;
+}
+
+.balkanPerson {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.balkanPerson > span {
+  display: grid;
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  background: #111827;
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.balkanPerson:last-child > span {
+  background: #155eef;
+}
+
+.balkanPerson small {
+  max-width: 65px;
+
+  overflow: hidden;
+
+  color: #667085;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.balkanTransferLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.balkanTransferLine strong {
+  color: var(--balkan-red);
+
+  font-size: 17px;
+  letter-spacing: -.03em;
+}
+
+.balkanTransferLine i {
+  color: #98a2b3;
+  font-style: normal;
+}
+
+/* ---------- RECENT ---------- */
+
+.balkanRecentHead {
+  margin-top: 4px;
+}
+
+.balkanSeeAll {
+  padding: 4px 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #155eef;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.balkanTimeline {
+  overflow: hidden;
+
+  margin-bottom: 28px;
+
+  border: 1px solid #e8eaee;
+  border-radius: 21px;
+
+  background: #fff;
+}
+
+.balkanExpenseRow {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 15px 40px 1fr auto;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 76px;
+
+  padding: 11px 14px;
+
+  border: 0;
+  border-bottom: 1px solid #f0f1f3;
+
+  background: #fff;
+
+  text-align: left;
+}
+
+.balkanExpenseRow:last-child {
+  border-bottom: 0;
+}
+
+.balkanTimelineMarker {
+  position: relative;
+
+  align-self: stretch;
+
+  display: flex;
+  justify-content: center;
+}
+
+.balkanTimelineMarker span {
+  position: absolute;
+  top: 24px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #a9142b;
+
+  box-shadow: 0 0 0 4px #fcecef;
+}
+
+.balkanTimelineMarker i {
+  position: absolute;
+  top: 31px;
+  bottom: -11px;
+
+  width: 1px;
+
+  background: #e6e8ec;
+}
+
+.balkanExpenseIcon {
+  display: grid;
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 13px;
+
+  background: #f5f6f8;
+  color: #344054;
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.balkanExpenseInfo {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.balkanExpenseInfo strong {
+  overflow: hidden;
+
+  color: #101828;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.balkanExpenseInfo span {
+  overflow: hidden;
+
+  color: #98a2b3;
+
+  font-size: 9px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.balkanExpenseAmount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.balkanExpenseAmount strong {
+  color: #101828;
+
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.balkanExpenseAmount small {
+  color: #98a2b3;
+
+  font-size: 8px;
+}
+
+/* ---------- CATEGORIES ---------- */
+
+.balkanCategories {
+  margin-bottom: 24px;
+}
+
+.balkanCategories > .balkanSectionHead > strong {
+  color: #101828;
+
+  font-size: 12px;
+}
+
+.balkanCategoryList {
+  padding: 3px 0;
+}
+
+.balkanCategory {
+  padding: 10px 0;
+}
+
+.balkanCategoryTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+}
+
+.balkanCategoryTop > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.balkanCategoryTop strong {
+  color: #344054;
+
+  font-size: 11px;
+}
+
+.balkanCategoryTop > span {
+  color: #667085;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.balkanCategoryDot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #a9142b;
+}
+
+.balkanCategoryDot1 {
+  background: #155eef;
+}
+
+.balkanCategoryDot2 {
+  background: #f5b700;
+}
+
+.balkanCategoryDot3 {
+  background: #12b76a;
+}
+
+.balkanCategoryDot4 {
+  background: #7f56d9;
+}
+
+.balkanCategoryTrack {
+  overflow: hidden;
+
+  height: 5px;
+
+  border-radius: 99px;
+
+  background: #f0f1f3;
+}
+
+.balkanCategoryTrack i {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #a9142b;
+}
+
+.balkanCategory:nth-child(2) .balkanCategoryTrack i {
+  background: #155eef;
+}
+
+.balkanCategory:nth-child(3) .balkanCategoryTrack i {
+  background: #f5b700;
+}
+
+.balkanCategory:nth-child(4) .balkanCategoryTrack i {
+  background: #12b76a;
+}
+
+.balkanCategory:nth-child(5) .balkanCategoryTrack i {
+  background: #7f56d9;
+}
+
+/* ---------- EMPTY ---------- */
+
+.balkanEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 35px 20px;
+
+  border: 1px dashed #d9dde4;
+  border-radius: 21px;
+
+  text-align: center;
+}
+
+.balkanEmpty > span {
+  margin-bottom: 9px;
+
+  color: #a9142b;
+
+  font-size: 22px;
+}
+
+.balkanEmpty strong {
+  color: #344054;
+
+  font-size: 13px;
+}
+
+.balkanEmpty small {
+  margin-top: 4px;
+
+  color: #98a2b3;
+
+  font-size: 10px;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+  .balkanDashboard {
+    max-width: none;
+    padding-bottom: 18px;
+  }
+
+  .balkanHero {
+    min-height: 315px;
+    padding: 18px;
+
+    border-radius: 24px;
+  }
+
+  .balkanHeroStats {
+    right: 18px;
+    bottom: 18px;
+    gap: 13px;
+  }
+
+  .balkanHeroStats strong {
+    font-size: 15px;
+  }
+
+  .balkanHeroStats span {
+    font-size: 7px;
+  }
+
+  .balkanMoneyGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .balkanTotalCard,
+  .balkanBudgetCard {
+    min-height: 137px;
+    padding: 15px;
+    border-radius: 18px;
+  }
+
+  .balkanTotalCard > strong,
+  .balkanBudgetCard > strong {
+    margin-top: 15px;
+    font-size: 25px;
+  }
+
+  .balkanSectionHead h2 {
+    font-size: 19px;
+  }
+
+  .balkanTransfer {
+    gap: 8px;
+  }
+
+  .balkanTransferLine strong {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 380px) {
+  .balkanMoneyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .balkanTotalCard,
+  .balkanBudgetCard {
+    min-height: 125px;
+  }
+
+  .balkanHero {
+    min-height: 340px;
+  }
+
+  .balkanHeroStats {
+    position: absolute;
+    left: 18px;
+    right: auto;
+    bottom: 18px;
+  }
+}
+
+/* =========================================================
+   MICRO UX — BALKAN TRAVEL OS
+   ========================================================= */*/
+
+/* ---------- GLOBAL TOUCH ---------- */
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+/* ---------- CARDS ---------- */
+
+.dashboardCard,
+.summaryCard,
+.balanceCardFinal,
+.categoryCard,
+.peopleEnhanced,
+.travelHero,
+.expenseCard {
+  transition:
+    transform 180ms cubic-bezier(.2,.8,.2,1),
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+@media (hover: hover) {
+  .dashboardCard:hover,
+  .summaryCard:hover,
+  .balanceCardFinal:hover,
+  .categoryCard:hover,
+  .peopleEnhanced:hover {
+    transform: translateY(-2px);
+  }
+
+  .expenseCard:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 14px 34px rgba(15, 23, 42, 0.08);
+  }
+}
+
+/* ---------- PRESS FEEDBACK ---------- */
+
+button:active:not(:disabled) {
+  transform: scale(0.975);
+}
+
+.navAdd:active {
+  transform: scale(0.92) !important;
+}
+
+.mobileAddButton:active,
+.expenseSaveButton:active {
+  transform: scale(0.965) !important;
+}
+
+/* ---------- BOTTOM NAV ---------- */
+
+.bottomNav {
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+  transition:
+    background 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.navItem,
+.navAdd {
+  transition:
+    transform 180ms cubic-bezier(.2,.8,.2,1),
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.navItem.active {
+  animation: navActivate 260ms cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes navActivate {
+  0% {
+    transform: scale(.92);
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---------- HERO ---------- */
+
+.travelHero {
+  overflow: hidden;
+}
+
+.travelHero::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255,255,255,.12),
+      transparent 25%
+    );
+
+  transform: translateX(-35%);
+  animation: heroGlow 9s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+  0%,
+  100% {
+    transform: translateX(-35%);
+  }
+
+  50% {
+    transform: translateX(35%);
+  }
+}
+
+/* ---------- PROGRESS BARS ---------- */
+
+.bar i,
+.categoryBar i,
+.personBar i {
+  transform-origin: left center;
+  animation: barGrow 700ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes barGrow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- BALANCE ---------- */
+
+.balanceCardFinal.balanced {
+  animation: balancedPulse 900ms ease-out;
+}
+
+@keyframes balancedPulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(22, 163, 74, .22);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 14px rgba(22, 163, 74, 0);
+  }
+}
+
+/* ---------- EXPENSE CARDS ---------- */
+
+.expenseCard {
+  animation: expenseAppear 300ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes expenseAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- CATEGORY ROWS ---------- */
+
+.mobileCategoryRow {
+  transition:
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+@media (hover: hover) {
+  .mobileCategoryRow:hover {
+    transform: translateX(3px);
+  }
+}
+
+/* ---------- PEOPLE ---------- */
+
+.mobilePersonRow {
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+@media (hover: hover) {
+  .mobilePersonRow:hover {
+    transform: translateX(3px);
+  }
+}
+
+/* ---------- MODAL ---------- */
+
+.overlay {
+  animation: overlayIn 180ms ease-out;
+}
+
+.modal {
+  animation: modalIn 260ms cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- INPUT FOCUS ---------- */
+
+input,
+select,
+textarea {
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, .08);
+}
+
+/* ---------- QUICK ADD CTA ---------- */
+
+.expenseSaveButton {
+  position: relative;
+  overflow: hidden;
+}
+
+.expenseSaveButton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -80%;
+
+  width: 45%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.24),
+      transparent
+    );
+
+  transform: skewX(-18deg);
+  animation: saveShine 4.5s ease-in-out infinite;
+}
+
+@keyframes saveShine {
+  0%,
+  65%,
+  100% {
+    left: -80%;
+  }
+
+  78% {
+    left: 135%;
+  }
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+  .dashboardCard,
+  .summaryCard,
+  .balanceCardFinal,
+  .categoryCard,
+  .peopleEnhanced,
+  .expenseCard {
+    transition:
+      transform 140ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .expenseCard:active {
+    transform: scale(.985);
+  }
+
+  .mobileCategoryRow:active,
+  .mobilePersonRow:active {
+    transform: scale(.99);
+  }
+}

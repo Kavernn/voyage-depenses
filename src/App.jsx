@@ -2115,20 +2115,25 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
       <section className={`travelIntel ${intelligenceStatus}`}>
 
-        <div className="travelIntelTop">
+        <div className="travelIntelHeader">
 
           <div>
             <span>TRAVEL INTELLIGENCE</span>
+
             <h2>{intelligenceHeadline}</h2>
           </div>
 
-          <div
-            className="travelIntelPulse"
-            aria-hidden="true"
-          >
+          <div className="travelIntelSignal">
             <i />
-            <i />
-            <i />
+            <span>
+              {intelligenceStatus === "hot"
+                ? "ALERTE"
+                : intelligenceStatus === "watch"
+                  ? "SURVEILLER"
+                  : intelligenceStatus === "on-track"
+                    ? "ON TRACK"
+                    : "INFO"}
+            </span>
           </div>
 
         </div>
@@ -2137,132 +2142,244 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           {intelligenceMessage}
         </p>
 
-        <div className="travelIntelGrid">
+        {/* PRÉ-DÉPART */}
+        {!tripHasStarted && !tripHasEnded && (
 
-          <div className="travelIntelMetric primary">
-            <small>RYTHME</small>
-            <strong>
-              {money(intelligenceBurnRate)}
-            </strong>
-            <span>par jour</span>
-          </div>
+          <div className="travelIntelMetrics travelIntelPreTrip">
 
-          <div className="travelIntelMetric">
-            <small>PROJECTION</small>
-            <strong>
-              {projectedTripCost > 0
-                ? money(projectedTripCost)
-                : "—"}
-            </strong>
-            <span>
-              {tripDays
-                ? `sur ${tripDays} jours`
-                : "durée inconnue"}
-            </span>
-          </div>
-
-          <div className="travelIntelMetric">
-            <small>RESTE</small>
-            <strong>
-              {budgetRemaining !== null
-                ? money(Math.max(0, budgetRemaining))
-                : "—"}
-            </strong>
-            <span>
-              {remainingTripDays > 0
-                ? `${remainingTripDays} jour${remainingTripDays > 1 ? "s" : ""} restant${remainingTripDays > 1 ? "s" : ""}`
-                : "budget"}
-            </span>
-          </div>
-
-          <div className="travelIntelMetric">
-            <small>PAR PERSONNE</small>
-            <strong>
-              {elapsedTripDays &&
-              data.people.length > 0
-                ? money(
-                    stats.total /
-                      elapsedTripDays /
-                      data.people.length,
-                  )
-                : "—"}
-            </strong>
-            <span>par jour</span>
-          </div>
-
-        </div>
-
-        {budgetAmount > 0 && (
-
-          <div className="travelIntelBudget">
-
-            <div className="travelIntelBudgetHead">
-              <span>
-                Budget · {money(stats.total)} /{" "}
-                {money(budgetAmount)}
-              </span>
+            <div className="travelIntelMetric">
+              <span>BUDGET TOTAL</span>
 
               <strong>
-                {Math.min(
-                  100,
-                  Math.max(
-                    0,
-                    (stats.total / budgetAmount) * 100,
-                  ),
-                ).toFixed(0)}
-                %
+                {budgetAmount > 0
+                  ? money(budgetAmount)
+                  : "—"}
               </strong>
+
+              <small>pour le voyage</small>
             </div>
 
-            <div className="travelIntelBar">
-              <i
-                style={{
-                  width: `${Math.min(
-                    100,
-                    Math.max(
-                      0,
-                      (stats.total / budgetAmount) * 100,
-                    ),
-                  )}%`,
-                }}
-              />
+            <div className="travelIntelMetric primary">
+              <span>OBJECTIF / JOUR</span>
+
+              <strong>
+                {budgetAmount > 0 && tripDays
+                  ? money(budgetAmount / tripDays)
+                  : "—"}
+              </strong>
+
+              <small>budget quotidien</small>
             </div>
 
-            {!tripHasEnded &&
-              requiredDailyBudget !== null && (
+            <div className="travelIntelMetric">
+              <span>PAR PERSONNE</span>
 
-                <div className="travelIntelCompare">
+              <strong>
+                {budgetAmount > 0 &&
+                tripDays &&
+                data.people.length > 0
+                  ? money(
+                      budgetAmount /
+                        tripDays /
+                        data.people.length,
+                    )
+                  : "—"}
+              </strong>
+
+              <small>par jour</small>
+            </div>
+
+            <div className="travelIntelMetric">
+              <span>À DÉPENSER</span>
+
+              <strong>
+                {budgetAmount > 0
+                  ? money(budgetAmount)
+                  : "—"}
+              </strong>
+
+              <small>avant le départ</small>
+            </div>
+
+          </div>
+        )}
+
+        {/* VOYAGE EN COURS */}
+        {tripHasStarted && !tripHasEnded && (
+
+          <>
+
+            <div className="travelIntelMetrics">
+
+              <div className="travelIntelMetric primary">
+                <span>RYTHME</span>
+
+                <strong>
+                  {money(intelligenceBurnRate)}
+                </strong>
+
+                <small>/ jour</small>
+              </div>
+
+              <div className="travelIntelMetric">
+                <span>PROJECTION</span>
+
+                <strong>
+                  {projectedTripCost > 0
+                    ? money(projectedTripCost)
+                    : "—"}
+                </strong>
+
+                <small>fin du voyage</small>
+              </div>
+
+              <div className="travelIntelMetric">
+                <span>RESTANT</span>
+
+                <strong>
+                  {budgetRemaining !== null
+                    ? money(Math.max(0, budgetRemaining))
+                    : "—"}
+                </strong>
+
+                <small>budget</small>
+              </div>
+
+            </div>
+
+            {budgetAmount > 0 && (
+
+              <div className="travelIntelBudget">
+
+                <div className="travelIntelBudgetTop">
+
                   <span>
-                    Pour respecter le budget
+                    Budget quotidien restant
                   </span>
 
                   <strong>
-                    {money(requiredDailyBudget)}
-                    /jour
+                    {requiredDailyBudget !== null
+                      ? money(requiredDailyBudget)
+                      : "—"}
+                    {requiredDailyBudget !== null &&
+                      " / jour"}
                   </strong>
-                </div>
-
-              )}
-
-            {burnVsRequired !== null &&
-              !tripHasEnded && (
-
-                <div className="travelIntelSignal">
-
-                  <span className="travelIntelSignalDot" />
-
-                  {burnVsRequired <= 1
-                    ? "Ton rythme actuel est soutenable."
-                    : `Ton rythme est ${Math.round(
-                        (burnVsRequired - 1) * 100,
-                      )}% au-dessus du rythme nécessaire.`}
 
                 </div>
 
-              )}
+                <div className="travelIntelBar">
+                  <i
+                    style={{
+                      width: `${Math.min(
+                        100,
+                        Math.max(
+                          0,
+                          (stats.total / budgetAmount) * 100,
+                        ),
+                      )}%`,
+                    }}
+                  />
+                </div>
+
+                <div className="travelIntelBudgetBottom">
+
+                  <span>
+                    {elapsedTripDays || 0} jour
+                    {elapsedTripDays === 1 ? "" : "s"} écoulé
+                    {elapsedTripDays === 1 ? "" : "s"}
+                  </span>
+
+                  <span>
+                    {remainingTripDays} jour
+                    {remainingTripDays === 1 ? "" : "s"} restant
+                    {remainingTripDays === 1 ? "" : "s"}
+                  </span>
+
+                </div>
+
+              </div>
+            )}
+
+            {burnVsRequired !== null && (
+
+              <div className="travelIntelInsight">
+
+                <span className="travelIntelInsightIcon">
+                  {burnVsRequired <= 1 ? "↘" : "↗"}
+                </span>
+
+                <div>
+
+                  <strong>
+                    {burnVsRequired <= 1
+                      ? "Ton rythme est sain."
+                      : "Ton rythme est au-dessus du plan."}
+                  </strong>
+
+                  <small>
+                    {burnVsRequired <= 1
+                      ? `Tu dépenses ${Math.round(
+                          (1 - burnVsRequired) * 100,
+                        )} % sous le rythme nécessaire.`
+                      : `Tu dépenses ${Math.round(
+                          (burnVsRequired - 1) * 100,
+                        )} % au-dessus du rythme nécessaire.`}
+                  </small>
+
+                </div>
+
+              </div>
+            )}
+
+          </>
+        )}
+
+        {/* VOYAGE TERMINÉ */}
+        {tripHasEnded && (
+
+          <div className="travelIntelMetrics">
+
+            <div className="travelIntelMetric primary">
+              <span>COÛT FINAL</span>
+
+              <strong>
+                {money(stats.total)}
+              </strong>
+
+              <small>total du voyage</small>
+            </div>
+
+            <div className="travelIntelMetric">
+              <span>MOYENNE / JOUR</span>
+
+              <strong>
+                {tripDays
+                  ? money(stats.total / tripDays)
+                  : "—"}
+              </strong>
+
+              <small>par jour</small>
+            </div>
+
+            <div className="travelIntelMetric">
+              <span>BUDGET</span>
+
+              <strong>
+                {budgetAmount > 0
+                  ? money(budgetAmount)
+                  : "—"}
+              </strong>
+
+              <small>
+                {projectionDelta !== null
+                  ? projectionDelta <= 0
+                    ? "sous le budget"
+                    : "au-dessus du budget"
+                  : "non défini"}
+              </small>
+            </div>
 
           </div>
-
         )}
 
       </section>
@@ -2323,135 +2440,6 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
               </div>
             ))}
           </div>
-        </section>
-      )}
-
-      {/* =================================================
-          TRAVEL INTELLIGENCE
-         ================================================= */}
-
-      {tripDays && (
-        <section className={`travelIntel ${intelligenceStatus}`}>
-
-          <div className="travelIntelHeader">
-            <div>
-              <span>TRAVEL INTELLIGENCE</span>
-              <h2>{intelligenceHeadline}</h2>
-            </div>
-
-            <div className="travelIntelSignal">
-              <i />
-              <span>
-                {intelligenceStatus === "hot"
-                  ? "ALERTE"
-                  : intelligenceStatus === "watch"
-                    ? "SURVEILLER"
-                    : intelligenceStatus === "on-track"
-                      ? "ON TRACK"
-                      : "INFO"}
-              </span>
-            </div>
-          </div>
-
-          <p className="travelIntelMessage">
-            {intelligenceMessage}
-          </p>
-
-          <div className="travelIntelMetrics">
-
-            <div className="travelIntelMetric">
-              <span>RYTHME</span>
-              <strong>{money(intelligenceBurnRate)}</strong>
-              <small>/ jour</small>
-            </div>
-
-            <div className="travelIntelMetric">
-              <span>PROJECTION</span>
-              <strong>{money(projectedTripCost)}</strong>
-              <small>fin du voyage</small>
-            </div>
-
-            <div className="travelIntelMetric">
-              <span>RESTANT</span>
-              <strong>
-                {budgetRemaining !== null
-                  ? money(Math.max(0, budgetRemaining))
-                  : "—"}
-              </strong>
-              <small>budget</small>
-            </div>
-
-          </div>
-
-          {budgetAmount > 0 && (
-            <div className="travelIntelBudget">
-
-              <div className="travelIntelBudgetTop">
-                <span>
-                  Budget quotidien restant
-                </span>
-
-                <strong>
-                  {requiredDailyBudget !== null
-                    ? money(requiredDailyBudget)
-                    : "—"}
-                  {requiredDailyBudget !== null && " / jour"}
-                </strong>
-              </div>
-
-              <div className="travelIntelBar">
-                <i
-                  style={{
-                    width: `${Math.min(
-                      100,
-                      Math.max(
-                        0,
-                        (stats.total / budgetAmount) * 100,
-                      ),
-                    )}%`,
-                  }}
-                />
-              </div>
-
-              <div className="travelIntelBudgetBottom">
-                <span>
-                  {elapsedTripDays || 0} jour
-                  {elapsedTripDays === 1 ? "" : "s"} écoulé
-                  {elapsedTripDays === 1 ? "" : "s"}
-                </span>
-
-                <span>
-                  {remainingTripDays} jour
-                  {remainingTripDays === 1 ? "" : "s"} restant
-                  {remainingTripDays === 1 ? "" : "s"}
-                </span>
-              </div>
-
-            </div>
-          )}
-
-          {burnVsRequired !== null && (
-            <div className="travelIntelInsight">
-              <span className="travelIntelInsightIcon">
-                {burnVsRequired <= 1 ? "↘" : "↗"}
-              </span>
-
-              <div>
-                <strong>
-                  {burnVsRequired <= 1
-                    ? "Ton rythme est sain."
-                    : "Ton rythme est au-dessus du plan."}
-                </strong>
-
-                <small>
-                  {burnVsRequired <= 1
-                    ? `Tu dépenses ${Math.round((1 - burnVsRequired) * 100)} % sous le rythme nécessaire.`
-                    : `Tu dépenses ${Math.round((burnVsRequired - 1) * 100)} % au-dessus du rythme nécessaire.`}
-                </small>
-              </div>
-            </div>
-          )}
-
         </section>
       )}
 

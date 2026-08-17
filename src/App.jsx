@@ -103,6 +103,7 @@ function App() {
   const [showJoin, setShowJoin] = useState(false);
   const [joining, setJoining] = useState(false);
   const [syncStatus, setSyncStatus] = useState("connecting");
+  const [tripDestinationDraft, setTripDestinationDraft] = useState("");
 
   /*
    * Helpers propres à l'éditeur du voyage.
@@ -535,6 +536,73 @@ function App() {
     };
   }
 
+  function getTripDestinations() {
+    return String(data.trip.countries || "")
+      .split(/[,·]/)
+      .map((country) => country.trim())
+      .filter(Boolean);
+  }
+
+  function setTripDestinations(destinations) {
+    setData((current) => ({
+      ...current,
+      trip: {
+        ...current.trip,
+        countries: destinations.join(", "),
+      },
+    }));
+  }
+
+  function addTripDestination() {
+    const destination = tripDestinationDraft.trim();
+
+    if (!destination) return;
+
+    const destinations = getTripDestinations();
+
+    const alreadyExists = destinations.some(
+      (item) =>
+        item.localeCompare(destination, "fr", {
+          sensitivity: "base",
+        }) === 0,
+    );
+
+    if (alreadyExists) {
+      setTripDestinationDraft("");
+      return;
+    }
+
+    setTripDestinations([...destinations, destination]);
+    setTripDestinationDraft("");
+  }
+
+  function removeTripDestination(index) {
+    const destinations = getTripDestinations();
+
+    setTripDestinations(
+      destinations.filter((_, i) => i !== index),
+    );
+  }
+
+  function moveTripDestination(index, direction) {
+    const destinations = [...getTripDestinations()];
+    const target = index + direction;
+
+    if (
+      target < 0 ||
+      target >= destinations.length
+    ) {
+      return;
+    }
+
+    [destinations[index], destinations[target]] = [
+      destinations[target],
+      destinations[index],
+    ];
+
+    setTripDestinations(destinations);
+  }
+
   function openTripEditor() {
     setTripEditSnapshot({
       trip: { ...data.trip },
@@ -566,6 +634,19 @@ function App() {
   
     const person1 = data.people[0]?.trim();
     const person2 = data.people[1]?.trim();
+
+    if (
+      data.trip.start &&
+      data.trip.end &&
+      new Date(`${data.trip.end}T00:00:00`) <
+        new Date(`${data.trip.start}T00:00:00`)
+    ) {
+      setError(
+        "La date de retour doit être après la date de départ.",
+      );
+      return;
+    }
+
   
     if (!person1 || !person2) {
       setError("Les deux voyageurs doivent avoir un nom.");
@@ -1299,19 +1380,66 @@ function App() {
 
       {showTrip && (
         <Modal title="Mon voyage" close={closeTripEditor}>
-          <form onSubmit={saveTrip} className="form tripEditorForm">
+          <form
+            onSubmit={saveTrip}
+            className="form tripManager"
+          >
 
-            {/* =================================================
-                INFORMATIONS
-               ================================================= */}
+            {/* ============================
+                APERÇU
+               ============================ */}
 
-            <section className="tripEditorSection">
-              <div className="tripEditorSectionHead">
-                <span>INFORMATIONS</span>
-                <h3>Ton voyage</h3>
+            <section className="tripManagerHero">
+
+              <span className="tripManagerEyebrow">
+                MON VOYAGE
+              </span>
+
+              <h2>
+                {data.trip.name?.trim() || "Mon voyage"}
+              </h2>
+
+              <div className="tripManagerSummary">
+                <span>
+                  <strong>{tripEditorDays || "—"}</strong>
+                  {tripEditorDays === 1 ? " jour" : " jours"}
+                </span>
+
+                <i />
+
+                <span>
+                  <strong>{getTripDestinations().length}</strong>
+                  {" "}
+                  {getTripDestinations().length === 1
+                    ? "pays"
+                    : "pays"}
+                </span>
+
+                <i />
+
+                <span>
+                  <strong>{data.people.length}</strong>
+                  {" "}
+                  {data.people.length === 1
+                    ? "voyageur"
+                    : "voyageurs"}
+                </span>
               </div>
 
-              <label className="tripEditorField">
+            </section>
+
+            {/* ============================
+                INFORMATIONS
+               ============================ */}
+
+            <section className="tripManagerCard">
+
+              <div className="tripManagerSectionHead">
+                <span>INFORMATIONS</span>
+                <h3>Les essentiels</h3>
+              </div>
+
+              <label className="tripManagerField">
                 <span>Nom du voyage</span>
 
                 <input
@@ -1329,20 +1457,23 @@ function App() {
                   }
                 />
               </label>
+
             </section>
 
-            {/* =================================================
+            {/* ============================
                 DATES
-               ================================================= */}
+               ============================ */}
 
-            <section className="tripEditorSection">
-              <div className="tripEditorSectionHead">
+            <section className="tripManagerCard">
+
+              <div className="tripManagerSectionHead">
                 <span>DATES</span>
                 <h3>Quand pars-tu?</h3>
               </div>
 
-              <div className="tripEditorDateGrid">
-                <label className="tripEditorField">
+              <div className="tripManagerDateGrid">
+
+                <label className="tripManagerField">
                   <span>Départ</span>
 
                   <input
@@ -1360,7 +1491,7 @@ function App() {
                   />
                 </label>
 
-                <label className="tripEditorField">
+                <label className="tripManagerField">
                   <span>Retour</span>
 
                   <input
@@ -1378,91 +1509,172 @@ function App() {
                     }
                   />
                 </label>
+
               </div>
 
               {data.trip.start &&
                 data.trip.end &&
                 tripEditorDays && (
-                <div className="tripEditorDateSummary">
-                  <div>
-                    <strong>{tripEditorDays || "—"}</strong>
+                  <div className="tripManagerDuration">
+                    <div>
+                      <strong>{tripEditorDays}</strong>
+                      <span>
+                        {tripEditorDays === 1
+                          ? "jour"
+                          : "jours"}
+                      </span>
+                    </div>
 
-                    <span>
-                      {tripEditorDays === 1 ? "jour" : "jours"}
-                    </span>
+                    <p>Durée totale du voyage</p>
                   </div>
+                )}
 
-                  <p>Durée totale du voyage</p>
-                </div>
-              )}
+              {data.trip.start &&
+                data.trip.end &&
+                !tripEditorDays && (
+                  <div className="tripManagerWarning">
+                    La date de retour doit être après
+                    la date de départ.
+                  </div>
+                )}
+
             </section>
 
-            {/* =================================================
+            {/* ============================
                 ITINÉRAIRE
-               ================================================= */}
+               ============================ */}
 
-            <section className="tripEditorSection">
-              <div className="tripEditorSectionHead">
+            <section className="tripManagerCard">
+
+              <div className="tripManagerSectionHead">
                 <span>ITINÉRAIRE</span>
-                <h3>Où vas-tu?</h3>
+                <h3>Ton parcours</h3>
               </div>
 
-              <label className="tripEditorField">
-                <span>Pays visités</span>
+              {getTripDestinations().length > 0 && (
+                <div className="tripManagerRoute">
+
+                  {getTripDestinations().map(
+                    (country, index) => (
+                      <div
+                        className="tripManagerStop"
+                        key={`${country}-${index}`}
+                      >
+                        <div className="tripManagerStopOrder">
+                          {index + 1}
+                        </div>
+
+                        <div className="tripManagerStopName">
+                          <strong>{country}</strong>
+
+                          <small>
+                            Étape {index + 1}
+                          </small>
+                        </div>
+
+                        <div className="tripManagerStopActions">
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              moveTripDestination(
+                                index,
+                                -1,
+                              )
+                            }
+                            disabled={index === 0}
+                            aria-label="Monter"
+                          >
+                            ↑
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              moveTripDestination(
+                                index,
+                                1,
+                              )
+                            }
+                            disabled={
+                              index ===
+                              getTripDestinations().length - 1
+                            }
+                            aria-label="Descendre"
+                          >
+                            ↓
+                          </button>
+
+                          <button
+                            type="button"
+                            className="danger"
+                            onClick={() =>
+                              removeTripDestination(index)
+                            }
+                            aria-label={`Supprimer ${country}`}
+                          >
+                            ×
+                          </button>
+
+                        </div>
+                      </div>
+                    ),
+                  )}
+
+                </div>
+              )}
+
+              <div className="tripManagerAddStop">
 
                 <input
                   type="text"
-                  value={data.trip.countries}
-                  placeholder="Albanie, Kosovo, Macédoine du Nord"
+                  value={tripDestinationDraft}
+                  placeholder="Ajouter une destination"
                   onChange={(e) =>
-                    setData((current) => ({
-                      ...current,
-                      trip: {
-                        ...current.trip,
-                        countries: e.target.value,
-                      },
-                    }))
+                    setTripDestinationDraft(
+                      e.target.value,
+                    )
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addTripDestination();
+                    }
+                  }}
                 />
 
-                <small>
-                  Sépare les destinations par une virgule.
-                </small>
-              </label>
+                <button
+                  type="button"
+                  onClick={addTripDestination}
+                  disabled={!tripDestinationDraft.trim()}
+                >
+                  +
+                </button>
 
-              {data.trip.countries?.trim() && (
-                <div className="tripEditorCountryList">
-                  {data.trip.countries
-                    .split(",")
-                    .map((country) => country.trim())
-                    .filter(Boolean)
-                    .map((country, index) => (
-                      <div
-                        className="tripEditorCountry"
-                        key={`${country}-${index}`}
-                      >
-                        <span>{index + 1}</span>
-                        <strong>{country}</strong>
-                      </div>
-                    ))}
-                </div>
-              )}
+              </div>
+
+              <small className="tripManagerHint">
+                Ajoute les pays dans l'ordre du voyage.
+              </small>
+
             </section>
 
-            {/* =================================================
+            {/* ============================
                 BUDGET
-               ================================================= */}
+               ============================ */}
 
-            <section className="tripEditorSection">
-              <div className="tripEditorSectionHead">
+            <section className="tripManagerCard">
+
+              <div className="tripManagerSectionHead">
                 <span>BUDGET</span>
                 <h3>Ton enveloppe</h3>
               </div>
 
-              <label className="tripEditorField tripEditorBudgetField">
+              <label className="tripManagerField">
                 <span>Budget total</span>
 
-                <div className="tripEditorMoneyInput">
+                <div className="tripManagerMoneyInput">
+
                   <input
                     type="number"
                     inputMode="decimal"
@@ -1482,34 +1694,36 @@ function App() {
                   />
 
                   <strong>CAD</strong>
+
                 </div>
               </label>
 
               {Number(data.trip.budget) > 0 && (
-                <div className="tripEditorBudgetPreview">
+                <div className="tripManagerBudgetGrid">
 
                   <div>
-                    <span>BUDGET TOTAL</span>
+                    <span>TOTAL</span>
                     <strong>
-                      {tripEditorCompactMoney(Number(data.trip.budget))}
+                      {tripEditorCompactMoney(
+                        Number(data.trip.budget),
+                      )}
                     </strong>
                   </div>
 
                   <div>
-                    <span>PAR JOUR</span>
+                    <span>/ JOUR</span>
                     <strong>
-                      {data.trip.start &&
-                      data.trip.end &&
-                      tripEditorDays
+                      {tripEditorDays
                         ? tripEditorCompactMoney(
-                            Number(data.trip.budget) / tripEditorDays,
+                            Number(data.trip.budget) /
+                              tripEditorDays,
                           )
                         : "—"}
                     </strong>
                   </div>
 
                   <div>
-                    <span>PAR PERSONNE</span>
+                    <span>/ PERSONNE</span>
                     <strong>
                       {data.people.length > 0
                         ? tripEditorCompactMoney(
@@ -1520,57 +1734,142 @@ function App() {
                     </strong>
                   </div>
 
+                  <div>
+                    <span>PERS. / JOUR</span>
+                    <strong>
+                      {tripEditorDays &&
+                      data.people.length > 0
+                        ? tripEditorCompactMoney(
+                            Number(data.trip.budget) /
+                              tripEditorDays /
+                              data.people.length,
+                          )
+                        : "—"}
+                    </strong>
+                  </div>
+
                 </div>
               )}
+
             </section>
 
-            {/* =================================================
+            {/* ============================
                 VOYAGEURS
-               ================================================= */}
+               ============================ */}
 
-            <section className="tripEditorSection">
-              <div className="tripEditorSectionHead">
+            <section className="tripManagerCard">
+
+              <div className="tripManagerSectionHead">
                 <span>VOYAGEURS</span>
                 <h3>Qui part?</h3>
               </div>
 
-              <div className="tripEditorTravellers">
+              <div className="tripManagerTravellers">
+
                 {data.people.map((person, index) => (
                   <label
-                    className="tripEditorField"
+                    className="tripManagerTraveller"
                     key={participantIds[index] || index}
                   >
-                    <span>Voyageur {index + 1}</span>
 
-                    <input
-                      type="text"
-                      value={person}
-                      maxLength={40}
-                      placeholder={`Voyageur ${index + 1}`}
-                      onChange={(e) =>
-                        setData((current) => ({
-                          ...current,
-                          people: current.people.map((p, i) =>
-                            i === index ? e.target.value : p,
-                          ),
-                        }))
-                      }
-                    />
+                    <div className="tripManagerAvatar">
+                      {(person || `V${index + 1}`)
+                        .charAt(0)
+                        .toUpperCase()}
+                    </div>
+
+                    <div>
+                      <span>
+                        Voyageur {index + 1}
+                      </span>
+
+                      <input
+                        type="text"
+                        value={person}
+                        maxLength={40}
+                        onChange={(e) =>
+                          setData((current) => ({
+                            ...current,
+                            people:
+                              current.people.map(
+                                (p, i) =>
+                                  i === index
+                                    ? e.target.value
+                                    : p,
+                              ),
+                          }))
+                        }
+                      />
+                    </div>
+
                   </label>
                 ))}
+
               </div>
+
+            </section>
+
+            {/* ============================
+                PARTAGE
+               ============================ */}
+
+            <section className="tripManagerCard">
+
+              <div className="tripManagerSectionHead">
+                <span>PARTAGE</span>
+                <h3>Voyager ensemble</h3>
+              </div>
+
+              <div className="tripManagerShare">
+
+                <div>
+                  <span>CODE DU VOYAGE</span>
+                  <strong>
+                    {data.trip.shareCode || "—"}
+                  </strong>
+                </div>
+
+                <button
+                  type="button"
+                  disabled={!data.trip.shareCode}
+                  onClick={async () => {
+                    if (!data.trip.shareCode) return;
+
+                    try {
+                      await navigator.clipboard.writeText(
+                        data.trip.shareCode,
+                      );
+                    } catch (err) {
+                      console.error(
+                        "Impossible de copier le code",
+                        err,
+                      );
+                    }
+                  }}
+                >
+                  Copier
+                </button>
+
+              </div>
+
+              <p className="tripManagerHint">
+                Ton compagnon peut utiliser ce code
+                pour rejoindre le même voyage.
+              </p>
+
             </section>
 
             {error && (
-              <div className="tripEditorError">
+              <div className="tripManagerError">
                 {error}
               </div>
             )}
 
-            <div className="tripEditorActions">
+            <div className="tripManagerFooter">
+
               <button
                 type="button"
-                className="tripEditorCancel"
+                className="tripManagerCancel"
                 onClick={closeTripEditor}
                 disabled={saving}
               >
@@ -1579,11 +1878,14 @@ function App() {
 
               <button
                 type="submit"
-                className="tripEditorSave"
+                className="tripManagerSave"
                 disabled={saving}
               >
-                {saving ? "Enregistrement…" : "Enregistrer"}
+                {saving
+                  ? "Enregistrement…"
+                  : "Enregistrer les changements"}
               </button>
+
             </div>
 
           </form>

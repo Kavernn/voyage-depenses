@@ -9764,3 +9764,579 @@ textarea:focus {
     animation: none !important;
   }
 }
+
+
+/* =========================================================
+   TRIP MANAGER — FINAL
+   ========================================================= */
+
+.tripManager {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.tripManagerHero {
+  padding: 20px !important;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(217, 95, 75, 0.16),
+      transparent 42%
+    ),
+    #101827 !important;
+
+  color: #ffffff !important;
+
+  border-radius: 20px !important;
+}
+
+.tripManagerEyebrow {
+  display: block !important;
+
+  margin-bottom: 7px !important;
+
+  color: rgba(255,255,255,0.5) !important;
+
+  font-size: 9px !important;
+  font-weight: 850 !important;
+  letter-spacing: 1.8px !important;
+}
+
+.tripManagerHero h2 {
+  margin: 0 !important;
+
+  color: #fff !important;
+
+  font-size: 23px !important;
+  font-weight: 800 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.6px !important;
+}
+
+.tripManagerSummary {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+
+  gap: 8px !important;
+
+  margin-top: 14px !important;
+
+  color: rgba(255,255,255,0.62) !important;
+
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.tripManagerSummary strong {
+  color: #ffffff !important;
+}
+
+.tripManagerSummary i {
+  width: 3px !important;
+  height: 3px !important;
+
+  background: rgba(255,255,255,0.34) !important;
+
+  border-radius: 50% !important;
+}
+
+.tripManagerCard {
+  padding: 18px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e8edf3 !important;
+  border-radius: 18px !important;
+
+  box-shadow:
+    0 1px 2px rgba(15,23,42,0.02),
+    0 8px 24px rgba(15,23,42,0.035) !important;
+}
+
+.tripManagerSectionHead {
+  margin-bottom: 16px !important;
+}
+
+.tripManagerSectionHead > span {
+  display: block !important;
+
+  margin-bottom: 4px !important;
+
+  color: #d95f4b !important;
+
+  font-size: 9px !important;
+  font-weight: 850 !important;
+  letter-spacing: 1.7px !important;
+}
+
+.tripManagerSectionHead h3 {
+  margin: 0 !important;
+
+  color: #101827 !important;
+
+  font-size: 18px !important;
+  font-weight: 780 !important;
+  letter-spacing: -0.4px !important;
+}
+
+.tripManagerField {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+}
+
+.tripManagerField > span {
+  color: #667085 !important;
+
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.tripManagerField input,
+.tripManagerAddStop input,
+.tripManagerTraveller input {
+  width: 100% !important;
+  height: 50px !important;
+
+  box-sizing: border-box !important;
+
+  padding: 0 14px !important;
+
+  background: #f8fafc !important;
+  color: #101827 !important;
+
+  border: 1px solid #e3e8ef !important;
+  border-radius: 13px !important;
+
+  outline: none !important;
+
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+.tripManagerDateGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+
+  gap: 10px !important;
+}
+
+.tripManagerDateGrid input {
+  padding: 0 9px !important;
+
+  font-size: 13px !important;
+}
+
+.tripManagerDuration {
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 11px !important;
+
+  margin-top: 12px !important;
+  padding: 12px 14px !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 13px !important;
+}
+
+.tripManagerDuration > div {
+  display: flex !important;
+  align-items: baseline !important;
+
+  gap: 4px !important;
+}
+
+.tripManagerDuration strong {
+  color: #101827 !important;
+
+  font-size: 21px !important;
+}
+
+.tripManagerDuration span,
+.tripManagerDuration p {
+  margin: 0 !important;
+
+  color: #7b8494 !important;
+
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.tripManagerWarning {
+  margin-top: 12px !important;
+  padding: 11px 12px !important;
+
+  background: #fff4f2 !important;
+  color: #b42318 !important;
+
+  border: 1px solid #fecdca !important;
+  border-radius: 12px !important;
+
+  font-size: 11px !important;
+  font-weight: 650 !important;
+}
+
+.tripManagerRoute {
+  display: flex !important;
+  flex-direction: column !important;
+
+  gap: 8px !important;
+}
+
+.tripManagerStop {
+  display: grid !important;
+  grid-template-columns: auto minmax(0,1fr) auto !important;
+  align-items: center !important;
+
+  gap: 10px !important;
+
+  min-height: 56px !important;
+
+  padding: 8px 9px !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 14px !important;
+}
+
+.tripManagerStopOrder {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 28px !important;
+  height: 28px !important;
+
+  background: #101827 !important;
+  color: #ffffff !important;
+
+  border-radius: 50% !important;
+
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+.tripManagerStopName {
+  min-width: 0 !important;
+}
+
+.tripManagerStopName strong {
+  display: block !important;
+
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+
+  color: #344054 !important;
+
+  font-size: 13px !important;
+}
+
+.tripManagerStopName small {
+  display: block !important;
+
+  margin-top: 2px !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 9px !important;
+}
+
+.tripManagerStopActions {
+  display: flex !important;
+
+  gap: 4px !important;
+}
+
+.tripManagerStopActions button {
+  width: 28px !important;
+  height: 28px !important;
+
+  padding: 0 !important;
+
+  background: #ffffff !important;
+  color: #667085 !important;
+
+  border: 1px solid #e4e7ec !important;
+  border-radius: 8px !important;
+}
+
+.tripManagerStopActions button.danger {
+  color: #d95f4b !important;
+}
+
+.tripManagerStopActions button:disabled {
+  opacity: 0.25 !important;
+}
+
+.tripManagerAddStop {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) 48px !important;
+
+  gap: 8px !important;
+
+  margin-top: 11px !important;
+}
+
+.tripManagerAddStop button {
+  height: 50px !important;
+
+  background: #101827 !important;
+  color: #ffffff !important;
+
+  border: 0 !important;
+  border-radius: 13px !important;
+
+  font-size: 23px !important;
+}
+
+.tripManagerAddStop button:disabled {
+  opacity: 0.35 !important;
+}
+
+.tripManagerHint {
+  display: block !important;
+
+  margin-top: 8px !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+
+.tripManagerMoneyInput {
+  position: relative !important;
+}
+
+.tripManagerMoneyInput input {
+  padding-right: 60px !important;
+
+  font-size: 21px !important;
+  font-weight: 800 !important;
+}
+
+.tripManagerMoneyInput strong {
+  position: absolute !important;
+  top: 50% !important;
+  right: 14px !important;
+
+  transform: translateY(-50%) !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 10px !important;
+}
+
+.tripManagerBudgetGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+
+  gap: 8px !important;
+
+  margin-top: 12px !important;
+}
+
+.tripManagerBudgetGrid > div {
+  min-width: 0 !important;
+
+  padding: 12px !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 13px !important;
+}
+
+.tripManagerBudgetGrid span {
+  display: block !important;
+
+  margin-bottom: 6px !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 8px !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.8px !important;
+}
+
+.tripManagerBudgetGrid strong {
+  display: block !important;
+
+  color: #101827 !important;
+
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.4px !important;
+}
+
+.tripManagerTravellers {
+  display: flex !important;
+  flex-direction: column !important;
+
+  gap: 9px !important;
+}
+
+.tripManagerTraveller {
+  display: grid !important;
+  grid-template-columns: 40px minmax(0,1fr) !important;
+  align-items: center !important;
+
+  gap: 10px !important;
+}
+
+.tripManagerAvatar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 40px !important;
+  height: 40px !important;
+
+  background: #101827 !important;
+  color: #ffffff !important;
+
+  border-radius: 13px !important;
+
+  font-size: 14px !important;
+  font-weight: 850 !important;
+}
+
+.tripManagerTraveller > div:last-child {
+  min-width: 0 !important;
+}
+
+.tripManagerTraveller span {
+  display: block !important;
+
+  margin-bottom: 5px !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 9px !important;
+  font-weight: 700 !important;
+}
+
+.tripManagerShare {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) auto !important;
+  align-items: center !important;
+
+  gap: 10px !important;
+
+  padding: 13px !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 13px !important;
+}
+
+.tripManagerShare span {
+  display: block !important;
+
+  margin-bottom: 3px !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.9px !important;
+}
+
+.tripManagerShare strong {
+  color: #101827 !important;
+
+  font-size: 16px !important;
+  font-weight: 850 !important;
+  letter-spacing: 1.5px !important;
+}
+
+.tripManagerShare button {
+  height: 38px !important;
+
+  padding: 0 13px !important;
+
+  background: #ffffff !important;
+  color: #344054 !important;
+
+  border: 1px solid #e4e7ec !important;
+  border-radius: 10px !important;
+
+  font-size: 11px !important;
+  font-weight: 750 !important;
+}
+
+.tripManagerError {
+  padding: 12px 14px !important;
+
+  background: #fff4f2 !important;
+  color: #b42318 !important;
+
+  border: 1px solid #fecdca !important;
+  border-radius: 12px !important;
+
+  font-size: 11px !important;
+}
+
+.tripManagerFooter {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 10 !important;
+
+  display: grid !important;
+  grid-template-columns: 0.72fr 1.28fr !important;
+
+  gap: 9px !important;
+
+  margin: 2px -4px -4px !important;
+  padding: 14px 4px 4px !important;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0.97) 28%,
+      #fff 52%
+    ) !important;
+}
+
+.tripManagerFooter button {
+  min-height: 52px !important;
+
+  border: 0 !important;
+  border-radius: 14px !important;
+
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+.tripManagerCancel {
+  background: #f2f4f7 !important;
+  color: #475467 !important;
+}
+
+.tripManagerSave {
+  background: #d95f4b !important;
+  color: #ffffff !important;
+
+  box-shadow:
+    0 8px 18px rgba(217,95,75,0.2) !important;
+}
+
+@media (max-width: 370px) {
+  .tripManagerCard {
+    padding: 15px !important;
+  }
+
+  .tripManagerDateGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .tripManagerBudgetGrid strong {
+    font-size: 15px !important;
+  }
+}

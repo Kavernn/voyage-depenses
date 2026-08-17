@@ -1603,7 +1603,8 @@ function App() {
             onAdd={newExpense}
             onHistory={() => setScreen("history")}
             onTrip={openTripEditor}
-          />
+            participantAvatars={participantAvatars}
+/>
         )}
 
         {screen === "history" && (
@@ -2729,7 +2730,26 @@ function getBalkanRoute(expenses) {
   return route;
 }
 
-function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
+function Dashboard({
+  data,
+  stats,
+  onAdd,
+  onHistory,
+  onTrip,
+  participantAvatars = [],
+}) {
+  const getDashboardParticipantAvatar = (name) => {
+    if (!name) return "";
+
+    const index = data.people.findIndex(
+      (person) => person === name,
+    );
+
+    if (index < 0) return "";
+
+    return participantAvatars[index] || "";
+  };
+
   const tripDays = (() => {
     if (!data.trip.start || !data.trip.end) return null;
 
@@ -3190,7 +3210,14 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
             <div className="balkanTransfer">
               <div className="balkanPerson">
                 <span>
-                  {debtor?.charAt(0).toUpperCase()}
+                  {getDashboardParticipantAvatar(debtor) ? (
+                    <img
+                      src={getDashboardParticipantAvatar(debtor)}
+                      alt=""
+                    />
+                  ) : (
+                    debtor?.charAt(0).toUpperCase()
+                  )}
                 </span>
                 <small>{debtor}</small>
               </div>
@@ -3202,7 +3229,14 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
               <div className="balkanPerson">
                 <span>
-                  {creditor?.charAt(0).toUpperCase()}
+                  {getDashboardParticipantAvatar(creditor) ? (
+                    <img
+                      src={getDashboardParticipantAvatar(creditor)}
+                      alt=""
+                    />
+                  ) : (
+                    creditor?.charAt(0).toUpperCase()
+                  )}
                 </span>
                 <small>{creditor}</small>
               </div>

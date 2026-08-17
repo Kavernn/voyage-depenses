@@ -10796,3 +10796,137 @@ textarea:focus {
     min-height: 49px !important;
   }
 }
+
+
+/* =========================================================
+   PWA — PULL TO CHECK UPDATE
+   ========================================================= */
+
+.pwaPullRefresh {
+  position: fixed !important;
+
+  top:
+    calc(env(safe-area-inset-top) + 8px) !important;
+
+  left: 50% !important;
+
+  z-index: 100000 !important;
+
+  pointer-events: none !important;
+
+  opacity: 0 !important;
+
+  transform:
+    translateX(-50%)
+    translateY(-18px)
+    scale(0.94) !important;
+
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease !important;
+}
+
+.pwaPullRefresh.visible {
+  opacity: 1 !important;
+
+  transform:
+    translateX(-50%)
+    translateY(
+      calc(
+        min(
+          var(--pull-distance),
+          72px
+        )
+      )
+    )
+    scale(1) !important;
+}
+
+.pwaPullRefreshBubble {
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 8px !important;
+
+  min-height: 38px !important;
+
+  padding: 0 13px !important;
+
+  background: rgba(16, 24, 39, 0.92) !important;
+  color: #ffffff !important;
+
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 999px !important;
+
+  box-shadow:
+    0 8px 22px rgba(15,23,42,0.18) !important;
+
+  backdrop-filter:
+    blur(14px)
+    saturate(145%) !important;
+
+  -webkit-backdrop-filter:
+    blur(14px)
+    saturate(145%) !important;
+}
+
+.pwaPullRefreshIcon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 20px !important;
+  height: 20px !important;
+
+  flex: 0 0 20px !important;
+
+  font-size: 15px !important;
+  font-weight: 800 !important;
+
+  transform:
+    rotate(
+      calc(
+        var(--pull-progress) * 180deg
+      )
+    ) !important;
+
+  transition:
+    transform 90ms linear !important;
+}
+
+.pwaPullRefresh.ready .pwaPullRefreshIcon {
+  color: #5ee5a3 !important;
+
+  transform: none !important;
+}
+
+.pwaPullRefresh.checking .pwaPullRefreshIcon {
+  animation:
+    pwaPullRefreshSpin
+    700ms linear infinite !important;
+}
+
+.pwaPullRefreshText {
+  white-space: nowrap !important;
+
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1px !important;
+}
+
+@keyframes pwaPullRefreshSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pwaPullRefresh,
+  .pwaPullRefreshIcon {
+    transition: none !important;
+  }
+
+  .pwaPullRefresh.checking .pwaPullRefreshIcon {
+    animation: none !important;
+  }
+}

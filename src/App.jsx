@@ -985,27 +985,36 @@ function App() {
 
   return (
     <div className="app">
-      <header>
-        <div className="brand">
-          <Plane size={22} />
-          Voyage Dépenses
-        </div>
-
-        <div style={{ display: "flex", gap: "8px" }}>
+      <header className="travelAppHeader">
+        <div className="travelHeaderSide travelHeaderWallet">
           <button
-            className="iconBtn"
+            className="travelHeaderIcon"
             onClick={openTripEditor}
             title="Voyage"
+            aria-label="Voyage"
           >
-            <Wallet size={20} />
+            <Wallet size={20} strokeWidth={1.9} />
           </button>
+        </div>
 
+        <div className="travelHeaderCenter">
+          <div className="travelHeaderPlane" aria-hidden="true">
+            <Plane size={25} strokeWidth={1.9} />
+          </div>
+
+          <div className="travelHeaderTitle">
+            Voyage Dépenses
+          </div>
+        </div>
+
+        <div className="travelHeaderSide travelHeaderAdd">
           <button
-            className="iconBtn"
+            className="travelHeaderIcon travelHeaderPlus"
             onClick={() => setShowJoin(true)}
             title="Rejoindre un voyage"
+            aria-label="Rejoindre un voyage"
           >
-            <Plus size={20} />
+            <Plus size={25} strokeWidth={1.9} />
           </button>
         </div>
       </header>

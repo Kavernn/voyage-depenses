@@ -7890,155 +7890,6 @@ textarea:focus {
 
 
 /* =========================================================
-   VOYAGE DÉPENSES — CENTERED HEADER
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  /*
-   * Le header devient une vraie zone d'accueil :
-   *
-   *       ✈
-   *   Voyage Dépenses
-   *   Ton dashboard de voyage
-   *
-   * wallet                         +
-   */
-
-  header,
-  .appHeader,
-  .topHeader,
-  .topbar,
-  .mobileHeader {
-    position: relative;
-    min-height: 112px;
-    background: #ffffff !important;
-    color: #111827 !important;
-    border-bottom: 1px solid rgba(15, 23, 42, 0.055);
-    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.045);
-  }
-
-  /*
-   * Lorsque le header utilise une structure flex,
-   * on garde les contrôles sur les côtés.
-   */
-  header,
-  .appHeader,
-  .topHeader,
-  .topbar,
-  .mobileHeader {
-    display: grid !important;
-    grid-template-columns: 52px 1fr 52px;
-    align-items: center;
-    column-gap: 12px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      18px
-      16px !important;
-  }
-
-  /*
-   * Le contenu textuel central.
-   */
-  header h1,
-  .appHeader h1,
-  .topHeader h1,
-  .topbar h1,
-  .mobileHeader h1 {
-    margin: 0 !important;
-    text-align: center !important;
-    color: #111827 !important;
-    font-size: 24px !important;
-    line-height: 1.05 !important;
-    letter-spacing: -0.035em !important;
-  }
-
-  /*
-   * Sous-titre éventuel.
-   */
-  header p,
-  .appHeader p,
-  .topHeader p,
-  .topbar p,
-  .mobileHeader p {
-    text-align: center !important;
-    color: #7c8799 !important;
-    font-size: 13px !important;
-    line-height: 1.2 !important;
-    margin: 5px 0 0 !important;
-  }
-
-  /*
-   * Boutons latéraux.
-   */
-  header button,
-  .appHeader button,
-  .topHeader button,
-  .topbar button,
-  .mobileHeader button {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    min-height: 48px !important;
-
-    display: grid !important;
-    place-items: center !important;
-
-    padding: 0 !important;
-
-    border-radius: 15px !important;
-    border: 1px solid rgba(15, 23, 42, 0.07) !important;
-
-    background: #ffffff !important;
-    color: #172033 !important;
-
-    box-shadow:
-      0 3px 10px rgba(15, 23, 42, 0.035) !important;
-  }
-
-  header button:first-child,
-  .appHeader button:first-child,
-  .topHeader button:first-child,
-  .topbar button:first-child,
-  .mobileHeader button:first-child {
-    justify-self: start;
-  }
-
-  header button:last-child,
-  .appHeader button:last-child,
-  .topHeader button:last-child,
-  .topbar button:last-child,
-  .mobileHeader button:last-child {
-    justify-self: end;
-  }
-
-  /*
-   * Icône avion :
-   * on essaie de placer le premier élément graphique
-   * au-dessus du titre lorsqu'il existe.
-   */
-  header svg,
-  .appHeader svg,
-  .topHeader svg,
-  .topbar svg,
-  .mobileHeader svg {
-    stroke-width: 1.9;
-  }
-
-  /*
-   * Transition douce vers le Hero.
-   */
-  header + main,
-  .appHeader + main,
-  .topHeader + main,
-  .topbar + main,
-  .mobileHeader + main {
-    padding-top: 14px !important;
-  }
-
-}
-
-/* =========================================================
    HEADER — DESKTOP SAFE
    ========================================================= */
 
@@ -8056,24 +7907,197 @@ textarea:focus {
 }
 
 
+
+
 /* =========================================================
-   HEADER CENTER — TYPOGRAPHY
+   VOYAGE DÉPENSES — FINAL MOBILE HEADER
    ========================================================= */
+
+.travelAppHeader {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+
+  width: 100%;
+  min-height: 150px;
+
+  box-sizing: border-box;
+
+  padding:
+    max(14px, env(safe-area-inset-top))
+    18px
+    14px;
+
+  background: #ffffff;
+  color: #111827;
+
+  border-bottom: 1px solid rgba(15, 23, 42, 0.045);
+
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.035);
+
+  z-index: 10;
+}
+
+/* ---------- CENTRE ---------- */
+
+.travelHeaderCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+
+  text-align: center;
+}
+
+.travelHeaderPlane {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 30px;
+
+  margin-bottom: 7px;
+
+  color: #172033;
+
+  transform: rotate(-3deg);
+}
+
+.travelHeaderTitle {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 23px;
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: -0.035em;
+
+  white-space: nowrap;
+}
+
+/* ---------- CÔTÉS ---------- */
+
+.travelHeaderSide {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+}
+
+.travelHeaderWallet {
+  justify-content: flex-start;
+}
+
+.travelHeaderAdd {
+  justify-content: flex-end;
+}
+
+/* ---------- BOUTONS ---------- */
+
+.travelHeaderIcon {
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  padding: 0;
+
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 14px;
+
+  background: #ffffff;
+  color: #172033;
+
+  box-shadow:
+    0 4px 14px rgba(15, 23, 42, 0.035);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.travelHeaderIcon:active {
+  transform: scale(0.93);
+
+  background: #f8fafc;
+
+  box-shadow:
+    0 2px 7px rgba(15, 23, 42, 0.025);
+}
+
+.travelHeaderPlus {
+  font-size: 25px;
+}
+
+/* ---------- MOBILE ---------- */
 
 @media (max-width: 600px) {
 
-  .headerTitle,
-  .appHeaderTitle,
-  .topHeaderTitle,
-  .topbarTitle {
-    text-align: center !important;
+  .travelAppHeader {
+    min-height: 148px;
+
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+
+    padding:
+      max(12px, env(safe-area-inset-top))
+      18px
+      12px;
   }
 
-  .headerSubtitle,
-  .appHeaderSubtitle,
-  .topHeaderSubtitle,
-  .topbarSubtitle {
-    text-align: center !important;
+  .travelHeaderTitle {
+    font-size: 22px;
   }
 
+  .travelHeaderPlane {
+    margin-bottom: 6px;
+  }
+
+  .travelHeaderIcon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 14px;
+  }
+
+}
+
+/* ---------- PETITS IPHONES ---------- */
+
+@media (max-width: 360px) {
+
+  .travelAppHeader {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .travelHeaderTitle {
+    font-size: 20px;
+  }
+
+  .travelHeaderIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+/* ---------- TRANSITION VERS LE HERO ---------- */
+
+.travelAppHeader + main {
+  padding-top: 12px;
 }

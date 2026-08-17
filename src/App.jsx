@@ -896,6 +896,79 @@ function App() {
     setError("");
   }
 
+  async function detectCurrentExpenseLocation() {
+    if (!navigator.geolocation) {
+      return null;
+    }
+
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          resolve,
+          reject,
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 60000,
+          },
+        );
+      });
+
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      const response = await fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(
+          latitude,
+        )}&longitude=${encodeURIComponent(
+          longitude,
+        )}&localityLanguage=fr`,
+        {
+          cache: "no-store",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Reverse geocoding indisponible");
+      }
+
+      const location = await response.json();
+
+      const city =
+        location.city ||
+        location.locality ||
+        location.principalSubdivision ||
+        "";
+
+      const country =
+        location.countryName ||
+        "";
+
+      if (city && country) {
+        return `${city}, ${country}`;
+      }
+
+      if (city) {
+        return city;
+      }
+
+      if (country) {
+        return country;
+      }
+
+      return null;
+    } catch (error) {
+      // Refus de permission, timeout, GPS indisponible ou API indisponible :
+      // on laisse simplement le champ Lieu vide.
+      console.info(
+        "Localisation automatique indisponible",
+        error,
+      );
+
+      return null;
+    }
+  }
+
   async function newExpense() {
     setEditing(null);
 
@@ -917,6 +990,27 @@ function App() {
 
     setRateStatus("1 CAD = 1 CAD");
     setShowExpense(true);
+
+    // La modale s'ouvre immédiatement.
+    // La localisation se fait ensuite sans bloquer l'utilisateur.
+    detectCurrentExpenseLocation().then((detectedPlace) => {
+      if (!detectedPlace) return;
+
+      setForm((current) => {
+        if (!current) return current;
+
+        // Ne jamais écraser un lieu que l'utilisateur aurait
+        // déjà commencé à saisir pendant la détection GPS.
+        if (String(current.place || "").trim()) {
+          return current;
+        }
+
+        return {
+          ...current,
+          place: detectedPlace,
+        };
+      });
+    });
   }
 
   function changeSplitMode(mode) {

@@ -1606,6 +1606,82 @@ function App() {
 }
 
 
+
+/* =========================================================
+   BALKAN SMART LOCATION
+   ========================================================= */
+
+function getBalkanLocation(expense) {
+  const text = [
+    expense?.place,
+    expense?.description,
+    expense?.category,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const cities = [
+    {
+      country: "Albanie",
+      flag: "🇦🇱",
+      names: ["tirana", "tiranë", "durres", "durrës", "shkoder", "shkodër", "berat", "vlore", "vlorë", "sarande", "sarandë", "gjirokaster", "gjirokastër", "kruje", "krujë"],
+    },
+    {
+      country: "Kosovo",
+      flag: "🇽🇰",
+      names: ["prizren", "pristina", "prishtina", "peja", "gjakova", "ferizaj", "mitrovica"],
+    },
+    {
+      country: "Macédoine du Nord",
+      flag: "🇲🇰",
+      names: ["skopje", "skopjë", "ohrid", "ohrid", "bitola", "tetovo", "struga"],
+    },
+  ];
+
+  for (const country of cities) {
+    for (const city of country.names) {
+      if (text.includes(city)) {
+        return {
+          city: city.charAt(0).toUpperCase() + city.slice(1),
+          country: country.country,
+          flag: country.flag,
+        };
+      }
+    }
+  }
+
+  const countries = [
+    {
+      country: "Albanie",
+      flag: "🇦🇱",
+      names: ["albanie", "albania"],
+    },
+    {
+      country: "Kosovo",
+      flag: "🇽🇰",
+      names: ["kosovo"],
+    },
+    {
+      country: "Macédoine du Nord",
+      flag: "🇲🇰",
+      names: ["macédoine", "macedonie", "macedonia", "north macedonia"],
+    },
+  ];
+
+  for (const country of countries) {
+    if (country.names.some((name) => text.includes(name))) {
+      return {
+        city: null,
+        country: country.country,
+        flag: country.flag,
+      };
+    }
+  }
+
+  return null;
+}
+
 function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
   const tripDays = (() => {
     if (!data.trip.start || !data.trip.end) return null;
@@ -1914,6 +1990,9 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
             const category =
               expense.category || "Autre";
 
+            const balkanLocation =
+              getBalkanLocation(expense);
+
             return (
               <button
                 type="button"
@@ -1932,6 +2011,16 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
                 </div>
 
                 <div className="balkanExpenseInfo">
+                  {balkanLocation && (
+                    <div className="balkanLocationBadge">
+                      <span>{balkanLocation.flag}</span>
+                      <span>
+                        {balkanLocation.city ||
+                          balkanLocation.country}
+                      </span>
+                    </div>
+                  )}
+
                   <strong>
                     {expense.description || category}
                   </strong>

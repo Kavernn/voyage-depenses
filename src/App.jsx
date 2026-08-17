@@ -41,6 +41,20 @@ const money = (n) =>
 
 const today = () => new Date().toISOString().slice(0, 10);
 
+function parseAmountInput(value) {
+  if (typeof value === "number") {
+    return Number.isFinite(value) ? value : 0;
+  }
+
+  const normalized = String(value ?? "")
+    .trim()
+    .replace(",", ".");
+
+  const parsed = Number(normalized);
+
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -510,11 +524,18 @@ function App() {
     const rate = await getRate(currency);
 
     if (rate) {
-      setForm((current) => ({
-        ...current,
-        currency,
-        rate,
-      }));
+      setForm((current) => {
+        // La personne a peut-être choisi une autre devise
+        // pendant que la requête réseau était en cours.
+        if (!current || current.currency !== currency) {
+          return current;
+        }
+
+        return {
+          ...current,
+          rate,
+        };
+      });
     }
   }
 
@@ -591,17 +612,42 @@ function App() {
 
     if (!tripId) return;
 
-    const amount = Number(form.amount);
+    const amount = parseAmountInput(form.amount);
 
-    if (!amount) return;
+    if (!Number.isFinite(amount) || amount <= 0) {
+      setError("Entre un montant supérieur à 0.");
+      return;
+    }
 
     try {
       setSaving(true);
       setError("");
 
-      const rate = form.currency === "CAD" ? 1 : await getRate(form.currency);
+      let rate = 1;
 
-      if (!rate) {
+      if (form.currency !== "CAD") {
+        const editingSameCurrency =
+          editing &&
+          editing.currency === form.currency &&
+          Number(editing.rate) > 0;
+
+        if (editingSameCurrency) {
+          // Une modification de description, catégorie, date, etc.
+          // ne doit jamais changer rétroactivement le taux historique.
+          rate = Number(editing.rate);
+        } else {
+          // Pour une nouvelle dépense ou une devise nouvellement choisie,
+          // on sauvegarde exactement le taux affiché dans le formulaire.
+          rate = Number(form.rate);
+
+          // Sécurité si le taux n'était pas encore disponible.
+          if (!rate || !Number.isFinite(rate)) {
+            rate = await getRate(form.currency);
+          }
+        }
+      }
+
+      if (!rate || !Number.isFinite(rate)) {
         setError(`Impossible de récupérer le taux ${form.currency} → CAD.`);
         return;
       }
@@ -1031,7 +1077,7 @@ function App() {
                   inputMode="decimal"
                   enterKeyHint="next"
                   step="0.01"
-                  min="0"
+                  min="0.01"
                   value={form.amount}
                   placeholder="0,00"
                   onChange={(e) =>
@@ -1049,17 +1095,17 @@ function App() {
             </div>
 
             {/* CONVERSION CAD EN TEMPS RÉEL */}
-            {form.amount && Number(form.amount) > 0 && (
+            {form.amount && parseAmountInput(form.amount) > 0 && (
               <div className="liveConversion mobileLiveConversion">
                 <div className="liveConversionMain">
                   <span>≈</span>
 
                   <strong>
                     {form.currency === "CAD"
-                      ? money(Number(form.amount))
+                      ? money(parseAmountInput(form.amount))
                       : form.rate
                         ? money(
-                            Number(form.amount) * Number(form.rate),
+                            parseAmountInput(form.amount) * Number(form.rate),
                           )
                         : "…"}
                   </strong>
@@ -1341,7 +1387,7 @@ function App() {
 
         <b>
           {money(
-            (Number(form.amount) || 0) *
+            parseAmountInput(form.amount) *
               (form.split / 100) *
               (form.currency === "CAD"
                 ? 1
@@ -1355,7 +1401,7 @@ function App() {
 
         <b>
           {money(
-            (Number(form.amount) || 0) *
+            parseAmountInput(form.amount) *
               ((100 - form.split) / 100) *
               (form.currency === "CAD"
                 ? 1

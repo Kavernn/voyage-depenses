@@ -1682,6 +1682,47 @@ function getBalkanLocation(expense) {
   return null;
 }
 
+
+function getBalkanRoute(expenses) {
+  const sorted = [...expenses].sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+
+    if (dateA !== dateB) return dateA - dateB;
+
+    return String(a.id || "").localeCompare(String(b.id || ""));
+  });
+
+  const route = [];
+
+  for (const expense of sorted) {
+    const location = getBalkanLocation(expense);
+
+    if (!location) continue;
+
+    const key = `${location.city || location.country}`;
+
+    const previous = route[route.length - 1];
+
+    if (previous?.key === key) {
+      previous.amount += Number(expense.cad) || 0;
+      previous.expenses += 1;
+      continue;
+    }
+
+    route.push({
+      key,
+      city: location.city,
+      country: location.country,
+      flag: location.flag,
+      amount: Number(expense.cad) || 0,
+      expenses: 1,
+    });
+  }
+
+  return route;
+}
+
 function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
   const tripDays = (() => {
     if (!data.trip.start || !data.trip.end) return null;
@@ -1700,6 +1741,8 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
     tripDays && stats.total > 0
       ? stats.total / tripDays
       : 0;
+
+  const balkanRoute = getBalkanRoute(data.expenses);
 
   const averagePerPerson =
     data.people.length > 0
@@ -1954,6 +1997,65 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
         )}
 
       </div>
+
+      {/* =================================================
+          YOUR ROUTE
+         ================================================= */}
+
+      {balkanRoute.length > 0 && (
+        <section className="balkanRouteSection">
+          <div className="balkanSectionHead">
+            <div>
+              <span>JOURNEY</span>
+              <h2>Your route</h2>
+            </div>
+
+            <strong>{balkanRoute.length} étapes</strong>
+          </div>
+
+          <div className="balkanRouteTrack">
+            {balkanRoute.map((stop, index) => (
+              <div
+                className="balkanRouteStop"
+                key={`${stop.key}-${index}`}
+              >
+                <div className="balkanRouteNode">
+                  <span>{stop.flag}</span>
+
+                  {index < balkanRoute.length - 1 && (
+                    <i />
+                  )}
+                </div>
+
+                <div className="balkanRouteCard">
+                  <div>
+                    <strong>
+                      {stop.city || stop.country}
+                    </strong>
+
+                    <small>
+                      {stop.city
+                        ? stop.country
+                        : "Étape du voyage"}
+                    </small>
+                  </div>
+
+                  <div className="balkanRouteAmount">
+                    <strong>{money(stop.amount)}</strong>
+
+                    <small>
+                      {stop.expenses}{" "}
+                      {stop.expenses === 1
+                        ? "dépense"
+                        : "dépenses"}
+                    </small>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* =================================================
           RECENT EXPENSES

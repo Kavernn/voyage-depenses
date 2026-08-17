@@ -7212,3 +7212,183 @@ textarea:focus {
     margin-top: 1px;
   }
 }
+
+
+/* =========================================================
+   BALKAN YOUR ROUTE
+   ========================================================= */
+
+.balkanRouteSection {
+  margin-top: 22px;
+}
+
+.balkanRouteTrack {
+  position: relative;
+  margin-top: 10px;
+  padding: 2px 0;
+}
+
+.balkanRouteStop {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+
+  min-height: 78px;
+}
+
+.balkanRouteNode {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.balkanRouteNode span {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 11px;
+
+  background: #ffffff;
+
+  font-size: 17px;
+
+  box-shadow:
+    0 5px 16px rgba(15, 23, 42, 0.08);
+}
+
+.balkanRouteNode i {
+  position: absolute;
+
+  top: 31px;
+  bottom: -2px;
+
+  width: 2px;
+
+  border-radius: 99px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #dbe4ef,
+      #eef2f7
+    );
+}
+
+.balkanRouteCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  min-width: 0;
+
+  margin: 0 0 10px 8px;
+  padding: 13px 14px;
+
+  border: 1px solid #edf0f4;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 6px 18px rgba(15, 23, 42, 0.035);
+}
+
+.balkanRouteCard > div:first-child {
+  min-width: 0;
+}
+
+.balkanRouteCard strong {
+  display: block;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #111827;
+
+  font-size: 14px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.balkanRouteCard small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.balkanRouteAmount {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.balkanRouteAmount strong {
+  color: #111827;
+  font-size: 12px;
+}
+
+.balkanRouteAmount small {
+  font-size: 8px;
+}
+
+@media (max-width: 600px) {
+
+  .balkanRouteSection {
+    margin-top: 20px;
+  }
+
+  .balkanRouteStop {
+    grid-template-columns: 34px minmax(0, 1fr);
+    min-height: 73px;
+  }
+
+  .balkanRouteNode span {
+    width: 29px;
+    height: 29px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+  }
+
+  .balkanRouteNode i {
+    top: 29px;
+  }
+
+  .balkanRouteCard {
+    margin-left: 7px;
+    margin-bottom: 9px;
+
+    padding: 12px;
+
+    border-radius: 15px;
+  }
+
+  .balkanRouteCard strong {
+    font-size: 13px;
+  }
+
+  .balkanRouteCard small {
+    font-size: 8px;
+  }
+
+  .balkanRouteAmount strong {
+    font-size: 11px;
+  }
+}

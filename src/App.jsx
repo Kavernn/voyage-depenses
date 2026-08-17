@@ -1964,6 +1964,17 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
       ? Number(data.trip.budget)
       : 0;
 
+  const compactMoney = (value) => {
+    const amount = Number(value);
+
+    if (!Number.isFinite(amount)) return "—";
+
+    return `${new Intl.NumberFormat("fr-CA", {
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    }).format(amount)} $`;
+  };
+
   const budgetRemaining =
     budgetAmount > 0
       ? budgetAmount - stats.total
@@ -2017,7 +2028,13 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           )} par jour, soit ${money(
             budgetAmount / tripDays / data.people.length,
           )} par personne / jour.`
-        : "Ajoute ton budget et tes dates pour préparer ton rythme de voyage."
+        : budgetAmount > 0 && data.people.length > 0
+          ? `Ton budget voyage est de ${money(
+              budgetAmount,
+            )}, soit ${money(
+              budgetAmount / data.people.length,
+            )} par personne. Ajoute tes dates pour calculer le budget quotidien.`
+          : "Ajoute ton budget et tes dates pour préparer ton rythme de voyage."
       : tripHasEnded
         ? "Voici ce que ton rythme réel raconte sur le voyage."
         : budgetAmount <= 0
@@ -2320,7 +2337,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
               <strong>
                 {budgetAmount > 0
-                  ? money(budgetAmount)
+                  ? compactMoney(budgetAmount)
                   : "—"}
               </strong>
 
@@ -2332,11 +2349,15 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
               <strong>
                 {budgetAmount > 0 && tripDays
-                  ? money(budgetAmount / tripDays)
+                  ? compactMoney(budgetAmount / tripDays)
                   : "—"}
               </strong>
 
-              <small>budget quotidien</small>
+              <small>
+                {tripDays
+                  ? "budget quotidien"
+                  : "ajoute tes dates"}
+              </small>
             </div>
 
             <div className="travelIntelMetric">
@@ -2344,7 +2365,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
               <strong>
                 {budgetAmount > 0 && data.people.length > 0
-                  ? money(
+                  ? compactMoney(
                       budgetAmount / data.people.length,
                     )
                   : "—"}
@@ -2357,8 +2378,10 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
               <span>DISPONIBLE</span>
 
               <strong>
-                {budgetAmount > 0
-                  ? money(budgetAmount)
+                {budgetRemaining !== null
+                  ? compactMoney(
+                      Math.max(0, budgetRemaining),
+                    )
                   : "—"}
               </strong>
 

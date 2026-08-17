@@ -9121,3 +9121,59 @@ textarea:focus {
   }
 }
 
+
+
+/* TRAVEL INTELLIGENCE — COMPACT PRETRIP FINAL */
+
+.travelIntelPreTrip .travelIntelMetric {
+  overflow: hidden !important;
+}
+
+.travelIntelPreTrip .travelIntelMetric > strong {
+  max-width: 100% !important;
+
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+
+  font-variant-numeric: tabular-nums !important;
+}
+
+.travelIntelPreTrip .travelIntelMetric > span,
+.travelIntelPreTrip .travelIntelMetric > small {
+  max-width: 100% !important;
+
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+}
+
+@media (max-width: 430px) {
+  .travelIntelPreTrip .travelIntelMetric {
+    padding: 17px 14px !important;
+  }
+
+  .travelIntelPreTrip .travelIntelMetric > strong {
+    font-size: clamp(22px, 6.7vw, 29px) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.8px !important;
+  }
+
+  .travelIntelPreTrip .travelIntelMetric > span {
+    min-height: 24px !important;
+
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    letter-spacing: 1.25px !important;
+  }
+
+  .travelIntelPreTrip .travelIntelMetric > small {
+    min-height: 28px !important;
+
+    margin-top: 9px !important;
+
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+}
+

@@ -692,12 +692,12 @@ function App() {
   function editExpense(expense) {
     let splitMode = "custom";
 
-    if (expense.split === 50) {
+    if (expense.personal && expense.split === 100) {
+      splitMode = "personal1";
+    } else if (expense.personal && expense.split === 0) {
+      splitMode = "personal2";
+    } else if (!expense.personal && expense.split === 50) {
       splitMode = "equal";
-    } else if (expense.split === 100) {
-      splitMode = expense.payer === data.people[0] ? "personal1" : "personal2";
-    } else if (expense.split === 0) {
-      splitMode = expense.payer === data.people[0] ? "personal2" : "personal1";
     }
 
     setEditing(expense);
@@ -727,36 +727,32 @@ function App() {
       ]),
     );
 
-    console.log(
-      "PAYERS DEBUG",
-      data.expenses.map((expense) => ({
-        amount: expense.cad,
-        payer: expense.payer,
-        description: expense.description,
-        category: expense.category,
-      })),
-    );
-
-    const owedBy = Object.fromEntries(data.people.map((person) => [person, 0]));
+    let net = 0;
 
     if (data.people.length >= 2) {
-      shared.forEach((expense) => {
-        const a = data.people[0];
-        const b = data.people[1];
+      const a = data.people[0];
+      const b = data.people[1];
 
-        const pct = expense.split / 100;
+      shared.forEach((expense) => {
+        // split = pourcentage de la dépense appartenant à A.
+        const shareA = Math.min(
+          1,
+          Math.max(0, Number(expense.split ?? 50) / 100),
+        );
+
+        const shareB = 1 - shareA;
 
         if (expense.payer === a) {
-          owedBy[b] += expense.cad * pct;
-          owedBy[a] -= expense.cad * pct;
-        } else {
-          owedBy[a] += expense.cad * (1 - pct);
-          owedBy[b] -= expense.cad * (1 - pct);
+          // A a payé.
+          // B doit rembourser à A la part qui appartient à B.
+          net += expense.cad * shareB;
+        } else if (expense.payer === b) {
+          // B a payé.
+          // A doit rembourser à B la part qui appartient à A.
+          net -= expense.cad * shareA;
         }
       });
     }
-
-    const net = owedBy[data.people[0]] || 0;
 
     const budget = Number(data.trip.budget) || 0;
 
@@ -1226,9 +1222,6 @@ function App() {
                 }
               />
             </label>
-            ### Section Répartition corrigée
-
-```jsx
 {/* RÉPARTITION */}
 {data.people.length >= 2 && (
   <div className="splitSection">

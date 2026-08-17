@@ -7030,3 +7030,131 @@ nav button {
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
   }
 }
+/* =========================================================
+   MODAL — FINAL MOBILE POLISH
+   ========================================================= */
+
+   @media (max-width: 600px) {
+    .overlay {
+      align-items: stretch !important;
+      padding: 0 !important;
+      background: rgba(15, 23, 42, 0.38) !important;
+    }
+  
+    .modal {
+      width: 100% !important;
+      height: 100dvh !important;
+      max-height: 100dvh !important;
+  
+      display: flex !important;
+      flex-direction: column !important;
+  
+      overflow: hidden !important;
+  
+      border-radius: 0 !important;
+      background: #f8fafc !important;
+  
+      box-shadow: none !important;
+    }
+  
+    .sheetHandle {
+      display: none !important;
+    }
+  
+    .modalHead {
+      position: relative !important;
+      top: auto !important;
+  
+      flex: 0 0 auto !important;
+  
+      min-height: calc(64px + env(safe-area-inset-top)) !important;
+  
+      padding:
+        env(safe-area-inset-top)
+        16px
+        0 !important;
+  
+      display: flex !important;
+      align-items: center !important;
+  
+      margin: 0 !important;
+  
+      background: rgba(248, 250, 252, 0.98) !important;
+      border-bottom: 1px solid #e8edf3 !important;
+  
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+  
+    .modalHead h2 {
+      margin: 0 !important;
+  
+      color: #0f172a !important;
+  
+      font-size: 20px !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.02em !important;
+    }
+  
+    .modalClose {
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+      min-height: 40px !important;
+  
+      padding: 0 !important;
+  
+      display: grid !important;
+      place-items: center !important;
+  
+      border: 1px solid #e5eaf0 !important;
+      border-radius: 13px !important;
+  
+      background: #ffffff !important;
+      color: #475569 !important;
+  
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+    }
+  
+    .modalContent {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+  
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+  
+      padding: 18px 16px calc(120px + env(safe-area-inset-bottom)) !important;
+  
+      overscroll-behavior: contain;
+    }
+  
+    .modalContent .form {
+      display: grid !important;
+      gap: 16px !important;
+  
+      padding: 0 !important;
+    }
+  
+    .modalContent .form > .primary:last-child {
+      position: sticky !important;
+      bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+      z-index: 20 !important;
+  
+      width: 100% !important;
+      min-height: 56px !important;
+  
+      margin-top: 6px !important;
+  
+      border-radius: 17px !important;
+  
+      background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+      color: #ffffff !important;
+  
+      font-size: 15px !important;
+      font-weight: 800 !important;
+  
+      box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.28),
+        0 0 0 6px rgba(248, 250, 252, 0.96) !important;
+    }
+  }

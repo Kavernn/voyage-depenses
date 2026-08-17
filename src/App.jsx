@@ -2579,35 +2579,37 @@ function App() {
       </div>
     )}
 
-    <div className="splitAmounts">
-      <div>
-        <span>{data.people[0]}</span>
+    {parseAmountInput(form.amount) > 0 && (
+      <div className="splitAmounts">
+        <div>
+          <span>{data.people[0]}</span>
 
-        <b>
-          {money(
-            parseAmountInput(form.amount) *
-              (form.split / 100) *
-              (form.currency === "CAD"
-                ? 1
-                : Number(form.rate) || 0),
-          )}
-        </b>
+          <b>
+            {money(
+              parseAmountInput(form.amount) *
+                (form.split / 100) *
+                (form.currency === "CAD"
+                  ? 1
+                  : Number(form.rate) || 0),
+            )}
+          </b>
+        </div>
+
+        <div>
+          <span>{data.people[1]}</span>
+
+          <b>
+            {money(
+              parseAmountInput(form.amount) *
+                ((100 - form.split) / 100) *
+                (form.currency === "CAD"
+                  ? 1
+                  : Number(form.rate) || 0),
+            )}
+          </b>
+        </div>
       </div>
-
-      <div>
-        <span>{data.people[1]}</span>
-
-        <b>
-          {money(
-            parseAmountInput(form.amount) *
-              ((100 - form.split) / 100) *
-              (form.currency === "CAD"
-                ? 1
-                : Number(form.rate) || 0),
-          )}
-        </b>
-      </div>
-    </div>
+    )}
   </div>
 )}
 

@@ -93,6 +93,7 @@ function App() {
 
   const [screen, setScreen] = useState("dashboard");
   const [showTrip, setShowTrip] = useState(false);
+  const [tripEditSnapshot, setTripEditSnapshot] = useState(null);
   const [showExpense, setShowExpense] = useState(false);
   const [editing, setEditing] = useState(null);
   const [rates, setRates] = useState({ CAD: 1 });
@@ -448,6 +449,30 @@ function App() {
     };
   }
 
+  function openTripEditor() {
+    setTripEditSnapshot({
+      trip: { ...data.trip },
+      people: [...data.people],
+    });
+
+    setError("");
+    setShowTrip(true);
+  }
+
+  function closeTripEditor() {
+    if (tripEditSnapshot) {
+      setData((current) => ({
+        ...current,
+        trip: { ...tripEditSnapshot.trip },
+        people: [...tripEditSnapshot.people],
+      }));
+    }
+
+    setTripEditSnapshot(null);
+    setError("");
+    setShowTrip(false);
+  }
+
   async function saveTrip(e) {
     e.preventDefault();
   
@@ -578,7 +603,8 @@ function App() {
       }
 
       await loadFromSupabase(tripId);
-  
+
+      setTripEditSnapshot(null);
       setShowTrip(false);
     } catch (err) {
       console.error(err);
@@ -963,7 +989,7 @@ function App() {
         <div style={{ display: "flex", gap: "8px" }}>
           <button
             className="iconBtn"
-            onClick={() => setShowTrip(true)}
+            onClick={openTripEditor}
             title="Voyage"
           >
             <Wallet size={20} />
@@ -1027,7 +1053,7 @@ function App() {
             stats={stats}
             onAdd={newExpense}
             onHistory={() => setScreen("history")}
-            onTrip={() => setShowTrip(true)}
+            onTrip={openTripEditor}
           />
         )}
 
@@ -1070,7 +1096,7 @@ function App() {
       </nav>
 
       {showTrip && (
-        <Modal title="Mon voyage" close={() => setShowTrip(false)}>
+        <Modal title="Mon voyage" close={closeTripEditor}>
           <form onSubmit={saveTrip} className="form">
             <label>
               Nom du voyage

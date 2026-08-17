@@ -826,23 +826,9 @@ button:active {
      BUDGET
      ------------------------- */
 
-  .budgetEnhanced {
-    margin: 10px 0 14px;
-    padding: 15px;
-    border-radius: 18px;
-  }
 
-  .budgetHeader {
-    margin-bottom: 10px;
-  }
 
-  .budgetHeader strong {
-    font-size: 15px;
-  }
 
-  .budgetHeader > span {
-    font-size: 11px;
-  }
 
   .bar {
     height: 7px;
@@ -1030,19 +1016,8 @@ button:active {
 
     /* ---------- BUDGET ---------- */
 
-    .budgetEnhanced {
-      padding: 16px;
-      margin: 10px 0;
-      border-radius: 20px;
-    }
 
-    .budgetHeader {
-      gap: 8px;
-    }
 
-    .budgetHeader strong {
-      font-size: 20px;
-    }
 
     .bar {
       height: 9px;
@@ -1997,7 +1972,20 @@ button:active {
     --tf-orange: #f59e0b;
   }
   
-  /* ---------- PAGE ---------- */
+  
+.sectionEyebrow {
+  display: block;
+  margin-bottom: 4px;
+
+  color: #2563eb;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- PAGE ---------- */
   
   body {
     background: var(--tf-bg);
@@ -2202,141 +2190,23 @@ button:active {
      FINANCIAL CARDS
      ========================================================= */
   
-  .financialGrid {
-    display: grid;
-    grid-template-columns: 1.12fr 0.88fr;
-    gap: 10px;
   
-    margin: 14px 0 10px;
-  }
   
-  .financialCard {
-    position: relative;
-    overflow: hidden;
   
-    min-width: 0;
-    padding: 17px;
   
-    border: 1px solid var(--tf-border);
-    border-radius: 20px;
   
-    background: var(--tf-card);
   
-    box-shadow:
-      0 2px 4px rgba(15, 23, 42, 0.025),
-      0 8px 24px rgba(15, 23, 42, 0.035);
-  }
-  
-  .financialCardMain {
-    background:
-      linear-gradient(
-        145deg,
-        rgba(239, 246, 255, 0.8),
-        #ffffff 65%
-      );
-  }
-  
-  .financialCardLabel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-  
-    margin-bottom: 10px;
-  
-    color: var(--tf-muted);
-  
-    font-size: 11px;
-    font-weight: 700;
-  }
-  
-  .financialCardLabel svg {
-    color: var(--tf-blue);
-  }
-  
-  .financialCard > strong {
-    display: block;
-  
-    overflow: hidden;
-  
-    color: var(--tf-text);
-  
-    font-size: clamp(20px, 5.5vw, 27px);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-  
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .financialCard small {
-    display: block;
-    margin-top: 8px;
-  
-    color: var(--tf-muted);
-  
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 1.3;
-  }
   
   /* =========================================================
      BUDGET
      ========================================================= */
   
-  .budgetEnhanced {
-    margin: 10px 0 14px;
-    padding: 16px 17px;
   
-    border: 1px solid var(--tf-border);
-    border-radius: 19px;
   
-    background: white;
   
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.035);
-  }
   
-  .budgetHeader {
-    margin-bottom: 12px;
-  }
   
-  .budgetHeader > div > span {
-    color: var(--tf-muted);
-    font-size: 11px;
-    font-weight: 700;
-  }
   
-  .budgetHeader strong {
-    color: var(--tf-text);
-    font-size: 17px;
-    font-weight: 800;
-  }
-  
-  .budgetHeader > span {
-    color: var(--tf-muted);
-    font-size: 11px;
-    font-weight: 600;
-  }
-  
-  .budgetEnhanced .bar {
-    height: 7px;
-  
-    overflow: hidden;
-  
-    border-radius: 999px;
-  
-    background: #e8edf5;
-  }
-  
-  .budgetEnhanced .bar i {
-    display: block;
-    height: 100%;
-  
-    border-radius: inherit;
-  
-    background: linear-gradient(90deg, #2563eb, #60a5fa);
-  }
   
   /* =========================================================
      IPHONE
@@ -2379,22 +2249,9 @@ button:active {
       font-size: 8px;
     }
   
-    .financialGrid {
-      gap: 9px;
-    }
   
-    .financialCard {
-      padding: 15px 14px;
-      border-radius: 18px;
-    }
   
-    .financialCard > strong {
-      font-size: 21px;
-    }
   
-    .financialCardLabel {
-      font-size: 10px;
-    }
   }
   /* =========================================================
    TRAVEL FINANCE PREMIUM — CARDS V3

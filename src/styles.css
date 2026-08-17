@@ -5425,3 +5425,42 @@ button:active {
   }
 }
 
+/* =========================================================
+   MOBILE UX — FINAL OVERRIDES
+   ========================================================= */
+
+@media (max-width: 600px) {
+  /* Modal : moins d'espace perdu sous le contenu */
+  .modalContent {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Bouton fermeture : vraie cible tactile */
+  .modalClose {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  /* Historique : lisibilité */
+  .expenseMeta {
+    font-size: 11px !important;
+    line-height: 1.35;
+  }
+
+  .expenseOriginal {
+    font-size: 11px !important;
+  }
+
+  .expenseCardActions button {
+    min-height: 44px !important;
+    font-size: 12px !important;
+  }
+
+  /* Titres de dépenses moins contraints */
+  .expenseCardTitle strong {
+    max-width: none !important;
+  }
+}
+

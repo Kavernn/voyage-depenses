@@ -2487,6 +2487,12 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
   const balkanRoute = getBalkanRoute(data.expenses);
 
+  // Résumé des lieux réellement enregistrés dans les dépenses.
+  const registeredRouteExpenseCount = balkanRoute.reduce(
+    (sum, stop) => sum + Number(stop.expenses || 0),
+    0,
+  );
+
   const averagePerPerson =
     data.people.length > 0
       ? stats.total / data.people.length
@@ -3230,7 +3236,12 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
             <strong>
               {balkanRoute.length}{" "}
-              {balkanRoute.length === 1 ? "étape" : "étapes"}
+              {balkanRoute.length === 1 ? "lieu" : "lieux"}
+              {" · "}
+              {registeredRouteExpenseCount}{" "}
+              {registeredRouteExpenseCount === 1
+                ? "dépense"
+                : "dépenses"}
             </strong>
           </div>
 
@@ -3257,7 +3268,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
                     <small>
                       {stop.city
                         ? stop.country
-                        : "Étape du voyage"}
+                        : "Lieu enregistré"}
                     </small>
                   </div>
 

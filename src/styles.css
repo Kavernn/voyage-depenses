@@ -11139,3 +11139,62 @@ textarea:focus {
   object-fit: cover !important;
   object-position: center !important;
 }
+
+
+/* =========================================================
+   TRAVELER AVATAR — STEP 2
+   ========================================================= */
+
+.tripManagerAvatarEditable {
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+.tripManagerAvatarFallback {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.tripManagerAvatarBadge {
+  position: absolute !important;
+  right: -2px !important;
+  bottom: -2px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 18px !important;
+  height: 18px !important;
+
+  background: #ffffff !important;
+  color: #101827 !important;
+
+  border: 2px solid #ffffff !important;
+  border-radius: 50% !important;
+
+  box-shadow:
+    0 2px 7px rgba(15, 23, 42, 0.18) !important;
+
+  font-size: 12px !important;
+  font-weight: 900 !important;
+}
+
+.tripManagerAvatarInput {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.tripManagerAvatarEditable.uploading {
+  opacity: 0.55 !important;
+  pointer-events: none !important;
+}

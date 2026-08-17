@@ -78,6 +78,7 @@ function App() {
   const [tripId, setTripId] = useState(null);
   const [participantIds, setParticipantIds] = useState([]);
   const [participantAvatars, setParticipantAvatars] = useState([]);
+  const [avatarUploadingIndex, setAvatarUploadingIndex] = useState(null);
 
   const [data, setData] = useState({
     trip: {
@@ -643,6 +644,135 @@ function App() {
 
   function getParticipantAvatar(index) {
     return participantAvatars[index] || "";
+  }
+
+  async function compressTravelerAvatar(file) {
+    if (!file?.type?.startsWith("image/")) {
+      throw new Error("Le fichier sélectionné n'est pas une image.");
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+
+    try {
+      const image = await new Promise((resolve, reject) => {
+        const img = new Image();
+
+        img.onload = () => resolve(img);
+        img.onerror = () =>
+          reject(new Error("Impossible de lire l'image."));
+
+        img.src = objectUrl;
+      });
+
+      const maxDimension = 720;
+      const scale = Math.min(
+        1,
+        maxDimension /
+          Math.max(image.naturalWidth, image.naturalHeight),
+      );
+
+      const width = Math.max(
+        1,
+        Math.round(image.naturalWidth * scale),
+      );
+
+      const height = Math.max(
+        1,
+        Math.round(image.naturalHeight * scale),
+      );
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext("2d");
+
+      if (!context) {
+        throw new Error("Canvas indisponible.");
+      }
+
+      context.drawImage(image, 0, 0, width, height);
+
+      const blob = await new Promise((resolve) => {
+        canvas.toBlob(resolve, "image/jpeg", 0.82);
+      });
+
+      if (!blob) {
+        throw new Error("Compression impossible.");
+      }
+
+      return blob;
+    } finally {
+      URL.revokeObjectURL(objectUrl);
+    }
+  }
+
+  async function uploadTravelerAvatar(index, file) {
+    const participantId = participantIds[index];
+
+    if (!participantId || !file) return;
+
+    try {
+      setAvatarUploadingIndex(index);
+      setError("");
+
+      const compressed = await compressTravelerAvatar(file);
+
+      const path =
+        `${participantId}/${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2, 8)}.jpg`;
+
+      const { error: uploadError } = await supabase
+        .storage
+        .from("traveler-avatars")
+        .upload(
+          path,
+          compressed,
+          {
+            contentType: "image/jpeg",
+            cacheControl: "3600",
+            upsert: false,
+          },
+        );
+
+      if (uploadError) throw uploadError;
+
+      const { data: publicData } = supabase
+        .storage
+        .from("traveler-avatars")
+        .getPublicUrl(path);
+
+      const avatarUrl = publicData?.publicUrl;
+
+      if (!avatarUrl) {
+        throw new Error("URL publique introuvable.");
+      }
+
+      const { error: updateError } = await supabase
+        .from("participants")
+        .update({
+          avatar_url: avatarUrl,
+        })
+        .eq("id", participantId);
+
+      if (updateError) throw updateError;
+
+      setParticipantAvatars((current) => {
+        const next = [...current];
+        next[index] = avatarUrl;
+        return next;
+      });
+    } catch (err) {
+      console.error("Erreur avatar", err);
+
+      setError(
+        err?.message ||
+          "Impossible d'enregistrer cette photo.",
+      );
+    } finally {
+      setAvatarUploadingIndex(null);
+    }
   }
 
   function openTripEditor() {
@@ -1933,18 +2063,50 @@ function App() {
                     key={participantIds[index] || index}
                   >
 
-                    <div className="tripManagerAvatar">
+                    <label
+                      className={[
+                        "tripManagerAvatar",
+                        "tripManagerAvatarEditable",
+                        avatarUploadingIndex === index
+                          ? "uploading"
+                          : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      aria-label={`Changer la photo de ${person}`}
+                    >
                       {getParticipantAvatar(index) ? (
                         <img
                           src={getParticipantAvatar(index)}
                           alt={person || `Voyageur ${index + 1}`}
                         />
                       ) : (
-                        (person || `V${index + 1}`)
-                          .charAt(0)
-                          .toUpperCase()
+                        <span className="tripManagerAvatarFallback">
+                          {(person || `V${index + 1}`)
+                            .charAt(0)
+                            .toUpperCase()}
+                        </span>
                       )}
-                    </div>
+
+                      <span className="tripManagerAvatarBadge">
+                        {avatarUploadingIndex === index ? "…" : "+"}
+                      </span>
+
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="tripManagerAvatarInput"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+
+                          if (file) {
+                            uploadTravelerAvatar(index, file);
+                          }
+
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
 
                     <div>
                       <span>

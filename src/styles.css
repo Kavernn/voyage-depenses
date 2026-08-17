@@ -11120,3 +11120,100 @@ textarea:focus {
     display: none !important;
   }
 }
+
+
+/* =========================================================
+   TRAVELER AVATARS — FINAL
+   ========================================================= */
+
+.tripManagerAvatar,
+.payerAvatar,
+.balkanPerson > span {
+  overflow: hidden !important;
+}
+
+.tripManagerAvatar img,
+.payerAvatar img,
+.balkanPerson > span img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.tripManagerAvatarEditable {
+  position: relative !important;
+
+  cursor: pointer !important;
+
+  flex: 0 0 auto !important;
+
+  border: 0 !important;
+}
+
+.tripManagerAvatarEditable > span:first-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.tripManagerAvatarCamera {
+  position: absolute !important;
+
+  right: -3px !important;
+  bottom: -3px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 18px !important;
+  height: 18px !important;
+
+  background: #ffffff !important;
+  color: #101827 !important;
+
+  border: 2px solid #ffffff !important;
+  border-radius: 50% !important;
+
+  box-shadow:
+    0 2px 7px rgba(15, 23, 42, 0.18) !important;
+
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.tripManagerAvatarEditable.uploading {
+  opacity: 0.58 !important;
+  pointer-events: none !important;
+}
+
+.tripManagerAvatarInput {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  opacity: 0 !important;
+
+  pointer-events: none !important;
+}
+
+.payerAvatar {
+  overflow: hidden !important;
+
+  padding: 0 !important;
+}
+
+.balkanPerson > span {
+  overflow: hidden !important;
+
+  padding: 0 !important;
+}

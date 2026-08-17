@@ -1305,54 +1305,56 @@ function App() {
   </div>
 </div>
 
-{/* PAYEUR */}
-<div className="expenseChoiceSection">
-  <label>Payé par</label>
+{/* PAYEUR + DATE */}
+<div className="expenseQuickFields expensePayerDateFields">
 
-  <div className="payerGrid">
-    {data.people.map((person) => (
-      <button
-        key={person}
-        type="button"
-        className={
-          form.payer === person
-            ? "payerChoice active"
-            : "payerChoice"
-        }
-        onClick={() =>
-          setForm({
-            ...form,
-            payer: person,
-          })
-        }
-      >
-        <span className="payerAvatar">
-          {person.charAt(0).toUpperCase()}
-        </span>
+  <div className="expenseQuickField expensePayerField">
+    <span>Payé par</span>
 
-        <span>{person}</span>
-      </button>
-    ))}
+    <div className="payerGrid">
+      {data.people.map((person) => (
+        <button
+          key={person}
+          type="button"
+          className={
+            form.payer === person
+              ? "payerChoice active"
+              : "payerChoice"
+          }
+          onClick={() =>
+            setForm({
+              ...form,
+              payer: person,
+            })
+          }
+        >
+          <span className="payerAvatar">
+            {person.charAt(0).toUpperCase()}
+          </span>
+
+          <span>{person}</span>
+        </button>
+      ))}
+    </div>
   </div>
-</div>
 
+  <label className="expenseQuickField expenseDateField">
+    <span>Date</span>
 
-{/* DATE */}
-<div className="expenseDateSection">
-  <label htmlFor="expense-date">Date</label>
+    <input
+      id="expense-date"
+      className="expenseDateInput"
+      type="date"
+      value={form.date}
+      onChange={(e) =>
+        setForm({
+          ...form,
+          date: e.target.value,
+        })
+      }
+    />
+  </label>
 
-  <input
-    id="expense-date"
-    className="expenseDateInput"
-    type="date"
-    value={form.date}
-    onChange={(e) =>
-      setForm({
-        ...form,
-        date: e.target.value,
-      })
-    }
-  />
 </div>
 
 {/* CATÉGORIE */}
@@ -1401,33 +1403,36 @@ function App() {
   </div>
 </div>
 
-            {/* DESCRIPTION */}
-            <label>
-              Description (facultatif)
-              <input
-                value={form.description}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    description: e.target.value,
-                  })
-                }
-              />
-            </label>
+            {/* DESCRIPTION + LIEU */}
+            <div className="expenseQuickFields expenseOptionalFields">
 
-            {/* LIEU */}
-            <label>
-              Lieu (facultatif)
-              <input
-                value={form.place}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    place: e.target.value,
-                  })
-                }
-              />
-            </label>
+              <label className="expenseQuickField">
+                <span>Description (facultatif)</span>
+                <input
+                  value={form.description}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      description: e.target.value,
+                    })
+                  }
+                />
+              </label>
+
+              <label className="expenseQuickField">
+                <span>Lieu (facultatif)</span>
+                <input
+                  value={form.place}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      place: e.target.value,
+                    })
+                  }
+                />
+              </label>
+
+            </div>
 {/* RÉPARTITION */}
 {data.people.length >= 2 && (
   <div className="splitSection">

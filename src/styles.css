@@ -5491,3 +5491,122 @@ button:active {
   }
 }
 
+/* =========================================================
+   MOBILE FIELDS UX
+   ========================================================= */
+
+.expensePayerDateFields {
+  align-items: start;
+}
+
+.expensePayerField .payerGrid {
+  margin: 0;
+}
+
+.expenseDateField {
+  display: block;
+}
+
+.expenseDateField input,
+.expenseOptionalFields input {
+  width: 100%;
+  min-height: 52px;
+
+  padding: 0 12px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+
+  background: #f8fafc;
+  color: #111827;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  outline: none;
+}
+
+.expenseDateField input:focus,
+.expenseOptionalFields input:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.07);
+}
+
+.expenseOptionalFields {
+  margin-top: 14px;
+}
+
+.expenseOptionalFields .expenseQuickField > span,
+.expensePayerDateFields .expenseQuickField > span {
+  display: block;
+  margin-bottom: 7px;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+@media (max-width: 600px) {
+  .expensePayerDateFields {
+    grid-template-columns: minmax(0, 1.45fr) minmax(105px, 0.85fr);
+    gap: 9px;
+    margin-top: 14px;
+    margin-bottom: 12px;
+  }
+
+  .expensePayerField .payerGrid {
+    gap: 6px;
+  }
+
+  .expensePayerField .payerChoice {
+    min-height: 52px;
+    padding: 7px 8px;
+    gap: 7px;
+    border-radius: 13px;
+  }
+
+  .expensePayerField .payerAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    font-size: 11px;
+  }
+
+  .expensePayerField .payerChoice > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .expenseDateField input {
+    min-height: 52px;
+    padding-left: 9px;
+    padding-right: 7px;
+    font-size: 13px;
+  }
+
+  .expenseOptionalFields {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-top: 10px;
+  }
+
+  .expenseOptionalFields input {
+    min-height: 48px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .expensePayerDateFields,
+  .expenseOptionalFields {
+    grid-template-columns: 1fr;
+  }
+
+  .expenseDateField {
+    margin-top: 2px;
+  }
+}
+

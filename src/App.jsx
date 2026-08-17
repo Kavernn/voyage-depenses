@@ -421,38 +421,80 @@ function App() {
   
       if (updateError) throw updateError;
   
-      // Sauvegarde des noms + migration des anciens payer
+      // Sauvegarde des noms + migration sécurisée des anciens payeurs.
+      //
+      // La migration se fait en deux phases pour supporter sans collision
+      // des changements comme :
+      //   Vincent -> Marie
+      //   Marie   -> Vincent
+      const renameOperations = participantIds
+        .map((participantId, index) => {
+          const oldName = oldNamesById[participantId];
+          const newName = data.people[index]?.trim();
+
+          return {
+            participantId,
+            oldName,
+            newName,
+            tempName: `__payer_tmp_${participantId}_${Date.now()}_${index}__`,
+          };
+        })
+        .filter(
+          ({ oldName, newName }) =>
+            oldName &&
+            newName &&
+            oldName !== newName,
+        );
+
+      // Phase 1 :
+      // déplace les anciens noms de payeur vers des valeurs temporaires.
+      for (const operation of renameOperations) {
+        const { error: tempExpenseError } = await supabase
+          .from("expenses")
+          .update({
+            payer: operation.tempName,
+          })
+          .eq("trip_id", tripId)
+          .eq("payer", operation.oldName);
+
+        if (tempExpenseError) {
+          throw tempExpenseError;
+        }
+      }
+
+      // Met à jour les noms des participants.
       for (let i = 0; i < participantIds.length; i++) {
         const participantId = participantIds[i];
         const newName = data.people[i]?.trim();
-        const oldName = oldNamesById[participantId];
-  
+
         const { error: participantError } = await supabase
           .from("participants")
           .update({
             name: newName,
           })
           .eq("id", participantId);
-  
-        if (participantError) throw participantError;
-  
-        // Si le voyageur a été renommé,
-        // on met à jour les anciennes dépenses.
-        if (oldName && oldName !== newName) {
-          const { error: expenseRenameError } = await supabase
-            .from("expenses")
-            .update({
-              payer: newName,
-            })
-            .eq("trip_id", tripId)
-            .eq("payer", oldName);
-  
-          if (expenseRenameError) {
-            throw expenseRenameError;
-          }
+
+        if (participantError) {
+          throw participantError;
         }
       }
-  
+
+      // Phase 2 :
+      // applique les nouveaux noms aux dépenses historiques.
+      for (const operation of renameOperations) {
+        const { error: finalExpenseError } = await supabase
+          .from("expenses")
+          .update({
+            payer: operation.newName,
+          })
+          .eq("trip_id", tripId)
+          .eq("payer", operation.tempName);
+
+        if (finalExpenseError) {
+          throw finalExpenseError;
+        }
+      }
+
       await loadFromSupabase();
   
       setShowTrip(false);

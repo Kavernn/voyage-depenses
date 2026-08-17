@@ -2941,276 +2941,6 @@ nav button {
   }
 }
 
-/* =========================================================
-   HISTORY — TRANSACTION CARDS
-   ========================================================= */
-
-   .historyScreen {
-    padding-bottom: 20px;
-  }
-  
-  .historyHeader {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-  }
-  
-  .historyBack {
-    display: grid;
-    width: 42px;
-    height: 42px;
-    flex: 0 0 auto;
-    place-items: center;
-    border: 1px solid #e2e8f0;
-    border-radius: 13px;
-    background: #ffffff;
-    color: #111827;
-    font-size: 22px;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-  }
-  
-  .historyHeader > div:nth-child(2) {
-    min-width: 0;
-    flex: 1;
-  }
-  
-  .historyHeader > div:nth-child(2) > span {
-    display: block;
-    color: #94a3b8;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-  }
-  
-  .historyHeader h2 {
-    margin: 2px 0 0;
-    color: #111827;
-    font-size: 25px;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-  }
-  
-  .historyTotal {
-    display: grid;
-    min-width: 58px;
-    padding: 7px 10px;
-    border-radius: 12px;
-    background: #f1f5f9;
-    text-align: center;
-  }
-  
-  .historyTotal strong {
-    color: #111827;
-    font-size: 15px;
-    line-height: 1;
-  }
-  
-  .historyTotal small {
-    margin-top: 3px;
-    color: #64748b;
-    font-size: 9px;
-    font-weight: 700;
-  }
-  
-  .historyList {
-    display: grid;
-    gap: 11px;
-  }
-  
-  .expenseCard {
-    overflow: hidden;
-    border: 1px solid #e8edf3;
-    border-radius: 19px;
-    background: #ffffff;
-    box-shadow:
-      0 2px 4px rgba(15, 23, 42, 0.025),
-      0 8px 24px rgba(15, 23, 42, 0.04);
-  }
-  
-  .expenseCardMain {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 15px;
-  }
-  
-  .expenseCategoryIcon {
-    display: grid;
-    width: 42px;
-    height: 42px;
-    flex: 0 0 auto;
-    place-items: center;
-    border-radius: 13px;
-    background: #f1f5f9;
-    color: #334155;
-    font-size: 14px;
-    font-weight: 800;
-  }
-  
-  .expenseCardInfo {
-    min-width: 0;
-    flex: 1;
-  }
-  
-  .expenseCardTitle {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    min-width: 0;
-  }
-  
-  .expenseCardTitle strong {
-    min-width: 0;
-    overflow: hidden;
-    color: #111827;
-    font-size: 14px;
-    font-weight: 800;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .expenseBadge {
-    flex: 0 0 auto;
-    padding: 3px 6px;
-    border-radius: 6px;
-    font-size: 9px;
-    font-weight: 800;
-  }
-  
-  .expenseBadge.shared {
-    background: #f1f5f9;
-    color: #64748b;
-  }
-  
-  .expenseBadge.personal {
-    background: #fef3c7;
-    color: #92400e;
-  }
-  
-  .expenseMeta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 5px;
-    color: #64748b;
-    font-size: 10px;
-    font-weight: 600;
-  }
-  
-  .expenseOriginal {
-    display: block;
-    margin-top: 5px;
-    color: #94a3b8;
-    font-size: 10px;
-  }
-  
-  .expenseCardAmount {
-    flex: 0 0 auto;
-    padding-left: 4px;
-    text-align: right;
-  }
-  
-  .expenseCardAmount strong {
-    color: #111827;
-    font-size: 15px;
-    font-weight: 800;
-    white-space: nowrap;
-  }
-  
-  .expenseCardActions {
-    display: flex;
-    border-top: 1px solid #f1f5f9;
-  }
-  
-  .expenseCardActions button {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    min-height: 42px;
-    color: #64748b;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  
-  .expenseCardActions button + button {
-    border-left: 1px solid #f1f5f9;
-  }
-  
-  .expenseCardActions button:hover {
-    background: #f8fafc;
-  }
-  
-  .expenseCardActions .deleteAction {
-    color: #dc2626;
-  }
-  
-  .historyEmpty {
-    padding: 42px 24px;
-    border: 1px dashed #cbd5e1;
-    border-radius: 20px;
-    background: #ffffff;
-    text-align: center;
-  }
-  
-  .historyEmptyIcon {
-    display: grid;
-    width: 52px;
-    height: 52px;
-    margin: 0 auto 12px;
-    place-items: center;
-    border-radius: 16px;
-    background: #f1f5f9;
-    color: #64748b;
-  }
-  
-  .historyEmpty strong {
-    display: block;
-    color: #111827;
-    font-size: 16px;
-  }
-  
-  .historyEmpty p {
-    max-width: 280px;
-    margin: 6px auto 0;
-    color: #64748b;
-    font-size: 12px;
-    line-height: 1.5;
-  }
-  
-  @media (max-width: 480px) {
-    .historyHeader h2 {
-      font-size: 22px;
-    }
-  
-    .expenseCard {
-      border-radius: 17px;
-    }
-  
-    .expenseCardMain {
-      gap: 10px;
-      padding: 13px;
-    }
-  
-    .expenseCategoryIcon {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
-    }
-  
-    .expenseCardTitle strong {
-      font-size: 13px;
-    }
-  
-    .expenseCardAmount strong {
-      font-size: 13px;
-    }
-  }
-
-
 /* Espace supplémentaire pour que le contenu
    ne soit jamais caché derrière la navigation */
 .app {
@@ -5789,5 +5519,144 @@ nav button {
 
 .bottomNav .navAdd:active {
   transform: scale(0.94) !important;
+}
+
+/* =========================================================
+   HISTORY V3 — FINAL POLISH
+   ========================================================= */
+
+.historyHeader {
+  margin-bottom: 18px;
+}
+
+.historyBack {
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.12s ease;
+}
+
+.historyBack:active {
+  transform: scale(0.94);
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.historyHeader h2 {
+  letter-spacing: -0.04em;
+}
+
+.historyTotal {
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.03);
+}
+
+.historyList {
+  gap: 9px;
+}
+
+.expenseCard {
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease;
+}
+
+.expenseCardMain {
+  align-items: center;
+}
+
+.expenseCategoryIcon {
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.06);
+}
+
+.expenseCardTitle strong {
+  font-size: 14px;
+}
+
+.expenseMeta {
+  margin-top: 4px;
+}
+
+.expenseOriginal {
+  margin-top: 3px;
+}
+
+.expenseCardAmount strong {
+  font-size: 15px;
+}
+
+.expenseBadge {
+  min-height: 19px;
+  padding: 2px 7px;
+}
+
+.expenseCardActions button {
+  min-height: 40px;
+  transition:
+    background 0.14s ease,
+    color 0.14s ease;
+}
+
+@media (max-width: 480px) {
+  .historyScreen {
+    padding-bottom: 12px;
+  }
+
+  .historyHeader {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .historyBack {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    border-radius: 13px;
+  }
+
+  .historyHeader h2 {
+    font-size: 23px;
+  }
+
+  .historyTotal {
+    min-width: 56px;
+    padding: 7px 9px;
+  }
+
+  .expenseCard {
+    border-radius: 18px;
+  }
+
+  .expenseCardMain {
+    gap: 10px;
+    padding: 13px;
+  }
+
+  .expenseCategoryIcon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .expenseCardTitle strong {
+    max-width: 150px;
+    font-size: 13px;
+  }
+
+  .expenseMeta {
+    font-size: 9px;
+  }
+
+  .expenseOriginal {
+    font-size: 9px;
+  }
+
+  .expenseCardAmount strong {
+    font-size: 14px;
+  }
+
+  .expenseCardActions button {
+    min-height: 39px;
+    font-size: 10px;
+  }
 }
 

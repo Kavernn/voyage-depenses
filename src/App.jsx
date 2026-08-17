@@ -9,6 +9,7 @@ import {
   Wallet,
   House,
   ReceiptText,
+  ArrowLeft,
 } from "lucide-react";
 import { supabase } from "./lib/supabase";
 import "./styles.css";
@@ -1861,8 +1862,12 @@ function History({ data, onBack, onEdit, onDelete }) {
   return (
     <section className="historyScreen">
       <div className="historyHeader">
-        <button className="historyBack" onClick={onBack}>
-          ←
+        <button
+          className="historyBack"
+          onClick={onBack}
+          aria-label="Retour à l'accueil"
+        >
+          <ArrowLeft size={20} strokeWidth={2.3} />
         </button>
 
         <div>

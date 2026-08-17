@@ -4129,3 +4129,1299 @@ button:active {
   }
 }
 
+/* =========================================================
+   TRAVEL HERO — FINAL POLISH
+   ========================================================= */
+
+.travelHero {
+  isolation: isolate;
+}
+
+.travelHero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.035),
+      transparent 42%
+    );
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+.travelHeroTop,
+.travelHeroContent,
+.travelHeroStats {
+  position: relative;
+  z-index: 2;
+}
+
+.travelHeroIcon,
+.travelHeroEdit {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 6px 16px rgba(15, 23, 42, 0.10);
+}
+
+.travelHeroEdit {
+  transition:
+    transform 0.14s ease,
+    background 0.14s ease;
+}
+
+.travelHeroEdit:active {
+  transform: scale(0.94);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.travelHeroLabel {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.travelHeroContent p {
+  max-width: 92%;
+}
+
+.travelHeroStats {
+  gap: 0;
+}
+
+.travelHeroStats > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 40px;
+}
+
+.travelHeroStats strong {
+  letter-spacing: -0.025em;
+}
+
+.travelHeroStats span {
+  opacity: 0.92;
+}
+
+@media (max-width: 480px) {
+  .travelHero {
+    margin-bottom: 16px;
+    padding: 18px 17px;
+    border-radius: 24px;
+
+    box-shadow:
+      0 14px 30px rgba(37, 99, 235, 0.15),
+      0 4px 10px rgba(15, 23, 42, 0.06);
+  }
+
+  .travelHeroTop {
+    margin-bottom: 18px;
+  }
+
+  .travelHero h1 {
+    font-size: 28px;
+    line-height: 1.03;
+  }
+
+  .travelHeroContent p {
+    max-width: 100%;
+    margin-top: 7px;
+    font-size: 12px;
+  }
+
+  .travelHeroStats {
+    margin-top: 19px;
+    padding-top: 14px;
+  }
+
+  .travelHeroStats > div {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .travelHeroStats strong {
+    font-size: 14px;
+  }
+
+  .travelHeroStats span {
+    margin-top: 3px;
+    font-size: 8px;
+  }
+}
+
+
+/* =========================================================
+   FINANCIAL SUMMARY — PREMIUM POLISH V4
+   ========================================================= */
+
+.financialSummary {
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 16px;
+  padding: 20px;
+
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 24px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.02),
+    0 12px 32px rgba(15, 23, 42, 0.055);
+}
+
+/* ---------- HEADER ---------- */
+
+.financialSummaryHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 17px;
+}
+
+.financialSummaryHeader h3 {
+  margin: 2px 0 0;
+
+  color: #0f172a;
+
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.financialSummaryTotal {
+  color: #0f172a;
+
+  font-size: 21px;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+/* ---------- MAIN METRICS ---------- */
+
+.financialMainGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 10px;
+}
+
+.financialMainCard {
+  position: relative;
+  overflow: hidden;
+
+  min-width: 0;
+  padding: 16px;
+
+  border: 1px solid #edf1f5;
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8fafc 0%,
+      #ffffff 100%
+    );
+}
+
+.financialMainCard:first-child {
+  border-color: rgba(37, 99, 235, 0.10);
+
+  background:
+    linear-gradient(
+      145deg,
+      #eff6ff 0%,
+      #f8fbff 55%,
+      #ffffff 100%
+    );
+}
+
+.financialMainCard span,
+.financialMetric span,
+.financialInsight span {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.financialMainCard strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #0f172a;
+
+  font-size: 23px;
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.financialMainCard:first-child strong {
+  color: #1d4ed8;
+}
+
+.financialMainCard small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---------- SECONDARY METRICS ---------- */
+
+.financialMetrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+
+  margin-top: 9px;
+}
+
+.financialMetric {
+  min-width: 0;
+  padding: 11px 9px;
+
+  border: 1px solid rgba(15, 23, 42, 0.045);
+  border-radius: 13px;
+
+  background: #f8fafc;
+}
+
+.financialMetric strong {
+  display: block;
+
+  margin-top: 5px;
+
+  overflow: hidden;
+
+  color: #0f172a;
+
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- BUDGET ---------- */
+
+.financialBudget {
+  margin-top: 17px;
+  padding: 14px 15px;
+
+  border: 1px solid #edf1f5;
+  border-radius: 16px;
+
+  background: #fafbfc;
+}
+
+.financialBudgetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 10px;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.financialBudgetHeader strong {
+  color: #0f172a;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.financialBudgetBar {
+  position: relative;
+
+  height: 7px;
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e8edf3;
+}
+
+.financialBudgetBar span {
+  display: block;
+
+  height: 100%;
+  min-width: 4px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb 0%,
+      #3b82f6 100%
+    );
+
+  box-shadow:
+    0 0 8px rgba(37, 99, 235, 0.22);
+
+  transition: width 0.3s ease;
+}
+
+/* ---------- INSIGHTS ---------- */
+
+.financialInsights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+
+  margin-top: 10px;
+}
+
+.financialInsight {
+  min-width: 0;
+  padding: 13px 14px;
+
+  border: 1px solid #edf1f5;
+  border-radius: 15px;
+
+  background: #ffffff;
+}
+
+.financialInsight strong {
+  display: block;
+
+  margin-top: 6px;
+
+  overflow: hidden;
+
+  color: #0f172a;
+
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.financialInsight small {
+  display: block;
+
+  margin-top: 4px;
+
+  overflow: hidden;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+  .financialSummary {
+    margin-top: 13px;
+    padding: 16px;
+
+    border-radius: 21px;
+  }
+
+  .financialSummaryHeader {
+    margin-bottom: 14px;
+  }
+
+  .financialSummaryHeader h3 {
+    font-size: 18px;
+  }
+
+  .financialSummaryTotal {
+    font-size: 19px;
+  }
+
+  .financialMainGrid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 8px;
+  }
+
+  .financialMainCard {
+    padding: 14px 13px;
+    border-radius: 15px;
+  }
+
+  .financialMainCard strong {
+    font-size: 20px;
+  }
+
+  .financialMetrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .financialMetric {
+    padding: 11px 12px;
+  }
+
+  .financialBudget {
+    margin-top: 13px;
+    padding: 13px;
+  }
+
+  .financialInsights {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .financialInsight {
+    padding: 12px 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .financialSummary {
+    padding: 14px;
+  }
+
+  .financialMainCard {
+    padding: 13px 11px;
+  }
+
+  .financialMainCard strong {
+    font-size: 18px;
+  }
+
+  .financialSummaryTotal {
+    font-size: 18px;
+  }
+}
+
+
+/* =========================================================
+   TRAVEL FINANCE PREMIUM — BALANCE V4
+   ========================================================= */
+
+.balanceCardFinal {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  margin: 14px 0 16px;
+  padding: 20px;
+
+  border: 1px solid rgba(37, 99, 235, 0.10);
+  border-radius: 22px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(96, 165, 250, 0.16),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      #eff6ff 0%,
+      #f8fbff 48%,
+      #ffffff 100%
+    );
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.02),
+    0 12px 30px rgba(37, 99, 235, 0.07);
+}
+
+/* Accent décoratif */
+.balanceCardFinal::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+
+  width: 110px;
+  height: 110px;
+  right: -45px;
+  bottom: -55px;
+
+  border-radius: 50%;
+
+  background: rgba(37, 99, 235, 0.055);
+}
+
+/* ---------- HEADER ---------- */
+
+.balanceCardFinal .balanceTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.balanceCardFinal .balanceTitle > span:first-child {
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+}
+
+.balanceCardFinal .balanceIcon {
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(37, 99, 235, 0.08);
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.76);
+
+  box-shadow:
+    0 4px 12px rgba(37, 99, 235, 0.08);
+
+  font-size: 17px;
+}
+
+/* ---------- MONTANT ---------- */
+
+.balanceCardFinal > strong {
+  display: block;
+
+  max-width: calc(100% - 8px);
+  margin: 0;
+
+  color: #172554;
+
+  font-size: clamp(23px, 6vw, 29px);
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+/* ---------- DESTINATAIRE ---------- */
+
+.balanceCardFinal > small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #64748b;
+
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+/* =========================================================
+   BALANCE — ÉTAT ÉQUILIBRÉ
+   ========================================================= */
+
+.balanceCardFinal.balanced {
+  border-color: rgba(22, 163, 74, 0.11);
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(74, 222, 128, 0.13),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      #f0fdf4 0%,
+      #f8fdf9 50%,
+      #ffffff 100%
+    );
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.02),
+    0 12px 30px rgba(22, 163, 74, 0.055);
+}
+
+.balanceCardFinal.balanced::after {
+  background: rgba(22, 163, 74, 0.05);
+}
+
+.balanceCardFinal.balanced .balanceIcon {
+  border-color: rgba(22, 163, 74, 0.08);
+
+  background: rgba(255, 255, 255, 0.78);
+
+  box-shadow:
+    0 4px 12px rgba(22, 163, 74, 0.07);
+}
+
+.balanceCardFinal.balanced > strong {
+  color: #166534;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 480px) {
+  .balanceCardFinal {
+    margin-top: 12px;
+    margin-bottom: 14px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+  }
+
+  .balanceCardFinal .balanceTitle {
+    margin-bottom: 16px;
+  }
+
+  .balanceCardFinal .balanceIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+  }
+
+  .balanceCardFinal > strong {
+    font-size: clamp(22px, 6.3vw, 27px);
+  }
+
+  .balanceCardFinal > small {
+    margin-top: 6px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   TRAVEL FINANCE PREMIUM — CATEGORY V4
+   ========================================================= */
+
+.categoryCard {
+  margin: 14px 0 16px;
+  padding: 20px;
+
+  border: 1px solid rgba(15, 23, 42, 0.055);
+  border-radius: 22px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.02),
+    0 12px 30px rgba(15, 23, 42, 0.045);
+}
+
+/* ---------- HEADER ---------- */
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.categoryHeader > div:first-child > span {
+  display: block;
+
+  color: #0f172a;
+
+  font-size: 16px;
+  font-weight: 850;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.categoryHeader > div:first-child small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.categoryCount {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(37, 99, 235, 0.07);
+  border-radius: 12px;
+
+  background: #eff6ff;
+  color: #2563eb;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+/* ---------- LIST ---------- */
+
+.categoryList {
+  display: grid;
+  gap: 16px;
+}
+
+.categoryRow {
+  min-width: 0;
+}
+
+.categoryTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 8px;
+}
+
+.categoryName {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+  gap: 9px;
+
+  color: #334155;
+
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.categoryName > span:last-child {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryDot {
+  width: 9px;
+  height: 9px;
+
+  flex: 0 0 auto;
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.07);
+}
+
+/* ---------- AMOUNT ---------- */
+
+.categoryAmount {
+  display: flex;
+  align-items: baseline;
+  flex: 0 0 auto;
+
+  gap: 7px;
+}
+
+.categoryAmount strong {
+  color: #0f172a;
+
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: -0.015em;
+}
+
+.categoryAmount small {
+  color: #94a3b8;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+/* ---------- BAR ---------- */
+
+.categoryBar {
+  position: relative;
+
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #edf2f7;
+}
+
+.categoryBar i {
+  display: block;
+
+  height: 100%;
+  min-width: 4px;
+
+  border-radius: inherit;
+
+  transition: width 0.3s ease;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 480px) {
+  .categoryCard {
+    margin: 12px 0 14px;
+
+    padding: 17px;
+
+    border-radius: 20px;
+  }
+
+  .categoryHeader {
+    margin-bottom: 17px;
+  }
+
+  .categoryHeader > div:first-child > span {
+    font-size: 15px;
+  }
+
+  .categoryCount {
+    width: 32px;
+    height: 32px;
+  }
+
+  .categoryList {
+    gap: 15px;
+  }
+
+  .categoryTop {
+    margin-bottom: 7px;
+  }
+
+  .categoryName {
+    font-size: 11px;
+  }
+
+  .categoryAmount strong {
+    font-size: 12px;
+  }
+
+  .categoryBar {
+    height: 5px;
+  }
+}
+
+
+/* =========================================================
+   TRAVEL FINANCE PREMIUM — PEOPLE V4
+   ========================================================= */
+
+.peopleEnhanced {
+  margin: 14px 0 16px;
+  padding: 20px;
+
+  border: 1px solid rgba(15, 23, 42, 0.055);
+  border-radius: 22px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.02),
+    0 12px 30px rgba(15, 23, 42, 0.045);
+}
+
+/* ---------- HEADER ---------- */
+
+.peopleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 19px;
+}
+
+.peopleHeader > div:first-child > span {
+  display: block;
+
+  color: #0f172a;
+
+  font-size: 16px;
+  font-weight: 850;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.peopleHeader > div:first-child small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.peopleCount {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  border-radius: 12px;
+
+  background: #f8fafc;
+  color: #475569;
+
+  font-size: 11px;
+  font-weight: 850;
+}
+
+/* ---------- LIST ---------- */
+
+.peopleList {
+  display: grid;
+  gap: 16px;
+}
+
+.personRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  min-height: 50px;
+}
+
+/* ---------- PERSON ---------- */
+
+.personInfo {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+  gap: 11px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #172554,
+      #2563eb
+    );
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 850;
+
+  box-shadow:
+    0 6px 16px rgba(37, 99, 235, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.personName {
+  min-width: 0;
+}
+
+.personName > span {
+  display: block;
+
+  overflow: hidden;
+
+  color: #0f172a;
+
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.2;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.personName small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* ---------- AMOUNT ---------- */
+
+.personAmount {
+  flex: 0 0 auto;
+
+  min-width: 96px;
+
+  text-align: right;
+}
+
+.personAmount strong {
+  display: block;
+
+  color: #0f172a;
+
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.personBar {
+  width: 96px;
+  height: 5px;
+
+  margin-top: 7px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #edf2f7;
+}
+
+.personBar i {
+  display: block;
+
+  height: 100%;
+  min-width: 4px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #60a5fa
+    );
+
+  box-shadow:
+    0 0 6px rgba(37, 99, 235, 0.16);
+
+  transition: width 0.3s ease;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 480px) {
+  .peopleEnhanced {
+    margin: 12px 0 14px;
+
+    padding: 17px;
+
+    border-radius: 20px;
+  }
+
+  .peopleHeader {
+    margin-bottom: 17px;
+  }
+
+  .peopleHeader > div:first-child > span {
+    font-size: 15px;
+  }
+
+  .peopleCount {
+    width: 32px;
+    height: 32px;
+  }
+
+  .peopleList {
+    gap: 15px;
+  }
+
+  .personRow {
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+
+    border-radius: 13px;
+  }
+
+  .personName > span {
+    font-size: 12px;
+  }
+
+  .personAmount {
+    min-width: 86px;
+  }
+
+  .personAmount strong {
+    font-size: 12px;
+  }
+
+  .personBar {
+    width: 86px;
+  }
+}
+
+
+/* =========================================================
+   TRAVEL FINANCE PREMIUM — DASHBOARD ACTIONS V4
+   ========================================================= */
+
+.dashboardActions {
+  display: grid;
+  gap: 10px;
+
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+
+.dashboardActions button {
+  width: 100%;
+  min-height: 56px;
+
+  border-radius: 17px;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    background 0.14s ease;
+}
+
+/* ---------- PRIMARY ---------- */
+
+.mobileAddButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1d4ed8,
+      #2563eb
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.24);
+}
+
+.mobileAddButton:active {
+  transform: scale(0.98);
+}
+
+/* ---------- HISTORY ---------- */
+
+.mobileHistoryButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-left: 17px;
+  padding-right: 13px;
+
+  border: 1px solid #e7ebf0;
+
+  background: #ffffff;
+  color: #334155;
+
+  box-shadow:
+    0 6px 18px rgba(15, 23, 42, 0.035);
+}
+
+.mobileHistoryButton:active {
+  transform: scale(0.98);
+  background: #f8fafc;
+}
+
+.historyCount {
+  display: grid;
+  place-items: center;
+
+  min-width: 31px;
+  height: 31px;
+
+  padding: 0 8px;
+
+  border-radius: 11px;
+
+  background: #eff6ff;
+  color: #2563eb;
+
+  font-size: 11px;
+  font-weight: 850;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 480px) {
+  .dashboardActions {
+    gap: 9px;
+
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  .dashboardActions button {
+    min-height: 54px;
+
+    border-radius: 16px;
+  }
+
+  .mobileHistoryButton {
+    padding-left: 16px;
+    padding-right: 12px;
+  }
+
+  .historyCount {
+    min-width: 30px;
+    height: 30px;
+
+    border-radius: 10px;
+  }
+}
+

@@ -11198,3 +11198,23 @@ textarea:focus {
   opacity: 0.55 !important;
   pointer-events: none !important;
 }
+
+
+/* =========================================================
+   TRAVELER AVATAR — STEP 3 SETTLE UP
+   ========================================================= */
+
+.balkanPerson > span {
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+.balkanPerson > span img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+  object-position: center !important;
+}

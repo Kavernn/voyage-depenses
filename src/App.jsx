@@ -646,6 +646,16 @@ function App() {
     return participantAvatars[index] || "";
   }
 
+  function getParticipantAvatarByName(name) {
+    const index = data.people.findIndex(
+      (person) => person === name,
+    );
+
+    if (index < 0) return "";
+
+    return getParticipantAvatar(index);
+  }
+
   async function compressTravelerAvatar(file) {
     if (!file?.type?.startsWith("image/")) {
       throw new Error("Le fichier sélectionné n'est pas une image.");
@@ -3190,7 +3200,14 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
             <div className="balkanTransfer">
               <div className="balkanPerson">
                 <span>
-                  {debtor?.charAt(0).toUpperCase()}
+                  {getParticipantAvatarByName(debtor) ? (
+                    <img
+                      src={getParticipantAvatarByName(debtor)}
+                      alt={debtor || ""}
+                    />
+                  ) : (
+                    debtor?.charAt(0).toUpperCase()
+                  )}
                 </span>
                 <small>{debtor}</small>
               </div>
@@ -3202,7 +3219,14 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
               <div className="balkanPerson">
                 <span>
-                  {creditor?.charAt(0).toUpperCase()}
+                  {getParticipantAvatarByName(creditor) ? (
+                    <img
+                      src={getParticipantAvatarByName(creditor)}
+                      alt={creditor || ""}
+                    />
+                  ) : (
+                    creditor?.charAt(0).toUpperCase()
+                  )}
                 </span>
                 <small>{creditor}</small>
               </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 
@@ -10,20 +10,25 @@ import './styles.css';
  * PWA UPDATE MANAGER
  * =========================================================
  *
- * registerType: 'autoUpdate' est configuré dans vite.config.js.
+ * Une nouvelle version n'est jamais appliquée pendant que
+ * l'utilisateur travaille.
  *
- * Ce module :
- * - enregistre immédiatement le service worker;
- * - laisse vite-plugin-pwa gérer l'activation/reload;
- * - vérifie la présence d'une nouvelle version au lancement;
- * - revérifie périodiquement pendant que l'app reste ouverte.
+ * Quand elle est disponible :
  *
- * Aucun double reload manuel via controllerchange.
+ *   Nouvelle version disponible
+ *   [Plus tard] [Mettre à jour]
+ *
+ * Le clic sur "Mettre à jour" active le nouveau SW et
+ * recharge l'application.
  */
 
 const UPDATE_INTERVAL_MS = 60 * 60 * 1000;
 
-registerSW({
+let updateServiceWorker = null;
+let notifyUpdateAvailable = null;
+let updateWaiting = false;
+
+const updateSW = registerSW({
   immediate: true,
 
   onRegisteredSW(swUrl, registration) {
@@ -32,29 +37,17 @@ registerSW({
     console.log('[PWA] Service worker enregistré:', swUrl);
 
     const checkForUpdate = async () => {
-      if (registration.installing) return;
       if (!navigator.onLine) return;
 
       try {
-        /*
-         * Vérifie d'abord que le sw.js distant est accessible
-         * sans réutiliser une réponse HTTP mise en cache.
-         */
         const response = await fetch(swUrl, {
           cache: 'no-store',
-          headers: {
-            'cache': 'no-store',
-            'cache-control': 'no-cache',
-          },
         });
 
         if (response.ok) {
           await registration.update();
         }
       } catch (error) {
-        /*
-         * Une perte de réseau ne doit jamais casser l'app.
-         */
         console.debug(
           '[PWA] Vérification de mise à jour impossible:',
           error,
@@ -62,29 +55,28 @@ registerSW({
       }
     };
 
-    /*
-     * Vérification immédiatement après l'enregistrement.
-     */
     checkForUpdate();
 
-    /*
-     * Puis une fois par heure si l'application reste ouverte.
-     */
     window.setInterval(
       checkForUpdate,
       UPDATE_INTERVAL_MS,
     );
 
-    /*
-     * Important sur mobile/PWA :
-     * quand l'utilisateur revient dans l'application après
-     * l'avoir laissée en arrière-plan, on revérifie aussi.
-     */
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
         checkForUpdate();
       }
     });
+  },
+
+  onNeedRefresh() {
+    console.log('[PWA] Nouvelle version disponible.');
+
+    updateWaiting = true;
+
+    if (notifyUpdateAvailable) {
+      notifyUpdateAvailable();
+    }
   },
 
   onOfflineReady() {
@@ -99,8 +91,105 @@ registerSW({
   },
 });
 
+updateServiceWorker = updateSW;
+
+
+/*
+ * =========================================================
+ * UPDATE BANNER
+ * =========================================================
+ */
+
+function PwaUpdateBanner() {
+  const [visible, setVisible] = useState(updateWaiting);
+  const [updating, setUpdating] = useState(false);
+
+  /*
+   * Permet au callback onNeedRefresh(), situé hors de React,
+   * d'afficher la bannière.
+   */
+  notifyUpdateAvailable = () => {
+    setVisible(true);
+  };
+
+  async function installUpdate() {
+    if (!updateServiceWorker || updating) return;
+
+    try {
+      setUpdating(true);
+
+      /*
+       * true = demande au nouveau service worker de prendre
+       * immédiatement le contrôle puis recharge l'application.
+       */
+      await updateServiceWorker(true);
+    } catch (error) {
+      console.error(
+        '[PWA] Impossible d’appliquer la mise à jour:',
+        error,
+      );
+
+      setUpdating(false);
+    }
+  }
+
+  function dismissUpdate() {
+    setVisible(false);
+  }
+
+  if (!visible) return null;
+
+  return (
+    <div
+      className="pwaUpdateBanner"
+      role="status"
+      aria-live="polite"
+    >
+      <div className="pwaUpdateBannerIcon" aria-hidden="true">
+        ↑
+      </div>
+
+      <div className="pwaUpdateBannerContent">
+        <strong>Nouvelle version disponible</strong>
+
+        <span>
+          Une mise à jour de l’application est prête.
+        </span>
+      </div>
+
+      <div className="pwaUpdateBannerActions">
+        <button
+          type="button"
+          className="pwaUpdateLater"
+          onClick={dismissUpdate}
+          disabled={updating}
+        >
+          Plus tard
+        </button>
+
+        <button
+          type="button"
+          className="pwaUpdateNow"
+          onClick={installUpdate}
+          disabled={updating}
+        >
+          {updating ? "Mise à jour…" : "Mettre à jour"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+/*
+ * =========================================================
+ * APPLICATION
+ * =========================================================
+ */
+
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
+    <PwaUpdateBanner />
   </React.StrictMode>
 );

@@ -77,8 +77,6 @@ function App() {
 
   const [tripId, setTripId] = useState(null);
   const [participantIds, setParticipantIds] = useState([]);
-  const [participantAvatars, setParticipantAvatars] = useState([]);
-  const [avatarUploadingIndex, setAvatarUploadingIndex] = useState(null);
 
   const [data, setData] = useState({
     trip: {
@@ -437,10 +435,6 @@ function App() {
 
       setParticipantIds((participants || []).map((p) => p.id));
 
-      setParticipantAvatars(
-        (participants || []).map((p) => p.avatar_url || ""),
-      );
-
       setData({
         trip: {
           name: trip.name || "Mon voyage",
@@ -640,180 +634,6 @@ function App() {
     ];
 
     setTripDestinations(destinations);
-  }
-
-  function getParticipantAvatar(index) {
-    return participantAvatars[index] || "";
-  }
-
-  function getParticipantAvatarByName(name) {
-    const index = data.people.findIndex(
-      (person) => person === name,
-    );
-
-    if (index < 0) return "";
-
-    return getParticipantAvatar(index);
-  }
-
-  async function compressTravelerAvatar(file) {
-    if (!file) return null;
-
-    if (!file.type?.startsWith("image/")) {
-      throw new Error("Le fichier sélectionné n'est pas une image.");
-    }
-
-    const imageUrl = URL.createObjectURL(file);
-
-    try {
-      const image = await new Promise((resolve, reject) => {
-        const img = new Image();
-
-        img.onload = () => resolve(img);
-        img.onerror = () =>
-          reject(new Error("Impossible de lire cette image."));
-
-        img.src = imageUrl;
-      });
-
-      const maxSize = 720;
-
-      const scale = Math.min(
-        1,
-        maxSize / Math.max(
-          image.naturalWidth,
-          image.naturalHeight,
-        ),
-      );
-
-      const width = Math.max(
-        1,
-        Math.round(image.naturalWidth * scale),
-      );
-
-      const height = Math.max(
-        1,
-        Math.round(image.naturalHeight * scale),
-      );
-
-      const canvas = document.createElement("canvas");
-      canvas.width = width;
-      canvas.height = height;
-
-      const context = canvas.getContext("2d");
-
-      if (!context) {
-        throw new Error(
-          "Impossible de préparer l'image.",
-        );
-      }
-
-      context.drawImage(
-        image,
-        0,
-        0,
-        width,
-        height,
-      );
-
-      const blob = await new Promise((resolve) => {
-        canvas.toBlob(
-          resolve,
-          "image/jpeg",
-          0.82,
-        );
-      });
-
-      if (!blob) {
-        throw new Error(
-          "Impossible de compresser l'image.",
-        );
-      }
-
-      return blob;
-    } finally {
-      URL.revokeObjectURL(imageUrl);
-    }
-  }
-
-  async function uploadTravelerAvatar(index, file) {
-    const participantId = participantIds[index];
-
-    if (!participantId || !file) return;
-
-    try {
-      setAvatarUploadingIndex(index);
-      setError("");
-
-      const compressed = await compressTravelerAvatar(file);
-
-      if (!compressed) return;
-
-      const fileName =
-        `${participantId}/${Date.now()}-${Math.random()
-          .toString(36)
-          .slice(2, 8)}.jpg`;
-
-      const { error: uploadError } = await supabase
-        .storage
-        .from("traveler-avatars")
-        .upload(
-          fileName,
-          compressed,
-          {
-            contentType: "image/jpeg",
-            cacheControl: "3600",
-            upsert: false,
-          },
-        );
-
-      if (uploadError) {
-        throw uploadError;
-      }
-
-      const { data: publicUrlData } = supabase
-        .storage
-        .from("traveler-avatars")
-        .getPublicUrl(fileName);
-
-      const avatarUrl =
-        publicUrlData?.publicUrl || "";
-
-      if (!avatarUrl) {
-        throw new Error(
-          "Impossible d'obtenir l'URL de l'avatar.",
-        );
-      }
-
-      const { error: participantError } = await supabase
-        .from("participants")
-        .update({
-          avatar_url: avatarUrl,
-        })
-        .eq("id", participantId);
-
-      if (participantError) {
-        throw participantError;
-      }
-
-      setParticipantAvatars((current) => {
-        const next = [...current];
-        next[index] = avatarUrl;
-        return next;
-      });
-    } catch (err) {
-      console.error(
-        "Erreur upload avatar",
-        err,
-      );
-
-      setError(
-        err?.message ||
-          "Impossible d'enregistrer cette photo.",
-      );
-    } finally {
-      setAvatarUploadingIndex(null);
-    }
   }
 
   function openTripEditor() {
@@ -2104,56 +1924,11 @@ function App() {
                     key={participantIds[index] || index}
                   >
 
-                    <label
-                      className={[
-                        "tripManagerAvatar",
-                        "tripManagerAvatarEditable",
-                        avatarUploadingIndex === index
-                          ? "uploading"
-                          : "",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                      aria-label={`Changer la photo de ${person}`}
-                    >
-                      {getParticipantAvatar(index) ? (
-                        <img
-                          src={getParticipantAvatar(index)}
-                          alt={person}
-                        />
-                      ) : (
-                        <span>
-                          {(person || `V${index + 1}`)
-                            .charAt(0)
-                            .toUpperCase()}
-                        </span>
-                      )}
-
-                      <span className="tripManagerAvatarCamera">
-                        {avatarUploadingIndex === index
-                          ? "…"
-                          : "＋"}
-                      </span>
-
-                      <input
-                        className="tripManagerAvatarInput"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file =
-                            e.target.files?.[0];
-
-                          if (file) {
-                            uploadTravelerAvatar(
-                              index,
-                              file,
-                            );
-                          }
-
-                          e.target.value = "";
-                        }}
-                      />
-                    </label>
+                    <div className="tripManagerAvatar">
+                      {(person || `V${index + 1}`)
+                        .charAt(0)
+                        .toUpperCase()}
+                    </div>
 
                     <div>
                       <span>
@@ -2382,14 +2157,7 @@ function App() {
           }
         >
           <span className="payerAvatar">
-            {getParticipantAvatarByName(person) ? (
-              <img
-                src={getParticipantAvatarByName(person)}
-                alt=""
-              />
-            ) : (
-              person.charAt(0).toUpperCase()
-            )}
+            {person.charAt(0).toUpperCase()}
           </span>
 
           <span>{person}</span>
@@ -3244,14 +3012,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
             <div className="balkanTransfer">
               <div className="balkanPerson">
                 <span>
-                  {getParticipantAvatarByName(debtor) ? (
-                    <img
-                      src={getParticipantAvatarByName(debtor)}
-                      alt=""
-                    />
-                  ) : (
-                    debtor?.charAt(0).toUpperCase()
-                  )}
+                  {debtor?.charAt(0).toUpperCase()}
                 </span>
                 <small>{debtor}</small>
               </div>
@@ -3263,14 +3024,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
               <div className="balkanPerson">
                 <span>
-                  {getParticipantAvatarByName(creditor) ? (
-                    <img
-                      src={getParticipantAvatarByName(creditor)}
-                      alt=""
-                    />
-                  ) : (
-                    creditor?.charAt(0).toUpperCase()
-                  )}
+                  {creditor?.charAt(0).toUpperCase()}
                 </span>
                 <small>{creditor}</small>
               </div>

@@ -2471,9 +2471,18 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
     return Math.max(1, diff + 1);
   })();
 
-  const dailyAverage =
+  // Dépense moyenne réelle sur la durée complète du voyage.
+  // Utilisée seulement pour les données de dépenses.
+  const actualDailyAverage =
     tripDays && stats.total > 0
       ? stats.total / tripDays
+      : 0;
+
+  // Budget quotidien planifié.
+  // C'est cette valeur qui doit apparaître dans le Hero.
+  const plannedDailyBudget =
+    tripDays && Number(data.trip.budget) > 0
+      ? Number(data.trip.budget) / tripDays
       : 0;
 
   const balkanRoute = getBalkanRoute(data.expenses);
@@ -2526,7 +2535,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
   const intelligenceBurnRate =
     elapsedTripDays && stats.total > 0
       ? stats.total / elapsedTripDays
-      : dailyAverage;
+      : actualDailyAverage;
 
   const projectedTripCost =
     tripDays && intelligenceBurnRate > 0
@@ -2651,9 +2660,54 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
     0,
   );
 
+  const tripCountries = String(data.trip.countries || "")
+    .split(/[·,;|]/)
+    .map((country) => country.trim())
+    .filter(Boolean);
+
   const countryText =
-    data.trip.countries ||
-    "Albanie · Kosovo · Macédoine du Nord";
+    tripCountries.length > 0
+      ? tripCountries.join(" · ")
+      : "Destination à définir";
+
+  const destinationFlag = (country) => {
+    const normalized = String(country || "")
+      .trim()
+      .toLocaleLowerCase("fr");
+
+    const flags = {
+      "albanie": "🇦🇱",
+      "albani": "🇦🇱",
+      "kosovo": "🇽🇰",
+      "macédoine du nord": "🇲🇰",
+      "macedoine du nord": "🇲🇰",
+      "north macedonia": "🇲🇰",
+      "monténégro": "🇲🇪",
+      "montenegro": "🇲🇪",
+      "croatie": "🇭🇷",
+      "croatia": "🇭🇷",
+      "serbie": "🇷🇸",
+      "serbia": "🇷🇸",
+      "bosnie-herzégovine": "🇧🇦",
+      "bosnie herzégovine": "🇧🇦",
+      "bosnia and herzegovina": "🇧🇦",
+      "slovénie": "🇸🇮",
+      "slovenie": "🇸🇮",
+      "slovenia": "🇸🇮",
+      "grèce": "🇬🇷",
+      "grece": "🇬🇷",
+      "greece": "🇬🇷",
+    };
+
+    return flags[normalized] || "📍";
+  };
+
+  const heroRouteLabel =
+    tripCountries.length > 1
+      ? `${tripCountries.length} PAYS · ROAD TRIP`
+      : tripCountries.length === 1
+        ? "VOYAGE"
+        : "PROCHAIN VOYAGE";
 
   const recentExpenses = [...data.expenses]
     .sort((a, b) => {
@@ -2692,17 +2746,27 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
         <div className="balkanRouteLabel">
           <span className="routePulse" />
-          BALKAN ROAD TRIP
+          {heroRouteLabel}
         </div>
 
         <h1>{data.trip.name || "Balkan Escape"}</h1>
 
         <div className="balkanRoute">
-          <span>🇦🇱</span>
-          <i />
-          <span>🇽🇰</span>
-          <i />
-          <span>🇲🇰</span>
+          {tripCountries.length > 0 ? (
+            tripCountries.map((country, index) => (
+              <React.Fragment key={`${country}-${index}`}>
+                {index > 0 && <i />}
+                <span
+                  title={country}
+                  aria-label={country}
+                >
+                  {destinationFlag(country)}
+                </span>
+              </React.Fragment>
+            ))
+          ) : (
+            <span>📍</span>
+          )}
         </div>
 
         <p className="balkanCountries">
@@ -2722,7 +2786,9 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
           <div>
             <strong>
-              {dailyAverage > 0 ? money(dailyAverage) : "—"}
+              {plannedDailyBudget > 0
+                ? compactMoney(plannedDailyBudget)
+                : "—"}
             </strong>
             <span>/ jour</span>
           </div>

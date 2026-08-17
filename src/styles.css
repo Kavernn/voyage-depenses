@@ -3122,424 +3122,6 @@ button:active {
 }
 
 /* =========================================================
-   TRAVEL INTELLIGENCE
-   ========================================================= */
-
-.travelIntel {
-  position: relative;
-  overflow: hidden;
-
-  margin: 22px 0 26px;
-  padding: 20px;
-
-  border: 1px solid rgba(15, 23, 42, 0.07);
-  border-radius: 24px;
-
-  background:
-    radial-gradient(
-      circle at 100% 0%,
-      rgba(37, 99, 235, 0.11),
-      transparent 38%
-    ),
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #f8fafc
-    );
-
-  box-shadow:
-    0 14px 38px rgba(15, 23, 42, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.travelIntel::after {
-  content: "";
-
-  position: absolute;
-
-  width: 150px;
-  height: 150px;
-
-  right: -75px;
-  bottom: -85px;
-
-  border: 1px solid rgba(37, 99, 235, 0.08);
-  border-radius: 50%;
-
-  pointer-events: none;
-}
-
-.travelIntelTop {
-  position: relative;
-  z-index: 1;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  gap: 16px;
-}
-
-.travelIntelTop > div:first-child > span {
-  display: block;
-
-  margin-bottom: 5px;
-
-  color: #64748b;
-
-  font-size: 10px;
-  font-weight: 850;
-
-  letter-spacing: 0.13em;
-}
-
-.travelIntelTop h2 {
-  margin: 0;
-
-  color: #0f172a;
-
-  font-size: clamp(22px, 5vw, 30px);
-  line-height: 1;
-
-  letter-spacing: -0.045em;
-}
-
-.travelIntelMessage {
-  position: relative;
-  z-index: 1;
-
-  max-width: 520px;
-
-  margin: 9px 0 18px;
-
-  color: #64748b;
-
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.travelIntelPulse {
-  display: flex;
-  align-items: flex-end;
-
-  gap: 3px;
-
-  height: 28px;
-  padding-top: 4px;
-}
-
-.travelIntelPulse i {
-  display: block;
-
-  width: 4px;
-
-  border-radius: 99px;
-
-  background: #2563eb;
-
-  animation:
-    travelIntelPulse
-    1.5s
-    ease-in-out
-    infinite;
-}
-
-.travelIntelPulse i:nth-child(1) {
-  height: 9px;
-}
-
-.travelIntelPulse i:nth-child(2) {
-  height: 18px;
-
-  animation-delay: 0.15s;
-}
-
-.travelIntelPulse i:nth-child(3) {
-  height: 13px;
-
-  animation-delay: 0.3s;
-}
-
-.travelIntel.watch .travelIntelPulse i {
-  background: #f59e0b;
-}
-
-.travelIntel.hot .travelIntelPulse i {
-  background: #ef4444;
-}
-
-.travelIntel.on-track .travelIntelPulse i {
-  background: #10b981;
-}
-
-@keyframes travelIntelPulse {
-  0%,
-  100% {
-    transform: scaleY(0.72);
-    opacity: 0.5;
-  }
-
-  50% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-}
-
-.travelIntelGrid {
-  position: relative;
-  z-index: 1;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 8px;
-}
-
-.travelIntelMetric {
-  min-width: 0;
-
-  padding: 13px 12px;
-
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 16px;
-
-  background:
-    rgba(255, 255, 255, 0.78);
-}
-
-.travelIntelMetric.primary {
-  border-color:
-    rgba(37, 99, 235, 0.14);
-
-  background:
-    rgba(239, 246, 255, 0.82);
-}
-
-.travelIntelMetric small {
-  display: block;
-
-  margin-bottom: 6px;
-
-  color: #94a3b8;
-
-  font-size: 9px;
-  font-weight: 850;
-
-  letter-spacing: 0.08em;
-}
-
-.travelIntelMetric strong {
-  display: block;
-
-  overflow: hidden;
-
-  color: #0f172a;
-
-  font-size: clamp(17px, 4vw, 23px);
-  line-height: 1;
-
-  letter-spacing: -0.04em;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.travelIntelMetric span {
-  display: block;
-
-  margin-top: 5px;
-
-  overflow: hidden;
-
-  color: #94a3b8;
-
-  font-size: 10px;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.travelIntelBudget {
-  position: relative;
-  z-index: 1;
-
-  margin-top: 10px;
-  padding: 14px;
-
-  border-radius: 17px;
-
-  background:
-    rgba(15, 23, 42, 0.035);
-}
-
-.travelIntelBudgetHead {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 12px;
-
-  color: #64748b;
-
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.travelIntelBudgetHead strong {
-  color: #0f172a;
-
-  font-size: 12px;
-}
-
-.travelIntelBar {
-  height: 7px;
-
-  margin-top: 9px;
-
-  overflow: hidden;
-
-  border-radius: 99px;
-
-  background: #e2e8f0;
-}
-
-.travelIntelBar i {
-  display: block;
-
-  height: 100%;
-
-  border-radius: inherit;
-
-  background: #2563eb;
-
-  transition:
-    width 0.35s ease;
-}
-
-.travelIntel.hot .travelIntelBar i {
-  background: #ef4444;
-}
-
-.travelIntel.watch .travelIntelBar i {
-  background: #f59e0b;
-}
-
-.travelIntel.on-track .travelIntelBar i {
-  background: #10b981;
-}
-
-.travelIntelCompare {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 10px;
-
-  margin-top: 10px;
-
-  color: #64748b;
-
-  font-size: 11px;
-}
-
-.travelIntelCompare strong {
-  color: #0f172a;
-
-  font-size: 12px;
-}
-
-.travelIntelSignal {
-  display: flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  margin-top: 9px;
-
-  color: #64748b;
-
-  font-size: 10px;
-  line-height: 1.3;
-}
-
-.travelIntelSignalDot {
-  width: 6px;
-  height: 6px;
-
-  flex: 0 0 6px;
-
-  border-radius: 50%;
-
-  background: #10b981;
-
-  box-shadow:
-    0 0 0 4px
-    rgba(16, 185, 129, 0.1);
-}
-
-.travelIntel.hot .travelIntelSignalDot {
-  background: #ef4444;
-
-  box-shadow:
-    0 0 0 4px
-    rgba(239, 68, 68, 0.1);
-}
-
-.travelIntel.watch .travelIntelSignalDot {
-  background: #f59e0b;
-
-  box-shadow:
-    0 0 0 4px
-    rgba(245, 158, 11, 0.1);
-}
-
-@media (max-width: 600px) {
-  .travelIntel {
-    margin-top: 18px;
-
-    padding: 17px;
-
-    border-radius: 21px;
-  }
-
-  .travelIntelGrid {
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .travelIntelMetric {
-    padding: 12px 11px;
-  }
-
-  .travelIntelMetric strong {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 360px) {
-  .travelIntelGrid {
-    gap: 6px;
-  }
-
-  .travelIntelMetric {
-    padding: 11px 9px;
-  }
-
-  .travelIntelMetric strong {
-    font-size: 16px;
-  }
-
-  .travelIntelTop h2 {
-    font-size: 21px;
-  }
-}
-
-/* =========================================================
    TRAVEL FINANCE PREMIUM — HISTORY V3
    ========================================================= */
 
@@ -7813,18 +7395,32 @@ textarea:focus {
 }
 
 
+
+
 /* =========================================================
-   TRAVEL INTELLIGENCE — COPILOT CARD
+   TRAVEL INTELLIGENCE — CLEAN
    ========================================================= */
 
 .travelIntel {
-  margin: 18px 0 24px;
+  position: relative;
+  overflow: hidden;
+
+  margin: 20px 0 24px;
   padding: 18px;
+
   border: 1px solid rgba(15, 23, 42, 0.07);
   border-radius: 22px;
-  background: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(37, 99, 235, 0.08),
+      transparent 38%
+    ),
+    #ffffff;
+
   box-shadow:
-    0 10px 30px rgba(15, 23, 42, 0.055);
+    0 8px 26px rgba(15, 23, 42, 0.045);
 }
 
 .travelIntelHeader {
@@ -7834,9 +7430,14 @@ textarea:focus {
   gap: 12px;
 }
 
+.travelIntelHeader > div:first-child {
+  min-width: 0;
+}
+
 .travelIntelHeader > div:first-child > span {
   display: block;
   margin-bottom: 4px;
+
   color: #94a3b8;
   font-size: 9px;
   font-weight: 850;
@@ -7845,25 +7446,30 @@ textarea:focus {
 
 .travelIntelHeader h2 {
   margin: 0;
+
   color: #0f172a;
-  font-size: 20px;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
+  font-size: 22px;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
 }
 
 .travelIntelSignal {
   display: flex;
   align-items: center;
   gap: 5px;
+
   flex: 0 0 auto;
-  padding: 7px 9px;
-  border-radius: 10px;
+
+  padding: 6px 8px;
+  border-radius: 9px;
+
   background: #f8fafc;
 }
 
 .travelIntelSignal i {
   width: 6px;
   height: 6px;
+
   border-radius: 50%;
   background: #10b981;
 }
@@ -7876,54 +7482,99 @@ textarea:focus {
 }
 
 .travelIntelMessage {
-  margin: 10px 0 16px;
+  max-width: 520px;
+
+  margin: 8px 0 15px;
+
   color: #64748b;
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.4;
 }
+
+/* ---------------------------------------------------------
+   MÉTRIQUES
+   --------------------------------------------------------- */
 
 .travelIntelMetrics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.travelIntelPreTrip {
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(0, 1fr)
+    minmax(0, 1fr);
 }
 
 .travelIntelMetric {
   min-width: 0;
-  padding: 11px;
+
+  padding: 11px 10px;
+
   border-radius: 14px;
   background: #f8fafc;
 }
 
+.travelIntelMetric.primary {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(239, 246, 255, 0.95),
+      #f8fafc
+    );
+}
+
 .travelIntelMetric > span {
   display: block;
+
   margin-bottom: 5px;
+
   color: #94a3b8;
   font-size: 8px;
   font-weight: 850;
   letter-spacing: 0.1em;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .travelIntelMetric strong {
   display: block;
+
   overflow: hidden;
+
   color: #0f172a;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 850;
-  letter-spacing: -0.035em;
+  line-height: 1;
+  letter-spacing: -0.04em;
+
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .travelIntelMetric small {
   display: block;
-  margin-top: 2px;
+
+  margin-top: 3px;
+
   color: #94a3b8;
   font-size: 9px;
 }
 
+/* ---------------------------------------------------------
+   BUDGET
+   --------------------------------------------------------- */
+
 .travelIntelBudget {
-  margin-top: 14px;
+  margin-top: 11px;
+  padding: 12px;
+
+  border-radius: 14px;
+  background: #f8fafc;
 }
 
 .travelIntelBudgetTop,
@@ -7935,7 +7586,7 @@ textarea:focus {
 }
 
 .travelIntelBudgetTop {
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .travelIntelBudgetTop span,
@@ -7951,60 +7602,83 @@ textarea:focus {
 }
 
 .travelIntelBar {
-  height: 7px;
+  height: 6px;
+
   overflow: hidden;
+
   border-radius: 99px;
-  background: #eef2f7;
+  background: #e2e8f0;
 }
 
 .travelIntelBar i {
   display: block;
+
   height: 100%;
+
   border-radius: inherit;
   background: #2563eb;
+
   transition: width 0.3s ease;
 }
 
 .travelIntelBudgetBottom {
-  margin-top: 6px;
+  margin-top: 5px;
 }
+
+/* ---------------------------------------------------------
+   INSIGHT
+   --------------------------------------------------------- */
 
 .travelIntelInsight {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 14px;
-  padding: 11px 12px;
-  border-radius: 14px;
+  gap: 9px;
+
+  margin-top: 10px;
+  padding: 10px 11px;
+
+  border-radius: 13px;
   background: #f8fafc;
 }
 
 .travelIntelInsightIcon {
   display: grid;
-  width: 28px;
-  height: 28px;
-  flex: 0 0 28px;
+
+  width: 26px;
+  height: 26px;
+
+  flex: 0 0 26px;
   place-items: center;
-  border-radius: 9px;
+
+  border-radius: 8px;
+
   background: #e0f2fe;
   color: #0284c7;
-  font-size: 16px;
+
+  font-size: 14px;
   font-weight: 850;
 }
 
 .travelIntelInsight strong {
   display: block;
+
   color: #334155;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
 }
 
 .travelIntelInsight small {
   display: block;
+
   margin-top: 2px;
+
   color: #94a3b8;
-  font-size: 9px;
+  font-size: 8px;
 }
+
+/* ---------------------------------------------------------
+   STATUTS
+   --------------------------------------------------------- */
 
 .travelIntel.on-track .travelIntelSignal i {
   background: #10b981;
@@ -8034,125 +7708,68 @@ textarea:focus {
   background: #ef4444;
 }
 
-@media (max-width: 380px) {
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
   .travelIntel {
+    margin: 18px 0 22px;
     padding: 16px;
     border-radius: 20px;
   }
 
-  .travelIntelMetrics {
+  .travelIntelHeader h2 {
+    font-size: 21px;
+  }
+
+  .travelIntelMessage {
+    font-size: 12px;
+    margin-bottom: 13px;
+  }
+
+  .travelIntelMetrics,
+  .travelIntelPreTrip {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
     gap: 6px;
   }
 
   .travelIntelMetric {
-    padding: 9px;
+    padding: 10px 9px;
+    border-radius: 13px;
   }
 
   .travelIntelMetric strong {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .travelIntelMetric small {
     font-size: 8px;
   }
-}
-
-
-
-/* =========================================================
-   TRAVEL INTELLIGENCE V2 — MOBILE POLISH
-   ========================================================= */
-
-.travelIntelPreTrip {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.travelIntelPreTrip .travelIntelMetric.primary {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(239, 246, 255, 0.95),
-      #ffffff
-    );
-}
-
-.travelIntelPreTrip .travelIntelMetric strong {
-  letter-spacing: -0.04em;
-}
-
-@media (max-width: 600px) {
-
-  .travelIntel {
-    margin-top: 24px !important;
-    padding: 20px !important;
-    border-radius: 24px !important;
-  }
-
-  .travelIntelHeader {
-    gap: 12px !important;
-  }
-
-  .travelIntelHeader h2,
-  .travelIntelTop h2 {
-    font-size: 25px !important;
-    line-height: 1.05 !important;
-    letter-spacing: -0.045em;
-  }
-
-  .travelIntelMessage {
-    font-size: 14px !important;
-    line-height: 1.45 !important;
-    margin-bottom: 18px !important;
-  }
-
-  .travelIntelMetrics,
-  .travelIntelPreTrip {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 9px !important;
-  }
-
-  .travelIntelMetric {
-    min-width: 0 !important;
-    padding: 14px !important;
-    border-radius: 17px !important;
-  }
-
-  .travelIntelMetric span {
-    font-size: 9px !important;
-    letter-spacing: 0.1em !important;
-  }
-
-  .travelIntelMetric strong {
-    font-size: 20px !important;
-    white-space: nowrap;
-  }
-
-  .travelIntelMetric small {
-    font-size: 11px !important;
-    line-height: 1.25 !important;
-  }
 
   .travelIntelBudget {
-    margin-top: 10px !important;
-    padding: 15px !important;
-    border-radius: 17px !important;
-  }
-
-  .travelIntelInsight {
-    margin-top: 10px !important;
-    padding: 14px !important;
-    border-radius: 17px !important;
+    padding: 11px;
   }
 }
 
 @media (max-width: 380px) {
 
   .travelIntel {
-    padding: 16px !important;
+    padding: 14px;
+  }
+
+  .travelIntelMetrics,
+  .travelIntelPreTrip {
+    gap: 5px;
+  }
+
+  .travelIntelMetric {
+    padding: 9px 8px;
   }
 
   .travelIntelMetric strong {
-    font-size: 18px !important;
+    font-size: 14px;
   }
-
 }

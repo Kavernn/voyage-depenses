@@ -107,7 +107,7 @@ function App() {
           filter: `trip_id=eq.${tripId}`,
         },
         () => {
-          loadFromSupabase();
+          loadFromSupabase(tripId);
         },
       )
       .on(
@@ -119,7 +119,7 @@ function App() {
           filter: `trip_id=eq.${tripId}`,
         },
         () => {
-          loadFromSupabase();
+          loadFromSupabase(tripId);
         },
       )
       .on(
@@ -131,7 +131,7 @@ function App() {
           filter: `id=eq.${tripId}`,
         },
         () => {
-          loadFromSupabase();
+          loadFromSupabase(tripId);
         },
       )
       .subscribe();
@@ -170,7 +170,9 @@ function App() {
       setShowJoin(false);
       setJoinCode("");
 
-      await loadFromSupabase();
+      // Charge explicitement le voyage rejoint.
+      // On ne dépend pas d'un fallback ou d'un état React asynchrone.
+      await loadFromSupabase(trip.id);
     } catch (err) {
       console.error(err);
       setError(err?.message || "Impossible de rejoindre ce voyage.");
@@ -179,7 +181,7 @@ function App() {
     }
   }
 
-  async function loadFromSupabase() {
+  async function loadFromSupabase(preferredTripId = null) {
     try {
       setLoading(true);
       setError("");
@@ -219,7 +221,22 @@ function App() {
         window.history.replaceState({}, "", "/");
       }
 
-      // 2. Sinon, on reprend le dernier voyage utilisé.
+      // 2. Si un voyage précis est demandé (realtime / rejoindre),
+      // on recharge exactement celui-là.
+      if (!trip && preferredTripId) {
+        const { data: preferredTrip, error: preferredTripError } =
+          await supabase
+            .from("trips")
+            .select("*")
+            .eq("id", preferredTripId)
+            .maybeSingle();
+
+        if (preferredTripError) throw preferredTripError;
+
+        trip = preferredTrip;
+      }
+
+      // 3. Sinon, on reprend le dernier voyage utilisé.
       if (!trip) {
         const savedTripId = localStorage.getItem(
           "voyage-depenses-trip-id",
@@ -238,25 +255,17 @@ function App() {
         }
       }
 
-      // 3. Dernier fallback : premier voyage existant.
-      if (!trip) {
-        const { data: trips, error: tripError } = await supabase
-          .from("trips")
-          .select("*")
-          .order("created_at", { ascending: true })
-          .limit(1);
-
-        if (tripError) throw tripError;
-
-        trip = trips?.[0];
-      }
-
-      // 4. Si aucun voyage n'existe, on en crée un.
+      // 4. Si aucun voyage connu n'est disponible,
+      // on crée un NOUVEAU voyage.
+      //
+      // Important : on ne prend jamais arbitrairement
+      // le premier voyage présent dans la base.
       if (!trip) {
         const { data: createdTrip, error: createError } = await supabase
           .from("trips")
           .insert({
             name: "Mon voyage",
+            share_code: generateShareCode(),
           })
           .select()
           .single();
@@ -281,6 +290,25 @@ function App() {
         if (participantError) throw participantError;
       }
 
+      // Compatibilité avec d'anciens voyages créés
+      // avant l'ajout systématique du code de partage.
+      if (!trip.share_code) {
+        const newShareCode = generateShareCode();
+
+        const { data: updatedTrip, error: shareCodeError } = await supabase
+          .from("trips")
+          .update({
+            share_code: newShareCode,
+          })
+          .eq("id", trip.id)
+          .select()
+          .single();
+
+        if (shareCodeError) throw shareCodeError;
+
+        trip = updatedTrip;
+      }
+
       setTripId(trip.id);
 
       localStorage.setItem(
@@ -294,8 +322,6 @@ function App() {
           trip.share_code,
         );
       }
-
-      setTripId(trip.id);
 
       const [
         { data: participants, error: participantsError },

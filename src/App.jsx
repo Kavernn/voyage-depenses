@@ -2240,7 +2240,10 @@ function App() {
           title={editing ? "Modifier la dépense" : "Ajouter une dépense"}
           close={closeExpenseEditor}
         >
-          <form onSubmit={saveExpense} className="form">
+          <form
+            onSubmit={saveExpense}
+            className="form expenseEditorForm"
+          >
                 {/* MONTANT */}
                 <div className="expenseAmountSection">
               <label className="amountLabel">

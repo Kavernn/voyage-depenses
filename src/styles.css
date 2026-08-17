@@ -11241,3 +11241,625 @@ textarea:focus {
 
   border-radius: inherit !important;
 }
+
+
+/* =========================================================
+   EXPENSE EDITOR — MOBILE V2
+   ========================================================= */
+
+/*
+ * Le formulaire reste entièrement fonctionnel tel quel.
+ * Cette couche ne change que sa présentation.
+ */
+
+.expenseEditorForm {
+  display: flex !important;
+  flex-direction: column !important;
+
+  gap: 22px !important;
+
+  width: 100% !important;
+
+  padding-bottom:
+    calc(env(safe-area-inset-bottom) + 26px) !important;
+}
+
+
+/* =========================================================
+   AMOUNT — HERO
+   ========================================================= */
+
+.expenseEditorForm .expenseAmountSection {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.expenseEditorForm .amountLabel {
+  display: block !important;
+
+  margin: 0 0 8px !important;
+
+  color: #667085 !important;
+
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  letter-spacing: 1.2px !important;
+  text-transform: uppercase !important;
+}
+
+.expenseEditorForm .amountInputWrap {
+  position: relative !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  min-height: 92px !important;
+
+  padding: 8px 14px 8px 18px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8fbff 0%,
+      #ffffff 100%
+    ) !important;
+
+  border: 1.5px solid #d8e5f5 !important;
+  border-radius: 22px !important;
+
+  box-shadow:
+    0 8px 28px rgba(15, 23, 42, 0.045) !important;
+}
+
+.expenseEditorForm .amountInputWrap:focus-within {
+  border-color: #79aef7 !important;
+
+  box-shadow:
+    0 0 0 3px rgba(30, 116, 242, 0.08),
+    0 10px 28px rgba(15, 23, 42, 0.05) !important;
+}
+
+.expenseEditorForm .amountInput {
+  flex: 1 1 auto !important;
+
+  min-width: 0 !important;
+  height: auto !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  color: #0f172a !important;
+
+  font-size: clamp(38px, 12vw, 52px) !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  letter-spacing: -2.2px !important;
+}
+
+.expenseEditorForm .amountInput::placeholder {
+  color: #e7ecf3 !important;
+}
+
+.expenseEditorForm .amountCurrency {
+  flex: 0 0 auto !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  min-width: 58px !important;
+  height: 46px !important;
+
+  margin-left: 10px !important;
+  padding: 0 12px !important;
+
+  background: #eaf3ff !important;
+  color: #2563c9 !important;
+
+  border-radius: 14px !important;
+
+  font-size: 14px !important;
+  font-weight: 850 !important;
+}
+
+
+/* =========================================================
+   CONVERSION
+   ========================================================= */
+
+.expenseEditorForm .mobileLiveConversion {
+  margin: -12px 0 0 !important;
+  padding: 10px 14px !important;
+
+  background: #f7f9fc !important;
+
+  border: 0 !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   TITRES DE SECTIONS
+   ========================================================= */
+
+.expenseEditorForm .expenseChoiceSection,
+.expenseEditorForm .expenseQuickFields,
+.expenseEditorForm .splitSection {
+  margin: 0 !important;
+}
+
+.expenseEditorForm .expenseChoiceSection > label,
+.expenseEditorForm .splitTitle,
+.expenseEditorForm .expenseQuickField > span {
+  color: #667085 !important;
+
+  font-size: 10px !important;
+  font-weight: 850 !important;
+  letter-spacing: 1.05px !important;
+  text-transform: uppercase !important;
+}
+
+
+/* =========================================================
+   DEVISES
+   ========================================================= */
+
+.expenseEditorForm .currencyGrid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+  gap: 8px !important;
+
+  margin-top: 9px !important;
+}
+
+.expenseEditorForm .currencyChoice {
+  min-width: 0 !important;
+  min-height: 68px !important;
+
+  padding: 11px 8px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e4e8ee !important;
+  border-radius: 16px !important;
+
+  box-shadow:
+    0 2px 10px rgba(15, 23, 42, 0.025) !important;
+
+  text-align: left !important;
+}
+
+.expenseEditorForm .currencyChoice strong {
+  display: block !important;
+
+  color: #25364c !important;
+
+  font-size: 15px !important;
+  font-weight: 850 !important;
+}
+
+.expenseEditorForm .currencyChoice span {
+  display: block !important;
+
+  margin-top: 2px !important;
+
+  overflow: hidden !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 9px !important;
+  line-height: 1.15 !important;
+
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.expenseEditorForm .currencyChoice.active {
+  background: #edf6ff !important;
+
+  border-color: #79aef7 !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(37, 99, 201, 0.05) !important;
+}
+
+.expenseEditorForm .currencyChoice.active strong {
+  color: #075fd5 !important;
+}
+
+.expenseEditorForm .currencyChoice.active span {
+  color: #4da0eb !important;
+}
+
+
+/* =========================================================
+   PAYEUR + DATE
+   ========================================================= */
+
+.expenseEditorForm .expensePayerDateFields {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.4fr) minmax(116px, 0.8fr) !important;
+
+  align-items: start !important;
+
+  gap: 10px !important;
+}
+
+.expenseEditorForm .expensePayerField,
+.expenseEditorForm .expenseDateField {
+  min-width: 0 !important;
+}
+
+.expenseEditorForm .expensePayerField > span,
+.expenseEditorForm .expenseDateField > span {
+  display: block !important;
+
+  margin-bottom: 8px !important;
+}
+
+.expenseEditorForm .payerGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+  gap: 7px !important;
+}
+
+.expenseEditorForm .payerChoice {
+  min-width: 0 !important;
+  min-height: 58px !important;
+
+  padding: 8px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e4e8ee !important;
+  border-radius: 15px !important;
+}
+
+.expenseEditorForm .payerChoice.active {
+  background: #edf6ff !important;
+
+  border-color: #79aef7 !important;
+}
+
+.expenseEditorForm .payerAvatar {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+
+  border-radius: 11px !important;
+}
+
+.expenseEditorForm .payerChoice > span:last-child {
+  min-width: 0 !important;
+
+  overflow: hidden !important;
+
+  font-size: 11px !important;
+  font-weight: 800 !important;
+
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.expenseEditorForm .expenseDateInput {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 58px !important;
+
+  padding: 0 9px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e4e8ee !important;
+  border-radius: 15px !important;
+
+  font-size: 11px !important;
+  font-weight: 750 !important;
+}
+
+
+/* =========================================================
+   CATÉGORIES — PLUS COMPACTES
+   ========================================================= */
+
+.expenseEditorForm .expenseCategoryGrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+  gap: 8px !important;
+
+  margin-top: 9px !important;
+}
+
+.expenseEditorForm .expenseCategoryChoice {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 5px !important;
+
+  min-width: 0 !important;
+  min-height: 74px !important;
+
+  padding: 8px 5px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e4e8ee !important;
+  border-radius: 16px !important;
+
+  box-shadow:
+    0 2px 10px rgba(15, 23, 42, 0.025) !important;
+
+  text-align: center !important;
+}
+
+.expenseEditorForm .expenseCategoryChoice.active {
+  background: #edf6ff !important;
+
+  border-color: #79aef7 !important;
+}
+
+.expenseEditorForm .expenseCategoryEmoji {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 32px !important;
+  height: 32px !important;
+
+  background: #f5f8fc !important;
+
+  border-radius: 10px !important;
+
+  font-size: 18px !important;
+}
+
+.expenseEditorForm .expenseCategoryChoice > span:last-child {
+  max-width: 100% !important;
+
+  overflow: hidden !important;
+
+  color: #344054 !important;
+
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.expenseEditorForm .expenseCategoryChoice.active > span:last-child {
+  color: #075fd5 !important;
+}
+
+
+/* =========================================================
+   DESCRIPTION + GPS
+   ========================================================= */
+
+.expenseEditorForm .expenseOptionalFields {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+
+  gap: 12px !important;
+
+  padding-top: 4px !important;
+}
+
+.expenseEditorForm .expenseOptionalFields .expenseQuickField {
+  display: block !important;
+
+  width: 100% !important;
+}
+
+.expenseEditorForm .expenseOptionalFields .expenseQuickField > span {
+  display: block !important;
+
+  margin-bottom: 7px !important;
+}
+
+.expenseEditorForm .expenseOptionalFields input {
+  width: 100% !important;
+  min-height: 52px !important;
+
+  padding: 0 14px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e4e8ee !important;
+  border-radius: 15px !important;
+
+  color: #172033 !important;
+
+  font-size: 14px !important;
+  font-weight: 650 !important;
+}
+
+
+/* =========================================================
+   RÉPARTITION
+   ========================================================= */
+
+.expenseEditorForm .splitSection {
+  padding-top: 20px !important;
+
+  border-top: 1px solid #e8ebef !important;
+}
+
+.expenseEditorForm .splitTitle {
+  margin-bottom: 9px !important;
+}
+
+.expenseEditorForm .splitOptions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+  gap: 8px !important;
+}
+
+.expenseEditorForm .splitOption {
+  min-width: 0 !important;
+  min-height: 72px !important;
+
+  padding: 10px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e4e8ee !important;
+  border-radius: 16px !important;
+
+  box-shadow:
+    0 2px 10px rgba(15, 23, 42, 0.025) !important;
+}
+
+.expenseEditorForm .splitOption.active {
+  background: #edf6ff !important;
+
+  border-color: #79aef7 !important;
+}
+
+.expenseEditorForm .splitOption .radio {
+  flex: 0 0 auto !important;
+}
+
+.expenseEditorForm .splitOption b {
+  display: block !important;
+
+  color: #344054 !important;
+
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  line-height: 1.15 !important;
+}
+
+.expenseEditorForm .splitOption small {
+  display: block !important;
+
+  margin-top: 3px !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+}
+
+
+/* =========================================================
+   MONTANTS INDIVIDUELS
+   ========================================================= */
+
+.expenseEditorForm .splitPreview,
+.expenseEditorForm .splitAmounts,
+.expenseEditorForm .splitSummary {
+  gap: 8px !important;
+}
+
+
+/* =========================================================
+   CTA — SURTOUT PAS STICKY
+   ========================================================= */
+
+/*
+ * Peu importe les anciennes règles de sticky/fixed :
+ * le bouton submit revient dans le flux normal.
+ */
+
+.expenseEditorForm > button[type="submit"],
+.expenseEditorForm button[type="submit"].primary {
+  position: static !important;
+
+  inset: auto !important;
+
+  z-index: auto !important;
+
+  width: 100% !important;
+  min-height: 58px !important;
+
+  margin: 0 !important;
+  margin-top: 2px !important;
+
+  padding: 0 18px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b6cf2,
+      #1769e8
+    ) !important;
+
+  color: #ffffff !important;
+
+  border: 0 !important;
+  border-radius: 17px !important;
+
+  box-shadow:
+    0 12px 28px rgba(11, 108, 242, 0.18) !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  font-size: 15px !important;
+  font-weight: 850 !important;
+}
+
+.expenseEditorForm > button[type="submit"]:disabled,
+.expenseEditorForm button[type="submit"].primary:disabled {
+  background: #9bbcf0 !important;
+
+  box-shadow: none !important;
+
+  opacity: 1 !important;
+}
+
+
+/* =========================================================
+   IPHONE ÉTROIT
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .expenseEditorForm {
+    gap: 20px !important;
+  }
+
+  .expenseEditorForm .currencyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .expenseEditorForm .expensePayerDateFields {
+    grid-template-columns: 1fr !important;
+  }
+
+  .expenseEditorForm .expenseCategoryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+
+/* =========================================================
+   CLAVIER OUVERT / PETITE HAUTEUR
+   ========================================================= */
+
+@media (max-height: 700px) {
+  .expenseEditorForm {
+    gap: 16px !important;
+  }
+
+  .expenseEditorForm .amountInputWrap {
+    min-height: 78px !important;
+  }
+
+  .expenseEditorForm .amountInput {
+    font-size: 38px !important;
+  }
+}

@@ -41,6 +41,21 @@ const money = (n) =>
 
 const today = () => new Date().toISOString().slice(0, 10);
 
+function sortExpenses(expenses) {
+  return [...expenses].sort((a, b) => {
+    const dateA = String(a?.date || "");
+    const dateB = String(b?.date || "");
+
+    if (dateA !== dateB) {
+      return dateB.localeCompare(dateA);
+    }
+
+    // Si deux dépenses ont la même date, on garde un ordre stable
+    // basé sur l'id pour éviter les changements visuels aléatoires.
+    return String(b?.id || "").localeCompare(String(a?.id || ""));
+  });
+}
+
 function parseAmountInput(value) {
   if (typeof value === "number") {
     return Number.isFinite(value) ? value : 0;
@@ -135,11 +150,13 @@ function App() {
 
               return {
                 ...current,
-                expenses: alreadyExists
-                  ? current.expenses.map((expense) =>
-                      expense.id === incoming.id ? incoming : expense,
-                    )
-                  : [incoming, ...current.expenses],
+                expenses: sortExpenses(
+                  alreadyExists
+                    ? current.expenses.map((expense) =>
+                        expense.id === incoming.id ? incoming : expense,
+                      )
+                    : [incoming, ...current.expenses],
+                ),
               };
             }
 
@@ -398,7 +415,9 @@ function App() {
         },
         people,
         categories: DEFAULT_CATS,
-        expenses: (expenses || []).map(dbExpenseToApp),
+        expenses: sortExpenses(
+          (expenses || []).map(dbExpenseToApp),
+        ),
       });
     } catch (err) {
       console.error(err);
@@ -784,8 +803,10 @@ function App() {
 
         setData((current) => ({
           ...current,
-          expenses: current.expenses.map((expense) =>
-            expense.id === editing.id ? dbExpenseToApp(updated) : expense,
+          expenses: sortExpenses(
+            current.expenses.map((expense) =>
+              expense.id === editing.id ? dbExpenseToApp(updated) : expense,
+            ),
           ),
         }));
       } else {
@@ -799,7 +820,10 @@ function App() {
 
         setData((current) => ({
           ...current,
-          expenses: [dbExpenseToApp(created), ...current.expenses],
+          expenses: sortExpenses([
+            dbExpenseToApp(created),
+            ...current.expenses,
+          ]),
         }));
       }
 

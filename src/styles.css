@@ -7811,3 +7811,249 @@ textarea:focus {
     font-size: 11px;
   }
 }
+
+
+/* =========================================================
+   TRAVEL INTELLIGENCE — COPILOT CARD
+   ========================================================= */
+
+.travelIntel {
+  margin: 18px 0 24px;
+  padding: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.055);
+}
+
+.travelIntelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.travelIntelHeader > div:first-child > span {
+  display: block;
+  margin-bottom: 4px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.18em;
+}
+
+.travelIntelHeader h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.travelIntelSignal {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.travelIntelSignal i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.travelIntelSignal span {
+  color: #64748b;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.travelIntelMessage {
+  margin: 10px 0 16px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.travelIntelMetrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.travelIntelMetric {
+  min-width: 0;
+  padding: 11px;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.travelIntelMetric > span {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.travelIntelMetric strong {
+  display: block;
+  overflow: hidden;
+  color: #0f172a;
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.travelIntelMetric small {
+  display: block;
+  margin-top: 2px;
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.travelIntelBudget {
+  margin-top: 14px;
+}
+
+.travelIntelBudgetTop,
+.travelIntelBudgetBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.travelIntelBudgetTop {
+  margin-bottom: 8px;
+}
+
+.travelIntelBudgetTop span,
+.travelIntelBudgetBottom span {
+  color: #64748b;
+  font-size: 10px;
+}
+
+.travelIntelBudgetTop strong {
+  color: #0f172a;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.travelIntelBar {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #eef2f7;
+}
+
+.travelIntelBar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #2563eb;
+  transition: width 0.3s ease;
+}
+
+.travelIntelBudgetBottom {
+  margin-top: 6px;
+}
+
+.travelIntelInsight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.travelIntelInsightIcon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+  border-radius: 9px;
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.travelIntelInsight strong {
+  display: block;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.travelIntelInsight small {
+  display: block;
+  margin-top: 2px;
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.travelIntel.on-track .travelIntelSignal i {
+  background: #10b981;
+}
+
+.travelIntel.watch .travelIntelSignal i {
+  background: #f59e0b;
+}
+
+.travelIntel.hot .travelIntelSignal i {
+  background: #ef4444;
+}
+
+.travelIntel.watch .travelIntelBar {
+  background: #fef3c7;
+}
+
+.travelIntel.watch .travelIntelBar i {
+  background: #f59e0b;
+}
+
+.travelIntel.hot .travelIntelBar {
+  background: #fee2e2;
+}
+
+.travelIntel.hot .travelIntelBar i {
+  background: #ef4444;
+}
+
+@media (max-width: 380px) {
+  .travelIntel {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .travelIntelMetrics {
+    gap: 6px;
+  }
+
+  .travelIntelMetric {
+    padding: 9px;
+  }
+
+  .travelIntelMetric strong {
+    font-size: 14px;
+  }
+
+  .travelIntelMetric small {
+    font-size: 8px;
+  }
+}
+

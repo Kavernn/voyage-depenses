@@ -2327,6 +2327,135 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
       )}
 
       {/* =================================================
+          TRAVEL INTELLIGENCE
+         ================================================= */}
+
+      {tripDays && (
+        <section className={`travelIntel ${intelligenceStatus}`}>
+
+          <div className="travelIntelHeader">
+            <div>
+              <span>TRAVEL INTELLIGENCE</span>
+              <h2>{intelligenceHeadline}</h2>
+            </div>
+
+            <div className="travelIntelSignal">
+              <i />
+              <span>
+                {intelligenceStatus === "hot"
+                  ? "ALERTE"
+                  : intelligenceStatus === "watch"
+                    ? "SURVEILLER"
+                    : intelligenceStatus === "on-track"
+                      ? "ON TRACK"
+                      : "INFO"}
+              </span>
+            </div>
+          </div>
+
+          <p className="travelIntelMessage">
+            {intelligenceMessage}
+          </p>
+
+          <div className="travelIntelMetrics">
+
+            <div className="travelIntelMetric">
+              <span>RYTHME</span>
+              <strong>{money(intelligenceBurnRate)}</strong>
+              <small>/ jour</small>
+            </div>
+
+            <div className="travelIntelMetric">
+              <span>PROJECTION</span>
+              <strong>{money(projectedTripCost)}</strong>
+              <small>fin du voyage</small>
+            </div>
+
+            <div className="travelIntelMetric">
+              <span>RESTANT</span>
+              <strong>
+                {budgetRemaining !== null
+                  ? money(Math.max(0, budgetRemaining))
+                  : "—"}
+              </strong>
+              <small>budget</small>
+            </div>
+
+          </div>
+
+          {budgetAmount > 0 && (
+            <div className="travelIntelBudget">
+
+              <div className="travelIntelBudgetTop">
+                <span>
+                  Budget quotidien restant
+                </span>
+
+                <strong>
+                  {requiredDailyBudget !== null
+                    ? money(requiredDailyBudget)
+                    : "—"}
+                  {requiredDailyBudget !== null && " / jour"}
+                </strong>
+              </div>
+
+              <div className="travelIntelBar">
+                <i
+                  style={{
+                    width: `${Math.min(
+                      100,
+                      Math.max(
+                        0,
+                        (stats.total / budgetAmount) * 100,
+                      ),
+                    )}%`,
+                  }}
+                />
+              </div>
+
+              <div className="travelIntelBudgetBottom">
+                <span>
+                  {elapsedTripDays || 0} jour
+                  {elapsedTripDays === 1 ? "" : "s"} écoulé
+                  {elapsedTripDays === 1 ? "" : "s"}
+                </span>
+
+                <span>
+                  {remainingTripDays} jour
+                  {remainingTripDays === 1 ? "" : "s"} restant
+                  {remainingTripDays === 1 ? "" : "s"}
+                </span>
+              </div>
+
+            </div>
+          )}
+
+          {burnVsRequired !== null && (
+            <div className="travelIntelInsight">
+              <span className="travelIntelInsightIcon">
+                {burnVsRequired <= 1 ? "↘" : "↗"}
+              </span>
+
+              <div>
+                <strong>
+                  {burnVsRequired <= 1
+                    ? "Ton rythme est sain."
+                    : "Ton rythme est au-dessus du plan."}
+                </strong>
+
+                <small>
+                  {burnVsRequired <= 1
+                    ? `Tu dépenses ${Math.round((1 - burnVsRequired) * 100)} % sous le rythme nécessaire.`
+                    : `Tu dépenses ${Math.round((burnVsRequired - 1) * 100)} % au-dessus du rythme nécessaire.`}
+                </small>
+              </div>
+            </div>
+          )}
+
+        </section>
+      )}
+
+      {/* =================================================
           RECENT EXPENSES
          ================================================= */}
 

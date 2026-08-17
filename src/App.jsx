@@ -521,7 +521,7 @@ function App() {
         }
       }
 
-      await loadFromSupabase();
+      await loadFromSupabase(tripId);
   
       setShowTrip(false);
     } catch (err) {

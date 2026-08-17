@@ -2126,13 +2126,15 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           <div className="travelIntelSignal">
             <i />
             <span>
-              {intelligenceStatus === "hot"
-                ? "ALERTE"
-                : intelligenceStatus === "watch"
-                  ? "SURVEILLER"
-                  : intelligenceStatus === "on-track"
-                    ? "ON TRACK"
-                    : "INFO"}
+              {!tripHasStarted && !tripHasEnded
+                ? "PLANIFIÉ"
+                : intelligenceStatus === "hot"
+                  ? "ALERTE"
+                  : intelligenceStatus === "watch"
+                    ? "SURVEILLER"
+                    : intelligenceStatus === "on-track"
+                      ? "ON TRACK"
+                      : "INFO"}
             </span>
           </div>
 
@@ -2393,10 +2395,13 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           <div className="balkanSectionHead">
             <div>
               <span>JOURNEY</span>
-              <h2>Your route</h2>
+              <h2>Ton itinéraire</h2>
             </div>
 
-            <strong>{balkanRoute.length} étapes</strong>
+            <strong>
+              {balkanRoute.length}{" "}
+              {balkanRoute.length === 1 ? "étape" : "étapes"}
+            </strong>
           </div>
 
           <div className="balkanRouteTrack">

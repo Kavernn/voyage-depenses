@@ -7773,3 +7773,117 @@ textarea:focus {
     font-size: 14px;
   }
 }
+
+
+/* =========================================================
+   TRAVEL INTELLIGENCE V3 — MOBILE POLISH
+   ========================================================= */
+
+.travelIntelMetric {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.travelIntelMetric > span {
+  display: block !important;
+  width: 100%;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.travelIntelMetric > strong {
+  display: block !important;
+  width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.05;
+}
+
+.travelIntelMetric > small {
+  display: block !important;
+  width: 100%;
+  margin-top: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.travelIntelMetric.primary {
+  min-width: 0;
+}
+
+.travelIntelMetric.primary > span,
+.travelIntelMetric.primary > strong,
+.travelIntelMetric.primary > small {
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+
+  .travelIntel {
+    padding: 24px 20px !important;
+  }
+
+  .travelIntelHeader {
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .travelIntelHeader h2 {
+    font-size: 28px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.035em;
+  }
+
+  .travelIntelMessage {
+    font-size: 16px !important;
+    line-height: 1.45 !important;
+    margin-bottom: 20px !important;
+  }
+
+  .travelIntelMetrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .travelIntelMetric {
+    min-width: 0 !important;
+    padding: 18px 16px !important;
+    border-radius: 18px !important;
+  }
+
+  .travelIntelMetric > span {
+    font-size: 10px !important;
+    letter-spacing: 0.13em !important;
+  }
+
+  .travelIntelMetric > strong {
+    font-size: 24px !important;
+    letter-spacing: -0.025em;
+  }
+
+  .travelIntelMetric > small {
+    font-size: 11px !important;
+    letter-spacing: 0.02em;
+  }
+
+  .travelIntelSignal {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .travelIntelMetrics {
+    grid-template-columns: 1fr !important;
+  }
+
+  .travelIntelMetric {
+    min-height: 0 !important;
+  }
+}

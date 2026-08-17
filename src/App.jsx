@@ -2011,7 +2011,13 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
   const intelligenceMessage =
     !tripHasStarted
-      ? "Les dépenses se transformeront en tendances dès le voyage commencé."
+      ? budgetAmount > 0 && tripDays && data.people.length > 0
+        ? `Ton budget te donne ${money(
+            budgetAmount / tripDays,
+          )} par jour, soit ${money(
+            budgetAmount / tripDays / data.people.length,
+          )} par personne / jour.`
+        : "Ajoute ton budget et tes dates pour préparer ton rythme de voyage."
       : tripHasEnded
         ? "Voici ce que ton rythme réel raconte sur le voyage."
         : budgetAmount <= 0
@@ -2322,7 +2328,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
             </div>
 
             <div className="travelIntelMetric primary">
-              <span>OBJECTIF / JOUR</span>
+              <span>BUDGET / JOUR</span>
 
               <strong>
                 {budgetAmount > 0 && tripDays
@@ -2337,22 +2343,18 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
               <span>PAR PERSONNE</span>
 
               <strong>
-                {budgetAmount > 0 &&
-                tripDays &&
-                data.people.length > 0
+                {budgetAmount > 0 && data.people.length > 0
                   ? money(
-                      budgetAmount /
-                        tripDays /
-                        data.people.length,
+                      budgetAmount / data.people.length,
                     )
                   : "—"}
               </strong>
 
-              <small>par jour</small>
+              <small>budget individuel</small>
             </div>
 
             <div className="travelIntelMetric">
-              <span>À DÉPENSER</span>
+              <span>DISPONIBLE</span>
 
               <strong>
                 {budgetAmount > 0

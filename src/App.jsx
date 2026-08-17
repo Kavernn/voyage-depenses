@@ -1678,32 +1678,6 @@ const budgetPercentage =
   )}
 </div>
 
-      {/* PROGRESSION BUDGET */}
-      {stats.budget > 0 && (
-        <div className="budget budgetEnhanced mobileBudget">
-          <div className="budgetHeader">
-            <div>
-              <span>Budget utilisé</span>
-              <strong>{pct.toFixed(0)} %</strong>
-            </div>
-
-            <span>
-              {stats.remaining >= 0
-                ? `${money(stats.remaining)} restant`
-                : `${money(Math.abs(stats.remaining))} dépassé`}
-            </span>
-          </div>
-
-          <div className="bar">
-            <i
-              style={{
-                width: `${pct}%`,
-              }}
-            />
-          </div>
-        </div>
-      )}
-
       {/* SOLDE */}
       <div
       className={`balanceCardFinal ${

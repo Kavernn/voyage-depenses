@@ -304,335 +304,6 @@ small {
 .travellers label + label {
   margin-top: 12px;
 }
-/* =========================
-   DASHBOARD V2
-   ========================= */
-
-.dashboardSummary {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 12px;
-  margin: 14px 0;
-}
-
-.summaryCard {
-  background: white;
-  border-radius: 18px;
-  padding: 17px;
-  box-shadow: 0 2px 12px #00000008;
-}
-
-.summaryCard span {
-  display: block;
-  color: #64748b;
-  font-size: 13px;
-}
-
-.summaryCard strong {
-  display: block;
-  font-size: 23px;
-  margin-top: 5px;
-}
-
-.summaryCard small {
-  display: block;
-  color: #64748b;
-  margin-top: 5px;
-}
-
-.primarySummary {
-  background: #111827;
-  color: white;
-}
-
-.primarySummary span,
-.primarySummary small {
-  color: #cbd5e1;
-}
-
-.budgetEnhanced {
-  margin-bottom: 14px;
-}
-
-.budgetHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 12px;
-}
-
-.budgetHeader > div {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.budgetHeader strong {
-  font-size: 18px;
-}
-
-.budgetHeader > span {
-  text-align: right;
-}
-
-
-.balanceTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.balanceIcon {
-  font-size: 20px !important;
-  color: #111827 !important;
-}
-
-.categoryCard {
-  background: white;
-  border-radius: 18px;
-  padding: 17px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 12px #00000008;
-}
-
-.sectionTitle {
-  margin-bottom: 15px;
-}
-
-.sectionTitle > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.sectionTitle span {
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.sectionTitle small {
-  color: #64748b;
-  font-size: 12px;
-}
-
-.categoryList {
-  display: grid;
-  gap: 14px;
-}
-
-.categoryRow {
-  display: grid;
-  gap: 7px;
-}
-
-.categoryTop {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  font-size: 13px;
-}
-
-.categoryTop > span {
-  color: #334155;
-}
-
-.categoryTop > div {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.categoryTop b {
-  font-size: 13px;
-}
-
-.categoryTop small {
-  color: #64748b;
-  min-width: 30px;
-  text-align: right;
-}
-
-.categoryBar {
-  height: 7px;
-  background: #e5e7eb;
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.categoryBar i {
-  display: block;
-  height: 100%;
-  background: #111827;
-  border-radius: 99px;
-}
-
-.peopleEnhanced {
-  padding: 17px;
-  margin-bottom: 14px;
-}
-
-.peopleEnhanced .sectionTitle {
-  margin-bottom: 8px;
-}
-
-.personRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 9px 0;
-}
-
-.personInfo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #e2e8f0;
-  display: grid;
-  place-items: center;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.personRow > b {
-  font-size: 15px;
-}
-
-@media (max-width: 480px) {
-  .dashboardSummary {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .summaryCard strong {
-    font-size: 20px;
-  }
-
-  .budgetHeader {
-    align-items: start;
-    flex-direction: column;
-  }
-
-  .budgetHeader > span {
-    text-align: left;
-  }
-}
-
-@media (max-width: 480px) {
-  .app {
-    width: 100%;
-  }
-
-  header {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  main {
-    padding: 14px;
-  }
-
-  .hero {
-    padding: 18px;
-    border-radius: 20px;
-  }
-
-  .hero h1 {
-    font-size: 23px;
-  }
-
-  .dashboardSummary {
-    gap: 9px;
-  }
-
-  .summaryCard {
-    padding: 14px;
-    border-radius: 16px;
-  }
-
-  .summaryCard strong {
-    font-size: 19px;
-  }
-
-  .cards {
-    gap: 9px;
-  }
-
-  .cards > div {
-    padding: 14px;
-  }
-
-  .cards strong {
-    font-size: 20px;
-  }
-
-  .expense {
-    padding: 14px;
-    border-radius: 16px;
-  }
-
-  .topline {
-    gap: 10px;
-  }
-
-  .topline h2 {
-    font-size: 21px;
-  }
-
-  nav {
-    height: calc(72px + env(safe-area-inset-bottom));
-  }
-
-  nav button {
-    min-width: 58px;
-    min-height: 48px;
-    padding: 6px 8px;
-  }
-
-  
-}
-
-/* Très petits iPhone */
-@media (max-width: 360px) {
-  main {
-    padding: 10px;
-  }
-
-  .hero {
-    padding: 16px;
-  }
-
-  .dashboardSummary {
-    grid-template-columns: 1fr;
-  }
-
-  .summaryCard strong {
-    font-size: 21px;
-  }
-}
-.app {
-  max-width: 720px;
-  margin: auto;
-  min-height: 100vh;
-  padding-bottom: 105px;
-}
-
-/* Réduit les animations si l'utilisateur les désactive */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
-}
-
 /* =========================================================
    IPHONE / MOBILE UX
    ========================================================= */
@@ -670,6 +341,11 @@ header {
   padding-top: env(safe-area-inset-top);
   height: calc(64px + env(safe-area-inset-top));
 }
+
+  main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
 /* Navigation iPhone */
 
@@ -777,9 +453,6 @@ button:active {
     max-height: 96dvh;
   }
 
-  nav {
-    height: calc(58px + env(safe-area-inset-bottom));
-  }
 }
 
 /* Desktop : on conserve le comportement actuel */
@@ -793,10 +466,6 @@ button:active {
     height: 64px;
   }
 
-  nav {
-    padding-bottom: 0;
-    height: 70px;
-  }
 
   .modal {
     max-height: 85dvh;
@@ -806,120 +475,6 @@ button:active {
 }
 
 /* =========================================================
-   IPHONE / MOBILE UX
-   ========================================================= */
-
-   html {
-    min-height: 100%;
-    background: #f8fafc;
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    min-height: 100%;
-    overscroll-behavior-y: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  button,
-  input,
-  select {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  button {
-    touch-action: manipulation;
-  }
-
-  .app {
-    min-height: 100dvh;
-    padding-bottom: calc(90px + env(safe-area-inset-bottom));
-  }
-
-  header {
-    padding-top: env(safe-area-inset-top);
-    height: calc(64px + env(safe-area-inset-top));
-  }
-
-  main {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  /* Navigation iPhone */
-
-  nav {
-    height: calc(70px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* Boutons suffisamment grands pour le doigt */
-
-  .primary,
-  .secondary {
-    min-height: 50px;
-  }
-
-  .actions button {
-    min-width: 42px;
-    min-height: 42px;
-  }
-
-  /* Formulaires */
-
-  .form input,
-  .form select {
-    min-height: 48px;
-    font-size: 16px;
-  }
-
-  /* Évite le zoom automatique d'iOS sur les inputs */
-
-  input,
-  select,
-  textarea {
-    font-size: 16px;
-  }
-
-  /* Hero mobile */
-
-  .hero {
-    padding: 18px;
-  }
-
-  .hero h1 {
-    font-size: 24px;
-    line-height: 1.15;
-  }
-
-  /* Cartes plus compactes sur petit écran */
-
-  @media (max-width: 480px) {
-    main {
-      padding-top: 14px;
-    }
-
-    .cards,
-    .dashboardSummary {
-      gap: 9px;
-    }
-
-    .summaryCard,
-    .cards > div {
-      padding: 14px;
-    }
-
-    .summaryCard strong,
-    .cards strong {
-      font-size: 20px;
-    }
-
-    .expense {
-      padding: 14px;
-    }
-  }
-
-  /* =========================================================
    IPHONE - BOUTON AJOUT
    ========================================================= */
 
@@ -927,123 +482,14 @@ button:active {
 
 
 
-nav button {
-  min-width: 64px;
-  min-height: 44px;
-  padding: 6px 8px;
-}
 
 @media (max-width: 480px) {
-  nav {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
 
-  nav button {
-    font-size: 11px;
-  }
 
   
 }
 
 /* =========================================================
-   IPHONE / MOBILE UX
-   ========================================================= */
-
-   html {
-    min-height: 100%;
-    background: #f8fafc;
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    min-height: 100%;
-    overscroll-behavior-y: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  button,
-  input,
-  select {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  button {
-    touch-action: manipulation;
-  }
-
-  .app {
-    min-height: 100dvh;
-    padding-bottom: calc(90px + env(safe-area-inset-bottom));
-  }
-
-  header {
-    padding-top: env(safe-area-inset-top);
-    height: calc(64px + env(safe-area-inset-top));
-  }
-
-  nav {
-    height: calc(70px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .primary,
-  .secondary {
-    min-height: 50px;
-  }
-
-  .actions button {
-    min-width: 42px;
-    min-height: 42px;
-  }
-
-  .form input,
-  .form select {
-    min-height: 48px;
-    font-size: 16px;
-  }
-
-  input,
-  select,
-  textarea {
-    font-size: 16px;
-  }
-
-  .hero {
-    padding: 18px;
-  }
-
-  .hero h1 {
-    font-size: 24px;
-    line-height: 1.15;
-  }
-
-  @media (max-width: 480px) {
-    main {
-      padding-top: 14px;
-    }
-
-    .cards,
-    .dashboardSummary {
-      gap: 9px;
-    }
-
-    .summaryCard,
-    .cards > div {
-      padding: 14px;
-    }
-
-    .summaryCard strong,
-    .cards strong {
-      font-size: 20px;
-    }
-
-    .expense {
-      padding: 14px;
-    }
-  }
-
-  /* =========================================================
    EXPENSE FORM — IPHONE
    ========================================================= */
 
@@ -1184,51 +630,8 @@ nav button {
     }
   }
     @media (max-width: 600px) {
-    nav {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 50;
 
-      height: calc(64px + env(safe-area-inset-bottom));
-      padding:
-        8px
-        12px
-        calc(8px + env(safe-area-inset-bottom));
 
-      display: grid;
-      grid-template-columns: 1fr 72px 1fr;
-      align-items: center;
-
-      background: rgba(255, 255, 255, 0.94);
-      border-top: 1px solid #e2e8f0;
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    nav > button {
-      height: 48px;
-      border: 0;
-      background: transparent;
-      border-radius: 14px;
-
-      color: #64748b;
-      font-size: 12px;
-      font-weight: 600;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      cursor: pointer;
-    }
-
-    nav > button.active {
-      color: #111827;
-      background: #f1f5f9;
-    }
 
     
 
@@ -1327,46 +730,10 @@ nav button {
   }
 
   @media (max-width: 600px) {
-    .balanceEnhanced {
-      margin-top: 14px;
-      padding: 20px 18px;
-      border-radius: 20px;
-      background: #111827;
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
-    }
 
-    .balanceEnhanced .balanceTitle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
 
-    .balanceEnhanced .balanceTitle span:first-child {
-      font-size: 13px;
-      font-weight: 600;
-      color: #cbd5e1;
-    }
 
-    .balanceEnhanced .balanceIcon {
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      font-size: 16px;
-    }
 
-    .balanceEnhanced > strong {
-      display: block;
-      font-size: 21px;
-      line-height: 1.3;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
   }
 
   /* =========================================
@@ -1487,47 +854,21 @@ nav button {
      SOLDE
      ------------------------- */
 
-  .balanceEnhanced {
-    margin: 0 0 14px;
-  }
 
   /* -------------------------
      CATÉGORIES
      ------------------------- */
 
-  .categoryCard {
-    margin-bottom: 14px;
-    padding: 17px;
-    border-radius: 18px;
-  }
-
-  .sectionTitle {
-    margin-bottom: 14px;
-  }
-
-  .sectionTitle span {
+.sectionTitle span {
     font-size: 15px;
     font-weight: 700;
   }
 
-  .sectionTitle small {
-    margin-top: 3px;
-    font-size: 11px;
-  }
-
-  .categoryRow {
-    margin-bottom: 13px;
-  }
-
-  .categoryRow:last-child {
+.categoryRow:last-child {
     margin-bottom: 0;
   }
 
-  .categoryTop {
-    margin-bottom: 6px;
-  }
-
-  .categoryTop > span {
+.categoryTop > span {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1535,40 +876,16 @@ nav button {
     font-size: 13px;
   }
 
-  .categoryTop b {
-    font-size: 12px;
-  }
-
-  .categoryTop small {
+.categoryTop small {
     min-width: 34px;
     font-size: 10px;
   }
 
-  .categoryBar {
-    height: 5px;
-    border-radius: 99px;
-  }
-
-  /* -------------------------
+/* -------------------------
      VOYAGEURS
      ------------------------- */
 
-  .peopleEnhanced {
-    margin-bottom: 14px;
-    padding: 17px;
-    border-radius: 18px;
-  }
-
-  .personRow {
-    min-height: 54px;
-    padding: 7px 0;
-  }
-
-  .personInfo {
-    gap: 10px;
-  }
-
-  .personInfo .avatar {
+.personInfo .avatar {
     width: 36px;
     height: 36px;
     flex: 0 0 36px;
@@ -1576,16 +893,7 @@ nav button {
     font-size: 14px;
   }
 
-  .personInfo span {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  .personRow > b {
-    font-size: 14px;
-  }
-
-  /* -------------------------
+/* -------------------------
      ACTIONS
      ------------------------- */
 
@@ -1744,22 +1052,12 @@ nav button {
 
     /* ---------- BALANCE ---------- */
 
-    .balanceEnhanced {
-      margin: 10px 0;
-      padding: 18px;
-      border-radius: 20px;
-    }
 
     .balanceTitle {
       font-size: 12px;
       margin-bottom: 9px;
     }
 
-    .balanceEnhanced strong {
-      display: block;
-      font-size: 19px;
-      line-height: 1.3;
-    }
 
     .balanceIcon {
       font-size: 18px;
@@ -1768,65 +1066,23 @@ nav button {
     /* ---------- SECTIONS ---------- */
 
     .categoryCard,
-    .peopleEnhanced {
-      margin-top: 10px;
-      padding: 17px;
-      border-radius: 20px;
-    }
-
-    .sectionTitle span {
-      font-size: 15px;
-      font-weight: 750;
-    }
-
-    .sectionTitle small {
+.sectionTitle small {
       font-size: 11px;
     }
 
-    .categoryRow {
-      padding: 10px 0;
-    }
-
-    .categoryTop {
+.categoryTop b {
       font-size: 13px;
     }
 
-    .categoryTop b {
-      font-size: 13px;
-    }
+/* ---------- PEOPLE ---------- */
 
-    .categoryTop small {
-      font-size: 11px;
-    }
-
-    .categoryBar {
-      height: 6px;
-      margin-top: 7px;
-    }
-
-    /* ---------- PEOPLE ---------- */
-
-    .personRow {
-      min-height: 52px;
-      padding: 7px 0;
-    }
-
-    .personInfo {
-      gap: 10px;
-      font-size: 14px;
-    }
-
-    .avatar {
+.avatar {
       width: 34px;
       height: 34px;
       border-radius: 11px;
     }
 
-    .personRow > b {
-      font-size: 14px;
-    }
-
-    /* ---------- MAIN ACTION ---------- */
+/* ---------- MAIN ACTION ---------- */
 
     button.primary.big,
     button.secondary.big {
@@ -1840,44 +1096,8 @@ nav button {
 
     /* ---------- BOTTOM NAV ---------- */
 
-    nav {
-      position: fixed;
-      z-index: 50;
-      left: 10px;
-      right: 10px;
-      bottom: calc(8px + env(safe-area-inset-bottom));
 
-      height: 66px;
-      padding: 7px;
 
-      border-radius: 22px;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      align-items: center;
-
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      box-shadow:
-        0 8px 30px rgba(15, 23, 42, 0.14),
-        0 1px 3px rgba(15, 23, 42, 0.08);
-    }
-
-    nav button {
-      min-height: 50px;
-      border: 0;
-      background: transparent;
-      border-radius: 16px;
-
-      font-size: 11px;
-      font-weight: 650;
-    }
-
-    nav button.active {
-      background: #f1f5f9;
-    }
 
     
 
@@ -2262,50 +1482,8 @@ nav button {
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 50;
 
-    height: calc(66px + env(safe-area-inset-bottom));
-    padding:
-      7px 18px
-      calc(7px + env(safe-area-inset-bottom));
 
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-around;
-    gap: 8px;
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    border-top: 1px solid rgba(127, 127, 127, 0.15);
-  }
-
-  nav > button {
-    position: relative;
-    flex: 1;
-    min-width: 0;
-    height: 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  nav > button.active {
-    font-weight: 700;
-  }
 
   
 
@@ -2318,14 +1496,7 @@ nav button {
 
 /* Très petits iPhone */
 @media (max-width: 360px) {
-  nav {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 
-  nav > button {
-    font-size: 10px;
-  }
 
   
 }
@@ -2442,513 +1613,6 @@ nav button {
   }
 
   /* =========================================================
-   DASHBOARD V2 — RÉSUMÉ FINANCIER
-   ========================================================= */
-
-   .financialGrid {
-    display: grid;
-    grid-template-columns: 1.25fr 1fr;
-    gap: 12px;
-    margin: 14px 0;
-  }
-  
-  .financialCard {
-    position: relative;
-    overflow: hidden;
-    min-width: 0;
-    padding: 18px;
-    border: 1px solid #e8edf3;
-    border-radius: 22px;
-    background: #ffffff;
-    box-shadow:
-      0 2px 4px rgba(15, 23, 42, 0.03),
-      0 10px 30px rgba(15, 23, 42, 0.06);
-  }
-  
-  .financialCardMain {
-    background:
-      linear-gradient(145deg, #111827 0%, #1f2937 100%);
-    border-color: #111827;
-    color: #ffffff;
-  }
-  
-  .financialCardLabel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  
-  .financialCardLabel span {
-    color: #64748b;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  
-  .financialCardMain .financialCardLabel span {
-    color: #cbd5e1;
-  }
-  
-  .financialCardLabel svg {
-    flex: 0 0 auto;
-    color: #94a3b8;
-  }
-  
-  .financialCardMain .financialCardLabel svg {
-    color: #ffffff;
-  }
-  
-  .financialCard strong {
-    display: block;
-    margin: 0;
-    font-size: clamp(25px, 7vw, 34px);
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-  
-  .financialCard small {
-    display: block;
-    margin-top: 10px;
-    color: #64748b;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  
-  .financialCardMain small {
-    color: #cbd5e1;
-  }
-  
-  /* Petite touche visuelle sur la carte principale */
-  .financialCardMain::after {
-    content: "";
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    right: -55px;
-    bottom: -65px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-  }
-  
-  @media (max-width: 480px) {
-    .financialGrid {
-      grid-template-columns: 1fr 1fr;
-      gap: 9px;
-      margin: 12px 0;
-    }
-  
-    .financialCard {
-      padding: 15px;
-      border-radius: 18px;
-    }
-  
-    .financialCard strong {
-      font-size: 22px;
-    }
-  
-    .financialCardLabel {
-      margin-bottom: 10px;
-    }
-  
-    .financialCardLabel span {
-      font-size: 10px;
-    }
-  
-    .financialCard small {
-      font-size: 10px;
-      line-height: 1.3;
-    }
-  }
-
-/* =========================================================
-   DASHBOARD V2 — DÉPENSES PAR CATÉGORIE
-   ========================================================= */
-
-   .categoryCard {
-    margin: 14px 0;
-    padding: 18px;
-    border: 1px solid #e8edf3;
-    border-radius: 22px;
-    background: #ffffff;
-    box-shadow:
-      0 2px 4px rgba(15, 23, 42, 0.03),
-      0 10px 30px rgba(15, 23, 42, 0.05);
-  }
-  
-  .categoryHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 18px;
-  }
-  
-  .categoryHeader > div:first-child span {
-    display: block;
-    color: #111827;
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-  
-  .categoryHeader > div:first-child small {
-    display: block;
-    margin-top: 3px;
-    color: #64748b;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  
-  .categoryCount {
-    display: grid;
-    width: 34px;
-    height: 34px;
-    place-items: center;
-    border-radius: 11px;
-    background: #f1f5f9;
-    color: #475569;
-    font-size: 12px;
-    font-weight: 800;
-  }
-  
-  .categoryList {
-    display: grid;
-    gap: 16px;
-  }
-  
-  .categoryRow {
-    min-width: 0;
-  }
-  
-  .categoryTop {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
-  
-  .categoryName {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    gap: 9px;
-    color: #334155;
-    font-size: 13px;
-    font-weight: 700;
-  }
-  
-  .categoryName > span:last-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .categoryDot {
-    flex: 0 0 auto;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #111827;
-  }
-  
-  .categoryDot1 {
-    background: #475569;
-  }
-  
-  .categoryDot2 {
-    background: #64748b;
-  }
-  
-  .categoryDot3 {
-    background: #94a3b8;
-  }
-  
-  .categoryDot4 {
-    background: #cbd5e1;
-  }
-  
-  .categoryDot5 {
-    background: #e2e8f0;
-  }
-  
-  .categoryAmount {
-    display: flex;
-    align-items: baseline;
-    flex: 0 0 auto;
-    gap: 7px;
-  }
-  
-  .categoryAmount strong {
-    color: #111827;
-    font-size: 14px;
-    font-weight: 800;
-  }
-  
-  .categoryAmount small {
-    color: #94a3b8;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  
-  .categoryBar {
-    width: 100%;
-    height: 7px;
-    overflow: hidden;
-    border-radius: 999px;
-    background: #f1f5f9;
-  }
-  
-  .categoryBar i {
-    display: block;
-    height: 100%;
-    min-width: 4px;
-    border-radius: inherit;
-    background: #111827;
-    transition: width 0.35s ease;
-  }
-  
-  .categoryRow:nth-child(2) .categoryBar i {
-    background: #475569;
-  }
-  
-  .categoryRow:nth-child(3) .categoryBar i {
-    background: #64748b;
-  }
-  
-  .categoryRow:nth-child(4) .categoryBar i {
-    background: #94a3b8;
-  }
-  
-  .categoryRow:nth-child(5) .categoryBar i {
-    background: #a8b3c2;
-  }
-  
-  .categoryRow:nth-child(6) .categoryBar i {
-    background: #cbd5e1;
-  }
-  
-  @media (max-width: 480px) {
-    .categoryCard {
-      margin: 12px 0;
-      padding: 16px;
-      border-radius: 18px;
-    }
-  
-    .categoryList {
-      gap: 15px;
-    }
-  
-    .categoryHeader {
-      margin-bottom: 16px;
-    }
-  
-    .categoryHeader > div:first-child span {
-      font-size: 14px;
-    }
-  
-    .categoryAmount {
-      gap: 5px;
-    }
-  
-    .categoryAmount strong {
-      font-size: 13px;
-    }
-  
-    .categoryName {
-      font-size: 12px;
-    }
-  }
-
-  /* =========================================================
-   DASHBOARD V2 — RÉPARTITION PAR VOYAGEUR
-   ========================================================= */
-
-.peopleEnhanced {
-  margin: 14px 0;
-  padding: 18px;
-  border: 1px solid #e8edf3;
-  border-radius: 22px;
-  background: #ffffff;
-  box-shadow:
-    0 2px 4px rgba(15, 23, 42, 0.03),
-    0 10px 30px rgba(15, 23, 42, 0.05);
-}
-
-.peopleHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.peopleHeader > div:first-child span {
-  display: block;
-  color: #111827;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.peopleHeader > div:first-child small {
-  display: block;
-  margin-top: 3px;
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.peopleCount {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  border-radius: 11px;
-  background: #f1f5f9;
-  color: #475569;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.peopleList {
-  display: grid;
-  gap: 16px;
-}
-
-.personRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.personInfo {
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  gap: 11px;
-}
-
-.avatar {
-  display: grid;
-  flex: 0 0 auto;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border-radius: 14px;
-  background: #111827;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.personName {
-  min-width: 0;
-}
-
-.personName > span {
-  display: block;
-  overflow: hidden;
-  color: #111827;
-  font-size: 14px;
-  font-weight: 800;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.personName small {
-  display: block;
-  margin-top: 3px;
-  color: #94a3b8;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.personAmount {
-  flex: 0 0 auto;
-  min-width: 105px;
-  text-align: right;
-}
-
-.personAmount strong {
-  display: block;
-  color: #111827;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.personBar {
-  width: 105px;
-  height: 5px;
-  margin-top: 7px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: #f1f5f9;
-}
-
-.personBar i {
-  display: block;
-  height: 100%;
-  min-width: 3px;
-  border-radius: inherit;
-  background: #111827;
-  transition: width 0.35s ease;
-}
-
-@media (max-width: 480px) {
-  .peopleEnhanced {
-    margin: 12px 0;
-    padding: 16px;
-    border-radius: 18px;
-  }
-
-  .peopleHeader {
-    margin-bottom: 16px;
-  }
-
-  .peopleHeader > div:first-child span {
-    font-size: 14px;
-  }
-
-  .peopleList {
-    gap: 15px;
-  }
-
-  .avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    font-size: 14px;
-  }
-
-  .personName > span {
-    font-size: 13px;
-  }
-
-  .personAmount {
-    min-width: 90px;
-  }
-
-  .personAmount strong {
-    font-size: 13px;
-  }
-
-  .personBar {
-    width: 90px;
-  }
-}
-
-/* Espace supplémentaire pour que le contenu
-   ne soit jamais caché derrière la navigation */
-.app {
-  padding-bottom: 96px;
-}
-
-
-/* =========================================================
    BOTTOM NAV — VERSION FINALE
    ========================================================= */
 
@@ -3281,75 +1945,23 @@ nav button {
    FIX — SOLDE ENTRE VOUS
    ========================================================= */
 
-   .balanceEnhanced {
-    color: #111827;
-  }
   
-  .balanceEnhanced .balanceTitle > span:first-child {
-    color: #64748b !important;
-  }
   
-  .balanceEnhanced .balanceIcon {
-    color: #111827 !important;
-    background: #f1f5f9 !important;
-  }
   
-  .balanceEnhanced > strong {
-    color: #111827 !important;
-  }
   
-  .balanceEnhanced > small {
-    color: #64748b !important;
-  }
   
-  .balanceEnhanced.balanced {
-    color: #111827;
-    background: linear-gradient(145deg, #f0fdf4, #ffffff);
-  }
   
-  .balanceEnhanced.balanced .balanceTitle > span:first-child {
-    color: #64748b !important;
-  }
   
-  .balanceEnhanced.balanced .balanceIcon {
-    color: #166534 !important;
-    background: #dcfce7 !important;
-  }
   
-  .balanceEnhanced.balanced > strong {
-    color: #166534 !important;
-  }
   
-  .balanceEnhanced.balanced > small {
-    color: #64748b !important;
-  }
   
   /* Mobile */
   @media (max-width: 600px) {
-    .balanceEnhanced {
-      color: #111827 !important;
-      background: #ffffff !important;
-    }
   
-    .balanceEnhanced .balanceTitle > span:first-child {
-      color: #64748b !important;
-    }
   
-    .balanceEnhanced > strong {
-      color: #111827 !important;
-    }
   
-    .balanceEnhanced > small {
-      color: #64748b !important;
-    }
   
-    .balanceEnhanced.balanced {
-      background: linear-gradient(145deg, #f0fdf4, #ffffff) !important;
-    }
   
-    .balanceEnhanced.balanced > strong {
-      color: #166534 !important;
-    }
   }
 
 /* =========================================================

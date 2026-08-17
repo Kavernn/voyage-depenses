@@ -7887,3 +7887,193 @@ textarea:focus {
     min-height: 0 !important;
   }
 }
+
+
+/* =========================================================
+   VOYAGE DÉPENSES — CENTERED HEADER
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  /*
+   * Le header devient une vraie zone d'accueil :
+   *
+   *       ✈
+   *   Voyage Dépenses
+   *   Ton dashboard de voyage
+   *
+   * wallet                         +
+   */
+
+  header,
+  .appHeader,
+  .topHeader,
+  .topbar,
+  .mobileHeader {
+    position: relative;
+    min-height: 112px;
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.055);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.045);
+  }
+
+  /*
+   * Lorsque le header utilise une structure flex,
+   * on garde les contrôles sur les côtés.
+   */
+  header,
+  .appHeader,
+  .topHeader,
+  .topbar,
+  .mobileHeader {
+    display: grid !important;
+    grid-template-columns: 52px 1fr 52px;
+    align-items: center;
+    column-gap: 12px;
+    padding:
+      max(12px, env(safe-area-inset-top))
+      18px
+      16px !important;
+  }
+
+  /*
+   * Le contenu textuel central.
+   */
+  header h1,
+  .appHeader h1,
+  .topHeader h1,
+  .topbar h1,
+  .mobileHeader h1 {
+    margin: 0 !important;
+    text-align: center !important;
+    color: #111827 !important;
+    font-size: 24px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  /*
+   * Sous-titre éventuel.
+   */
+  header p,
+  .appHeader p,
+  .topHeader p,
+  .topbar p,
+  .mobileHeader p {
+    text-align: center !important;
+    color: #7c8799 !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    margin: 5px 0 0 !important;
+  }
+
+  /*
+   * Boutons latéraux.
+   */
+  header button,
+  .appHeader button,
+  .topHeader button,
+  .topbar button,
+  .mobileHeader button {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    padding: 0 !important;
+
+    border-radius: 15px !important;
+    border: 1px solid rgba(15, 23, 42, 0.07) !important;
+
+    background: #ffffff !important;
+    color: #172033 !important;
+
+    box-shadow:
+      0 3px 10px rgba(15, 23, 42, 0.035) !important;
+  }
+
+  header button:first-child,
+  .appHeader button:first-child,
+  .topHeader button:first-child,
+  .topbar button:first-child,
+  .mobileHeader button:first-child {
+    justify-self: start;
+  }
+
+  header button:last-child,
+  .appHeader button:last-child,
+  .topHeader button:last-child,
+  .topbar button:last-child,
+  .mobileHeader button:last-child {
+    justify-self: end;
+  }
+
+  /*
+   * Icône avion :
+   * on essaie de placer le premier élément graphique
+   * au-dessus du titre lorsqu'il existe.
+   */
+  header svg,
+  .appHeader svg,
+  .topHeader svg,
+  .topbar svg,
+  .mobileHeader svg {
+    stroke-width: 1.9;
+  }
+
+  /*
+   * Transition douce vers le Hero.
+   */
+  header + main,
+  .appHeader + main,
+  .topHeader + main,
+  .topbar + main,
+  .mobileHeader + main {
+    padding-top: 14px !important;
+  }
+
+}
+
+/* =========================================================
+   HEADER — DESKTOP SAFE
+   ========================================================= */
+
+@media (min-width: 601px) {
+
+  header,
+  .appHeader,
+  .topHeader,
+  .topbar,
+  .mobileHeader {
+    background: #ffffff;
+    color: #111827;
+  }
+
+}
+
+
+/* =========================================================
+   HEADER CENTER — TYPOGRAPHY
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .headerTitle,
+  .appHeaderTitle,
+  .topHeaderTitle,
+  .topbarTitle {
+    text-align: center !important;
+  }
+
+  .headerSubtitle,
+  .appHeaderSubtitle,
+  .topHeaderSubtitle,
+  .topbarSubtitle {
+    text-align: center !important;
+  }
+
+}

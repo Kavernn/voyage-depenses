@@ -5742,3 +5742,52 @@ nav button {
         0 0 0 6px rgba(248, 250, 252, 0.96) !important;
     }
   }
+
+/* =========================================================
+   BOTTOM NAV — ICON POLISH
+   ========================================================= */
+
+.bottomNav .navItem {
+  gap: 4px !important;
+}
+
+.bottomNav .navItem svg {
+  flex: 0 0 auto;
+  transition:
+    transform 0.16s ease,
+    stroke 0.16s ease;
+}
+
+.bottomNav .navItem span {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.bottomNav .navItem.active {
+  color: #2563eb !important;
+  background: #eff6ff !important;
+}
+
+.bottomNav .navItem.active svg {
+  transform: translateY(-1px);
+  stroke-width: 2.5;
+}
+
+.bottomNav .navAdd {
+  background:
+    linear-gradient(
+      145deg,
+      #1d4ed8,
+      #2563eb
+    ) !important;
+
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.28),
+    0 0 0 5px #f8fafc !important;
+}
+
+.bottomNav .navAdd:active {
+  transform: scale(0.94) !important;
+}
+

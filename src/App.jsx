@@ -1,6 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Modal from "./components/Modal";
-import { Plus, Trash2, Pencil, X, Plane, Wallet } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+  Pencil,
+  X,
+  Plane,
+  Wallet,
+  House,
+  ReceiptText,
+} from "lucide-react";
 import { supabase } from "./lib/supabase";
 import "./styles.css";
 
@@ -861,26 +870,32 @@ function App() {
       </main>
 
       <nav className="bottomNav">
-  <button
-    className={screen === "dashboard" ? "navItem active" : "navItem"}
-    onClick={() => setScreen("dashboard")}
-  >
-    <span className="navIcon">⌂</span>
-    <span>Accueil</span>
-  </button>
+        <button
+          className={screen === "dashboard" ? "navItem active" : "navItem"}
+          onClick={() => setScreen("dashboard")}
+          aria-label="Accueil"
+        >
+          <House size={21} strokeWidth={2.2} />
+          <span>Accueil</span>
+        </button>
 
-  <button className="navAdd" onClick={newExpense} aria-label="Ajouter une dépense">
-    <Plus size={24} strokeWidth={2.5} />
-  </button>
+        <button
+          className="navAdd"
+          onClick={newExpense}
+          aria-label="Ajouter une dépense"
+        >
+          <Plus size={25} strokeWidth={2.6} />
+        </button>
 
-  <button
-    className={screen === "history" ? "navItem active" : "navItem"}
-    onClick={() => setScreen("history")}
-  >
-    <span className="navIcon">≡</span>
-    <span>Dépenses</span>
-  </button>
-</nav>
+        <button
+          className={screen === "history" ? "navItem active" : "navItem"}
+          onClick={() => setScreen("history")}
+          aria-label="Dépenses"
+        >
+          <ReceiptText size={21} strokeWidth={2.2} />
+          <span>Dépenses</span>
+        </button>
+      </nav>
 
       {showTrip && (
         <Modal title="Mon voyage" close={() => setShowTrip(false)}>

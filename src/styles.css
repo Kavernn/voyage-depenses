@@ -8327,3 +8327,82 @@ textarea:focus {
     transform: translateY(-14px);
   }
 }
+
+/* =========================================================
+   HEADER — TRUE CENTER FINAL
+   ========================================================= */
+
+.travelAppHeader {
+  position: relative !important;
+  height: 150px !important;
+  min-height: 150px !important;
+}
+
+/*
+ * Centre réellement avion + titre dans le header,
+ * indépendamment du wallet et du bouton +.
+ */
+.travelAppHeader .travelHeaderCenter {
+  position: absolute !important;
+
+  left: 50% !important;
+  top: 50% !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 7px !important;
+
+  width: max-content !important;
+  max-width: calc(100% - 150px) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translate(-50%, -38%) !important;
+
+  text-align: center !important;
+  white-space: nowrap !important;
+
+  z-index: 2 !important;
+}
+
+.travelAppHeader .travelHeaderPlane {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.travelAppHeader .travelHeaderTitle {
+  margin: 0 !important;
+
+  line-height: 1.1 !important;
+
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+/*
+ * Les actions restent indépendantes de la marque centrale.
+ */
+.travelAppHeader .travelHeaderWallet,
+.travelAppHeader .travelHeaderAdd {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+@media (max-width: 430px) {
+  .travelAppHeader {
+    height: 150px !important;
+    min-height: 150px !important;
+  }
+
+  .travelAppHeader .travelHeaderCenter {
+    transform: translate(-50%, -36%) !important;
+  }
+
+  .travelAppHeader .travelHeaderTitle {
+    font-size: 20px !important;
+  }
+}

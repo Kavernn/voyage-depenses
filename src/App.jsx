@@ -103,6 +103,43 @@ function App() {
   const [showJoin, setShowJoin] = useState(false);
   const [joining, setJoining] = useState(false);
   const [syncStatus, setSyncStatus] = useState("connecting");
+
+  /*
+   * Helpers propres à l'éditeur du voyage.
+   * Le Dashboard possède ses propres calculs, mais le modal
+   * est rendu dans App() et ne peut pas accéder à ceux-ci.
+   */
+  const tripEditorDays = (() => {
+    if (!data.trip.start || !data.trip.end) return null;
+
+    const start = new Date(`${data.trip.start}T00:00:00`);
+    const end = new Date(`${data.trip.end}T00:00:00`);
+
+    if (
+      Number.isNaN(start.getTime()) ||
+      Number.isNaN(end.getTime()) ||
+      end < start
+    ) {
+      return null;
+    }
+
+    const diff = Math.floor(
+      (end - start) / (1000 * 60 * 60 * 24),
+    );
+
+    return diff + 1;
+  })();
+
+  const tripEditorCompactMoney = (value) => {
+    const amount = Number(value);
+
+    if (!Number.isFinite(amount)) return "—";
+
+    return `${new Intl.NumberFormat("fr-CA", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount)} $`;
+  };
   const [noTrip, setNoTrip] = useState(false);
   const [creatingTrip, setCreatingTrip] = useState(false);
 
@@ -1343,13 +1380,15 @@ function App() {
                 </label>
               </div>
 
-              {data.trip.start && data.trip.end && (
+              {data.trip.start &&
+                data.trip.end &&
+                tripEditorDays && (
                 <div className="tripEditorDateSummary">
                   <div>
-                    <strong>{tripDays || "—"}</strong>
+                    <strong>{tripEditorDays || "—"}</strong>
 
                     <span>
-                      {tripDays === 1 ? "jour" : "jours"}
+                      {tripEditorDays === 1 ? "jour" : "jours"}
                     </span>
                   </div>
 
@@ -1452,7 +1491,7 @@ function App() {
                   <div>
                     <span>BUDGET TOTAL</span>
                     <strong>
-                      {compactMoney(Number(data.trip.budget))}
+                      {tripEditorCompactMoney(Number(data.trip.budget))}
                     </strong>
                   </div>
 
@@ -1461,9 +1500,9 @@ function App() {
                     <strong>
                       {data.trip.start &&
                       data.trip.end &&
-                      tripDays
-                        ? compactMoney(
-                            Number(data.trip.budget) / tripDays,
+                      tripEditorDays
+                        ? tripEditorCompactMoney(
+                            Number(data.trip.budget) / tripEditorDays,
                           )
                         : "—"}
                     </strong>
@@ -1473,7 +1512,7 @@ function App() {
                     <span>PAR PERSONNE</span>
                     <strong>
                       {data.people.length > 0
-                        ? compactMoney(
+                        ? tripEditorCompactMoney(
                             Number(data.trip.budget) /
                               data.people.length,
                           )

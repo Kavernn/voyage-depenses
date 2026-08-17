@@ -536,6 +536,25 @@ function App() {
     };
   }
 
+  function getTripDestinationFlag(country) {
+    const normalized = String(country || "")
+      .trim()
+      .toLocaleLowerCase("fr");
+
+    if (normalized.includes("alban")) return "🇦🇱";
+    if (normalized.includes("kosovo")) return "🇽🇰";
+
+    if (
+      normalized.includes("macédoine") ||
+      normalized.includes("macedoine") ||
+      normalized.includes("north macedonia")
+    ) {
+      return "🇲🇰";
+    }
+
+    return "✦";
+  }
+
   function getTripDestinations() {
     return String(data.trip.countries || "")
       .split(/[,·]/)
@@ -1561,7 +1580,11 @@ function App() {
                         key={`${country}-${index}`}
                       >
                         <div className="tripManagerStopOrder">
-                          {index + 1}
+                          <span className="tripManagerStopFlag">
+                            {getTripDestinationFlag(country)}
+                          </span>
+
+                          <small>{index + 1}</small>
                         </div>
 
                         <div className="tripManagerStopName">
@@ -1585,7 +1608,7 @@ function App() {
                             disabled={index === 0}
                             aria-label="Monter"
                           >
-                            ↑
+                            ‹
                           </button>
 
                           <button
@@ -1602,7 +1625,7 @@ function App() {
                             }
                             aria-label="Descendre"
                           >
-                            ↓
+                            ›
                           </button>
 
                           <button
@@ -1883,7 +1906,7 @@ function App() {
               >
                 {saving
                   ? "Enregistrement…"
-                  : "Enregistrer les changements"}
+                  : "Enregistrer"}
               </button>
 
             </div>

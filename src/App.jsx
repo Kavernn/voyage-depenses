@@ -1003,7 +1003,7 @@ function App() {
           </div>
 
           <div className="travelHeaderTitle">
-            Voyage Dépenses
+            Voyage Dépenses • LIVE
           </div>
         </div>
 

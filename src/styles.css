@@ -5464,3 +5464,30 @@ button:active {
   }
 }
 
+/* =========================================================
+   EXPENSE QUICK ADD — CTA
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .expenseSaveButton {
+    min-height: 58px !important;
+
+    font-size: 16px !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.01em;
+
+    box-shadow:
+      0 12px 28px rgba(37, 99, 235, 0.28),
+      0 0 0 6px rgba(248, 250, 252, 0.96) !important;
+  }
+
+  .expenseSaveButton:disabled {
+    opacity: 0.48 !important;
+    cursor: default;
+    transform: none !important;
+
+    box-shadow:
+      0 0 0 6px rgba(248, 250, 252, 0.96) !important;
+  }
+}
+

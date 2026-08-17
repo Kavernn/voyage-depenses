@@ -1585,8 +1585,13 @@ function App() {
             <div className="rate">{rateStatus}</div>
 
             {/* SAVE */}
-            <button className="primary" disabled={saving}>
-              {saving ? "Enregistrement…" : "Enregistrer la dépense"}
+            <button
+              className="primary expenseSaveButton"
+              disabled={saving || parseAmountInput(form.amount) <= 0}
+            >
+              {saving
+                ? "Enregistrement…"
+                : `Enregistrer · ${money(parseAmountInput(form.amount))}`}
             </button>
           </form>
         </Modal>

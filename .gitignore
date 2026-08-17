@@ -6,3 +6,7 @@ dist
 .DS_Store
 .env.local
 .vercel
+
+# Local AI/dev backups
+src/App.jsx.*-backup
+src/styles.css.*-backup

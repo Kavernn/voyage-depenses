@@ -646,6 +646,18 @@ function App() {
     return participantAvatars[index] || "";
   }
 
+  function getParticipantAvatarByName(name) {
+    if (!name) return "";
+
+    const index = data.people.findIndex(
+      (person) => person === name,
+    );
+
+    if (index < 0) return "";
+
+    return getParticipantAvatar(index);
+  }
+
   async function compressTravelerAvatar(file) {
     if (!file?.type?.startsWith("image/")) {
       throw new Error("Le fichier sélectionné n'est pas une image.");
@@ -2336,7 +2348,14 @@ function App() {
           }
         >
           <span className="payerAvatar">
-            {person.charAt(0).toUpperCase()}
+            {getParticipantAvatarByName(person) ? (
+              <img
+                src={getParticipantAvatarByName(person)}
+                alt=""
+              />
+            ) : (
+              person.charAt(0).toUpperCase()
+            )}
           </span>
 
           <span>{person}</span>

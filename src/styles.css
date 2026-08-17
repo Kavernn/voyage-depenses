@@ -11219,3 +11219,25 @@ textarea:focus {
 
   border-radius: inherit !important;
 }
+
+
+/* =========================================================
+   TRAVELER AVATAR — STEP 4 PAYER
+   ========================================================= */
+
+.payerAvatar {
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+.payerAvatar img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+  object-position: center !important;
+
+  border-radius: inherit !important;
+}

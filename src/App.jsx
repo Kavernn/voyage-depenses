@@ -106,8 +106,45 @@ function App() {
           table: "expenses",
           filter: `trip_id=eq.${tripId}`,
         },
-        () => {
-          loadFromSupabase(tripId);
+        (payload) => {
+          setData((current) => {
+            if (payload.eventType === "DELETE") {
+              const deletedId = payload.old?.id;
+
+              if (!deletedId) return current;
+
+              return {
+                ...current,
+                expenses: current.expenses.filter(
+                  (expense) => expense.id !== deletedId,
+                ),
+              };
+            }
+
+            if (
+              payload.eventType === "INSERT" ||
+              payload.eventType === "UPDATE"
+            ) {
+              if (!payload.new?.id) return current;
+
+              const incoming = dbExpenseToApp(payload.new);
+
+              const alreadyExists = current.expenses.some(
+                (expense) => expense.id === incoming.id,
+              );
+
+              return {
+                ...current,
+                expenses: alreadyExists
+                  ? current.expenses.map((expense) =>
+                      expense.id === incoming.id ? incoming : expense,
+                    )
+                  : [incoming, ...current.expenses],
+              };
+            }
+
+            return current;
+          });
         },
       )
       .on(

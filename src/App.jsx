@@ -1722,10 +1722,10 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           {countryText}
         </p>
 
-        <div className="balkanHeroStats">
+        <div className="balkanHeroStats balkanHeroStatsPolished">
           <div>
             <strong>{tripDays || "—"}</strong>
-            <span>jours</span>
+            <span>{tripDays === 1 ? "jour" : "jours"}</span>
           </div>
 
           <div>
@@ -1908,7 +1908,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
       ) : (
 
-        <div className="balkanTimeline">
+        <div className="balkanTimeline balkanTimelinePolished">
 
           {recentExpenses.map((expense, index) => {
             const category =

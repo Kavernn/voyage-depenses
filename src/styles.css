@@ -6968,3 +6968,197 @@ textarea:focus {
     transform: scale(.99);
   }
 }
+
+
+/* =========================================================
+   BALKAN ROAD TRIP — POLISH PASS
+   ========================================================= */
+
+.balkanHeroStatsPolished {
+  position: relative;
+}
+
+.balkanTimelinePolished {
+  position: relative;
+}
+
+/* ---------- HERO ---------- */
+
+@media (max-width: 600px) {
+
+  .balkanHero {
+    min-height: 0 !important;
+  }
+
+  .balkanHeroStatsPolished {
+    margin-top: 10px !important;
+    padding-top: 4px;
+  }
+
+  .balkanHeroStatsPolished > div {
+    min-width: 62px;
+  }
+
+  .balkanHeroStatsPolished strong {
+    font-size: 19px !important;
+    line-height: 1 !important;
+    letter-spacing: -0.04em;
+  }
+
+  .balkanHeroStatsPolished span {
+    margin-top: 4px !important;
+    font-size: 8px !important;
+    letter-spacing: 0.13em !important;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .balkanCountries {
+    margin-top: 5px !important;
+    margin-bottom: 2px !important;
+    font-size: 13px !important;
+  }
+
+  /* ---------- TIMELINE ---------- */
+
+  .balkanTimelinePolished {
+    margin-top: 4px;
+    padding: 4px 0 2px;
+  }
+
+  .balkanExpenseRow {
+    position: relative;
+    min-height: 76px !important;
+
+    padding: 12px 10px 12px 4px !important;
+
+    border-radius: 18px !important;
+
+    transition:
+      transform 0.16s ease,
+      background 0.16s ease;
+  }
+
+  .balkanExpenseRow:active {
+    transform: scale(0.985);
+    background: #f8fafc;
+  }
+
+  .balkanTimelineMarker {
+    width: 30px !important;
+    min-width: 30px !important;
+  }
+
+  .balkanTimelineMarker span {
+    width: 9px !important;
+    height: 9px !important;
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 5px rgba(190, 24, 60, 0.08);
+  }
+
+  .balkanTimelineMarker i {
+    width: 1px !important;
+    opacity: 0.45;
+  }
+
+  .balkanExpenseIcon {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+
+    border-radius: 13px !important;
+
+    font-size: 13px !important;
+    font-weight: 850 !important;
+  }
+
+  .balkanExpenseInfo {
+    min-width: 0;
+  }
+
+  .balkanExpenseInfo strong {
+    display: block;
+
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 14px !important;
+    letter-spacing: -0.015em;
+  }
+
+  .balkanExpenseInfo span {
+    display: block;
+
+    margin-top: 4px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 10px !important;
+    color: #94a3b8 !important;
+  }
+
+  .balkanExpenseAmount {
+    min-width: 70px;
+    margin-left: 6px;
+    text-align: right;
+  }
+
+  .balkanExpenseAmount strong {
+    display: block;
+
+    font-size: 13px !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.02em;
+  }
+
+  .balkanExpenseAmount small {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 8px !important;
+    letter-spacing: 0.04em;
+    color: #a1aab8 !important;
+  }
+
+  /* ---------- SECTION HEAD ---------- */
+
+  .balkanRecentHead {
+    margin-bottom: 9px !important;
+  }
+
+  .balkanRecentHead h2 {
+    letter-spacing: -0.035em;
+  }
+
+  .balkanSeeAll {
+    font-weight: 750 !important;
+  }
+}
+
+/* ---------- VERY SMALL PHONES ---------- */
+
+@media (max-width: 380px) {
+
+  .balkanHeroStatsPolished strong {
+    font-size: 17px !important;
+  }
+
+  .balkanExpenseAmount {
+    min-width: 62px;
+  }
+
+  .balkanExpenseAmount strong {
+    font-size: 12px !important;
+  }
+
+  .balkanExpenseInfo strong {
+    font-size: 13px !important;
+  }
+}

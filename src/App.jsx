@@ -1262,120 +1262,295 @@ function App() {
 
       {showTrip && (
         <Modal title="Mon voyage" close={closeTripEditor}>
-          <form onSubmit={saveTrip} className="form">
-            <label>
-              Nom du voyage
-              <input
-                type="text"
-                value={data.trip.name}
-                onChange={(e) =>
-                  setData((current) => ({
-                    ...current,
-                    trip: {
-                      ...current.trip,
-                      name: e.target.value,
-                    },
-                  }))
-                }
-              />
-            </label>
+          <form onSubmit={saveTrip} className="form tripEditorForm">
 
-            <label>
-              Date de début
-              <input
-                type="date"
-                value={data.trip.start}
-                onChange={(e) =>
-                  setData((current) => ({
-                    ...current,
-                    trip: {
-                      ...current.trip,
-                      start: e.target.value,
-                    },
-                  }))
-                }
-              />
-            </label>
+            {/* =================================================
+                INFORMATIONS
+               ================================================= */}
 
-            <label>
-              Date de fin
-              <input
-                type="date"
-                value={data.trip.end}
-                onChange={(e) =>
-                  setData((current) => ({
-                    ...current,
-                    trip: {
-                      ...current.trip,
-                      end: e.target.value,
-                    },
-                  }))
-                }
-              />
-            </label>
+            <section className="tripEditorSection">
+              <div className="tripEditorSectionHead">
+                <span>INFORMATIONS</span>
+                <h3>Ton voyage</h3>
+              </div>
 
-            <label>
-              Pays visités
-              <input
-                type="text"
-                value={data.trip.countries}
-                onChange={(e) =>
-                  setData((current) => ({
-                    ...current,
-                    trip: {
-                      ...current.trip,
-                      countries: e.target.value,
-                    },
-                  }))
-                }
-              />
-            </label>
+              <label className="tripEditorField">
+                <span>Nom du voyage</span>
 
-            <label>
-              Budget total (CAD)
-              <input
-                type="number"
-                step="0.01"
-                value={data.trip.budget}
-                onChange={(e) =>
-                  setData((current) => ({
-                    ...current,
-                    trip: {
-                      ...current.trip,
-                      budget: e.target.value,
-                    },
-                  }))
-                }
-              />
-            </label>
-            <div className="travellers">
-              <h3>Voyageurs</h3>
+                <input
+                  type="text"
+                  value={data.trip.name}
+                  placeholder="Ex. Balkans 2026"
+                  onChange={(e) =>
+                    setData((current) => ({
+                      ...current,
+                      trip: {
+                        ...current.trip,
+                        name: e.target.value,
+                      },
+                    }))
+                  }
+                />
+              </label>
+            </section>
 
-              {data.people.map((person, index) => (
-                <label key={participantIds[index] || index}>
-                  Voyageur {index + 1}
+            {/* =================================================
+                DATES
+               ================================================= */}
+
+            <section className="tripEditorSection">
+              <div className="tripEditorSectionHead">
+                <span>DATES</span>
+                <h3>Quand pars-tu?</h3>
+              </div>
+
+              <div className="tripEditorDateGrid">
+                <label className="tripEditorField">
+                  <span>Départ</span>
+
                   <input
-                    type="text"
-                    value={person}
-                    maxLength={40}
+                    type="date"
+                    value={data.trip.start}
                     onChange={(e) =>
                       setData((current) => ({
                         ...current,
-                        people: current.people.map((p, i) =>
-                          i === index ? e.target.value : p,
-                        ),
+                        trip: {
+                          ...current.trip,
+                          start: e.target.value,
+                        },
                       }))
                     }
                   />
                 </label>
-              ))}
+
+                <label className="tripEditorField">
+                  <span>Retour</span>
+
+                  <input
+                    type="date"
+                    min={data.trip.start || undefined}
+                    value={data.trip.end}
+                    onChange={(e) =>
+                      setData((current) => ({
+                        ...current,
+                        trip: {
+                          ...current.trip,
+                          end: e.target.value,
+                        },
+                      }))
+                    }
+                  />
+                </label>
+              </div>
+
+              {data.trip.start && data.trip.end && (
+                <div className="tripEditorDateSummary">
+                  <div>
+                    <strong>{tripDays || "—"}</strong>
+
+                    <span>
+                      {tripDays === 1 ? "jour" : "jours"}
+                    </span>
+                  </div>
+
+                  <p>Durée totale du voyage</p>
+                </div>
+              )}
+            </section>
+
+            {/* =================================================
+                ITINÉRAIRE
+               ================================================= */}
+
+            <section className="tripEditorSection">
+              <div className="tripEditorSectionHead">
+                <span>ITINÉRAIRE</span>
+                <h3>Où vas-tu?</h3>
+              </div>
+
+              <label className="tripEditorField">
+                <span>Pays visités</span>
+
+                <input
+                  type="text"
+                  value={data.trip.countries}
+                  placeholder="Albanie, Kosovo, Macédoine du Nord"
+                  onChange={(e) =>
+                    setData((current) => ({
+                      ...current,
+                      trip: {
+                        ...current.trip,
+                        countries: e.target.value,
+                      },
+                    }))
+                  }
+                />
+
+                <small>
+                  Sépare les destinations par une virgule.
+                </small>
+              </label>
+
+              {data.trip.countries?.trim() && (
+                <div className="tripEditorCountryList">
+                  {data.trip.countries
+                    .split(",")
+                    .map((country) => country.trim())
+                    .filter(Boolean)
+                    .map((country, index) => (
+                      <div
+                        className="tripEditorCountry"
+                        key={`${country}-${index}`}
+                      >
+                        <span>{index + 1}</span>
+                        <strong>{country}</strong>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </section>
+
+            {/* =================================================
+                BUDGET
+               ================================================= */}
+
+            <section className="tripEditorSection">
+              <div className="tripEditorSectionHead">
+                <span>BUDGET</span>
+                <h3>Ton enveloppe</h3>
+              </div>
+
+              <label className="tripEditorField tripEditorBudgetField">
+                <span>Budget total</span>
+
+                <div className="tripEditorMoneyInput">
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    step="0.01"
+                    min="0"
+                    value={data.trip.budget}
+                    placeholder="0"
+                    onChange={(e) =>
+                      setData((current) => ({
+                        ...current,
+                        trip: {
+                          ...current.trip,
+                          budget: e.target.value,
+                        },
+                      }))
+                    }
+                  />
+
+                  <strong>CAD</strong>
+                </div>
+              </label>
+
+              {Number(data.trip.budget) > 0 && (
+                <div className="tripEditorBudgetPreview">
+
+                  <div>
+                    <span>BUDGET TOTAL</span>
+                    <strong>
+                      {compactMoney(Number(data.trip.budget))}
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>PAR JOUR</span>
+                    <strong>
+                      {data.trip.start &&
+                      data.trip.end &&
+                      tripDays
+                        ? compactMoney(
+                            Number(data.trip.budget) / tripDays,
+                          )
+                        : "—"}
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>PAR PERSONNE</span>
+                    <strong>
+                      {data.people.length > 0
+                        ? compactMoney(
+                            Number(data.trip.budget) /
+                              data.people.length,
+                          )
+                        : "—"}
+                    </strong>
+                  </div>
+
+                </div>
+              )}
+            </section>
+
+            {/* =================================================
+                VOYAGEURS
+               ================================================= */}
+
+            <section className="tripEditorSection">
+              <div className="tripEditorSectionHead">
+                <span>VOYAGEURS</span>
+                <h3>Qui part?</h3>
+              </div>
+
+              <div className="tripEditorTravellers">
+                {data.people.map((person, index) => (
+                  <label
+                    className="tripEditorField"
+                    key={participantIds[index] || index}
+                  >
+                    <span>Voyageur {index + 1}</span>
+
+                    <input
+                      type="text"
+                      value={person}
+                      maxLength={40}
+                      placeholder={`Voyageur ${index + 1}`}
+                      onChange={(e) =>
+                        setData((current) => ({
+                          ...current,
+                          people: current.people.map((p, i) =>
+                            i === index ? e.target.value : p,
+                          ),
+                        }))
+                      }
+                    />
+                  </label>
+                ))}
+              </div>
+            </section>
+
+            {error && (
+              <div className="tripEditorError">
+                {error}
+              </div>
+            )}
+
+            <div className="tripEditorActions">
+              <button
+                type="button"
+                className="tripEditorCancel"
+                onClick={closeTripEditor}
+                disabled={saving}
+              >
+                Annuler
+              </button>
+
+              <button
+                type="submit"
+                className="tripEditorSave"
+                disabled={saving}
+              >
+                {saving ? "Enregistrement…" : "Enregistrer"}
+              </button>
             </div>
-            <button className="primary" disabled={saving}>
-              {saving ? "Enregistrement…" : "Enregistrer"}
-            </button>
+
           </form>
         </Modal>
       )}
+
       {showExpense && form && (
         <Modal
           title={editing ? "Modifier la dépense" : "Ajouter une dépense"}

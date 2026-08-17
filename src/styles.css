@@ -9260,3 +9260,354 @@ textarea:focus {
     font-size: 21px !important;
   }
 }
+
+
+/* =========================================================
+   TRIP EDITOR — MOBILE REDESIGN
+   ========================================================= */
+
+.tripEditorForm {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.tripEditorSection {
+  padding: 18px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e8edf3 !important;
+  border-radius: 18px !important;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.02),
+    0 8px 24px rgba(15, 23, 42, 0.035) !important;
+}
+
+.tripEditorSectionHead {
+  margin-bottom: 16px !important;
+}
+
+.tripEditorSectionHead > span {
+  display: block !important;
+
+  margin-bottom: 4px !important;
+
+  color: #d95f4b !important;
+
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.7px !important;
+}
+
+.tripEditorSectionHead h3 {
+  margin: 0 !important;
+
+  color: #101827 !important;
+
+  font-size: 18px !important;
+  font-weight: 750 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.35px !important;
+}
+
+.tripEditorField {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+
+  margin: 0 !important;
+}
+
+.tripEditorField > span {
+  color: #667085 !important;
+
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2px !important;
+}
+
+.tripEditorField input {
+  width: 100% !important;
+  height: 50px !important;
+
+  box-sizing: border-box !important;
+
+  padding: 0 14px !important;
+
+  background: #f8fafc !important;
+  color: #101827 !important;
+
+  border: 1px solid #e3e8ef !important;
+  border-radius: 13px !important;
+
+  outline: none !important;
+
+  font-size: 16px !important;
+  font-weight: 600 !important;
+
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.tripEditorField input:focus {
+  background: #ffffff !important;
+  border-color: #d95f4b !important;
+
+  box-shadow: 0 0 0 3px rgba(217, 95, 75, 0.09) !important;
+}
+
+.tripEditorField small {
+  color: #98a2b3 !important;
+
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+}
+
+.tripEditorDateGrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.tripEditorDateGrid input {
+  padding: 0 10px !important;
+  font-size: 13px !important;
+}
+
+.tripEditorDateSummary {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+
+  margin-top: 12px !important;
+  padding: 12px 14px !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 13px !important;
+}
+
+.tripEditorDateSummary > div {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+}
+
+.tripEditorDateSummary strong {
+  color: #101827 !important;
+  font-size: 20px !important;
+}
+
+.tripEditorDateSummary span,
+.tripEditorDateSummary p {
+  margin: 0 !important;
+
+  color: #7b8494 !important;
+
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.tripEditorCountryList {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+
+  margin-top: 14px !important;
+}
+
+.tripEditorCountry {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  min-height: 42px !important;
+
+  padding: 0 12px !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 12px !important;
+}
+
+.tripEditorCountry > span {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 23px !important;
+  height: 23px !important;
+
+  flex: 0 0 23px !important;
+
+  background: #101827 !important;
+  color: #ffffff !important;
+
+  border-radius: 50% !important;
+
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}
+
+.tripEditorCountry strong {
+  color: #344054 !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.tripEditorMoneyInput {
+  position: relative !important;
+}
+
+.tripEditorMoneyInput input {
+  padding-right: 62px !important;
+
+  font-size: 21px !important;
+  font-weight: 750 !important;
+}
+
+.tripEditorMoneyInput > strong {
+  position: absolute !important;
+  top: 50% !important;
+  right: 14px !important;
+
+  transform: translateY(-50%) !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 11px !important;
+  letter-spacing: 0.5px !important;
+}
+
+.tripEditorBudgetPreview {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 7px !important;
+
+  margin-top: 12px !important;
+}
+
+.tripEditorBudgetPreview > div {
+  min-width: 0 !important;
+
+  padding: 11px 8px !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 12px !important;
+}
+
+.tripEditorBudgetPreview span {
+  display: block !important;
+
+  margin-bottom: 6px !important;
+
+  color: #98a2b3 !important;
+
+  font-size: 7px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.7px !important;
+}
+
+.tripEditorBudgetPreview strong {
+  display: block !important;
+
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+
+  color: #101827 !important;
+
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.3px !important;
+}
+
+.tripEditorTravellers {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.tripEditorError {
+  padding: 12px 14px !important;
+
+  background: #fff4f2 !important;
+  color: #b42318 !important;
+
+  border: 1px solid #fecdca !important;
+  border-radius: 12px !important;
+
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.tripEditorActions {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 5 !important;
+
+  display: grid !important;
+  grid-template-columns: 0.75fr 1.25fr !important;
+  gap: 10px !important;
+
+  margin: 4px -4px -4px !important;
+  padding: 12px 4px 4px !important;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0.96) 24%,
+      #ffffff 50%
+    ) !important;
+}
+
+.tripEditorCancel,
+.tripEditorSave {
+  height: 52px !important;
+
+  border-radius: 14px !important;
+
+  font-size: 14px !important;
+  font-weight: 750 !important;
+}
+
+.tripEditorCancel {
+  background: #f2f4f7 !important;
+  color: #475467 !important;
+
+  border: 0 !important;
+}
+
+.tripEditorSave {
+  background: #d95f4b !important;
+  color: #ffffff !important;
+
+  border: 0 !important;
+
+  box-shadow: 0 8px 18px rgba(217, 95, 75, 0.20) !important;
+}
+
+.tripEditorSave:disabled,
+.tripEditorCancel:disabled {
+  opacity: 0.55 !important;
+}
+
+@media (max-width: 370px) {
+  .tripEditorSection {
+    padding: 15px !important;
+  }
+
+  .tripEditorDateGrid,
+  .tripEditorTravellers {
+    grid-template-columns: 1fr !important;
+  }
+
+  .tripEditorBudgetPreview strong {
+    font-size: 13px !important;
+  }
+}

@@ -1091,9 +1091,13 @@ function App() {
         location.principalSubdivision ||
         "";
 
-      const country =
+      const rawCountry =
         location.countryName ||
         "";
+
+      const country = rawCountry
+        .replace(/\s*\([^)]*\)\s*$/, "")
+        .trim();
 
       if (city && country) {
         return `${city}, ${country}`;

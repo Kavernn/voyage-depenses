@@ -11120,3 +11120,22 @@ textarea:focus {
     display: none !important;
   }
 }
+
+
+/* =========================================================
+   TRAVELER AVATAR — STEP 1
+   ========================================================= */
+
+.tripManagerAvatar {
+  overflow: hidden !important;
+}
+
+.tripManagerAvatar img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+  object-position: center !important;
+}

@@ -77,6 +77,7 @@ function App() {
 
   const [tripId, setTripId] = useState(null);
   const [participantIds, setParticipantIds] = useState([]);
+  const [participantAvatars, setParticipantAvatars] = useState([]);
 
   const [data, setData] = useState({
     trip: {
@@ -435,6 +436,10 @@ function App() {
 
       setParticipantIds((participants || []).map((p) => p.id));
 
+      setParticipantAvatars(
+        (participants || []).map((p) => p.avatar_url || ""),
+      );
+
       setData({
         trip: {
           name: trip.name || "Mon voyage",
@@ -634,6 +639,10 @@ function App() {
     ];
 
     setTripDestinations(destinations);
+  }
+
+  function getParticipantAvatar(index) {
+    return participantAvatars[index] || "";
   }
 
   function openTripEditor() {
@@ -1925,9 +1934,16 @@ function App() {
                   >
 
                     <div className="tripManagerAvatar">
-                      {(person || `V${index + 1}`)
-                        .charAt(0)
-                        .toUpperCase()}
+                      {getParticipantAvatar(index) ? (
+                        <img
+                          src={getParticipantAvatar(index)}
+                          alt={person || `Voyageur ${index + 1}`}
+                        />
+                      ) : (
+                        (person || `V${index + 1}`)
+                          .charAt(0)
+                          .toUpperCase()
+                      )}
                     </div>
 
                     <div>

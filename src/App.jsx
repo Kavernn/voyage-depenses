@@ -131,6 +131,20 @@ function App() {
     return diff + 1;
   })();
 
+  const tripEditorFormatDate = (value) => {
+    if (!value) return "—";
+
+    const date = new Date(`${value}T00:00:00`);
+
+    if (Number.isNaN(date.getTime())) return "—";
+
+    return new Intl.DateTimeFormat("fr-CA", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(date);
+  };
+
   const tripEditorCompactMoney = (value) => {
     const amount = Number(value);
 
@@ -1424,8 +1438,6 @@ function App() {
                   {tripEditorDays === 1 ? " jour" : " jours"}
                 </span>
 
-                <i />
-
                 <span>
                   <strong>{getTripDestinations().length}</strong>
                   {" "}
@@ -1433,8 +1445,6 @@ function App() {
                     ? "pays"
                     : "pays"}
                 </span>
-
-                <i />
 
                 <span>
                   <strong>{data.people.length}</strong>
@@ -1531,6 +1541,26 @@ function App() {
 
               </div>
 
+              {(data.trip.start || data.trip.end) && (
+                <div className="tripManagerDatePreview">
+                  <div>
+                    <span>DÉPART</span>
+                    <strong>
+                      {tripEditorFormatDate(data.trip.start)}
+                    </strong>
+                  </div>
+
+                  <i>→</i>
+
+                  <div>
+                    <span>RETOUR</span>
+                    <strong>
+                      {tripEditorFormatDate(data.trip.end)}
+                    </strong>
+                  </div>
+                </div>
+              )}
+
               {data.trip.start &&
                 data.trip.end &&
                 tripEditorDays && (
@@ -1591,7 +1621,12 @@ function App() {
                           <strong>{country}</strong>
 
                           <small>
-                            Étape {index + 1}
+                            {index === 0
+                              ? "Début du voyage"
+                              : index ===
+                                  getTripDestinations().length - 1
+                                ? "Dernière étape"
+                                : `Étape ${index + 1}`}
                           </small>
                         </div>
 
@@ -1725,7 +1760,7 @@ function App() {
                 <div className="tripManagerBudgetGrid">
 
                   <div>
-                    <span>TOTAL</span>
+                    <span>BUDGET TOTAL</span>
                     <strong>
                       {tripEditorCompactMoney(
                         Number(data.trip.budget),
@@ -1734,7 +1769,7 @@ function App() {
                   </div>
 
                   <div>
-                    <span>/ JOUR</span>
+                    <span>PAR JOUR</span>
                     <strong>
                       {tripEditorDays
                         ? tripEditorCompactMoney(
@@ -1746,7 +1781,7 @@ function App() {
                   </div>
 
                   <div>
-                    <span>/ PERSONNE</span>
+                    <span>PAR PERSONNE</span>
                     <strong>
                       {data.people.length > 0
                         ? tripEditorCompactMoney(

@@ -8747,3 +8747,11 @@ textarea:focus {
     font-size: 8px !important;
   }
 }
+
+/* HERO — FINAL MICRO SPACING */
+@media (max-width: 430px) {
+  .balkanHero .balkanHeroStats,
+  .balkanHero .balkanHeroStatsPolished {
+    margin-top: 10px !important;
+  }
+}

@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { X } from "lucide-react";
 
-export default function Modal({ title, close, children }) {
+export default function Modal({
+  title,
+  close,
+  children,
+  footer = null,
+}) {
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
 
@@ -38,6 +43,12 @@ export default function Modal({ title, close, children }) {
         <div className="modalContent">
           {children}
         </div>
+
+        {footer && (
+          <div className="modalFooter">
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );

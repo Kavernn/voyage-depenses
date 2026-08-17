@@ -2278,8 +2278,26 @@ function App() {
         <Modal
           title={editing ? "Modifier la dépense" : "Ajouter une dépense"}
           close={closeExpenseEditor}
+          footer={
+            <button
+              type="submit"
+              form="expenseEditorForm"
+              className="primary expenseSaveButton"
+              disabled={
+                saving ||
+                parseAmountInput(form.amount) <= 0
+              }
+            >
+              {saving
+                ? "Enregistrement…"
+                : `Enregistrer · ${money(
+                    parseAmountInput(form.amount),
+                  )}`}
+            </button>
+          }
         >
           <form
+            id="expenseEditorForm"
             onSubmit={saveExpense}
             className="form expenseEditorForm"
           >
@@ -2659,15 +2677,7 @@ function App() {
             {/* STATUT DU TAUX */}
             <div className="rate">{rateStatus}</div>
 
-            {/* SAVE */}
-            <button
-              className="primary expenseSaveButton"
-              disabled={saving || parseAmountInput(form.amount) <= 0}
-            >
-              {saving
-                ? "Enregistrement…"
-                : `Enregistrer · ${money(parseAmountInput(form.amount))}`}
-            </button>
+
           </form>
         </Modal>
       )}

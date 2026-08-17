@@ -103,6 +103,8 @@ function App() {
   const [showJoin, setShowJoin] = useState(false);
   const [joining, setJoining] = useState(false);
   const [syncStatus, setSyncStatus] = useState("connecting");
+  const [noTrip, setNoTrip] = useState(false);
+  const [creatingTrip, setCreatingTrip] = useState(false);
 
   useEffect(() => {
     loadFromSupabase();
@@ -310,39 +312,14 @@ function App() {
         }
       }
 
-      // 4. Si aucun voyage connu n'est disponible,
-      // on crée un NOUVEAU voyage.
-      //
-      // Important : on ne prend jamais arbitrairement
-      // le premier voyage présent dans la base.
+      // 4. Aucun voyage connu :
+      // on NE crée rien automatiquement.
+      // Une nouvelle installation doit explicitement créer
+      // ou rejoindre un voyage.
       if (!trip) {
-        const { data: createdTrip, error: createError } = await supabase
-          .from("trips")
-          .insert({
-            name: "Mon voyage",
-            share_code: generateShareCode(),
-          })
-          .select()
-          .single();
-
-        if (createError) throw createError;
-
-        trip = createdTrip;
-
-        const { error: participantError } = await supabase
-          .from("participants")
-          .insert([
-            {
-              trip_id: trip.id,
-              name: "Moi",
-            },
-            {
-              trip_id: trip.id,
-              name: "Mon conjoint",
-            },
-          ]);
-
-        if (participantError) throw participantError;
+        setTripId(null);
+        setNoTrip(true);
+        return;
       }
 
       // Compatibilité avec d'anciens voyages créés
@@ -364,6 +341,7 @@ function App() {
         trip = updatedTrip;
       }
 
+      setNoTrip(false);
       setTripId(trip.id);
 
       localStorage.setItem(
@@ -425,6 +403,77 @@ function App() {
       setError(err?.message || "Impossible de charger les données Supabase.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function createNewTrip() {
+    if (creatingTrip) return;
+
+    try {
+      setCreatingTrip(true);
+      setError("");
+
+      const { data: createdTrip, error: createError } = await supabase
+        .from("trips")
+        .insert({
+          name: "Mon voyage",
+          share_code: generateShareCode(),
+        })
+        .select()
+        .single();
+
+      if (createError) throw createError;
+
+      const { error: participantError } = await supabase
+        .from("participants")
+        .insert([
+          {
+            trip_id: createdTrip.id,
+            name: "Moi",
+          },
+          {
+            trip_id: createdTrip.id,
+            name: "Mon conjoint",
+          },
+        ]);
+
+      if (participantError) {
+        // Évite de laisser un voyage orphelin si la création
+        // des participants échoue.
+        await supabase
+          .from("trips")
+          .delete()
+          .eq("id", createdTrip.id);
+
+        throw participantError;
+      }
+
+      localStorage.setItem(
+        "voyage-depenses-trip-id",
+        createdTrip.id,
+      );
+
+      localStorage.setItem(
+        "voyage-depenses-share-code",
+        createdTrip.share_code,
+      );
+
+      setNoTrip(false);
+
+      await loadFromSupabase(createdTrip.id);
+
+      // Ouvre immédiatement l'éditeur pour configurer
+      // le nouveau voyage.
+      setTripEditSnapshot(null);
+      setShowTrip(true);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err?.message ||
+          "Impossible de créer le voyage.",
+      );
+    } finally {
+      setCreatingTrip(false);
     }
   }
 
@@ -978,6 +1027,108 @@ function App() {
       <div className="app">
         <main>
           <div className="empty">Chargement de ton voyage…</div>
+        </main>
+      </div>
+    );
+  }
+
+  if (noTrip) {
+    return (
+      <div className="app tripOnboardingApp">
+        <main className="tripOnboarding">
+          <div className="tripOnboardingIcon">
+            <Plane size={30} strokeWidth={1.9} />
+          </div>
+
+          <div className="tripOnboardingCopy">
+            <span>VOYAGE DÉPENSES</span>
+
+            <h1>Ton prochain voyage commence ici.</h1>
+
+            <p>
+              Crée un nouveau voyage ou rejoins celui
+              d'un compagnon avec son code de partage.
+            </p>
+          </div>
+
+          {error && (
+            <div className="tripOnboardingError">
+              {error}
+            </div>
+          )}
+
+          <div className="tripOnboardingActions">
+            <button
+              type="button"
+              className="tripOnboardingPrimary"
+              onClick={createNewTrip}
+              disabled={creatingTrip}
+            >
+              <Plus size={20} />
+              {creatingTrip
+                ? "Création…"
+                : "Créer un voyage"}
+            </button>
+
+            <button
+              type="button"
+              className="tripOnboardingSecondary"
+              onClick={() => setShowJoin(true)}
+            >
+              Rejoindre un voyage
+            </button>
+          </div>
+
+          {showJoin && (
+            <Modal
+              title="Rejoindre un voyage"
+              close={() => {
+                setShowJoin(false);
+                setJoinCode("");
+              }}
+            >
+              <form
+                className="form"
+                onSubmit={joinTripByCode}
+              >
+                <p>
+                  Entre le code de partage que ton
+                  compagnon t'a donné.
+                </p>
+
+                <label>
+                  Code du voyage
+
+                  <input
+                    autoFocus
+                    required
+                    type="text"
+                    inputMode="text"
+                    autoCapitalize="characters"
+                    autoCorrect="off"
+                    spellCheck="false"
+                    maxLength={8}
+                    value={joinCode}
+                    placeholder="Ex. 4251CBDD"
+                    onChange={(e) =>
+                      setJoinCode(
+                        e.target.value.toUpperCase(),
+                      )
+                    }
+                  />
+                </label>
+
+                <button
+                  className="primary"
+                  disabled={joining}
+                >
+                  {joining
+                    ? "Connexion…"
+                    : "Rejoindre le voyage"}
+                </button>
+              </form>
+            </Modal>
+          )}
         </main>
       </div>
     );

@@ -8755,3 +8755,175 @@ textarea:focus {
     margin-top: 10px !important;
   }
 }
+
+
+/* =========================================================
+   TRIP ONBOARDING
+   Aucun voyage n'est créé sans action explicite.
+   ========================================================= */
+
+.tripOnboardingApp {
+  min-height: 100dvh;
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(59, 130, 246, 0.10),
+      transparent 34%
+    ),
+    #f7f8fb;
+}
+
+.tripOnboarding {
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding:
+    calc(env(safe-area-inset-top) + 40px)
+    24px
+    calc(env(safe-area-inset-bottom) + 40px);
+
+  text-align: center;
+}
+
+.tripOnboardingIcon {
+  width: 66px;
+  height: 66px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 24px;
+
+  border-radius: 22px;
+
+  background: #101827;
+  color: #ffffff;
+
+  box-shadow:
+    0 14px 35px rgba(15, 23, 42, 0.16);
+}
+
+.tripOnboardingCopy {
+  width: 100%;
+  max-width: 360px;
+}
+
+.tripOnboardingCopy > span {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.tripOnboardingCopy h1 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: clamp(30px, 8vw, 38px);
+  font-weight: 850;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.tripOnboardingCopy p {
+  max-width: 330px;
+
+  margin: 18px auto 0;
+
+  color: #64748b;
+
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.tripOnboardingActions {
+  width: 100%;
+  max-width: 350px;
+
+  display: grid;
+
+  margin-top: 34px;
+
+  gap: 11px;
+}
+
+.tripOnboardingPrimary,
+.tripOnboardingSecondary {
+  width: 100%;
+  min-height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  box-sizing: border-box;
+
+  border-radius: 17px;
+
+  font-size: 15px;
+  font-weight: 750;
+
+  cursor: pointer;
+}
+
+.tripOnboardingPrimary {
+  border: 1px solid #101827;
+
+  background: #101827;
+  color: #ffffff;
+
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.13);
+}
+
+.tripOnboardingPrimary:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.tripOnboardingSecondary {
+  border: 1px solid #e2e8f0;
+
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.tripOnboardingPrimary:active,
+.tripOnboardingSecondary:active {
+  transform: scale(0.985);
+}
+
+.tripOnboardingError {
+  width: 100%;
+  max-width: 350px;
+
+  box-sizing: border-box;
+
+  margin-top: 20px;
+  padding: 12px 14px;
+
+  border: 1px solid #fecaca;
+  border-radius: 14px;
+
+  background: #fef2f2;
+  color: #b91c1c;
+
+  font-size: 13px;
+  line-height: 1.4;
+}
+

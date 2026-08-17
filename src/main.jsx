@@ -10,29 +10,20 @@ import './styles.css';
  * PWA UPDATE MANAGER
  * =========================================================
  *
- * Vérifie automatiquement si une nouvelle version est
- * disponible et force le remplacement de l'ancien bundle.
+ * registerType: 'autoUpdate' est configuré dans vite.config.js.
  *
- * Objectif :
- *   git push
- *      ↓
- *   Vercel deploy
- *      ↓
- *   nouveau SW détecté
- *      ↓
- *   nouveau SW activé
- *      ↓
- *   page rechargée
- *      ↓
- *   nouvelle version affichée
+ * Ce module :
+ * - enregistre immédiatement le service worker;
+ * - laisse vite-plugin-pwa gérer l'activation/reload;
+ * - vérifie la présence d'une nouvelle version au lancement;
+ * - revérifie périodiquement pendant que l'app reste ouverte.
  *
- * Le client ne doit pas vider le cache ni réinstaller
- * l'application pour les prochaines mises à jour.
+ * Aucun double reload manuel via controllerchange.
  */
 
-let refreshing = false;
+const UPDATE_INTERVAL_MS = 60 * 60 * 1000;
 
-const updateSW = registerSW({
+registerSW({
   immediate: true,
 
   onRegisteredSW(swUrl, registration) {
@@ -40,34 +31,60 @@ const updateSW = registerSW({
 
     console.log('[PWA] Service worker enregistré:', swUrl);
 
-    /*
-     * Vérification immédiate au lancement.
-     */
-    registration.update().catch(() => {});
+    const checkForUpdate = async () => {
+      if (registration.installing) return;
+      if (!navigator.onLine) return;
+
+      try {
+        /*
+         * Vérifie d'abord que le sw.js distant est accessible
+         * sans réutiliser une réponse HTTP mise en cache.
+         */
+        const response = await fetch(swUrl, {
+          cache: 'no-store',
+          headers: {
+            'cache': 'no-store',
+            'cache-control': 'no-cache',
+          },
+        });
+
+        if (response.ok) {
+          await registration.update();
+        }
+      } catch (error) {
+        /*
+         * Une perte de réseau ne doit jamais casser l'app.
+         */
+        console.debug(
+          '[PWA] Vérification de mise à jour impossible:',
+          error,
+        );
+      }
+    };
 
     /*
-     * Vérification périodique.
-     *
-     * Une heure est volontairement utilisée :
-     * suffisamment fréquente pour une app de voyage,
-     * sans faire des requêtes inutiles en permanence.
+     * Vérification immédiatement après l'enregistrement.
      */
-    window.setInterval(() => {
-      registration.update().catch(() => {});
-    }, 60 * 60 * 1000);
-  },
-
-  onNeedRefresh() {
-    console.log('[PWA] Nouvelle version détectée.');
+    checkForUpdate();
 
     /*
-     * Active immédiatement le nouveau service worker
-     * et recharge la page.
+     * Puis une fois par heure si l'application reste ouverte.
      */
-    if (!refreshing) {
-      refreshing = true;
-      updateSW(true);
-    }
+    window.setInterval(
+      checkForUpdate,
+      UPDATE_INTERVAL_MS,
+    );
+
+    /*
+     * Important sur mobile/PWA :
+     * quand l'utilisateur revient dans l'application après
+     * l'avoir laissée en arrière-plan, on revérifie aussi.
+     */
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        checkForUpdate();
+      }
+    });
   },
 
   onOfflineReady() {
@@ -75,23 +92,12 @@ const updateSW = registerSW({
   },
 
   onRegisterError(error) {
-    console.error('[PWA] Erreur service worker:', error);
+    console.error(
+      '[PWA] Erreur service worker:',
+      error,
+    );
   },
 });
-
-/*
- * Si le nouveau service worker prend le contrôle alors que
- * la page actuelle est encore ouverte, on recharge une seule
- * fois pour récupérer le nouveau bundle JS/CSS.
- */
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (refreshing) return;
-
-    refreshing = true;
-    window.location.reload();
-  });
-}
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

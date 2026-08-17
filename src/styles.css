@@ -11120,3 +11120,39 @@ textarea:focus {
     display: none !important;
   }
 }
+
+
+/* =========================================================
+   TRIP MANAGER — DATES FINAL POLISH
+   ========================================================= */
+
+.tripManagerDateGrid {
+  gap: 8px !important;
+}
+
+.tripManagerDateGrid .tripManagerField {
+  gap: 6px !important;
+}
+
+.tripManagerDateGrid input {
+  height: 48px !important;
+}
+
+.tripManagerDuration {
+  margin-top: 10px !important;
+  padding: 11px 13px !important;
+
+  min-height: 52px !important;
+}
+
+.tripManagerDuration strong {
+  font-size: 20px !important;
+}
+
+.tripManagerDuration p {
+  text-align: right !important;
+}
+
+.tripManagerCard:has(.tripManagerDateGrid) {
+  padding-bottom: 16px !important;
+}

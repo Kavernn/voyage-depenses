@@ -1541,26 +1541,6 @@ function App() {
 
               </div>
 
-              {(data.trip.start || data.trip.end) && (
-                <div className="tripManagerDatePreview">
-                  <div>
-                    <span>DÉPART</span>
-                    <strong>
-                      {tripEditorFormatDate(data.trip.start)}
-                    </strong>
-                  </div>
-
-                  <i>→</i>
-
-                  <div>
-                    <span>RETOUR</span>
-                    <strong>
-                      {tripEditorFormatDate(data.trip.end)}
-                    </strong>
-                  </div>
-                </div>
-              )}
-
               {data.trip.start &&
                 data.trip.end &&
                 tripEditorDays && (

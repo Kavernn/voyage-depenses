@@ -2679,6 +2679,8 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
       "albanie": "🇦🇱",
       "albani": "🇦🇱",
       "kosovo": "🇽🇰",
+      "macédoine": "🇲🇰",
+      "macedoine": "🇲🇰",
       "macédoine du nord": "🇲🇰",
       "macedoine du nord": "🇲🇰",
       "north macedonia": "🇲🇰",
@@ -3223,7 +3225,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
           <div className="balkanSectionHead">
             <div>
               <span>JOURNEY</span>
-              <h2>Ton itinéraire</h2>
+              <h2>Étapes enregistrées</h2>
             </div>
 
             <strong>

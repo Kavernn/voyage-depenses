@@ -12307,3 +12307,208 @@ textarea:focus {
       ) !important;
   }
 }
+
+
+/* =========================================================
+   EXPENSE EDITOR — MODAL FOOTER FINAL
+   ========================================================= */
+
+/*
+ * La modale devient un shell fixe.
+ * Seul .modalContent scrolle.
+ */
+
+.overlay {
+  overflow: hidden !important;
+}
+
+.modal {
+  position: relative !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  width: min(720px, 100%) !important;
+
+  max-height: 92dvh !important;
+
+  overflow: hidden !important;
+
+  padding: 0 !important;
+
+  background: #f8fafc !important;
+
+  border-radius: 24px 24px 0 0 !important;
+}
+
+
+/*
+ * Header fixe dans la modale.
+ */
+
+.modalHead {
+  flex: 0 0 auto !important;
+
+  margin: 0 !important;
+  padding: 18px !important;
+
+  background: #f8fafc !important;
+
+  border-bottom: 1px solid #e7ebf0 !important;
+
+  z-index: 3 !important;
+}
+
+
+/*
+ * Seule cette zone scrolle.
+ */
+
+.modalContent {
+  flex: 1 1 auto !important;
+
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  -webkit-overflow-scrolling: touch !important;
+
+  padding: 18px !important;
+}
+
+
+/*
+ * Réserve l'espace nécessaire au footer.
+ */
+
+.modalContent .expenseEditorForm {
+  padding-bottom:
+    calc(
+      92px +
+      env(safe-area-inset-bottom)
+    ) !important;
+}
+
+
+/*
+ * Bouton fixé AU BAS DE LA MODALE,
+ * pas au viewport global.
+ */
+
+.modal .expenseEditorForm .expenseSaveButton {
+  position: absolute !important;
+
+  left: 18px !important;
+  right: 18px !important;
+
+  bottom:
+    calc(
+      12px +
+      env(safe-area-inset-bottom)
+    ) !important;
+
+  z-index: 20 !important;
+
+  width: auto !important;
+
+  min-height: 58px !important;
+
+  margin: 0 !important;
+  padding: 0 18px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b6cf2 0%,
+      #1769e8 100%
+    ) !important;
+
+  color: #ffffff !important;
+
+  border: 0 !important;
+  border-radius: 18px !important;
+
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.18),
+    0 0 0 8px rgba(248, 250, 252, 0.96) !important;
+
+  font-size: 16px !important;
+  font-weight: 850 !important;
+
+  transform: none !important;
+}
+
+
+/*
+ * État désactivé.
+ */
+
+.modal .expenseEditorForm .expenseSaveButton:disabled {
+  background: #c4d5ec !important;
+
+  color: rgba(255, 255, 255, 0.92) !important;
+
+  box-shadow:
+    0 0 0 8px rgba(248, 250, 252, 0.96) !important;
+
+  opacity: 1 !important;
+}
+
+
+/*
+ * iPhone / mobile.
+ */
+
+@media (max-width: 699px) {
+  .modal {
+    height: 92dvh !important;
+    max-height: 92dvh !important;
+  }
+
+  .modalHead {
+    padding:
+      18px
+      18px
+      16px !important;
+  }
+
+  .modalContent {
+    padding:
+      18px
+      18px
+      calc(
+        18px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+
+  .modal .expenseEditorForm .expenseSaveButton {
+    left: 18px !important;
+    right: 18px !important;
+
+    bottom:
+      calc(
+        10px +
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+}
+
+
+/*
+ * Desktop.
+ */
+
+@media (min-width: 700px) {
+  .modal {
+    max-height: 85dvh !important;
+
+    border-radius: 24px !important;
+  }
+
+  .modal .expenseEditorForm .expenseSaveButton {
+    left: 18px !important;
+    right: 18px !important;
+  }
+}

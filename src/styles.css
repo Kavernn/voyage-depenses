@@ -8406,3 +8406,122 @@ textarea:focus {
     font-size: 20px !important;
   }
 }
+
+
+/* =========================================================
+   HEADER — LOCKED FINAL LAYOUT
+   ========================================================= */
+
+.travelAppHeader {
+  position: relative !important;
+
+  display: block !important;
+
+  height: 150px !important;
+  min-height: 150px !important;
+
+  padding:
+    calc(env(safe-area-inset-top) + 16px)
+    18px
+    18px !important;
+
+  background: #101827 !important;
+}
+
+/* Centre indépendant */
+
+.travelAppHeader .travelHeaderCenter {
+  position: absolute !important;
+
+  left: 50% !important;
+  top: 50% !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 7px !important;
+
+  width: max-content !important;
+  max-width: calc(100% - 150px) !important;
+
+  transform: translate(-50%, -38%) !important;
+
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+
+/* Wallet verrouillé à gauche */
+
+.travelAppHeader .travelHeaderWallet {
+  position: absolute !important;
+
+  left: 18px !important;
+  top: 50% !important;
+
+  transform: translateY(-20%) !important;
+
+  z-index: 4 !important;
+}
+
+/* + verrouillé à droite */
+
+.travelAppHeader .travelHeaderAdd {
+  position: absolute !important;
+
+  right: 18px !important;
+  top: 50% !important;
+
+  transform: translateY(-20%) !important;
+
+  z-index: 4 !important;
+}
+
+/* Boutons */
+
+.travelAppHeader .travelHeaderIcon {
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  margin: 0 !important;
+
+  transform: none !important;
+}
+
+/* Typographie */
+
+.travelAppHeader .travelHeaderTitle {
+  font-size: 21px !important;
+  line-height: 1.08 !important;
+
+  margin: 0 !important;
+
+  white-space: nowrap !important;
+}
+
+.travelAppHeader .travelHeaderPlane {
+  margin: 0 !important;
+}
+
+@media (max-width: 380px) {
+
+  .travelAppHeader .travelHeaderWallet {
+    left: 14px !important;
+  }
+
+  .travelAppHeader .travelHeaderAdd {
+    right: 14px !important;
+  }
+
+  .travelAppHeader .travelHeaderTitle {
+    font-size: 19px !important;
+  }
+
+}

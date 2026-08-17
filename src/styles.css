@@ -10543,3 +10543,138 @@ textarea:focus {
     padding: 0 12px !important;
   }
 }
+
+
+/* =========================================================
+   TRIP MANAGER — COMPACT FOOTER FINAL
+   ========================================================= */
+
+.tripManagerFooter {
+  position: sticky !important;
+
+  bottom:
+    calc(env(safe-area-inset-bottom) + 8px) !important;
+
+  z-index: 60 !important;
+
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  align-items: center !important;
+
+  gap: 8px !important;
+
+  width: calc(100% - 8px) !important;
+  min-height: 0 !important;
+
+  margin:
+    4px
+    4px
+    0 !important;
+
+  padding:
+    7px
+    7px !important;
+
+  box-sizing: border-box !important;
+
+  background: rgba(255, 255, 255, 0.88) !important;
+
+  border: 1px solid rgba(228, 231, 236, 0.92) !important;
+  border-radius: 17px !important;
+
+  box-shadow:
+    0 10px 28px rgba(15, 23, 42, 0.10),
+    0 2px 7px rgba(15, 23, 42, 0.05) !important;
+
+  backdrop-filter:
+    blur(18px)
+    saturate(140%) !important;
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(140%) !important;
+}
+
+.tripManagerFooter button {
+  height: 48px !important;
+  min-height: 48px !important;
+
+  margin: 0 !important;
+
+  border-radius: 12px !important;
+
+  font-size: 12px !important;
+  font-weight: 800 !important;
+
+  line-height: 1 !important;
+}
+
+.tripManagerCancel {
+  width: auto !important;
+
+  padding: 0 15px !important;
+
+  background: transparent !important;
+  color: #667085 !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.tripManagerSave {
+  width: 100% !important;
+
+  padding: 0 18px !important;
+
+  background: #ef5543 !important;
+  color: #ffffff !important;
+
+  border: 0 !important;
+
+  box-shadow:
+    0 6px 14px rgba(239, 85, 67, 0.18) !important;
+}
+
+.tripManagerFooter button:active {
+  transform: scale(0.985) !important;
+}
+
+.tripManagerFooter button:disabled {
+  opacity: 0.5 !important;
+}
+
+/*
+ * Empêche l'ancien CSS sticky d'ajouter
+ * une grande zone verticale autour de la barre.
+ */
+.tripManagerFooter::before,
+.tripManagerFooter::after {
+  display: none !important;
+  content: none !important;
+}
+
+.tripManager {
+  padding-bottom:
+    calc(env(safe-area-inset-bottom) + 14px) !important;
+}
+
+@media (max-width: 370px) {
+  .tripManagerFooter {
+    bottom:
+      calc(env(safe-area-inset-bottom) + 6px) !important;
+
+    padding: 6px !important;
+
+    border-radius: 16px !important;
+  }
+
+  .tripManagerFooter button {
+    height: 45px !important;
+    min-height: 45px !important;
+  }
+
+  .tripManagerCancel {
+    padding: 0 12px !important;
+  }
+}

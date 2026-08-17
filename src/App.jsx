@@ -2022,18 +2022,18 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
   const intelligenceMessage =
     !tripHasStarted
-      ? budgetAmount > 0 && tripDays && data.people.length > 0
+      ? budgetAmount > 0 && tripStartDate && tripEndDate && tripDays && data.people.length > 0
         ? `Ton budget te donne ${money(
             budgetAmount / tripDays,
           )} par jour, soit ${money(
             budgetAmount / tripDays / data.people.length,
           )} par personne / jour.`
         : budgetAmount > 0 && data.people.length > 0
-          ? `Ton budget voyage est de ${money(
+          ? `Ton budget voyage est de ${compactMoney(
               budgetAmount,
-            )}, soit ${money(
+            )}, soit ${compactMoney(
               budgetAmount / data.people.length,
-            )} par personne. Ajoute tes dates pour calculer le budget quotidien.`
+            )} par personne.`
           : "Ajoute ton budget et tes dates pour préparer ton rythme de voyage."
       : tripHasEnded
         ? "Voici ce que ton rythme réel raconte sur le voyage."
@@ -2348,13 +2348,16 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
               <span>BUDGET / JOUR</span>
 
               <strong>
-                {budgetAmount > 0 && tripDays
+                {budgetAmount > 0 &&
+                tripStartDate &&
+                tripEndDate &&
+                tripDays
                   ? compactMoney(budgetAmount / tripDays)
                   : "—"}
               </strong>
 
               <small>
-                {tripDays
+                {tripStartDate && tripEndDate
                   ? "budget quotidien"
                   : "ajoute tes dates"}
               </small>
@@ -2553,7 +2556,7 @@ function Dashboard({ data, stats, onAdd, onHistory, onTrip }) {
 
               <strong>
                 {budgetAmount > 0
-                  ? money(budgetAmount)
+                  ? compactMoney(budgetAmount)
                   : "—"}
               </strong>
 

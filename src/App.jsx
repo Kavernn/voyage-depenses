@@ -689,6 +689,13 @@ function App() {
     }
   }
 
+  function closeExpenseEditor() {
+    setShowExpense(false);
+    setForm(null);
+    setEditing(null);
+    setError("");
+  }
+
   async function newExpense() {
     setEditing(null);
 
@@ -853,9 +860,7 @@ function App() {
         }));
       }
 
-      setShowExpense(false);
-      setForm(null);
-      setEditing(null);
+      closeExpenseEditor();
     } catch (err) {
       console.error(err);
       setError(err?.message || "Impossible de sauvegarder la dépense.");
@@ -1214,7 +1219,7 @@ function App() {
       {showExpense && form && (
         <Modal
           title={editing ? "Modifier la dépense" : "Ajouter une dépense"}
-          close={() => setShowExpense(false)}
+          close={closeExpenseEditor}
         >
           <form onSubmit={saveExpense} className="form">
                 {/* MONTANT */}

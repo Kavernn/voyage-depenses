@@ -1129,11 +1129,32 @@ function App() {
 
     const initialCurrency = "CAD";
 
+    const savedPayer =
+      localStorage.getItem(
+        "voyage-depenses-last-payer",
+      ) || "";
+
+    const savedCategory =
+      localStorage.getItem(
+        "voyage-depenses-last-category",
+      ) || "";
+
+    const initialPayer =
+      savedPayer && data.people.includes(savedPayer)
+        ? savedPayer
+        : data.people[0];
+
+    const initialCategory =
+      savedCategory &&
+      data.categories.includes(savedCategory)
+        ? savedCategory
+        : data.categories[0];
+
     setForm({
       amount: "",
       currency: initialCurrency,
-      payer: data.people[0],
-      category: data.categories[0],
+      payer: initialPayer,
+      category: initialCategory,
       description: "",
       date: today(),
       place: "",
@@ -1307,6 +1328,20 @@ function App() {
             ...current.expenses,
           ]),
         }));
+      }
+
+      if (form.payer) {
+        localStorage.setItem(
+          "voyage-depenses-last-payer",
+          form.payer,
+        );
+      }
+
+      if (form.category) {
+        localStorage.setItem(
+          "voyage-depenses-last-category",
+          form.category,
+        );
       }
 
       closeExpenseEditor();

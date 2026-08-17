@@ -534,7 +534,7 @@ function App() {
   function changeSplitMode(mode) {
     setForm((current) => {
       if (!current) return current;
-
+  
       switch (mode) {
         case "equal":
           return {
@@ -543,23 +543,25 @@ function App() {
             splitMode: "equal",
             split: 50,
           };
-
+  
         case "personal1":
           return {
             ...current,
-            personal: false,
+            personal: true,
             splitMode: "personal1",
             split: 100,
+            payer: data.people[0],
           };
-
+  
         case "personal2":
           return {
             ...current,
-            personal: false,
+            personal: true,
             splitMode: "personal2",
             split: 0,
+            payer: data.people[1],
           };
-
+  
         case "custom":
           return {
             ...current,
@@ -567,7 +569,7 @@ function App() {
             splitMode: "custom",
             split: current.split === 50 ? 50 : current.split,
           };
-
+  
         default:
           return current;
       }

@@ -6740,3 +6740,293 @@ nav button {
     grid-template-columns: 1fr;
   }
 }
+/* =========================================================
+   ADD EXPENSE — SPLIT V4
+   ========================================================= */
+
+   .splitSection {
+    margin-top: 20px;
+    padding-top: 18px;
+  
+    border-top: 1px solid #eef2f7;
+  }
+  
+  .splitTitle {
+    margin-bottom: 10px;
+  
+    color: #64748b;
+  
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  
+  .splitOptions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+  
+  .splitOption {
+    min-height: 72px;
+  
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    padding: 12px;
+  
+    border: 1px solid #e5eaf0;
+    border-radius: 15px;
+  
+    background: #ffffff;
+    color: #334155;
+  
+    text-align: left;
+  
+    transition:
+      border-color 0.15s ease,
+      background 0.15s ease,
+      transform 0.12s ease;
+  }
+  
+  .splitOption:active {
+    transform: scale(0.98);
+  }
+  
+  .splitOption.active {
+    border-color: rgba(37, 99, 235, 0.35);
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+  
+  .splitOption .radio {
+    display: grid;
+  
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+  
+    place-items: center;
+  
+    border-radius: 10px;
+  
+    background: #f1f5f9;
+    color: #94a3b8;
+  
+    font-size: 14px;
+  }
+  
+  .splitOption.active .radio {
+    background: #dbeafe;
+    color: #2563eb;
+  }
+  
+  .splitOption > span:last-child {
+    min-width: 0;
+  }
+  
+  .splitOption b {
+    display: block;
+  
+    color: inherit;
+  
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  
+  .splitOption small {
+    display: block;
+  
+    margin-top: 3px;
+  
+    color: #94a3b8;
+  
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  
+  .splitOption.active small {
+    color: #60a5fa;
+  }
+  
+  /* ---------- CUSTOM ---------- */
+  
+  .customSplit {
+    margin-top: 12px;
+    padding: 14px;
+  
+    border: 1px solid #eef2f7;
+    border-radius: 15px;
+  
+    background: #f8fafc;
+  }
+  
+  .customSplit .splitPercent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    margin-bottom: 8px;
+  }
+  
+  .customSplit .splitPercent span {
+    color: #64748b;
+  
+    font-size: 11px;
+    font-weight: 700;
+  }
+  
+  .customSplit .splitPercent b {
+    color: #0f172a;
+  
+    font-size: 17px;
+    font-weight: 800;
+  }
+  
+  .customSplit input[type="range"] {
+    width: 100%;
+    min-height: 32px;
+  
+    accent-color: #2563eb;
+  }
+  
+  /* ---------- AMOUNTS ---------- */
+  
+  .splitAmounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  
+    margin-top: 12px;
+  }
+  
+  .splitAmounts > div {
+    padding: 12px;
+  
+    border: 1px solid #eef2f7;
+    border-radius: 14px;
+  
+    background: #ffffff;
+  }
+  
+  .splitAmounts span {
+    display: block;
+  
+    color: #94a3b8;
+  
+    font-size: 9px;
+    font-weight: 700;
+  }
+  
+  .splitAmounts b {
+    display: block;
+  
+    margin-top: 4px;
+  
+    color: #0f172a;
+  
+    font-size: 14px;
+    font-weight: 800;
+  }
+  
+  /* ---------- MOBILE ---------- */
+  
+  @media (max-width: 480px) {
+    .splitSection {
+      margin-top: 18px;
+      padding-top: 16px;
+    }
+  
+    .splitOption {
+      min-height: 68px;
+      padding: 11px;
+    }
+  
+    .splitOption .radio {
+      width: 28px;
+      height: 28px;
+      flex-basis: 28px;
+    }
+  
+    .splitAmounts > div {
+      padding: 11px;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .splitOptions,
+    .splitAmounts {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* =========================================================
+   ADD EXPENSE — STICKY SAVE + MODAL POLISH
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .modal {
+    background: #f8fafc !important;
+  }
+
+  .modalHead {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 30 !important;
+
+    background: rgba(248, 250, 252, 0.96) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid #eef2f7 !important;
+  }
+
+  .modalContent {
+    padding-bottom: 100px !important;
+  }
+
+  .modalContent .form {
+    position: relative;
+  }
+
+  .modalContent .form > .primary:last-child {
+    position: sticky;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 25;
+
+    margin-top: 18px;
+
+    min-height: 56px;
+
+    border-radius: 17px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #1d4ed8,
+        #2563eb
+      );
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    box-shadow:
+      0 12px 28px rgba(37, 99, 235, 0.28),
+      0 0 0 6px rgba(248, 250, 252, 0.96);
+  }
+
+  .modalContent .form > .primary:last-child:active {
+    transform: scale(0.98);
+  }
+
+  .modalClose {
+    background: #ffffff !important;
+    border: 1px solid #e5eaf0 !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+}

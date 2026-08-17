@@ -8311,3 +8311,19 @@ textarea:focus {
     min-height: 43px !important;
   }
 }
+
+/* =========================================================
+   HEADER — FINAL VERTICAL BALANCE
+   Remonte légèrement le groupe avion + titre sans déplacer
+   les actions latérales.
+   ========================================================= */
+
+.travelAppHeader .travelHeaderCenter {
+  transform: translateY(-12px);
+}
+
+@media (max-width: 480px) {
+  .travelAppHeader .travelHeaderCenter {
+    transform: translateY(-14px);
+  }
+}

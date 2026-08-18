@@ -486,7 +486,7 @@ button:active {
 @media (max-width: 480px) {
 
 
-  
+
 }
 
 /* =========================================================
@@ -633,9 +633,9 @@ button:active {
 
 
 
-    
 
-    
+
+
 
     main {
       padding-bottom: calc(82px + env(safe-area-inset-bottom));
@@ -1074,9 +1074,9 @@ button:active {
 
 
 
-    
 
-    
+
+
 
     /* ---------- FORMS ---------- */
 
@@ -1460,9 +1460,9 @@ button:active {
 
 
 
-  
 
-  
+
+
 
   main {
     padding-bottom: 92px;
@@ -1473,7 +1473,7 @@ button:active {
 @media (max-width: 360px) {
 
 
-  
+
 }
 
 /* =========================================================
@@ -1596,123 +1596,123 @@ button:active {
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-  
+
     width: 100% !important;
     max-width: none !important;
     height: calc(72px + env(safe-area-inset-bottom)) !important;
-  
+
     margin: 0 !important;
     padding: 0 20px env(safe-area-inset-bottom) !important;
-  
+
     transform: none !important;
-  
+
     display: grid !important;
     grid-template-columns: 1fr 72px 1fr !important;
     align-items: center !important;
     justify-items: center !important;
-  
+
     box-sizing: border-box !important;
-  
+
     background: rgba(255, 255, 255, 0.97) !important;
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-  
+
     border: 0 !important;
     border-top: 1px solid rgba(226, 232, 240, 0.9) !important;
     border-radius: 0 !important;
-  
+
     box-shadow: 0 -8px 30px rgba(15, 23, 42, 0.08);
-  
+
     z-index: 9999 !important;
   }
-  
+
   .bottomNav .navItem {
     position: relative !important;
-  
+
     width: 100% !important;
     max-width: 120px !important;
     height: 52px !important;
-  
+
     margin: 0 !important;
     padding: 5px 8px !important;
-  
+
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-  
+
     box-sizing: border-box !important;
-  
+
     border: 0 !important;
     border-radius: 14px !important;
-  
+
     background: transparent !important;
     color: #64748b !important;
-  
+
     font-size: 11px !important;
   }
-  
+
   .bottomNav .navItem.active {
     color: #111827 !important;
     background: #f1f5f9 !important;
   }
-  
+
   .bottomNav .navIcon {
     display: block !important;
     line-height: 1 !important;
     font-size: 21px !important;
     margin-bottom: 3px !important;
   }
-  
+
   .bottomNav .navAdd {
     position: relative !important;
-  
+
     grid-column: 2 !important;
     justify-self: center !important;
-  
+
     width: 56px !important;
     height: 56px !important;
     min-width: 56px !important;
     min-height: 56px !important;
-  
+
     margin: -18px 0 0 !important;
     padding: 0 !important;
-  
+
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-  
+
     box-sizing: border-box !important;
-  
+
     border: 0 !important;
     border-radius: 18px !important;
-  
+
     background: #111827 !important;
     color: white !important;
-  
+
     box-shadow:
       0 8px 20px rgba(15, 23, 42, 0.25),
       0 0 0 5px #f8fafc !important;
-  
+
     transform: none !important;
   }
-  
+
   .bottomNav .navAdd:active {
     transform: scale(0.94) !important;
   }
-  
+
   .bottomNav .navAdd svg {
     width: 24px !important;
     height: 24px !important;
   }
-  
+
   @media (max-width: 390px) {
     .bottomNav {
       padding-left: 12px !important;
       padding-right: 12px !important;
       grid-template-columns: 1fr 64px 1fr !important;
     }
-  
+
     .bottomNav .navAdd {
       width: 54px !important;
       height: 54px !important;
@@ -1920,23 +1920,23 @@ button:active {
    FIX — SOLDE ENTRE VOUS
    ========================================================= */
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
   /* Mobile */
   @media (max-width: 600px) {
-  
-  
-  
-  
-  
+
+
+
+
+
   }
 
 /* =========================================================
@@ -1950,7 +1950,7 @@ button:active {
         110px + env(safe-area-inset-bottom)
       ) !important;
     }
-  
+
     .form .primary:last-child {
       margin-bottom: 8px;
     }
@@ -1971,8 +1971,8 @@ button:active {
     --tf-green: #16a34a;
     --tf-orange: #f59e0b;
   }
-  
-  
+
+
 .sectionEyebrow {
   display: block;
   margin-bottom: 4px;
@@ -1986,29 +1986,29 @@ button:active {
 }
 
 /* ---------- PAGE ---------- */
-  
+
   body {
     background: var(--tf-bg);
   }
-  
+
   .dashboard {
     width: 100%;
   }
-  
+
   /* =========================================================
      HERO
      ========================================================= */
-  
+
   .travelHero {
     position: relative;
     overflow: hidden;
-  
+
     margin-bottom: 14px;
     padding: 20px;
-  
+
     border: 0;
     border-radius: 26px;
-  
+
     background:
       radial-gradient(
         circle at 90% 5%,
@@ -2021,14 +2021,14 @@ button:active {
         #1d4ed8 55%,
         #3b82f6 100%
       );
-  
+
     color: white;
-  
+
     box-shadow:
       0 18px 40px rgba(37, 99, 235, 0.16),
       0 4px 12px rgba(15, 23, 42, 0.08);
   }
-  
+
   .travelHero::after {
     content: "";
     position: absolute;
@@ -2036,40 +2036,40 @@ button:active {
     height: 180px;
     right: -90px;
     bottom: -110px;
-  
+
     border: 30px solid rgba(255, 255, 255, 0.06);
     border-radius: 50%;
-  
+
     pointer-events: none;
   }
-  
+
   .travelHeroTop {
     position: relative;
     z-index: 1;
-  
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-  
+
     margin-bottom: 24px;
   }
-  
+
   .travelHeroIcon {
     display: grid;
     width: 42px;
     height: 42px;
     place-items: center;
-  
+
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 14px;
-  
+
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-  
+
     color: white;
   }
-  
+
   .travelHeroEdit {
     display: grid;
     width: 42px;
@@ -2078,151 +2078,151 @@ button:active {
     min-height: 42px;
     padding: 0;
     place-items: center;
-  
+
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 14px;
-  
+
     background: rgba(255, 255, 255, 0.12);
     color: white;
-  
+
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
-  
+
   .travelHeroContent {
     position: relative;
     z-index: 1;
   }
-  
+
   .travelHeroLabel {
     display: block;
     margin-bottom: 7px;
-  
+
     color: rgba(255, 255, 255, 0.7);
-  
+
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.09em;
     text-transform: uppercase;
   }
-  
+
   .travelHero h1 {
     margin: 0;
-  
+
     color: white;
-  
+
     font-size: clamp(25px, 7vw, 34px);
     font-weight: 800;
     line-height: 1.05;
     letter-spacing: -0.04em;
   }
-  
+
   .travelHeroContent p {
     margin: 9px 0 0;
-  
+
     color: rgba(255, 255, 255, 0.75);
-  
+
     font-size: 13px;
     font-weight: 500;
     line-height: 1.4;
   }
-  
+
   /* ---------- HERO STATS ---------- */
-  
+
   .travelHeroStats {
     position: relative;
     z-index: 1;
-  
+
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-  
+
     margin-top: 24px;
     padding-top: 17px;
-  
+
     border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
-  
+
   .travelHeroStats > div {
     min-width: 0;
     padding: 0 10px;
-  
+
     border-right: 1px solid rgba(255, 255, 255, 0.12);
-  
+
     text-align: center;
   }
-  
+
   .travelHeroStats > div:first-child {
     padding-left: 0;
   }
-  
+
   .travelHeroStats > div:last-child {
     padding-right: 0;
     border-right: 0;
   }
-  
+
   .travelHeroStats strong {
     display: block;
-  
+
     overflow: hidden;
     color: white;
-  
+
     font-size: 16px;
     font-weight: 800;
     line-height: 1.15;
-  
+
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
+
   .travelHeroStats span {
     display: block;
     margin-top: 4px;
-  
+
     color: rgba(255, 255, 255, 0.6);
-  
+
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.03em;
     text-transform: uppercase;
   }
-  
+
   /* =========================================================
      FINANCIAL CARDS
      ========================================================= */
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   /* =========================================================
      BUDGET
      ========================================================= */
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   /* =========================================================
      IPHONE
      ========================================================= */
-  
+
   @media (max-width: 480px) {
     .travelHero {
       margin-top: 2px;
       padding: 18px;
       border-radius: 23px;
     }
-  
+
     .travelHeroTop {
       margin-bottom: 21px;
     }
-  
+
     .travelHeroIcon,
     .travelHeroEdit {
       width: 39px;
@@ -2231,27 +2231,27 @@ button:active {
       min-height: 39px;
       border-radius: 13px;
     }
-  
+
     .travelHero h1 {
       font-size: 27px;
     }
-  
+
     .travelHeroStats {
       margin-top: 21px;
       padding-top: 15px;
     }
-  
+
     .travelHeroStats strong {
       font-size: 14px;
     }
-  
+
     .travelHeroStats span {
       font-size: 8px;
     }
-  
-  
-  
-  
+
+
+
+
   }
   /* =========================================================
    TRAVEL FINANCE PREMIUM — CARDS V3
@@ -3129,396 +3129,396 @@ button:active {
     width: 100%;
     padding-bottom: 24px;
   }
-  
+
   /* ---------- HEADER ---------- */
-  
+
   .historyHeader {
     display: flex;
     align-items: center;
     gap: 12px;
-  
+
     margin: 4px 0 20px;
   }
-  
+
   .historyBack {
     display: grid;
     width: 42px;
     height: 42px;
     flex: 0 0 42px;
     place-items: center;
-  
+
     padding: 0;
-  
+
     border: 1px solid rgba(15, 23, 42, 0.07);
     border-radius: 14px;
-  
+
     background: #ffffff;
     color: #0f172a;
-  
+
     font-size: 20px;
-  
+
     box-shadow:
       0 2px 4px rgba(15, 23, 42, 0.02),
       0 6px 18px rgba(15, 23, 42, 0.035);
   }
-  
+
   .historyHeader > div:nth-child(2) {
     min-width: 0;
     flex: 1;
   }
-  
+
   .historyHeader > div:nth-child(2) > span {
     display: block;
-  
+
     color: #2563eb;
-  
+
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 0.1em;
   }
-  
+
   .historyHeader h2 {
     margin: 3px 0 0;
-  
+
     color: #0f172a;
-  
+
     font-size: 26px;
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.035em;
   }
-  
+
   /* ---------- COMPTEUR ---------- */
-  
+
   .historyTotal {
     display: grid;
     min-width: 60px;
-  
+
     padding: 8px 10px;
-  
+
     border: 1px solid rgba(37, 99, 235, 0.08);
     border-radius: 13px;
-  
+
     background: #eff6ff;
-  
+
     text-align: center;
   }
-  
+
   .historyTotal strong {
     color: #1d4ed8;
-  
+
     font-size: 16px;
     font-weight: 800;
     line-height: 1;
   }
-  
+
   .historyTotal small {
     margin-top: 3px;
-  
+
     color: #60a5fa;
-  
+
     font-size: 9px;
     font-weight: 700;
   }
-  
+
   /* =========================================================
      TRANSACTIONS
      ========================================================= */
-  
+
   .historyList {
     display: grid;
     gap: 10px;
   }
-  
+
   .expenseCard {
     overflow: hidden;
-  
+
     border: 1px solid rgba(15, 23, 42, 0.06);
     border-radius: 19px;
-  
+
     background: #ffffff;
-  
+
     box-shadow:
       0 2px 4px rgba(15, 23, 42, 0.02),
       0 8px 24px rgba(15, 23, 42, 0.035);
   }
-  
+
   .expenseCardMain {
     display: flex;
     align-items: flex-start;
     gap: 11px;
-  
+
     padding: 15px;
   }
-  
+
   /* ---------- ICÔNE ---------- */
-  
+
   .expenseCategoryIcon {
     display: grid;
     width: 42px;
     height: 42px;
     flex: 0 0 42px;
     place-items: center;
-  
+
     border-radius: 13px;
-  
+
     background:
       linear-gradient(
         145deg,
         #eff6ff,
         #dbeafe
       );
-  
+
     color: #2563eb;
-  
+
     font-size: 13px;
     font-weight: 800;
   }
-  
+
   /* ---------- INFO ---------- */
-  
+
   .expenseCardInfo {
     min-width: 0;
     flex: 1;
   }
-  
+
   .expenseCardTitle {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 6px;
-  
+
     min-width: 0;
   }
-  
+
   .expenseCardTitle strong {
     min-width: 0;
-  
+
     overflow: hidden;
-  
+
     color: #0f172a;
-  
+
     font-size: 13px;
     font-weight: 800;
     line-height: 1.25;
-  
+
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
+
   /* ---------- BADGES ---------- */
-  
+
   .expenseBadge {
     display: inline-flex;
     align-items: center;
-  
+
     min-height: 20px;
-  
+
     padding: 2px 7px;
-  
+
     border-radius: 999px;
-  
+
     font-size: 8px;
     font-weight: 800;
     letter-spacing: 0.02em;
   }
-  
+
   .expenseBadge.shared {
     background: #eff6ff;
     color: #2563eb;
   }
-  
+
   .expenseBadge.personal {
     background: #f1f5f9;
     color: #64748b;
   }
-  
+
   /* ---------- META ---------- */
-  
+
   .expenseMeta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 4px;
-  
+
     margin-top: 5px;
-  
+
     color: #94a3b8;
-  
+
     font-size: 9px;
     font-weight: 600;
   }
-  
+
   .expenseOriginal {
     display: block;
-  
+
     margin-top: 4px;
-  
+
     color: #64748b;
-  
+
     font-size: 10px;
     font-weight: 700;
   }
-  
+
   /* ---------- MONTANT ---------- */
-  
+
   .expenseCardAmount {
     flex: 0 0 auto;
-  
+
     padding-left: 4px;
-  
+
     text-align: right;
   }
-  
+
   .expenseCardAmount strong {
     color: #0f172a;
-  
+
     font-size: 14px;
     font-weight: 800;
     letter-spacing: -0.02em;
-  
+
     white-space: nowrap;
   }
-  
+
   /* =========================================================
      ACTIONS
      ========================================================= */
-  
+
   .expenseCardActions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  
+
     border-top: 1px solid #f1f5f9;
   }
-  
+
   .expenseCardActions button {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-  
+
     min-height: 42px;
-  
+
     padding: 0 10px;
-  
+
     border: 0;
     border-radius: 0;
-  
+
     background: #ffffff;
     color: #64748b;
-  
+
     font-size: 10px;
     font-weight: 700;
-  
+
     box-shadow: none;
   }
-  
+
   .expenseCardActions button:first-child {
     border-right: 1px solid #f1f5f9;
   }
-  
+
   .expenseCardActions button:first-child:active {
     background: #eff6ff;
     color: #2563eb;
   }
-  
+
   .expenseCardActions .deleteAction {
     color: #94a3b8;
   }
-  
+
   .expenseCardActions .deleteAction:active {
     background: #fef2f2;
     color: #dc2626;
   }
-  
+
   /* =========================================================
      EMPTY STATE
      ========================================================= */
-  
+
   .historyEmpty {
     display: flex;
     flex-direction: column;
     align-items: center;
-  
+
     padding: 48px 24px;
-  
+
     border: 1px solid rgba(15, 23, 42, 0.06);
     border-radius: 22px;
-  
+
     background: #ffffff;
-  
+
     text-align: center;
-  
+
     box-shadow:
       0 8px 24px rgba(15, 23, 42, 0.035);
   }
-  
+
   .historyEmptyIcon {
     display: grid;
     width: 52px;
     height: 52px;
     place-items: center;
-  
+
     margin-bottom: 14px;
-  
+
     border-radius: 17px;
-  
+
     background: #eff6ff;
     color: #2563eb;
   }
-  
+
   .historyEmpty > strong {
     color: #0f172a;
-  
+
     font-size: 16px;
     font-weight: 800;
   }
-  
+
   .historyEmpty p {
     max-width: 260px;
-  
+
     margin: 6px 0 0;
-  
+
     color: #94a3b8;
-  
+
     font-size: 12px;
     line-height: 1.5;
   }
-  
+
   /* =========================================================
      IPHONE
      ========================================================= */
-  
+
   @media (max-width: 480px) {
     .historyHeader {
       margin-top: 2px;
       margin-bottom: 16px;
     }
-  
+
     .historyHeader h2 {
       font-size: 24px;
     }
-  
+
     .expenseCardMain {
       padding: 13px;
     }
-  
+
     .expenseCategoryIcon {
       width: 39px;
       height: 39px;
       flex-basis: 39px;
-  
+
       border-radius: 12px;
     }
-  
+
     .expenseCardTitle strong {
       max-width: 145px;
     }
-  
+
     .expenseCardAmount strong {
       font-size: 13px;
     }
-  
+
     .expenseCardActions button {
       min-height: 40px;
     }
@@ -3598,216 +3598,216 @@ button:active {
    .splitSection {
     margin-top: 20px;
     padding-top: 18px;
-  
+
     border-top: 1px solid #eef2f7;
   }
-  
+
   .splitTitle {
     margin-bottom: 10px;
-  
+
     color: #64748b;
-  
+
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
-  
+
   .splitOptions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 9px;
   }
-  
+
   .splitOption {
     min-height: 72px;
-  
+
     display: flex;
     align-items: center;
     gap: 10px;
-  
+
     padding: 12px;
-  
+
     border: 1px solid #e5eaf0;
     border-radius: 15px;
-  
+
     background: #ffffff;
     color: #334155;
-  
+
     text-align: left;
-  
+
     transition:
       border-color 0.15s ease,
       background 0.15s ease,
       transform 0.12s ease;
   }
-  
+
   .splitOption:active {
     transform: scale(0.98);
   }
-  
+
   .splitOption.active {
     border-color: rgba(37, 99, 235, 0.35);
     background: #eff6ff;
     color: #1d4ed8;
   }
-  
+
   .splitOption .radio {
     display: grid;
-  
+
     width: 30px;
     height: 30px;
     flex: 0 0 30px;
-  
+
     place-items: center;
-  
+
     border-radius: 10px;
-  
+
     background: #f1f5f9;
     color: #94a3b8;
-  
+
     font-size: 14px;
   }
-  
+
   .splitOption.active .radio {
     background: #dbeafe;
     color: #2563eb;
   }
-  
+
   .splitOption > span:last-child {
     min-width: 0;
   }
-  
+
   .splitOption b {
     display: block;
-  
+
     color: inherit;
-  
+
     font-size: 12px;
     font-weight: 800;
     line-height: 1.2;
   }
-  
+
   .splitOption small {
     display: block;
-  
+
     margin-top: 3px;
-  
+
     color: #94a3b8;
-  
+
     font-size: 9px;
     font-weight: 600;
     line-height: 1.25;
   }
-  
+
   .splitOption.active small {
     color: #60a5fa;
   }
-  
+
   /* ---------- CUSTOM ---------- */
-  
+
   .customSplit {
     margin-top: 12px;
     padding: 14px;
-  
+
     border: 1px solid #eef2f7;
     border-radius: 15px;
-  
+
     background: #f8fafc;
   }
-  
+
   .customSplit .splitPercent {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  
+
     margin-bottom: 8px;
   }
-  
+
   .customSplit .splitPercent span {
     color: #64748b;
-  
+
     font-size: 11px;
     font-weight: 700;
   }
-  
+
   .customSplit .splitPercent b {
     color: #0f172a;
-  
+
     font-size: 17px;
     font-weight: 800;
   }
-  
+
   .customSplit input[type="range"] {
     width: 100%;
     min-height: 32px;
-  
+
     accent-color: #2563eb;
   }
-  
+
   /* ---------- AMOUNTS ---------- */
-  
+
   .splitAmounts {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 9px;
-  
+
     margin-top: 12px;
   }
-  
+
   .splitAmounts > div {
     padding: 12px;
-  
+
     border: 1px solid #eef2f7;
     border-radius: 14px;
-  
+
     background: #ffffff;
   }
-  
+
   .splitAmounts span {
     display: block;
-  
+
     color: #94a3b8;
-  
+
     font-size: 9px;
     font-weight: 700;
   }
-  
+
   .splitAmounts b {
     display: block;
-  
+
     margin-top: 4px;
-  
+
     color: #0f172a;
-  
+
     font-size: 14px;
     font-weight: 800;
   }
-  
+
   /* ---------- MOBILE ---------- */
-  
+
   @media (max-width: 480px) {
     .splitSection {
       margin-top: 18px;
       padding-top: 16px;
     }
-  
+
     .splitOption {
       min-height: 68px;
       padding: 11px;
     }
-  
+
     .splitOption .radio {
       width: 28px;
       height: 28px;
       flex-basis: 28px;
     }
-  
+
     .splitAmounts > div {
       padding: 11px;
     }
   }
-  
+
   @media (max-width: 360px) {
     .splitOptions,
     .splitAmounts {
@@ -3824,119 +3824,119 @@ button:active {
       padding: 0 !important;
       background: rgba(15, 23, 42, 0.38) !important;
     }
-  
+
     .modal {
       width: 100% !important;
       height: 100dvh !important;
       max-height: 100dvh !important;
-  
+
       display: flex !important;
       flex-direction: column !important;
-  
+
       overflow: hidden !important;
-  
+
       border-radius: 0 !important;
       background: #f8fafc !important;
-  
+
       box-shadow: none !important;
     }
-  
+
     .sheetHandle {
       display: none !important;
     }
-  
+
     .modalHead {
       position: relative !important;
       top: auto !important;
-  
+
       flex: 0 0 auto !important;
-  
+
       min-height: calc(64px + env(safe-area-inset-top)) !important;
-  
+
       padding:
         env(safe-area-inset-top)
         16px
         0 !important;
-  
+
       display: flex !important;
       align-items: center !important;
-  
+
       margin: 0 !important;
-  
+
       background: rgba(248, 250, 252, 0.98) !important;
       border-bottom: 1px solid #e8edf3 !important;
-  
+
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
-  
+
     .modalHead h2 {
       margin: 0 !important;
-  
+
       color: #0f172a !important;
-  
+
       font-size: 20px !important;
       font-weight: 800 !important;
       letter-spacing: -0.02em !important;
     }
-  
+
     .modalClose {
       width: 40px !important;
       height: 40px !important;
       min-width: 40px !important;
       min-height: 40px !important;
-  
+
       padding: 0 !important;
-  
+
       display: grid !important;
       place-items: center !important;
-  
+
       border: 1px solid #e5eaf0 !important;
       border-radius: 13px !important;
-  
+
       background: #ffffff !important;
       color: #475569 !important;
-  
+
       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
     }
-  
+
     .modalContent {
       flex: 1 1 auto !important;
       min-height: 0 !important;
-  
+
       overflow-y: auto !important;
       -webkit-overflow-scrolling: touch;
-  
+
       padding: 18px 16px calc(120px + env(safe-area-inset-bottom)) !important;
-  
+
       overscroll-behavior: contain;
     }
-  
+
     .modalContent .form {
       display: grid !important;
       gap: 16px !important;
-  
+
       padding: 0 !important;
     }
-  
+
     .modalContent .form > .primary:last-child {
       position: sticky !important;
       bottom: calc(12px + env(safe-area-inset-bottom)) !important;
       z-index: 20 !important;
-  
+
       width: 100% !important;
       min-height: 56px !important;
-  
+
       margin-top: 6px !important;
-  
+
       border-radius: 17px !important;
-  
+
       background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
       color: #ffffff !important;
-  
+
       font-size: 15px !important;
       font-weight: 800 !important;
-  
+
       box-shadow:
         0 12px 28px rgba(37, 99, 235, 0.28),
         0 0 0 6px rgba(248, 250, 252, 0.96) !important;
@@ -12093,427 +12093,6 @@ textarea:focus {
   }
 }
 
-
-/* =========================================================
-   EXPENSE EDITOR — UX STICKY SAVE FINAL
-   ========================================================= */
-
-.expenseEditorForm .expenseSaveButton {
-  position: sticky !important;
-
-  bottom:
-    calc(env(safe-area-inset-bottom) + 8px) !important;
-
-  left: 0 !important;
-  right: 0 !important;
-
-  z-index: 40 !important;
-
-  width: 100% !important;
-  min-height: 58px !important;
-
-  margin-top: 10px !important;
-  margin-bottom: 0 !important;
-
-  padding: 0 18px !important;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0b6cf2 0%,
-      #1769e8 100%
-    ) !important;
-
-  color: #ffffff !important;
-
-  border: 0 !important;
-  border-radius: 17px !important;
-
-  box-shadow:
-    0 10px 26px rgba(15, 23, 42, 0.16),
-    0 0 0 8px rgba(248, 250, 252, 0.96) !important;
-
-  font-size: 15px !important;
-  font-weight: 850 !important;
-
-  transform: translateZ(0) !important;
-}
-
-.expenseEditorForm .expenseSaveButton:disabled {
-  background: #a9c4ee !important;
-
-  color: rgba(255,255,255,0.96) !important;
-
-  box-shadow:
-    0 0 0 8px rgba(248, 250, 252, 0.96) !important;
-
-  opacity: 1 !important;
-}
-
-/*
- * Garantit que les derniers éléments puissent passer
- * derrière puis au-dessus du CTA sticky sans être masqués.
- */
-
-.expenseEditorForm {
-  padding-bottom:
-    calc(
-      env(safe-area-inset-bottom) +
-      24px
-    ) !important;
-}
-
-
-/*
- * Ajustement quand le clavier iOS réduit fortement la hauteur.
- */
-
-@media (max-height: 700px) {
-  .expenseEditorForm .expenseSaveButton {
-    bottom:
-      calc(env(safe-area-inset-bottom) + 4px) !important;
-
-    min-height: 54px !important;
-
-    box-shadow:
-      0 8px 20px rgba(15, 23, 42, 0.14),
-      0 0 0 6px rgba(248, 250, 252, 0.96) !important;
-  }
-}
-
-
-/* =========================================================
-   EXPENSE EDITOR — FIXED SAVE FOOTER V2
-   ========================================================= */
-
-/*
- * Réserve de l'espace à la fin du formulaire.
- * Le contenu peut donc être scrollé complètement au-dessus
- * du bouton fixe.
- */
-.expenseEditorForm {
-  padding-bottom:
-    calc(
-      105px +
-      env(safe-area-inset-bottom)
-    ) !important;
-}
-
-
-/*
- * CTA toujours ancré au bas de l'écran.
- */
-.expenseEditorForm .expenseSaveButton {
-  position: fixed !important;
-
-  left: 50% !important;
-  right: auto !important;
-
-  bottom:
-    calc(
-      12px +
-      env(safe-area-inset-bottom)
-    ) !important;
-
-  transform: translateX(-50%) !important;
-
-  z-index: 1000 !important;
-
-  width: calc(100% - 72px) !important;
-  max-width: 688px !important;
-
-  min-height: 58px !important;
-
-  margin: 0 !important;
-  padding: 0 18px !important;
-
-  border: 0 !important;
-  border-radius: 18px !important;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0868ee 0%,
-      #0964e8 100%
-    ) !important;
-
-  color: #ffffff !important;
-
-  font-size: 16px !important;
-  font-weight: 850 !important;
-
-  box-shadow:
-    0 12px 30px rgba(15, 23, 42, 0.18),
-    0 0 0 10px rgba(248, 250, 252, 0.96) !important;
-
-  opacity: 1 !important;
-}
-
-
-/*
- * Aucun montant :
- * le CTA reste visible mais clairement désactivé.
- */
-.expenseEditorForm .expenseSaveButton:disabled {
-  background: #c4d5ec !important;
-
-  color: rgba(255, 255, 255, 0.90) !important;
-
-  box-shadow:
-    0 0 0 10px rgba(248, 250, 252, 0.96) !important;
-
-  opacity: 1 !important;
-
-  cursor: default !important;
-}
-
-
-/*
- * Petit écran iPhone.
- */
-@media (max-width: 480px) {
-  .expenseEditorForm .expenseSaveButton {
-    width: calc(100% - 48px) !important;
-
-    bottom:
-      calc(
-        10px +
-        env(safe-area-inset-bottom)
-      ) !important;
-  }
-
-  .expenseEditorForm {
-    padding-bottom:
-      calc(
-        100px +
-        env(safe-area-inset-bottom)
-      ) !important;
-  }
-}
-
-
-/*
- * Quand le clavier iOS est ouvert, on garde un CTA
- * compact pour maximiser la zone de formulaire.
- */
-@media (max-height: 700px) {
-  .expenseEditorForm .expenseSaveButton {
-    min-height: 54px !important;
-
-    bottom:
-      calc(
-        6px +
-        env(safe-area-inset-bottom)
-      ) !important;
-  }
-}
-
-
-/* =========================================================
-   EXPENSE EDITOR — MODAL FOOTER FINAL
-   ========================================================= */
-
-/*
- * La modale devient un shell fixe.
- * Seul .modalContent scrolle.
- */
-
-.overlay {
-  overflow: hidden !important;
-}
-
-.modal {
-  position: relative !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-
-  width: min(720px, 100%) !important;
-
-  max-height: 92dvh !important;
-
-  overflow: hidden !important;
-
-  padding: 0 !important;
-
-  background: #f8fafc !important;
-
-  border-radius: 24px 24px 0 0 !important;
-}
-
-
-/*
- * Header fixe dans la modale.
- */
-
-.modalHead {
-  flex: 0 0 auto !important;
-
-  margin: 0 !important;
-  padding: 18px !important;
-
-  background: #f8fafc !important;
-
-  border-bottom: 1px solid #e7ebf0 !important;
-
-  z-index: 3 !important;
-}
-
-
-/*
- * Seule cette zone scrolle.
- */
-
-.modalContent {
-  flex: 1 1 auto !important;
-
-  min-height: 0 !important;
-
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-
-  -webkit-overflow-scrolling: touch !important;
-
-  padding: 18px !important;
-}
-
-
-/*
- * Réserve l'espace nécessaire au footer.
- */
-
-.modalContent .expenseEditorForm {
-  padding-bottom:
-    calc(
-      92px +
-      env(safe-area-inset-bottom)
-    ) !important;
-}
-
-
-/*
- * Bouton fixé AU BAS DE LA MODALE,
- * pas au viewport global.
- */
-
-.modal .expenseEditorForm .expenseSaveButton {
-  position: absolute !important;
-
-  left: 18px !important;
-  right: 18px !important;
-
-  bottom:
-    calc(
-      12px +
-      env(safe-area-inset-bottom)
-    ) !important;
-
-  z-index: 20 !important;
-
-  width: auto !important;
-
-  min-height: 58px !important;
-
-  margin: 0 !important;
-  padding: 0 18px !important;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0b6cf2 0%,
-      #1769e8 100%
-    ) !important;
-
-  color: #ffffff !important;
-
-  border: 0 !important;
-  border-radius: 18px !important;
-
-  box-shadow:
-    0 12px 28px rgba(15, 23, 42, 0.18),
-    0 0 0 8px rgba(248, 250, 252, 0.96) !important;
-
-  font-size: 16px !important;
-  font-weight: 850 !important;
-
-  transform: none !important;
-}
-
-
-/*
- * État désactivé.
- */
-
-.modal .expenseEditorForm .expenseSaveButton:disabled {
-  background: #c4d5ec !important;
-
-  color: rgba(255, 255, 255, 0.92) !important;
-
-  box-shadow:
-    0 0 0 8px rgba(248, 250, 252, 0.96) !important;
-
-  opacity: 1 !important;
-}
-
-
-/*
- * iPhone / mobile.
- */
-
-@media (max-width: 699px) {
-  .modal {
-    height: 92dvh !important;
-    max-height: 92dvh !important;
-  }
-
-  .modalHead {
-    padding:
-      18px
-      18px
-      16px !important;
-  }
-
-  .modalContent {
-    padding:
-      18px
-      18px
-      calc(
-        18px +
-        env(safe-area-inset-bottom)
-      ) !important;
-  }
-
-  .modal .expenseEditorForm .expenseSaveButton {
-    left: 18px !important;
-    right: 18px !important;
-
-    bottom:
-      calc(
-        10px +
-        env(safe-area-inset-bottom)
-      ) !important;
-  }
-}
-
-
-/*
- * Desktop.
- */
-
-@media (min-width: 700px) {
-  .modal {
-    max-height: 85dvh !important;
-
-    border-radius: 24px !important;
-  }
-
-  .modal .expenseEditorForm .expenseSaveButton {
-    left: 18px !important;
-    right: 18px !important;
-  }
-}
-
-
 /* =========================================================
    EXPENSE EDITOR — REAL MODAL FOOTER
    ========================================================= */
@@ -12661,87 +12240,6 @@ textarea:focus {
     padding-bottom: 18px !important;
   }
 }
-
-
-/* =========================================================
-   EXPENSE EDITOR — PAYER + DATE REDESIGN
-   ========================================================= */
-
-/*
- * Date puis Payé par, chacun sur sa propre ligne.
- */
-
-.expenseEditorForm .expensePayerDateFields {
-  display: flex !important;
-  flex-direction: column !important;
-
-  gap: 22px !important;
-
-  width: 100% !important;
-}
-
-
-/* DATE EN PREMIER */
-
-.expenseEditorForm .expenseDateField {
-  order: 1 !important;
-
-  display: block !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-}
-
-.expenseEditorForm .expenseDateField > span {
-  display: block !important;
-
-  margin-bottom: 9px !important;
-
-  color: #667085 !important;
-
-  font-size: 10px !important;
-  font-weight: 850 !important;
-  letter-spacing: 1.05px !important;
-  text-transform: uppercase !important;
-}
-
-.expenseEditorForm .expenseDateInput {
-  display: flex !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  min-height: 64px !important;
-
-  padding: 0 18px !important;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff 0%,
-      #f9fbff 100%
-    ) !important;
-
-  color: #172033 !important;
-
-  border: 1px solid #dde5ef !important;
-  border-radius: 17px !important;
-
-  box-shadow:
-    0 3px 12px rgba(15, 23, 42, 0.035) !important;
-
-  font-size: 15px !important;
-  font-weight: 800 !important;
-
-  text-align: left !important;
-}
-
-.expenseEditorForm .expenseDateInput:focus {
-  border-color: #72acf6 !important;
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.07) !important;
-}
-
 
 /* =========================================================
    PAYÉ PAR
@@ -12943,5 +12441,649 @@ textarea:focus {
     min-height: 60px !important;
 
     font-size: 14px !important;
+  }
+}
+
+/* =========================================================
+   TRÈS PETITS IPHONE
+   ========================================================= */
+
+@media (max-width: 374px) {
+
+  .expenseEditorForm {
+    gap: 20px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryGrid {
+    gap: 7px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryChoice {
+    min-height: 82px !important;
+
+    padding:
+      8px
+      4px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryEmoji {
+    width: 32px !important;
+    height: 32px !important;
+
+    font-size: 21px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryChoice > span:last-child {
+    font-size: 10.5px !important;
+  }
+
+  .expenseEditorForm .splitOptions {
+    gap: 7px !important;
+  }
+
+  .expenseEditorForm .splitOption {
+    grid-template-columns:
+      24px
+      minmax(0, 1fr) !important;
+
+    gap: 6px !important;
+
+    min-height: 76px !important;
+
+    padding: 8px !important;
+  }
+
+  .expenseEditorForm .splitOption .radio {
+    width: 24px !important;
+    height: 24px !important;
+
+    font-size: 17px !important;
+  }
+
+  .expenseEditorForm .splitOption b {
+    font-size: 11px !important;
+  }
+
+  .expenseEditorForm .splitOption small {
+    font-size: 9px !important;
+  }
+}
+
+/* =========================================================
+   EXPENSE EDITOR — MOBILE CONSOLIDATED
+   ========================================================= */
+
+/*
+ * Source de vérité mobile pour :
+ * - Date
+ * - Payé par
+ * - Catégories
+ * - Description / Lieu
+ * - Répartition
+ *
+ * Le vrai footer Modal est géré séparément.
+ */
+
+@media (max-width: 699px) {
+
+  /* =======================================================
+     RYTHME GLOBAL
+     ======================================================= */
+
+  .expenseEditorForm {
+    gap: 22px !important;
+  }
+
+  .expenseEditorForm .expenseChoiceSection,
+  .expenseEditorForm .expenseQuickFields,
+  .expenseEditorForm .splitSection {
+    margin: 0 !important;
+  }
+
+
+  /* =======================================================
+     DATE + PAYÉ PAR
+     ======================================================= */
+
+  .expenseEditorForm .expensePayerDateFields {
+    display: flex !important;
+    flex-direction: column !important;
+
+    gap: 22px !important;
+
+    width: 100% !important;
+  }
+
+
+  /* DATE */
+
+  .expenseEditorForm .expenseDateField {
+    order: 1 !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .expenseEditorForm .expenseDateField > span {
+    display: block !important;
+
+    margin-bottom: 9px !important;
+
+    color: #667085 !important;
+
+    font-size: 10px !important;
+    font-weight: 850 !important;
+    letter-spacing: 1.05px !important;
+    text-transform: uppercase !important;
+  }
+
+  .expenseEditorForm .expenseDateInput {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 70px !important;
+
+    padding: 0 18px !important;
+
+    background:
+      linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8fbff 100%
+      ) !important;
+
+    color: #172033 !important;
+
+    border: 1px solid #dfe7f1 !important;
+    border-radius: 18px !important;
+
+    box-shadow:
+      0 4px 14px rgba(15, 23, 42, 0.04) !important;
+
+    font-size: 15px !important;
+    font-weight: 800 !important;
+
+    text-align: left !important;
+  }
+
+  .expenseEditorForm .expenseDateInput:focus {
+    border-color: #72acf6 !important;
+
+    box-shadow:
+      0 0 0 3px rgba(37, 99, 235, 0.07) !important;
+  }
+
+
+  /* PAYÉ PAR */
+
+  .expenseEditorForm .expensePayerField {
+    order: 2 !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .expenseEditorForm .expensePayerField > span {
+    display: block !important;
+
+    margin-bottom: 9px !important;
+
+    color: #667085 !important;
+
+    font-size: 10px !important;
+    font-weight: 850 !important;
+    letter-spacing: 1.05px !important;
+    text-transform: uppercase !important;
+  }
+
+  .expenseEditorForm .payerGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+
+    gap: 10px !important;
+
+    width: 100% !important;
+  }
+
+  .expenseEditorForm .payerChoice {
+    display: grid !important;
+
+    grid-template-columns:
+      52px
+      minmax(0, 1fr) !important;
+
+    align-items: center !important;
+
+    gap: 14px !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 74px !important;
+
+    padding: 10px 15px !important;
+
+    background:
+      linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #fbfcfe 100%
+      ) !important;
+
+    color: #172033 !important;
+
+    border: 1px solid #dfe7f1 !important;
+    border-radius: 18px !important;
+
+    box-shadow:
+      0 4px 14px rgba(15, 23, 42, 0.04) !important;
+
+    text-align: left !important;
+  }
+
+  .expenseEditorForm .payerChoice.active {
+    background:
+      linear-gradient(
+        135deg,
+        #edf6ff 0%,
+        #f8fbff 100%
+      ) !important;
+
+    border-color: #4b9df4 !important;
+
+    box-shadow:
+      0 5px 16px rgba(37, 99, 235, 0.07) !important;
+  }
+
+  .expenseEditorForm .payerAvatar {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+
+    overflow: hidden !important;
+
+    padding: 0 !important;
+
+    border-radius: 16px !important;
+  }
+
+  .expenseEditorForm .payerAvatar img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .expenseEditorForm .payerChoice > span:last-child {
+    display: block !important;
+
+    min-width: 0 !important;
+
+    overflow: visible !important;
+
+    color: #202b3c !important;
+
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+
+    white-space: normal !important;
+    text-overflow: clip !important;
+
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
+  .expenseEditorForm .payerChoice.active > span:last-child {
+    color: #0b66d4 !important;
+  }
+
+
+  /* =======================================================
+     CATÉGORIES
+     ======================================================= */
+
+  .expenseEditorForm .expenseCategoryGrid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 9px !important;
+
+    width: 100% !important;
+  }
+
+  .expenseEditorForm .expenseCategoryChoice {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 6px !important;
+
+    min-width: 0 !important;
+    min-height: 88px !important;
+
+    padding: 10px 5px !important;
+
+    border-radius: 17px !important;
+
+    text-align: center !important;
+  }
+
+  .expenseEditorForm .expenseCategoryEmoji {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 36px !important;
+    height: 36px !important;
+
+    font-size: 23px !important;
+    line-height: 1 !important;
+  }
+
+  .expenseEditorForm .expenseCategoryChoice > span:last-child {
+    width: 100% !important;
+    min-width: 0 !important;
+
+    overflow: visible !important;
+
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    line-height: 1.12 !important;
+
+    white-space: normal !important;
+    text-overflow: clip !important;
+
+    overflow-wrap: break-word !important;
+  }
+
+
+  /* =======================================================
+     DESCRIPTION + LIEU
+     ======================================================= */
+
+  .expenseEditorForm .expenseOptionalFields {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+
+    gap: 14px !important;
+
+    width: 100% !important;
+
+    padding-top: 3px !important;
+  }
+
+  .expenseEditorForm
+  .expenseOptionalFields
+  .expenseQuickField {
+    display: block !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .expenseEditorForm
+  .expenseOptionalFields
+  .expenseQuickField > span {
+    display: block !important;
+
+    margin-bottom: 8px !important;
+  }
+
+  .expenseEditorForm .expenseOptionalFields input {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 54px !important;
+
+    padding: 0 15px !important;
+
+    border-radius: 15px !important;
+
+    font-size: 16px !important;
+  }
+
+
+  /* =======================================================
+     RÉPARTITION
+     ======================================================= */
+
+  .expenseEditorForm .splitSection {
+    width: 100% !important;
+
+    padding-top: 4px !important;
+  }
+
+  .expenseEditorForm .splitTitle {
+    margin-bottom: 10px !important;
+  }
+
+  .expenseEditorForm .splitOptions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 9px !important;
+
+    width: 100% !important;
+  }
+
+  .expenseEditorForm .splitOption {
+    display: grid !important;
+
+    grid-template-columns:
+      28px
+      minmax(0, 1fr) !important;
+
+    align-items: center !important;
+
+    gap: 8px !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 78px !important;
+
+    padding: 10px !important;
+
+    border-radius: 16px !important;
+
+    text-align: left !important;
+  }
+
+  .expenseEditorForm .splitOption .radio {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 28px !important;
+    height: 28px !important;
+
+    font-size: 19px !important;
+  }
+
+  .expenseEditorForm .splitOption > span:last-child {
+    display: flex !important;
+    flex-direction: column !important;
+
+    min-width: 0 !important;
+
+    gap: 3px !important;
+  }
+
+  .expenseEditorForm .splitOption b {
+    font-size: 12px !important;
+    font-weight: 850 !important;
+    line-height: 1.15 !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+
+    overflow-wrap: break-word !important;
+  }
+
+  .expenseEditorForm .splitOption small {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+
+    overflow-wrap: break-word !important;
+  }
+
+
+  /* CUSTOM SPLIT */
+
+  .expenseEditorForm .customSplit {
+    margin-top: 14px !important;
+
+    padding: 14px !important;
+
+    border-radius: 16px !important;
+  }
+
+  .expenseEditorForm .customSplit input[type="range"] {
+    width: 100% !important;
+  }
+
+
+  /* MONTANTS */
+
+  .expenseEditorForm .splitAmounts {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 9px !important;
+
+    margin-top: 12px !important;
+  }
+
+  .expenseEditorForm .splitAmounts > div {
+    min-width: 0 !important;
+
+    padding: 11px 12px !important;
+
+    border-radius: 14px !important;
+  }
+
+  .expenseEditorForm .splitAmounts span {
+    font-size: 10px !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+
+    overflow-wrap: break-word !important;
+  }
+
+  .expenseEditorForm .splitAmounts b {
+    display: block !important;
+
+    margin-top: 3px !important;
+
+    font-size: 13px !important;
+  }
+
+
+  /* TAUX */
+
+  .expenseEditorForm .rate {
+    margin: -4px 0 0 !important;
+
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+}
+
+
+/* =========================================================
+   TRÈS PETITS IPHONE
+   ========================================================= */
+
+@media (max-width: 374px) {
+
+  .expenseEditorForm {
+    gap: 20px !important;
+  }
+
+  .expenseEditorForm .expenseDateInput {
+    min-height: 66px !important;
+
+    font-size: 14px !important;
+  }
+
+  .expenseEditorForm .payerChoice {
+    grid-template-columns:
+      48px
+      minmax(0, 1fr) !important;
+
+    min-height: 70px !important;
+
+    padding: 9px 13px !important;
+  }
+
+  .expenseEditorForm .payerAvatar {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+  }
+
+  .expenseEditorForm .payerChoice > span:last-child {
+    font-size: 13px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryGrid,
+  .expenseEditorForm .splitOptions {
+    gap: 7px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryChoice {
+    min-height: 82px !important;
+
+    padding: 8px 4px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryEmoji {
+    width: 32px !important;
+    height: 32px !important;
+
+    font-size: 21px !important;
+  }
+
+  .expenseEditorForm .expenseCategoryChoice > span:last-child {
+    font-size: 10.5px !important;
+  }
+
+  .expenseEditorForm .splitOption {
+    grid-template-columns:
+      24px
+      minmax(0, 1fr) !important;
+
+    gap: 6px !important;
+
+    min-height: 76px !important;
+
+    padding: 8px !important;
+  }
+
+  .expenseEditorForm .splitOption .radio {
+    width: 24px !important;
+    height: 24px !important;
+
+    font-size: 17px !important;
+  }
+
+  .expenseEditorForm .splitOption b {
+    font-size: 11px !important;
+  }
+
+  .expenseEditorForm .splitOption small {
+    font-size: 9px !important;
   }
 }

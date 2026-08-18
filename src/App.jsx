@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import Modal from "./components/Modal";
 import {
   Plus,
@@ -1668,7 +1669,9 @@ function App() {
         )}
       </main>
 
-      <nav className="bottomNav">
+      {typeof document !== "undefined" &&
+          createPortal(
+            <nav className="bottomNav">
         <button
           className={screen === "dashboard" ? "navItem active" : "navItem"}
           onClick={() => setScreen("dashboard")}
@@ -1694,7 +1697,9 @@ function App() {
           <ReceiptText size={21} strokeWidth={2.2} />
           <span>Dépenses</span>
         </button>
-      </nav>
+      </nav>,
+            document.body,
+          )}
 
       {showTrip && (
         <Modal title="Mon voyage" close={closeTripEditor}>

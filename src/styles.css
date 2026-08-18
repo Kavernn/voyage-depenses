@@ -13325,3 +13325,117 @@ textarea:focus {
     min-height: 68px !important;
   }
 }
+
+/* =========================================================
+   BUDGET FX — MOBILE
+   ========================================================= */
+
+.budgetFx {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  width: 100%;
+
+  margin-top: 10px;
+  padding-top: 9px;
+
+  border-top:
+    1px solid rgba(15, 23, 42, 0.06);
+}
+
+.budgetFxCurrencies {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 5px;
+
+  width: 100%;
+}
+
+.budgetFxChoice {
+  min-width: 0;
+  min-height: 28px;
+
+  padding: 4px 5px;
+
+  background:
+    rgba(248, 250, 252, 0.92);
+
+  color: #64748b;
+
+  border:
+    1px solid rgba(148, 163, 184, 0.18);
+
+  border-radius: 9px;
+
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1;
+
+  letter-spacing: 0.025em;
+
+  touch-action: manipulation;
+}
+
+.budgetFxChoice.active {
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  border-color:
+    rgba(37, 99, 235, 0.22);
+}
+
+.budgetFxEquivalent {
+  display: flex;
+  align-items: baseline;
+
+  gap: 4px;
+
+  min-height: 20px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  line-height: 1.15;
+}
+
+.budgetFxEquivalent strong {
+  color: #0f172a;
+
+  font-size: 13px;
+  font-weight: 850;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+.budgetFxRate {
+  display: block;
+
+  color: #98a2b3 !important;
+
+  font-size: 8px !important;
+  font-weight: 650 !important;
+  line-height: 1.2 !important;
+}
+
+@media (max-width: 699px) {
+
+  .balkanBudgetCard .budgetFx {
+    margin-top: 9px;
+    padding-top: 8px;
+  }
+
+  .balkanBudgetCard .budgetFxChoice {
+    min-height: 27px;
+  }
+
+  .balkanBudgetCard
+  .budgetFxEquivalent strong {
+    font-size: 12px;
+  }
+}

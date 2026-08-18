@@ -71,6 +71,44 @@ function parseAmountInput(value) {
   return Number.isFinite(parsed) ? parsed : 0;
 }
 
+/**
+ * Retourne une valeur CAD sûre pour une dépense.
+ *
+ * Priorité :
+ * 1. amount_cad chargé comme expenseCadValue(expense)
+ * 2. amount original × taux historique
+ * 3. 0 si la donnée est invalide
+ */
+function expenseCadValue(expense) {
+  const rawStoredCad = expense?.cad;
+
+  if (
+    rawStoredCad !== null &&
+    rawStoredCad !== undefined &&
+    rawStoredCad !== ""
+  ) {
+    const storedCad = Number(rawStoredCad);
+
+    if (Number.isFinite(storedCad)) {
+      return storedCad;
+    }
+  }
+
+  const amount = Number(expense?.amount);
+  const rate = Number(expense?.rate);
+
+  if (
+    Number.isFinite(amount) &&
+    Number.isFinite(rate) &&
+    rate > 0
+  ) {
+    return amount * rate;
+  }
+
+  return 0;
+}
+
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -1403,7 +1441,7 @@ function App() {
   }
 
   const stats = useMemo(() => {
-    const total = data.expenses.reduce((sum, expense) => sum + expense.cad, 0);
+    const total = data.expenses.reduce((sum, expense) => sum + expenseCadValue(expense), 0);
 
     const personal = data.expenses.filter((expense) => expense.personal);
 
@@ -1414,7 +1452,7 @@ function App() {
         person,
         data.expenses
           .filter((expense) => expense.payer === person)
-          .reduce((sum, expense) => sum + expense.cad, 0),
+          .reduce((sum, expense) => sum + expenseCadValue(expense), 0),
       ]),
     );
 
@@ -1436,11 +1474,11 @@ function App() {
         if (expense.payer === a) {
           // A a payé.
           // B doit rembourser à A la part qui appartient à B.
-          net += expense.cad * shareB;
+          net += expenseCadValue(expense) * shareB;
         } else if (expense.payer === b) {
           // B a payé.
           // A doit rembourser à B la part qui appartient à A.
-          net -= expense.cad * shareA;
+          net -= expenseCadValue(expense) * shareA;
         }
       });
     }
@@ -1449,8 +1487,8 @@ function App() {
 
     return {
       total,
-      sharedTotal: shared.reduce((sum, expense) => sum + expense.cad, 0),
-      personalTotal: personal.reduce((sum, expense) => sum + expense.cad, 0),
+      sharedTotal: shared.reduce((sum, expense) => sum + expenseCadValue(expense), 0),
+      personalTotal: personal.reduce((sum, expense) => sum + expenseCadValue(expense), 0),
       paid,
       net,
       budget,
@@ -2790,7 +2828,7 @@ function getBalkanRoute(expenses) {
     const previous = route[route.length - 1];
 
     if (previous?.key === key) {
-      previous.amount += Number(expense.cad) || 0;
+      previous.amount += Number(expenseCadValue(expense)) || 0;
       previous.expenses += 1;
       continue;
     }
@@ -2800,13 +2838,201 @@ function getBalkanRoute(expenses) {
       city: location.city,
       country: location.country,
       flag: location.flag,
-      amount: Number(expense.cad) || 0,
+      amount: Number(expenseCadValue(expense)) || 0,
       expenses: 1,
     });
   }
 
   return route;
 }
+
+
+/* =========================================================
+   BUDGET FX EQUIVALENT
+   ========================================================= */
+
+function BudgetCurrencyEquivalent({ cadAmount }) {
+  const currencies = [
+    { code: "ALL", label: "Lek" },
+    { code: "MKD", label: "Denar" },
+    { code: "EUR", label: "Euro" },
+  ];
+
+  const [currency, setCurrency] = useState(() => {
+    const saved =
+      localStorage.getItem(
+        "voyage-depenses-budget-fx",
+      ) || "";
+
+    return currencies.some(
+      (item) => item.code === saved,
+    )
+      ? saved
+      : "ALL";
+  });
+
+  const [rate, setRate] = useState(null);
+  const [loadingRate, setLoadingRate] = useState(false);
+  const [rateError, setRateError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadRate() {
+      try {
+        setLoadingRate(true);
+        setRateError(false);
+
+        const response = await fetch(
+          `https://open.er-api.com/v6/latest/${currency}`,
+          {
+            cache: "no-store",
+          },
+        );
+
+        if (!response.ok) {
+          throw new Error("Erreur du service de taux");
+        }
+
+        const json = await response.json();
+        const cadPerUnit = Number(json?.rates?.CAD);
+
+        if (
+          !cadPerUnit ||
+          !Number.isFinite(cadPerUnit)
+        ) {
+          throw new Error("Taux CAD invalide");
+        }
+
+        if (!cancelled) {
+          setRate(cadPerUnit);
+        }
+      } catch (error) {
+        console.error(
+          "Budget FX indisponible",
+          error,
+        );
+
+        if (!cancelled) {
+          setRate(null);
+          setRateError(true);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoadingRate(false);
+        }
+      }
+    }
+
+    loadRate();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currency]);
+
+  const selectCurrency = (nextCurrency) => {
+    setCurrency(nextCurrency);
+
+    localStorage.setItem(
+      "voyage-depenses-budget-fx",
+      nextCurrency,
+    );
+  };
+
+  const safeCad = Number(cadAmount);
+
+  /*
+   * API :
+   * 1 ALL/MKD/EUR = X CAD.
+   *
+   * Pour convertir CAD → devise :
+   * montant devise = CAD / taux.
+   */
+  const converted =
+    Number.isFinite(safeCad) &&
+    Number.isFinite(rate) &&
+    rate > 0
+      ? safeCad / rate
+      : null;
+
+  const formatForeign = (value) => {
+    if (!Number.isFinite(value)) {
+      return "—";
+    }
+
+    const decimals =
+      currency === "EUR"
+        ? 2
+        : 0;
+
+    return new Intl.NumberFormat(
+      "fr-CA",
+      {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      },
+    ).format(value);
+  };
+
+  return (
+    <div className="budgetFx">
+      <div
+        className="budgetFxCurrencies"
+        role="group"
+        aria-label="Équivalent du budget restant"
+      >
+        {currencies.map((item) => (
+          <button
+            key={item.code}
+            type="button"
+            className={
+              currency === item.code
+                ? "budgetFxChoice active"
+                : "budgetFxChoice"
+            }
+            onClick={() =>
+              selectCurrency(item.code)
+            }
+            aria-pressed={
+              currency === item.code
+            }
+          >
+            {item.code}
+          </button>
+        ))}
+      </div>
+
+      <div className="budgetFxEquivalent">
+        {loadingRate ? (
+          <span>Conversion…</span>
+        ) : rateError ? (
+          <span>Taux indisponible</span>
+        ) : converted !== null ? (
+          <>
+            <span>≈</span>
+
+            <strong>
+              {formatForeign(converted)}
+            </strong>
+
+            <span>{currency}</span>
+          </>
+        ) : (
+          <span>—</span>
+        )}
+      </div>
+
+      {rate && (
+        <small className="budgetFxRate">
+          taux actuel · 1 {currency} ={" "}
+          {Number(rate).toFixed(6)} CAD
+        </small>
+      )}
+    </div>
+  );
+}
+
 
 function Dashboard({
   data,
@@ -3024,7 +3250,7 @@ function Dashboard({
   const categories = Object.entries(
     data.expenses.reduce((result, expense) => {
       const category = expense.category || "Autre";
-      result[category] = (result[category] || 0) + expense.cad;
+      result[category] = (result[category] || 0) + expenseCadValue(expense);
       return result;
     }, {}),
   )
@@ -3247,6 +3473,12 @@ function Dashboard({
                 : "budget dépassé"
               : "aucun budget défini"}
           </small>
+
+            {stats.budget > 0 && (
+              <BudgetCurrencyEquivalent
+                cadAmount={stats.remaining}
+              />
+            )}
 
           {stats.budget > 0 && (
             <div className="balkanBudgetTrack">
@@ -3750,7 +3982,7 @@ function Dashboard({
                 </div>
 
                 <div className="balkanExpenseAmount">
-                  <strong>{money(expense.cad)}</strong>
+                  <strong>{money(expenseCadValue(expense))}</strong>
                   <small>{expense.date}</small>
                 </div>
 
@@ -3907,7 +4139,7 @@ function History({ data, onBack, onEdit, onDelete }) {
                   </div>
 
                   <div className="expenseCardAmount">
-                    <strong>{money(expense.cad)}</strong>
+                    <strong>{money(expenseCadValue(expense))}</strong>
                   </div>
                 </div>
 
